@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Psr\Http\Message\ServerRequestInterface;
+use App\JsonApi\JsonApiServer;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::fallback(function (ServerRequestInterface $request) {
+    $server = new JsonApiServer();
+
+    return $server->requestHandler($request);
 });
