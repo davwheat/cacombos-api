@@ -14,7 +14,7 @@ class Device extends Model
         'release_date' => 'datetime',
     ];
 
-    public function firmwares()
+    public function deviceFirmwares()
     {
         return $this->hasMany(DeviceFirmware::class);
     }
@@ -26,6 +26,6 @@ class Device extends Model
 
     public function modem()
     {
-        return $this->belongsTo(CapabilitySet::class);
+        return $this->belongsTo(Modem::class);
     }
 }
