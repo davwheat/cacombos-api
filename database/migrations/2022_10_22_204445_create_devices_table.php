@@ -17,15 +17,17 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
 
-            $table->string('device_name');
-            $table->string('model_name');
-            $table->string('manufacturer');
+            $table->string('device_name')->index();
+            $table->string('model_name')->index();
+            $table->string('manufacturer')->index();
 
-            $table->foreignId('modem_id')->nullable()->constrained('modems')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('modem_id')->index()->nullable()->constrained('modems')->nullOnDelete()->cascadeOnUpdate();
 
-            $table->date('release_date');
+            $table->date('release_date')->index();
 
             $table->timestamps();
+            $table->index('updated_at');
+            $table->index('created_at');
         });
     }
 

@@ -21,14 +21,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('device_capability_set', function (Blueprint $table) {
-            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('device_firmware_id')->nullable()->index()->constrained('device_firmwares')->nullOnDelete()->cascadeOnUpdate();
-            $table->foreignId('capability_set_id')->constrained('capability_sets')->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::create('device_capability_sets', function (Blueprint $table) {
+            $table->foreignId('device_id')->index()->constrained('devices')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('device_firmware_id')->index()->nullable()->index()->constrained('device_firmwares')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('capability_set_id')->index()->constrained('capability_sets')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->primary(['device_id', 'capability_set_id']);
 
             $table->timestamps();
+            $table->index('updated_at');
+            $table->index('created_at');
         });
     }
 
@@ -39,7 +41,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_capability_set');
+        Schema::dropIfExists('device_capability_sets');
         Schema::dropIfExists('capability_sets');
     }
 };
