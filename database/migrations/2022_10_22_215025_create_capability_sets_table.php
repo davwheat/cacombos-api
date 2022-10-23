@@ -39,6 +39,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('device_capability_set');
         Schema::dropIfExists('capability_sets');
     }
 };
