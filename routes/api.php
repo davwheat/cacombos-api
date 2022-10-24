@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/heartbeat', function (ServerRequestInterface $request) {
+    return response()->json(['status' => 'ok']);
+});
+
 Route::group(['prefix' => 'v1'], function () {
     Route::fallback(function (ServerRequestInterface $request) {
         $server = new JsonApiServer();
