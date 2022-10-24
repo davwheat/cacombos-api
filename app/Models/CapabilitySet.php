@@ -15,4 +15,11 @@ class CapabilitySet extends Model
     {
         return $this->belongsTo(DeviceFirmware::class);
     }
+
+    public function combos()
+    {
+        return $this
+            ->belongsToMany(Combo::class, 'capability_set_combo', 'capability_set_id', 'combo_id')
+            ->withPivot('uuid');
+    }
 }
