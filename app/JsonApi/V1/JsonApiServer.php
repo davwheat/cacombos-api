@@ -1,13 +1,9 @@
 <?php
 
-namespace App\JsonApi;
+namespace App\JsonApi\V1;
 
-use App\Models\Device;
-use App\Models\Modem;
 use Illuminate\Support\Facades\Config;
 use Psr\Http\Message\ServerRequestInterface;
-use Tobyz\JsonApiServer\Schema\Type;
-use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
 
 class JsonApiServer
 {
@@ -16,7 +12,7 @@ class JsonApiServer
     public function requestHandler(ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
     {
         if (!$this->server) {
-            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url'));
+            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url').'/v1');
 
             $this->addResources();
         }

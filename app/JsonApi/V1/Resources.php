@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi;
+namespace App\JsonApi\V1;
 
 use App\Models\{Device, Modem};
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
