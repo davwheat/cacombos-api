@@ -66,3 +66,21 @@ The one remaining step is to run all migrations. This sets up the database struc
 ```
 sail artisan migrate
 ```
+
+### Database seeding
+
+The app contains some basic sample data which you can fill the database with. This contains various devices, modems and combo sets.
+
+This provides some basic data to test the API with.
+
+```
+sail artisan db:seed
+```
+
+## Using the API
+
+The API is available under the `v1` suffix, in order to allow for future breaking changes, and backwards compatibility.
+
+The API complies with the JSON:API standard, exposing models as resources, and using the `filter`, `sort` and `include` query parameters.
+
+For example, to list all devices, including their modems, you can perform a GET request against `/v1/devices?include=modem`.
