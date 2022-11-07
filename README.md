@@ -8,6 +8,8 @@ This project is written in PHP with Laravel 9.
 
 To run this locally, you should use Laravel Sail and Composer.
 
+> If you're using VS Code, you might want to use the included dev container. You should be prompted automatically by VS Code to relaunch the project in the provided dev container.
+
 ### Requirements
 
 -   Docker
