@@ -58,3 +58,11 @@ This might take several minutes depending on your device and internet speed. It 
 The majority of this is a one-time process. Subsequent runs will take only a matter of seconds to start.
 
 Once you are told that all containers are started, navigate to http://local.davw.network. You will be prompted with an error page, with an option to generate an app key. Click this, and your setup is complete.
+
+### Migrations
+
+The one remaining step is to run all migrations. This sets up the database structure as required.
+
+```
+sail artisan migrate
+```
