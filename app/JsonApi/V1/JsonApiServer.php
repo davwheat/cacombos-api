@@ -8,11 +8,20 @@ use Psr\Http\Message\ServerRequestInterface;
 class JsonApiServer
 {
     protected ?\Tobyz\JsonApiServer\JsonApi $server = null;
+    protected string $apiPath;
+
+    /**
+     * @param string $apiPath The path from `app.url` to the API with a leading slash, e.g. `"/v1/api"`
+     */
+    public function __construct(string $apiPath)
+    {
+        $this->apiPath = $apiPath;
+    }
 
     public function requestHandler(ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
     {
         if (!$this->server) {
-            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url').'/v1');
+            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url').$this->apiPath);
 
             $this->addResources();
         }

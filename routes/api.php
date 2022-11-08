@@ -24,10 +24,14 @@ Route::get('/heartbeat', function (ServerRequestInterface $request) {
     return response()->json(['status' => 'ok']);
 });
 
+// v1 API
 Route::group(['prefix' => 'v1'], function () {
-    Route::fallback(function (ServerRequestInterface $request) {
-        $server = new JsonApiServer();
+    Route::group(['prefix' => 'api'], function () {
+        // JSON:API instance
+        Route::fallback(function (ServerRequestInterface $request) {
+            $server = new JsonApiServer('/v1/api');
 
-        return $server->requestHandler($request);
+            return $server->requestHandler($request);
+        });
     });
 });
