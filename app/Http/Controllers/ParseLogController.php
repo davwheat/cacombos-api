@@ -29,17 +29,7 @@ class ParseLogController extends JsonController
     {
         $token = $request->getHeader('X-Auth-Token')[0] ?? null;
 
-        $findToken = $this->tokensRepository->isValidToken($token);
-
-        if (empty($findToken)) {
-            $this->response = $this->response->withStatus(Response::HTTP_UNAUTHORIZED);
-
-            return [
-                'errors' => [
-                    'detail' => 'No token or invalid token provided.'
-                ]
-            ];
-        }
+        $this->tokensRepository->assertValidToken($token);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 

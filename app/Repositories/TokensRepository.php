@@ -11,4 +11,12 @@ class TokensRepository {
             ->where('expires_after', '>', now())
             ->exists();
     }
+    
+    public function assertValidToken(string $token) {
+        $isValid = $this->isValidToken($token);
+
+        if (!$isValid) {
+            throw new \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException('No token or invalid token provided.');
+        }
+    }
 }
