@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
 
-            $table->string("modem_name")->index();
+            $table->string("name")->index();
 
             $table->timestamps();
             $table->index('updated_at');

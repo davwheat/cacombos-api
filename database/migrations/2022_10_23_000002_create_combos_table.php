@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('combo_string')->index();
             $table->foreignId('capability_set_id')->index()->constrained('capability_sets')->cascadeOnDelete()->cascadeOnUpdate();
 
+            $table->string('bandwidth_combination_set', 128)->default('["0"]');
+
             $table->timestamps();
         });
     }

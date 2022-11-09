@@ -19,7 +19,6 @@ return new class extends Migration
 
             $table->foreignId('device_id')->index()->constrained('devices')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name')->index();
-            $table->string('plmn', 16)->nullable()->index();
 
             $table->timestamps();
             $table->index('updated_at');

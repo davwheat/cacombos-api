@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Device extends Model
 {
+    use Traits\HasSecondaryUuid;
+
     /**
      * @var array
      */

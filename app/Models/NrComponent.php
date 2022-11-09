@@ -19,4 +19,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NrComponent extends Model
 {
+    use Traits\HasSecondaryUuid;
 }

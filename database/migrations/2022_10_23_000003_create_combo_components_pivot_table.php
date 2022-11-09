@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('combo_components', function (Blueprint $table) {
             $table->id();
-            $table->uuid()->unique();
 
             $table->foreignId('combo_id')->index()->constrained('combos')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('nr_component_id')->nullable()->constrained('nr_components')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('lte_component_id')->nullable()->constrained('lte_components')->cascadeOnDelete()->cascadeOnUpdate();
-
-            $table->smallInteger('bandwidth_component_set')->default(0);
 
             $table->timestamps();
         });

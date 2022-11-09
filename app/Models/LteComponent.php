@@ -18,4 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LteComponent extends Model
 {
+    use Traits\HasSecondaryUuid;
+
+    public $fillable = [
+        'band',
+        'dl_class',
+        'ul_class',
+        'mimo',
+        'dl_modulation',
+        'ul_modulation',
+    ];
 }

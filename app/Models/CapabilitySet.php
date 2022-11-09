@@ -2,30 +2,30 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
  * @property string $uuid
+ * @property string $description
+ * @property ?string $plmn
+ * @property DeviceFirmware $deviceFirmware
+ * @property Collection<Combo> $combos
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
 class CapabilitySet extends Model
 {
-    public function device()
-    {
-        return $this->belongsTo(Device::class);
-    }
+    use Traits\HasSecondaryUuid;
 
-    public function deviceFirmware()
+    public function deviceFirmware(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(DeviceFirmware::class);
     }
 
-    public function combos()
+    public function combos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this
-            ->belongsToMany(Combo::class, 'capability_set_combo', 'capability_set_id', 'combo_id')
-            ->withPivot('uuid');
+        return $this->hasMany(Combo::class);
     }
 }
