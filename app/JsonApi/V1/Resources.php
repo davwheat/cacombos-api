@@ -2,7 +2,7 @@
 
 namespace App\JsonApi\V1;
 
-use App\Models\{Device, Modem};
+use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Modem, NrComponent};
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
 use Tobyz\JsonApiServer\Schema\Type;
 
@@ -33,8 +33,9 @@ class Resources
                 ->withoutLinkage()
                 ->filterable();
 
-            $type->hasMany('device-firmwares')
+            $type->hasMany('deviceFirmwares')
                 ->type('device-firmwares')
+                ->includable()
                 ->withoutLinkage()
                 ->includable();
 
@@ -44,14 +45,115 @@ class Resources
         $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) {
             $type->attribute('uuid');
 
-            $type->attribute('modemName')->sortable();
+            $type->attribute('name')->sortable();
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
 
             $type->hasMany('devices')
                 ->type('devices')
+                ->includable()
                 ->withoutLinkage()
                 ->filterable();
+        });
+
+        $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) {
+            $type->attribute('uuid');
+
+            $type->attribute('name')->sortable();
+            $type->attribute('createdAt')->sortable();
+            $type->attribute('updatedAt')->sortable();
+
+            $type->hasMany('capabilitySets')
+                ->type('capability-sets')
+                ->includable()
+                ->withoutLinkage()
+                ->filterable();
+        });
+
+        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) {
+            $type->attribute('uuid');
+
+            $type->attribute('description')->sortable();
+            $type->attribute('plmn')->sortable();
+
+            $type->attribute('createdAt')->sortable();
+            $type->attribute('updatedAt')->sortable();
+
+            $type->hasOne('deviceFirmware')
+                ->type('device-firmwares')
+                ->includable()
+                ->withoutLinkage()
+                ->filterable();
+
+            $type->hasMany('combos')
+                ->type('combos')
+                ->includable()
+                ->withoutLinkage()
+                ->filterable();
+        });
+
+        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
+            $type->attribute('uuid');
+
+            $type->attribute('combo_string')->filterable();
+            $type->attribute('bandwidth_combination_set');
+
+            $type->attribute('createdAt')->sortable();
+            $type->attribute('updatedAt')->sortable();
+
+            $type->hasOne('capabilitySet')
+                ->type('capability-sets')
+                ->includable()
+                ->withoutLinkage()
+                ->filterable();
+
+            $type->hasMany('lteComponents')
+                ->type('lte-components')
+                ->includable()
+                ->withoutLinkage()
+                // ->filterable()
+            ;
+
+            $type->hasMany('nrComponents')
+                ->type('nr-components')
+                ->includable()
+                ->withoutLinkage()
+                // ->filterable()
+            ;
+        });
+
+        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) {
+            $type->attribute('uuid');
+
+            $type->attribute('band')->filterable();
+
+            $type->attribute('dlClass');
+            $type->attribute('ulClass');
+            $type->attribute('mimo');
+            $type->attribute('dlModulation');
+            $type->attribute('ulModulation');
+
+            $type->attribute('createdAt')->sortable();
+            $type->attribute('updatedAt')->sortable();
+        });
+
+        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) {
+            $type->attribute('uuid');
+
+            $type->attribute('band')->filterable();
+
+            $type->attribute('dlClass');
+            $type->attribute('ulClass');
+            $type->attribute('bandwidth');
+            $type->attribute('subcarrierSpacing');
+            $type->attribute('mimo');
+            $type->attribute('dlMimo');
+            $type->attribute('ulMimo');
+            $type->attribute('dlModulation');
+            $type->attribute('ulModulation');
+
+            $type->attribute('createdAt')->sortable();
+            $type->attribute('updatedAt')->sortable();
         });
     }
 }
