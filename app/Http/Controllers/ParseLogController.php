@@ -59,15 +59,15 @@ class ParseLogController extends JsonController
 
         $output = $this->callParser($logFormat, $logs);
 
-        // if ($output['code'] !== 0) {
-        //     $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        if ($output['code'] !== 0) {
+            $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        //     return [
-        //         'errors' => [
-        //             'detail' => 'Parser failed to execute with the provided log files.'
-        //         ]
-        //     ];
-        // }
+            return [
+                'errors' => [
+                    'detail' => 'Parser failed to execute with the provided log files.'
+                ]
+            ];
+        }
 
         if ($output['code'] === 0) {
             $this->response = $this->response->withHeader('Content-Type', 'text/csv');
