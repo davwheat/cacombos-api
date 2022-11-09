@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\CapabilitySet;
+use App\Models\DeviceFirmware;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
@@ -17,15 +19,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('tokens')->insert([
+            [
+                'token' => 'testabc',
+                'comment' => '',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+
         DB::table('modems')->insert([
             [
                 'uuid' => Uuid::uuid4(),
-                'modem_name' => 'Shannon 5300',
+                'name' => 'Shannon 5300',
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
                 'uuid' => Uuid::uuid4(),
-                'modem_name' => 'Shannon 5123b',
+                'name' => 'Shannon 5123b',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -53,5 +64,16 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        $p7pro_a13 = new DeviceFirmware();
+        $p7pro_a13->device_id = 2;
+        $p7pro_a13->name = 'Android 13';
+        $p7pro_a13->save();
+
+        $p7pro_a13_ee = new CapabilitySet();
+        $p7pro_a13_ee->description = "EE";
+        $p7pro_a13_ee->plmn = "234-30";
+        $p7pro_a13_ee->deviceFirmware()->associate($p7pro_a13);
+        $p7pro_a13_ee->save();
     }
 }
