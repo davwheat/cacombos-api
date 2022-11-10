@@ -23,9 +23,7 @@ abstract class JsonController extends Controller
             $this->response = $this->response->withHeader('Content-Type', 'application/json');
         }
 
-        $encodedBody = $this->response->getHeader('Content-Type')[0] === 'application/json'
-            ? json_encode($response)
-            : $response;
+        $encodedBody = json_encode($response);
 
         $this->response->getBody()->write($encodedBody);
 
