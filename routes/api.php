@@ -30,7 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/parse-log', [ParseLogController::class, 'requestHandler']);
     });
 
-    Route::group(['prefix' => 'api'], function () {
+    Route::group(['prefix' => 'api', 'middleware' => 'etag'], function () {
         // JSON:API instance
         Route::fallback(function (ServerRequestInterface $request) {
             $server = new JsonApiServer('/v1/api');
