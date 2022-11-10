@@ -10,13 +10,13 @@ use Illuminate\Validation\Rule;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
-const VALID_LOG_FORMATS = [
-    'nsg' => 'N',
-];
-
 class ParseLogController extends JsonController
 {
     protected TokensRepository $tokensRepository;
+
+    public const VALID_LOG_FORMATS = [
+        'nsg' => 'N',
+    ];
 
     public function __construct(TokensRepository $tokenRepository)
     {
@@ -40,7 +40,7 @@ class ParseLogController extends JsonController
         };
 
         $validator = Validator::make($body, [
-            'logFormat' => ['required', 'string', Rule::in(array_keys(VALID_LOG_FORMATS))],
+            'logFormat' => ['required', 'string', Rule::in(array_keys(self::VALID_LOG_FORMATS))],
             'eutraLog' => ['required_without_all:eutranrLog,nrLog', $fileOrStringValidator],
             'eutranrLog' => ['required_without_all:eutraLog,nrLog', $fileOrStringValidator],
             'nrLog' => ['required_without_all:eutraLog,eutranrLog', $fileOrStringValidator],
@@ -81,7 +81,7 @@ class ParseLogController extends JsonController
     public function getParserType(string $format): ?string
     {
         // Must include all `VALID_LOG_TYPES`
-        $converted = VALID_LOG_FORMATS[$format] ?? null;
+        $converted = self::VALID_LOG_FORMATS[$format] ?? null;
 
         return $converted;
     }
