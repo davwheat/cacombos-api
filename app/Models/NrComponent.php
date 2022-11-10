@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property string $uuid
  * @property int $band
  * @property ?string $dl_class
  * @property ?string $ul_class
@@ -19,5 +18,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NrComponent extends Model
 {
-    use Traits\HasSecondaryUuid;
+    public $fillable = [
+        'band',
+        'dl_class',
+        'ul_class',
+        'bandwidth',
+        'subcarrier_spacing',
+        'dl_mimo',
+        'ul_mimo',
+        'dl_modulation',
+        'ul_modulation',
+    ];
 }

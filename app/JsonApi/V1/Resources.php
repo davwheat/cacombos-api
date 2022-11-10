@@ -130,6 +130,7 @@ class Resources
             $type->attribute('dlClass');
             $type->attribute('ulClass');
             $type->attribute('mimo');
+            $type->attribute('ulMimo');
             $type->attribute('dlModulation');
             $type->attribute('ulModulation');
 

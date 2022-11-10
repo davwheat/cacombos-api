@@ -21,6 +21,12 @@ class Combo extends Model
 {
     use Traits\HasSecondaryUuid;
 
+    public $fillable = [
+        'combo_string',
+        'bandwidth_combination_set',
+        'capability_set_id',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -30,7 +36,8 @@ class Combo extends Model
         'bandwidth_combination_set' => 'array',
     ];
 
-    public function capabilitySet() {
+    public function capabilitySet()
+    {
         return $this->belongsTo(CapabilitySet::class);
     }
 
