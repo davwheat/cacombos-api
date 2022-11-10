@@ -75,7 +75,7 @@ class ParseLogController extends JsonController
             $this->response = $this->response->withHeader('Content-Type', 'text/plain');
         }
 
-        return implode(PHP_EOL, $output['output']);
+        return explode(PHP_EOL . PHP_EOL, implode(PHP_EOL, $output['output']));
     }
 
     public function getParserType(string $format): ?string
@@ -86,7 +86,10 @@ class ParseLogController extends JsonController
         return $converted;
     }
 
-    public function callParser(string $logFormat, array $logs)
+    /**
+     * Returns an array of lines from the CLI output of the parser.
+     */
+    public function callParser(string $logFormat, array $logs): array
     {
         $formatFlag = $this->getParserType($logFormat);
 
@@ -127,8 +130,6 @@ class ParseLogController extends JsonController
 
             $command = escapeshellcmd(sprintf('java -jar %s %s', escapeshellarg($pathToParserJar), $options));
             $command .= ' 2>&1';
-
-            // dd($command, $filePaths);
 
             $result = exec($command, $output, $return);
 
