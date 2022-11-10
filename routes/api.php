@@ -28,6 +28,7 @@ Route::get('/heartbeat', function (ServerRequestInterface $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'actions'], function () {
         Route::post('/parse-log', [ParseLogController::class, 'requestHandler']);
+        Route::post('/import-csv', [ImportParsedCsvController::class, 'requestHandler']);
     });
 
     Route::group(['prefix' => 'api', 'middleware' => 'etag'], function () {
