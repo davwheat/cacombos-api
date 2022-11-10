@@ -50,6 +50,6 @@ class Combo extends Model
     public function nrComponents()
     {
         return $this
-            ->belongsToMany(LteComponent::class, 'combo_components', 'combo_id', 'nr_component_id');
+            ->belongsToMany(NrComponent::class, 'combo_components', 'combo_id', 'nr_component_id');
     }
 }
