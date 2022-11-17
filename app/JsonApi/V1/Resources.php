@@ -95,8 +95,8 @@ class Resources
         $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
             $type->attribute('uuid');
 
-            $type->attribute('combo_string')->filterable();
-            $type->attribute('bandwidth_combination_set');
+            $type->attribute('comboString')->filterable();
+            $type->attribute('bandwidthCombinationSet');
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
