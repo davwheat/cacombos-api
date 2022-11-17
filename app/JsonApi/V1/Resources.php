@@ -123,8 +123,6 @@ class Resources
         });
 
         $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) {
-            $type->attribute('uuid');
-
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
@@ -139,15 +137,12 @@ class Resources
         });
 
         $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) {
-            $type->attribute('uuid');
-
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
             $type->attribute('ulClass');
             $type->attribute('bandwidth');
             $type->attribute('subcarrierSpacing');
-            $type->attribute('mimo');
             $type->attribute('dlMimo');
             $type->attribute('ulMimo');
             $type->attribute('dlModulation');
