@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?int $ul_mimo
  * @property ?string $dl_modulation
  * @property ?string $ul_modulation
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class NrComponent extends Model
 {
