@@ -18,7 +18,8 @@ class Resources
     public function __invoke()
     {
         $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) {
-            $type->attribute('uuid');
+            $type->attribute('uuid')
+                ->filterable();
 
             $type->attribute('deviceName')->sortable();
             $type->attribute('modelName')->sortable();
@@ -43,7 +44,8 @@ class Resources
         });
 
         $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) {
-            $type->attribute('uuid');
+            $type->attribute('uuid')
+                ->filterable();
 
             $type->attribute('name')->sortable();
             $type->attribute('createdAt')->sortable();
@@ -57,7 +59,8 @@ class Resources
         });
 
         $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) {
-            $type->attribute('uuid');
+            $type->attribute('uuid')
+                ->filterable();
 
             $type->attribute('name')->sortable();
             $type->attribute('createdAt')->sortable();
@@ -71,7 +74,8 @@ class Resources
         });
 
         $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) {
-            $type->attribute('uuid');
+            $type->attribute('uuid')
+                ->filterable();
 
             $type->attribute('description')->sortable();
             $type->attribute('plmn')->sortable();
@@ -93,7 +97,8 @@ class Resources
         });
 
         $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
-            $type->attribute('uuid');
+            $type->attribute('uuid')
+                ->filterable();
 
             $type->attribute('comboString')->filterable();
             $type->attribute('bandwidthCombinationSet');
