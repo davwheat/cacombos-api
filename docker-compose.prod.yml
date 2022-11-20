@@ -12,6 +12,8 @@ services:
     working_dir: /var/www
     volumes:
       - .:/var/www
+    ports:
+      - 9000
     depends_on:
       - db
     networks:
@@ -31,7 +33,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     ports:
-      - "3306:3306"
+      - 3306
     networks:
       - app
 
