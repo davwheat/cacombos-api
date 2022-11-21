@@ -3,7 +3,10 @@
 namespace App\JsonApi\V1;
 
 use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Modem, NrComponent};
+use App\Repositories\TokensRepository;
+use App\RequiresAuthentication;
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
+use Tobyz\JsonApiServer\Context;
 use Tobyz\JsonApiServer\Schema\Type;
 
 class Resources
@@ -41,6 +44,9 @@ class Resources
                 ->includable();
 
             $type->defaultSort('-createdAt,manufacturer,deviceName');
+
+            $type->creatable(RequiresAuthentication::class);
+            $type->updatable(RequiresAuthentication::class);
         });
 
         $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) {
@@ -56,6 +62,9 @@ class Resources
                 ->includable()
                 ->withoutLinkage()
                 ->filterable();
+
+            $type->creatable(RequiresAuthentication::class);
+            $type->updatable(RequiresAuthentication::class);
         });
 
         $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) {
@@ -71,6 +80,9 @@ class Resources
                 ->includable()
                 ->withoutLinkage()
                 ->filterable();
+
+            $type->creatable(RequiresAuthentication::class);
+            $type->updatable(RequiresAuthentication::class);
         });
 
         $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) {
@@ -94,6 +106,9 @@ class Resources
                 ->includable()
                 ->withoutLinkage()
                 ->filterable();
+
+            $type->creatable(RequiresAuthentication::class);
+            $type->updatable(RequiresAuthentication::class);
         });
 
         $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
