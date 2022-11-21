@@ -1,0 +1,59 @@
+version: "3.11"
+
+services:
+  laravel:
+    build:
+      args:
+        user: www
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - 9000
+    depends_on:
+      - db
+    networks:
+      - app
+
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker.prod/mysql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 3306
+    networks:
+      - app
+
+  web:
+    image: nginx:1-alpine
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker.prod/nginx:/etc/nginx/conf.d
+    ports:
+      - 8080:80
+    depends_on:
+      - laravel
+    networks:
+      - app
+
+volumes:
+  db_data:
+
+networks:
+  app:
+    driver: bridge
