@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TokensRepository;
-use Illuminate\Http\Response;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -35,6 +35,16 @@ class ParseAndImportLogController extends JsonController
         return null;
     }
 
+    protected function writeResponse($json): ResponseInterface
+    {
+        $encodedBody = json_encode($json);
+
+        $this->response = $this->response->withHeader('Content-Type', 'application/json');
+        $this->response->getBody()->write($encodedBody);
+
+        return $this->response;
+    }
+
     public function requestHandler(ServerRequestInterface $request): ResponseInterface
     {
         $token = $request->getHeader('X-Auth-Token')[0] ?? null;
@@ -59,11 +69,11 @@ class ParseAndImportLogController extends JsonController
         ]);
 
         if ($validator->fails()) {
-            $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+            $this->response = $this->response->withStatus(HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
 
-            return [
+            return $this->writeResponse([
                 'errors' => $validator->errors()->jsonSerialize()
-            ];
+            ]);
         }
 
         $parseResponse = $this->parseLogController->requestHandler($request);
