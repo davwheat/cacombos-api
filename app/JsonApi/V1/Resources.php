@@ -15,10 +15,10 @@ class Resources
 
     protected RequiresAuthentication $requiresAuthentication;
 
-    public function __construct(\Tobyz\JsonApiServer\JsonApi $server, RequiresAuthentication $requiresAuthentication)
+    public function __construct(\Tobyz\JsonApiServer\JsonApi $server, TokensRepository $tokensRepository)
     {
         $this->server = $server;
-        $this->requiresAuthentication = $requiresAuthentication;
+        $this->requiresAuthentication = new RequiresAuthentication($tokensRepository);
     }
 
     public function __invoke()
