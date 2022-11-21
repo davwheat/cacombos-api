@@ -13,9 +13,12 @@ class Resources
 {
     protected \Tobyz\JsonApiServer\JsonApi $server;
 
-    public function __construct(\Tobyz\JsonApiServer\JsonApi $server)
+    protected RequiresAuthentication $requiresAuthentication;
+
+    public function __construct(\Tobyz\JsonApiServer\JsonApi $server, RequiresAuthentication $requiresAuthentication)
     {
         $this->server = $server;
+        $this->requiresAuthentication = $requiresAuthentication;
     }
 
     public function __invoke()
@@ -45,8 +48,8 @@ class Resources
 
             $type->defaultSort('-createdAt,manufacturer,deviceName');
 
-            $type->creatable(RequiresAuthentication::class);
-            $type->updatable(RequiresAuthentication::class);
+            $type->creatable($this->requiresAuthentication);
+            $type->updatable($this->requiresAuthentication);
         });
 
         $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) {
@@ -63,8 +66,8 @@ class Resources
                 ->withoutLinkage()
                 ->filterable();
 
-            $type->creatable(RequiresAuthentication::class);
-            $type->updatable(RequiresAuthentication::class);
+            $type->creatable($this->requiresAuthentication);
+            $type->updatable($this->requiresAuthentication);
         });
 
         $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) {
@@ -81,8 +84,8 @@ class Resources
                 ->withoutLinkage()
                 ->filterable();
 
-            $type->creatable(RequiresAuthentication::class);
-            $type->updatable(RequiresAuthentication::class);
+            $type->creatable($this->requiresAuthentication);
+            $type->updatable($this->requiresAuthentication);
         });
 
         $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) {
@@ -107,8 +110,8 @@ class Resources
                 ->withoutLinkage()
                 ->filterable();
 
-            $type->creatable(RequiresAuthentication::class);
-            $type->updatable(RequiresAuthentication::class);
+            $type->creatable($this->requiresAuthentication);
+            $type->updatable($this->requiresAuthentication);
         });
 
         $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
