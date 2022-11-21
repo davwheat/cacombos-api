@@ -6,7 +6,6 @@ use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Mode
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
-use Tobyz\JsonApiServer\Context;
 use Tobyz\JsonApiServer\Schema\Type;
 
 class Resources
@@ -15,10 +14,10 @@ class Resources
 
     protected RequiresAuthentication $requiresAuthentication;
 
-    public function __construct(\Tobyz\JsonApiServer\JsonApi $server, TokensRepository $tokensRepository)
+    public function __construct(\Tobyz\JsonApiServer\JsonApi $server)
     {
         $this->server = $server;
-        $this->requiresAuthentication = new RequiresAuthentication($tokensRepository);
+        $this->requiresAuthentication = new RequiresAuthentication(resolve(TokensRepository::class));
     }
 
     public function __invoke()
