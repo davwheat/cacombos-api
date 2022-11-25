@@ -38,7 +38,7 @@ class JsonApiServer
             $response = $this->server->handle($request);
         } catch (\Exception $e) {
             // Visualise errors in debug mode
-            if (config('app.debug')) throw $e;
+            if (config('app.debug') && !($e instanceof ErrorProviderInterface)) throw $e;
 
             $response = $this->server->error($e);
         }
