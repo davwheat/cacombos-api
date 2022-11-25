@@ -4,6 +4,7 @@ namespace App\JsonApi\V1;
 
 use Illuminate\Support\Facades\Config;
 use Psr\Http\Message\ServerRequestInterface;
+use Tobyz\JsonApiServer\ErrorProviderInterface;
 use Tobyz\JsonApiServer\Extension\Atomic;
 
 class JsonApiServer
@@ -24,9 +25,9 @@ class JsonApiServer
         if (!$this->server) {
             $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url') . $this->apiPath);
 
-            $this->server->extension(new Atomic());
-
             $this->addResources();
+
+            $this->server->extension(new Atomic());
         }
 
         if (!$request->hasHeader('Accept')) {
