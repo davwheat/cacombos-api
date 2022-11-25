@@ -6,6 +6,7 @@ use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Mode
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
+use Tobyz\JsonApiServer\Context;
 use Tobyz\JsonApiServer\Schema\Type;
 
 class Resources
@@ -22,14 +23,17 @@ class Resources
 
     public function __invoke()
     {
-        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) {
+        $adminOnlyCreate = fn (Context $context) => ($this->requiresAuthentication)($context);
+        $adminOnlyUpdate = fn ($model, Context $context) => ($this->requiresAuthentication)($context);
+
+        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
-            $type->attribute('deviceName')->sortable();
-            $type->attribute('modelName')->sortable();
-            $type->attribute('manufacturer')->sortable();
-            $type->attribute('releaseDate')->sortable();
+            $type->attribute('deviceName')->sortable()->writable();
+            $type->attribute('modelName')->sortable()->writable();
+            $type->attribute('manufacturer')->sortable()->writable();
+            $type->attribute('releaseDate')->sortable()->writable();
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
 
@@ -37,25 +41,27 @@ class Resources
                 ->type('modems')
                 ->includable()
                 ->withoutLinkage()
-                ->filterable();
+                ->filterable()
+                ->writable();
 
             $type->hasMany('deviceFirmwares')
                 ->type('device-firmwares')
                 ->includable()
                 ->withoutLinkage()
-                ->includable();
+                ->includable()
+                ->writable();
 
             $type->defaultSort('-createdAt,manufacturer,deviceName');
 
-            $type->creatable($this->requiresAuthentication);
-            $type->updatable($this->requiresAuthentication);
+            $type->creatable($adminOnlyCreate);
+            $type->updatable($adminOnlyUpdate);
         });
 
-        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) {
+        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
-            $type->attribute('name')->sortable();
+            $type->attribute('name')->sortable()->writable();
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
 
@@ -63,36 +69,45 @@ class Resources
                 ->type('devices')
                 ->includable()
                 ->withoutLinkage()
-                ->filterable();
+                ->filterable()
+                ->writable();
 
-            $type->creatable($this->requiresAuthentication);
-            $type->updatable($this->requiresAuthentication);
+            $type->creatable($adminOnlyCreate);
+            $type->updatable($adminOnlyUpdate);
         });
 
-        $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) {
+        $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
-            $type->attribute('name')->sortable();
+            $type->attribute('name')->sortable()->writable();
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
+
+            $type->hasOne('device')
+                ->type('devices')
+                // ->includable()
+                ->withoutLinkage()
+                // ->filterable()
+                ->writable();
 
             $type->hasMany('capabilitySets')
                 ->type('capability-sets')
                 ->includable()
                 ->withoutLinkage()
-                ->filterable();
+                ->filterable()
+                ->writable();
 
-            $type->creatable($this->requiresAuthentication);
-            $type->updatable($this->requiresAuthentication);
+            $type->creatable($adminOnlyCreate);
+            $type->updatable($adminOnlyUpdate);
         });
 
-        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) {
+        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
-            $type->attribute('description')->sortable();
-            $type->attribute('plmn')->sortable();
+            $type->attribute('description')->sortable()->writable();
+            $type->attribute('plmn')->sortable()->writable();
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
@@ -101,19 +116,21 @@ class Resources
                 ->type('device-firmwares')
                 ->includable()
                 ->withoutLinkage()
-                ->filterable();
+                ->filterable()
+                ->writable();
 
             $type->hasMany('combos')
                 ->type('combos')
                 ->includable()
                 ->withoutLinkage()
-                ->filterable();
+                ->filterable()
+                ->writable();
 
-            $type->creatable($this->requiresAuthentication);
-            $type->updatable($this->requiresAuthentication);
+            $type->creatable($adminOnlyCreate);
+            $type->updatable($adminOnlyUpdate);
         });
 
-        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
+        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -144,7 +161,7 @@ class Resources
             ;
         });
 
-        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) {
+        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
@@ -158,7 +175,7 @@ class Resources
             $type->attribute('updatedAt')->sortable();
         });
 
-        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) {
+        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
