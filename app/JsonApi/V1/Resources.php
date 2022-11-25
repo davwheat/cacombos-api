@@ -72,6 +72,8 @@ class Resources
                 ->filterable()
                 ->writable();
 
+            $type->dontPaginate();
+
             $type->creatable($adminOnlyCreate);
             $type->updatable($adminOnlyUpdate);
         });
