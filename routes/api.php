@@ -6,6 +6,7 @@ use App\Http\Controllers\ParseLogController;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use App\JsonApi\V1\JsonApiServer;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +37,10 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['prefix' => 'api', 'middleware' => 'etag'], function () {
         // JSON:API instance
-        Route::fallback(function (ServerRequestInterface $request) {
+        Route::any('{any}', function (ServerRequestInterface $request) {
             $server = new JsonApiServer('/v1/api');
 
-            return $server->requestHandler($request);
-        });
+            return DB::transaction(fn () => $server->requestHandler($request));
+        })->where('any', '.*');
     });
 });
