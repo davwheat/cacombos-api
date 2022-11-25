@@ -8,6 +8,7 @@ use App\Models\Device;
 use App\Models\LteComponent;
 use App\Models\NrComponent;
 use App\Repositories\TokensRepository;
+use App\RequiresAuthentication;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -18,7 +19,7 @@ use League\Csv\Reader;
 
 class ImportParsedCsvController extends JsonController
 {
-    protected TokensRepository $tokensRepository;
+    protected RequiresAuthentication $requiresAuthentication;
     protected Collection $combosToDelete;
 
     /**
@@ -26,9 +27,9 @@ class ImportParsedCsvController extends JsonController
      */
     protected $capabilitySet;
 
-    public function __construct(TokensRepository $tokenRepository)
+    public function __construct(RequiresAuthentication $requiresAuthentication, TokensRepository $tokensRepository)
     {
-        $this->tokensRepository = $tokenRepository;
+        $this->requiresAuthentication = $requiresAuthentication;
         $this->combosToDelete = new Collection();
 
         parent::__construct();
@@ -36,9 +37,7 @@ class ImportParsedCsvController extends JsonController
 
     public function handle(ServerRequestInterface $request): array | string | int | bool | null
     {
-        $token = $request->getHeader('X-Auth-Token')[0] ?? null;
-
-        $this->tokensRepository->assertValidToken($token);
+        ($this->requiresAuthentication)($request, 'uploader');
 
         $body = $request->getParsedBody();
 

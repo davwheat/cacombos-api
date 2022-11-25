@@ -23,10 +23,17 @@ class Resources
 
     public function __invoke()
     {
-        $adminOnlyCreate = fn (Context $context) => ($this->requiresAuthentication)($context);
-        $adminOnlyUpdate = fn ($model, Context $context) => ($this->requiresAuthentication)($context);
+        $uploaderOnlyCreate = function (Context $context): bool {
+            return ($this->requiresAuthentication)($context->getRequest(), 'uploader');
+        };
+        $uploaderOnlyUpdate = function ($model, Context $context): bool {
+            return ($this->requiresAuthentication)($context->getRequest(), 'uploader');
+        };
+        $adminOnlyDelete = function ($model, Context $context): bool {
+            return ($this->requiresAuthentication)($context->getRequest(), 'admin');
+        };
 
-        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -53,11 +60,11 @@ class Resources
 
             $type->defaultSort('-createdAt,manufacturer,deviceName');
 
-            $type->creatable($adminOnlyCreate);
-            $type->updatable($adminOnlyUpdate);
+            $type->creatable($uploaderOnlyCreate);
+            $type->updatable($uploaderOnlyUpdate);
         });
 
-        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -74,11 +81,11 @@ class Resources
 
             $type->dontPaginate();
 
-            $type->creatable($adminOnlyCreate);
-            $type->updatable($adminOnlyUpdate);
+            $type->creatable($uploaderOnlyCreate);
+            $type->updatable($uploaderOnlyUpdate);
         });
 
-        $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -100,11 +107,12 @@ class Resources
                 ->filterable()
                 ->writable();
 
-            $type->creatable($adminOnlyCreate);
-            $type->updatable($adminOnlyUpdate);
+            $type->creatable($uploaderOnlyCreate);
+            $type->updatable($uploaderOnlyUpdate);
+            $type->deletable($adminOnlyDelete);
         });
 
-        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -128,11 +136,11 @@ class Resources
                 ->filterable()
                 ->writable();
 
-            $type->creatable($adminOnlyCreate);
-            $type->updatable($adminOnlyUpdate);
+            $type->creatable($uploaderOnlyCreate);
+            $type->updatable($uploaderOnlyUpdate);
         });
 
-        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -163,7 +171,7 @@ class Resources
             ;
         });
 
-        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
@@ -177,7 +185,7 @@ class Resources
             $type->attribute('updatedAt')->sortable();
         });
 
-        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) use ($adminOnlyCreate, $adminOnlyUpdate) {
+        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');

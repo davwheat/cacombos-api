@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TokensRepository;
+use App\RequiresAuthentication;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -14,13 +14,13 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class ParseAndImportLogController extends JsonController
 {
-    protected TokensRepository $tokensRepository;
+    protected RequiresAuthentication $requiresAuthentication;
     protected ParseLogController $parseLogController;
     protected ImportParsedCsvController $importParsedCsvController;
 
-    public function __construct(TokensRepository $tokenRepository, ParseLogController $parseLogController, ImportParsedCsvController $importParsedCsvController)
+    public function __construct(RequiresAuthentication $requiresAuthentication, ParseLogController $parseLogController, ImportParsedCsvController $importParsedCsvController)
     {
-        $this->tokensRepository = $tokenRepository;
+        $this->requiresAuthentication = $requiresAuthentication;
         $this->parseLogController = $parseLogController;
         $this->importParsedCsvController = $importParsedCsvController;
 
@@ -47,9 +47,7 @@ class ParseAndImportLogController extends JsonController
 
     public function requestHandler(ServerRequestInterface $request): ResponseInterface
     {
-        $token = $request->getHeader('X-Auth-Token')[0] ?? null;
-
-        $this->tokensRepository->assertValidToken($token);
+        ($this->requiresAuthentication)($request, 'uploader');
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
