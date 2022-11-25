@@ -14,10 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tokens', function (Blueprint $table) {
-            $table->string('type', 128)
-                ->nullable(false)
-                ->default('uploader')
-                ->index();
+            $table->dropIndex('tokens_token_index');
+            $table->unique('token');
         });
     }
 
@@ -28,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('tokens', 'type');
+        Schema::table('tokens', function (Blueprint $table) {
+            $table->dropIndex('tokens_token_index');
+            $table->index('token');
+        });
     }
 };
