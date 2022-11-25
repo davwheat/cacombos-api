@@ -4,6 +4,7 @@ namespace App\JsonApi\V1;
 
 use Illuminate\Support\Facades\Config;
 use Psr\Http\Message\ServerRequestInterface;
+use Tobyz\JsonApiServer\Extension\Atomic;
 
 class JsonApiServer
 {
@@ -21,7 +22,9 @@ class JsonApiServer
     public function requestHandler(ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
     {
         if (!$this->server) {
-            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url').$this->apiPath);
+            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url') . $this->apiPath);
+
+            $this->server->extension(new Atomic());
 
             $this->addResources();
         }
