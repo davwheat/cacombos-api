@@ -180,6 +180,7 @@ class Resources
             $type->attribute('ulMimo');
             $type->attribute('dlModulation');
             $type->attribute('ulModulation');
+            $type->attribute('componentIndex');
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
@@ -196,6 +197,7 @@ class Resources
             $type->attribute('ulMimo');
             $type->attribute('dlModulation');
             $type->attribute('ulModulation');
+            $type->attribute('componentIndex');
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();

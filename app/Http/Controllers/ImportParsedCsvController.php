@@ -205,6 +205,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_class' => $ccData['ul'],
                         'dl_modulation' => $ccData['DLmod'],
                         'ul_modulation' => $ccData['ULmod'],
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -238,12 +239,6 @@ class ImportParsedCsvController extends JsonController
             // $combo = new Combo();
             $combos[] = $combo;
 
-            // $combo->combo_string = $comboData['combo'];
-            // $combo->bandwidth_combination_set = null;
-            // $combo->capabilitySet()->associate($this->capabilitySet);
-
-            // $combo->save();
-
             $lteCCs = [];
             $nrCCs = [];
 
@@ -263,6 +258,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_class' => null,
                         'dl_modulation' => null,
                         'ul_modulation' => null,
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -282,6 +278,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_class' => substr($ccData['UL'], -1, 1), // "7A" -> "A"
                         'dl_modulation' => null,
                         'ul_modulation' => strtolower($ccData['MOD UL']), // "64QAM" -> "64qam"
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -305,6 +302,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_mimo' => null,
                         'dl_modulation' => 'qam256',
                         'ul_modulation' => null,
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -328,6 +326,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_mimo' => $ccData['mimo NR UL'],
                         'dl_modulation' => null,
                         'ul_modulation' => $ccData['NR UL MOD'],
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -359,14 +358,7 @@ class ImportParsedCsvController extends JsonController
                 ]
             );
 
-            // $combo = new Combo();
             $combos[] = $combo;
-
-            // $combo->combo_string = $comboData['combo'];
-            // $combo->bandwidth_combination_set = null;
-            // $combo->capabilitySet()->associate($this->capabilitySet);
-
-            // $combo->save();
 
             $nrCCs = [];
 
@@ -389,6 +381,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_mimo' => null,
                         'dl_modulation' => 'qam256',
                         'ul_modulation' => null,
+                        'component_index' => $i - 1,
                     ]
                 );
             }
@@ -412,6 +405,7 @@ class ImportParsedCsvController extends JsonController
                         'ul_mimo' => $ccData['mimo NR UL'],
                         'dl_modulation' => null,
                         'ul_modulation' => $ccData['NR UL MOD'],
+                        'component_index' => $i - 1,
                     ]
                 );
             }
