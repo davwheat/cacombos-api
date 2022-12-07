@@ -320,7 +320,8 @@ class ImportParsedCsvController extends JsonController
                         'band' => intval($ccData['NR UL']), // "78A" -> "78"
                         'dl_class' => null,
                         'ul_class' => substr($ccData['NR UL'], -1, 1), // "78A" -> "A"
-                        'bandwidth' => $ccData['NR BW'],
+                        // 'bandwidth' => $ccData['NR BW'],
+                        'bandwidth' => null,
                         'subcarrier_spacing' => $ccData['NR SCS'],
                         'dl_mimo' => null,
                         'ul_mimo' => $ccData['mimo NR UL'],
