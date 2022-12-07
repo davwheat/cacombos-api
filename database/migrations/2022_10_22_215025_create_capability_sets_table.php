@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('capability_sets', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            
+
             $table->foreignId('device_firmware_id')->index()->nullable()->index()->constrained('device_firmwares')->nullOnDelete()->cascadeOnUpdate();
 
             $table->string('description', 255)->index();
