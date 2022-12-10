@@ -175,6 +175,7 @@ class ImportParsedCsvController extends JsonController
         $combos = [];
 
         foreach ($records as $comboData) {
+            /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
                     'combo_string' => $comboData['combo'],
@@ -210,6 +211,11 @@ class ImportParsedCsvController extends JsonController
                 );
             }
 
+            // remove all attached models
+            $combo->lteComponents()->detach();
+            $combo->nrComponents()->detach();
+
+            // attach new models
             $combo->lteComponents()->saveMany($ccs);
         }
 
@@ -228,6 +234,7 @@ class ImportParsedCsvController extends JsonController
         $combos = [];
 
         foreach ($records as $comboData) {
+            /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
                     'combo_string' => $comboData['combo'],
@@ -332,6 +339,11 @@ class ImportParsedCsvController extends JsonController
                 );
             }
 
+            // remove all attached models
+            $combo->lteComponents()->detach();
+            $combo->nrComponents()->detach();
+
+            // attach new models
             $combo->lteComponents()->saveMany($lteCCs);
             $combo->nrComponents()->saveMany($nrCCs);
         }
@@ -351,6 +363,7 @@ class ImportParsedCsvController extends JsonController
         $combos = [];
 
         foreach ($records as $comboData) {
+            /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
                     'combo_string' => $comboData['combo'],
@@ -411,6 +424,11 @@ class ImportParsedCsvController extends JsonController
                 );
             }
 
+            // remove all attached models
+            $combo->lteComponents()->detach();
+            $combo->nrComponents()->detach();
+
+            // attach new models
             $combo->nrComponents()->saveMany($nrCCs);
         }
 
