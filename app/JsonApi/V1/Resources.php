@@ -112,7 +112,7 @@ class Resources
             $type->deletable($adminOnlyDelete);
         });
 
-        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('capability-sets', new EloquentAdapter(CapabilitySet::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -138,6 +138,7 @@ class Resources
 
             $type->creatable($uploaderOnlyCreate);
             $type->updatable($uploaderOnlyUpdate);
+            $type->deletable($adminOnlyDelete);
         });
 
         $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
