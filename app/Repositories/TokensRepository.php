@@ -7,7 +7,8 @@ use App\Models\Token;
 class TokensRepository
 {
     protected const TOKEN_RANK = [
-        'uploader' => 1,
+        'uploader' => 50,
+        'parser' => 25,
         'admin' => 100,
     ];
 
@@ -40,6 +41,16 @@ class TokensRepository
         if (!$this->isTokenValidFor($token, $tokenType)) {
             $this->failsAssert();
         }
+    }
+
+    public function isValidParserToken(string $token): bool
+    {
+        return $this->isTokenValidFor($token, 'parser');
+    }
+
+    public function assertValidParserToken(string $token): void
+    {
+        $this->assertTokenValidFor($token, 'parser');
     }
 
     public function isValidUploaderToken(string $token): bool

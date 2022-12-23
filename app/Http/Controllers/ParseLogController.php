@@ -27,9 +27,7 @@ class ParseLogController extends JsonController
 
     public function handle(ServerRequestInterface $request): array | string | int | bool | null
     {
-        $token = $request->getHeader('X-Auth-Token')[0] ?? null;
-
-        $this->tokensRepository->assertValidUploaderToken($token);
+        ($this->requiresAuthentication)($request, 'parser');
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
