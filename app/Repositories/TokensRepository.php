@@ -7,8 +7,8 @@ use App\Models\Token;
 class TokensRepository
 {
     protected const TOKEN_RANK = [
-        'uploader' => 50,
         'parser' => 25,
+        'uploader' => 50,
         'admin' => 100,
     ];
 
