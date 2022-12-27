@@ -3,6 +3,7 @@
 use App\Http\Controllers\ImportParsedCsvController;
 use App\Http\Controllers\ParseAndImportLogController;
 use App\Http\Controllers\ParseLogController;
+use App\Http\Controllers\SubmitCombosController;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use App\JsonApi\V1\JsonApiServer;
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['cache.headers']], function () {
             Route::post('/parse-log', [ParseLogController::class, 'requestHandler']);
             Route::post('/import-csv', [ImportParsedCsvController::class, 'requestHandler']);
             Route::post('/parse-import-log', [ParseAndImportLogController::class, 'requestHandler']);
+            Route::post('/submit-combos', [SubmitCombosController::class, 'requestHandler']);
         });
 
         Route::group(['prefix' => 'api', 'middleware' => 'etag'], function () {
