@@ -33,7 +33,7 @@ class Resources
             return ($this->requiresAuthentication)($context->getRequest(), 'admin');
         };
 
-        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('devices', new EloquentAdapter(Device::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -62,9 +62,10 @@ class Resources
 
             $type->creatable($uploaderOnlyCreate);
             $type->updatable($uploaderOnlyUpdate);
+            $type->deletable($adminOnlyDelete);
         });
 
-        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -83,6 +84,7 @@ class Resources
 
             $type->creatable($uploaderOnlyCreate);
             $type->updatable($uploaderOnlyUpdate);
+            $type->deletable($adminOnlyDelete);
         });
 
         $this->server->resourceType('device-firmwares', new EloquentAdapter(DeviceFirmware::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
