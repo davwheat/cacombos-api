@@ -5,6 +5,7 @@ namespace App\JsonApi\V1;
 use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Modem, NrComponent};
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
+use Illuminate\Support\Facades\Validator;
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
 use Tobyz\JsonApiServer\Context;
 use Tobyz\JsonApiServer\Schema\Type;
@@ -119,7 +120,16 @@ class Resources
                 ->filterable();
 
             $type->attribute('description')->sortable()->writable();
-            $type->attribute('plmn')->sortable()->writable();
+            $type->attribute('plmn')->sortable()->writable()
+                ->validate(function (callable $fail, $value, $model, Context $context) {
+                    $validator = Validator::make(['plmn' => $value], [
+                        'plmn' => ['nullable', 'regex:/^[0-9]{3}-[0-9]{2,3}$/'],
+                    ]);
+
+                    if ($validator->fails()) {
+                        $fail($validator->errors()->first('plmn'));
+                    }
+                });
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
