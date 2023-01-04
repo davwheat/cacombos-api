@@ -18,6 +18,8 @@ services:
       - db
     networks:
       - app
+    environment:
+      - UPLOAD_LIMIT=50M
 
   db:
     image: mysql:8
