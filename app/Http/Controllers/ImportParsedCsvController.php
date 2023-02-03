@@ -9,6 +9,7 @@ use App\Models\LteComponent;
 use App\Models\NrComponent;
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
+use App\Validator\FileOrStringValidator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -27,7 +28,7 @@ class ImportParsedCsvController extends JsonController
      */
     protected $capabilitySet;
 
-    public function __construct(RequiresAuthentication $requiresAuthentication, TokensRepository $tokensRepository)
+    public function __construct(RequiresAuthentication $requiresAuthentication)
     {
         $this->requiresAuthentication = $requiresAuthentication;
         $this->combosToDelete = new Collection();
@@ -42,9 +43,9 @@ class ImportParsedCsvController extends JsonController
         $body = $request->getParsedBody();
 
         $validator = Validator::make($body, [
-            'eutraCsv' => 'required_with:eutranrCsv|required_without:nrCsv|string',
-            'eutranrCsv' => 'required_without_all:eutraCsv,nrCsv|string',
-            'nrCsv' => 'required_without_all:eutraCsv,eutranrCsv|string',
+            'eutraCsv' => ['required_with:eutranrCsv|required_without:nrCsv', FileOrStringValidator::class],
+            'eutranrCsv' => ['required_without_all:eutraCsv,nrCsv', FileOrStringValidator::class],
+            'nrCsv' => ['required_without_all:eutraCsv,eutranrCsv', FileOrStringValidator::class],
             'deviceId' => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);
@@ -58,6 +59,13 @@ class ImportParsedCsvController extends JsonController
         }
 
         $csvData = Arr::only($body, ['eutraCsv', 'eutranrCsv', 'nrCsv']);
+
+        # For each CSV, if they are files, convert to strings
+        foreach ($csvData as $key => $csv) {
+            if (!is_string($csv)) {
+                $csvData[$key] = $csv->getStream()->getContents();
+            }
+        }
 
         $deviceId = Arr::get($body, 'deviceId');
         $device = Device::findOrFail($deviceId);

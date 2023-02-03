@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
+use App\Validator\FileOrStringValidator;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -33,17 +34,11 @@ class ParseLogController extends JsonController
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
-        $fileOrStringValidator = function ($attribute, $value, $fail) {
-            if (!is_string($value) && !($value instanceof UploadedFileInterface)) {
-                $fail('The ' . $attribute . ' must either be a string or file.');
-            }
-        };
-
         $validator = Validator::make($body, [
             'logFormat' => ['required', 'string', Rule::in(array_keys(self::VALID_LOG_FORMATS))],
-            'eutraLog' => ['required_without_all:eutranrLog,nrLog', $fileOrStringValidator],
-            'eutranrLog' => ['required_without_all:eutraLog,nrLog', $fileOrStringValidator],
-            'nrLog' => ['required_without_all:eutraLog,eutranrLog', $fileOrStringValidator],
+            'eutraLog' => ['required_without_all:eutranrLog,nrLog', FileOrStringValidator::class],
+            'eutranrLog' => ['required_without_all:eutraLog,nrLog', FileOrStringValidator::class],
+            'nrLog' => ['required_without_all:eutraLog,eutranrLog', FileOrStringValidator::class],
         ]);
 
         if ($validator->fails()) {

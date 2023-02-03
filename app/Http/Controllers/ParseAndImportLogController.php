@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
+use App\Validator\FileOrStringValidator;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UploadedFileInterface;
 
 
 class ParseAndImportLogController extends JsonController
@@ -51,17 +51,11 @@ class ParseAndImportLogController extends JsonController
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
-        $fileOrStringValidator = function ($attribute, $value, $fail) {
-            if (!is_string($value) && !($value instanceof UploadedFileInterface)) {
-                $fail('The ' . $attribute . ' must either be a string or file.');
-            }
-        };
-
         $validator = Validator::make($body, [
             'logFormat' => ['required', 'string', Rule::in(array_keys($this->parseLogController::VALID_LOG_FORMATS))],
-            'eutraLog' => ['required_without_all:eutranrLog,nrLog', $fileOrStringValidator],
-            'eutranrLog' => ['required_without_all:eutraLog,nrLog', $fileOrStringValidator],
-            'nrLog' => ['required_without_all:eutraLog,eutranrLog', $fileOrStringValidator],
+            'eutraLog' => ['required_without_all:eutranrLog,nrLog', FileOrStringValidator::class],
+            'eutranrLog' => ['required_without_all:eutraLog,nrLog', FileOrStringValidator::class],
+            'nrLog' => ['required_without_all:eutraLog,eutranrLog', FileOrStringValidator::class],
             'deviceId' => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);
