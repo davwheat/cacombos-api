@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
-use App\Validator\FileOrStringValidator;
+use App\Validator\FileOrString;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -53,9 +53,9 @@ class ParseAndImportLogController extends JsonController
 
         $validator = Validator::make($body, [
             'logFormat' => ['required', 'string', Rule::in(array_keys($this->parseLogController::VALID_LOG_FORMATS))],
-            'eutraLog' => ['required_without_all:eutranrLog,nrLog', FileOrStringValidator::class],
-            'eutranrLog' => ['required_without_all:eutraLog,nrLog', FileOrStringValidator::class],
-            'nrLog' => ['required_without_all:eutraLog,eutranrLog', FileOrStringValidator::class],
+            'eutraLog' => ['required_without_all:eutranrLog,nrLog', new FileOrString()],
+            'eutranrLog' => ['required_without_all:eutraLog,nrLog', new FileOrString()],
+            'nrLog' => ['required_without_all:eutraLog,eutranrLog', new FileOrString()],
             'deviceId' => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);

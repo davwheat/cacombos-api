@@ -7,9 +7,8 @@ use App\Models\Combo;
 use App\Models\Device;
 use App\Models\LteComponent;
 use App\Models\NrComponent;
-use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
-use App\Validator\FileOrStringValidator;
+use App\Validator\FileOrString;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -40,12 +39,12 @@ class ImportParsedCsvController extends JsonController
     {
         ($this->requiresAuthentication)($request, 'uploader');
 
-        $body = $request->getParsedBody();
+        $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
         $validator = Validator::make($body, [
-            'eutraCsv' => ['required_with:eutranrCsv|required_without:nrCsv', FileOrStringValidator::class],
-            'eutranrCsv' => ['required_without_all:eutraCsv,nrCsv', FileOrStringValidator::class],
-            'nrCsv' => ['required_without_all:eutraCsv,eutranrCsv', FileOrStringValidator::class],
+            'eutraCsv' => ['required_with:eutranrCsv|required_without:nrCsv', new FileOrString()],
+            'eutranrCsv' => ['required_without_all:eutraCsv,nrCsv', new FileOrString()],
+            'nrCsv' => ['required_without_all:eutraCsv,eutranrCsv', new FileOrString()],
             'deviceId' => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);
