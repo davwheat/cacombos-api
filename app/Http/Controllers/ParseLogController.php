@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
-use App\Validator\FileOrString;
+use App\Rules\FileOrString;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;

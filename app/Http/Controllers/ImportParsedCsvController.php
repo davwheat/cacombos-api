@@ -8,7 +8,7 @@ use App\Models\Device;
 use App\Models\LteComponent;
 use App\Models\NrComponent;
 use App\RequiresAuthentication;
-use App\Validator\FileOrString;
+use App\Rules\FileOrString;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;

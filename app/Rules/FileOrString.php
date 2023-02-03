@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validator;
+namespace App\Rules;
 
 use Illuminate\Contracts\Validation\InvokableRule;
 use Psr\Http\Message\UploadedFileInterface;
