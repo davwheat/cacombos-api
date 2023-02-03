@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RequiresAuthentication;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,6 +17,7 @@ class ParseLogController extends JsonController
 
     public const VALID_LOG_FORMATS = [
         'nsg' => 'N',
+        'qualcomm' => 'QALL',
     ];
 
     public function __construct(RequiresAuthentication $requiresAuthentication)
@@ -58,11 +60,13 @@ class ParseLogController extends JsonController
         $output = $this->callParser($logFormat, $logs);
 
         if ($output['code'] !== 0) {
+            $debug = App::hasDebugModeEnabled();
             $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 
             return [
                 'errors' => [
-                    'detail' => 'Parser failed to execute with the provided log files.'
+                    'detail' => 'Parser failed to execute with the provided log files.',
+                    'meta' => !$debug ? null : ['output' => $output['output']]
                 ]
             ];
         }
@@ -76,10 +80,14 @@ class ParseLogController extends JsonController
         return explode(PHP_EOL . PHP_EOL, implode(PHP_EOL, $output['output']));
     }
 
-    public function getParserType(string $format): ?string
+    public function getParserType(string $format): ?array
     {
         // Must include all `VALID_LOG_TYPES`
         $converted = self::VALID_LOG_FORMATS[$format] ?? null;
+
+        if ($converted !== null && !is_array($converted)) {
+            return [$converted, $converted, $converted];
+        }
 
         return $converted;
     }
@@ -89,36 +97,29 @@ class ParseLogController extends JsonController
      */
     public function callParser(string $logFormat, array $logs): array
     {
-        $formatFlag = $this->getParserType($logFormat);
-
-        if ($formatFlag === null) {
-            throw new \Exception('Invalid log format.');
-        }
-
         $output = [];
-        $return = 0;
-
-        $pathToParserJar = base_path('executables/log-parser/uecapabilityparser.jar');
 
         $filePaths = $this->writeLogsToTempFiles($logs);
 
         try {
-            $options = "--csv --type $formatFlag";
+            $options = [];
+
+            $options[] = ['--csv'];
 
             $logPassed = false;
 
             if (Arr::has($filePaths, 'eutraLog')) {
-                $options .= " -i " . escapeshellarg($filePaths['eutraLog']);
+                $options[] = ["-i", escapeshellarg($filePaths['eutraLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'eutranrLog')) {
-                $options .= " -inputENDC " . escapeshellarg($filePaths['eutranrLog']);
+                $options[] = ["-inputENDC", escapeshellarg($filePaths['eutranrLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'nrLog')) {
-                $options .= " -inputNR " . escapeshellarg($filePaths['nrLog']);
+                $options[] = ["-inputNR", escapeshellarg($filePaths['nrLog'])];
                 $logPassed = true;
             }
 
@@ -126,14 +127,11 @@ class ParseLogController extends JsonController
                 throw new \Exception('No log files provided to be parsed.');
             }
 
-            $command = escapeshellcmd(sprintf('java -jar %s %s', escapeshellarg($pathToParserJar), $options));
-            $command .= ' 2>&1';
-
-            $result = exec($command, $output, $return);
+            $output = $this->executeParser($logFormat, $options);
 
             $this->cleanUpTempFiles($filePaths);
 
-            return ['code' => $return, 'output' => $output];
+            return $output;
         } catch (\Exception $e) {
             $this->cleanUpTempFiles($filePaths);
 
@@ -163,5 +161,38 @@ class ParseLogController extends JsonController
         foreach ($tempFiles as $tempFile) {
             unlink($tempFile);
         }
+    }
+
+    public function executeParser(string $logFormat, array $options): array
+    {
+        $formatFlag = $this->getParserType($logFormat);
+
+        if ($formatFlag === null) {
+            throw new \Exception('Invalid log format.');
+        }
+
+        $options[] = ['--type', $formatFlag];
+        $options = $this->transformOptions($logFormat, $options);
+        $options = implode(' ', Arr::flatten($options));
+
+        $pathToParserJar = base_path('executables/log-parser/uecapabilityparser.jar');
+
+        $command = escapeshellcmd(sprintf('java -jar %s %s', escapeshellarg($pathToParserJar), $options));
+        $command .= ' 2>&1';
+
+        exec($command, $output, $return);
+
+        return ['code' => $return, 'output' => $output];
+    }
+
+    private function transformOptions(string $type, array $options): array
+    {
+        switch ($type) {
+            case 'qualcomm':
+                $options[] = ['--multi'];
+                break;
+        }
+
+        return $options;
     }
 }
