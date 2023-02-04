@@ -82,12 +82,30 @@ class ParseAndImportLogController extends JsonController
             $eutraCsv = array_shift($parsedBody);
         }
 
-        if (Arr::has($body, 'nrLog')) {
+        /**
+         * Ideally, I would implement a better output format in the parser
+         * itself, and I might still do that in the future.
+         * 
+         * It's hard to ascertain which CSV is which in the STDOUT output
+         * when using the Qualcomm hexdump log type, since you only input
+         * two files, and this can produce either 1, 2, or 3 depending on
+         * the device's capability. These 1 or 2 could be in any combination,
+         * and it's not realistic to be able to tell which is which purely
+         * from the output without some form of heuristics.
+         * 
+         * This is the best way I can think of doing it for now.
+         */
+        if ($body['logFormat'] === 'qualcomm') {
             $nrCsv = array_shift($parsedBody);
-        }
-
-        if (Arr::has($body, 'eutranrLog')) {
             $eutranrCsv = array_shift($parsedBody);
+        } else {
+            if (Arr::has($body, 'nrLog')) {
+                $nrCsv = array_shift($parsedBody);
+            }
+
+            if (Arr::has($body, 'eutranrLog')) {
+                $eutranrCsv = array_shift($parsedBody);
+            }
         }
 
         $importBody = [
