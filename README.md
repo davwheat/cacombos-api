@@ -20,7 +20,7 @@ To run this locally, you should use Laravel Sail and Composer.
 ### Installing dependencies
 
 ```
-composer update
+composer update -W
 ```
 
 This will install all the required PHP dependencies for the project.
