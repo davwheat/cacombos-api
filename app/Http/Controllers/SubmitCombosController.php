@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SubmitCombos;
 use App\RequiresAuthentication;
+use App\Rules\File;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -26,28 +27,14 @@ class SubmitCombosController extends JsonController
     {
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
-        $fileValidator = function ($attribute, $value, $fail) {
-            if (!($value instanceof UploadedFileInterface)) {
-                $fail('The ' . $attribute . ' must either be a string or file.');
-            }
-
-            /** @var UploadedFileInterface $file */
-            $file = $value;
-
-            // Check file size - max 25MB
-            if ($file->getSize() > 25 * 1024 * 1024) {
-                $fail('The ' . $attribute . ' must be less than 25 MB.');
-            }
-        };
-
 
         $validator = Validator::make($body, [
             'fromUser' => 'nullable|email',
-            'deviceName' => 'required|string',
-            'deviceModel' => 'required|string',
-            'deviceFirmware' => 'required|string',
-            'comment' => 'required|string',
-            'log' => $fileValidator,
+            'deviceName' => 'required|string|max:255',
+            'deviceModel' => 'required|string|max:255',
+            'deviceFirmware' => 'required|string|max:255',
+            'comment' => 'required|string|max:2500',
+            'log' => [new File(25 * 1024 * 1024)],
         ]);
 
 
