@@ -55,7 +55,7 @@ class SubmitCombosController extends JsonController
             log: Arr::get($body, 'log'),
         );
 
-        $result = Mail::to('admins@mobilecombos.com')->send($submitCombos);
+        $result = Mail::to('david@davwheat.dev')->send($submitCombos);
 
         if ($result) {
             $this->response = $this->response->withStatus(HttpResponse::HTTP_OK);
