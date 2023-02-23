@@ -38,7 +38,7 @@ Route::group(['middleware' => ['cache.headers']], function () {
             Route::post('/submit-combos', [SubmitCombosController::class, 'requestHandler']);
         });
 
-        Route::group(['prefix' => 'api', 'middleware' => 'etag'], function () {
+        Route::group(['prefix' => 'api'], function () {
             // JSON:API instance
             Route::any('{any}', function (ServerRequestInterface $request) {
                 $server = new JsonApiServer('/v1/api');
