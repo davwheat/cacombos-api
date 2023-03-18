@@ -30,7 +30,7 @@ class ParseLogController extends JsonController
 
     public function handle(ServerRequestInterface $request): array | string | int | bool | null
     {
-        ($this->requiresAuthentication)($request, 'parser');
+        ($this->requiresAuthentication)($request, 'parser', true);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 

@@ -3,30 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SubmitCombos;
-use App\RequiresAuthentication;
 use App\Rules\File;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Support\Facades\Mail;
-use Psr\Http\Message\UploadedFileInterface;
 
 class SubmitCombosController extends JsonController
 {
-    protected RequiresAuthentication $requiresAuthentication;
-
-    public function __construct(RequiresAuthentication $requiresAuthentication)
+    public function __construct()
     {
-        $this->requiresAuthentication = $requiresAuthentication;
-
         parent::__construct();
     }
 
     public function handle(ServerRequestInterface $request): array|string|int|bool|null
     {
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
-
 
         $validator = Validator::make($body, [
             'fromUser' => 'nullable|email',

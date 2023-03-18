@@ -47,7 +47,7 @@ class ParseAndImportLogController extends JsonController
 
     public function requestHandler(ServerRequestInterface $request): ResponseInterface
     {
-        ($this->requiresAuthentication)($request, 'uploader');
+        ($this->requiresAuthentication)($request, 'uploader', true);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 

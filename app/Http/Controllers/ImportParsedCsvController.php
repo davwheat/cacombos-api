@@ -37,7 +37,7 @@ class ImportParsedCsvController extends JsonController
 
     public function handle(ServerRequestInterface $request): array | string | int | bool | null
     {
-        ($this->requiresAuthentication)($request, 'uploader');
+        ($this->requiresAuthentication)($request, 'uploader', true);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
