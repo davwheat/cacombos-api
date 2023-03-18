@@ -36,11 +36,13 @@ class TokensRepository
         return (self::TOKEN_RANK[$tokenObj->type] ?? -1) >= $tokenRank;
     }
 
-    protected function assertTokenValidFor(string $token, string $tokenType): void
+    protected function assertTokenValidFor(string $token, string $tokenType): bool
     {
         if (!$this->isTokenValidFor($token, $tokenType)) {
             $this->failsAssert();
         }
+
+        return true;
     }
 
     public function isValidParserToken(string $token): bool
@@ -48,9 +50,9 @@ class TokensRepository
         return $this->isTokenValidFor($token, 'parser');
     }
 
-    public function assertValidParserToken(string $token): void
+    public function assertValidParserToken(string $token): bool
     {
-        $this->assertTokenValidFor($token, 'parser');
+        return $this->assertTokenValidFor($token, 'parser');
     }
 
     public function isValidUploaderToken(string $token): bool
@@ -58,9 +60,9 @@ class TokensRepository
         return $this->isTokenValidFor($token, 'uploader');
     }
 
-    public function assertValidUploaderToken(string $token): void
+    public function assertValidUploaderToken(string $token): bool
     {
-        $this->assertTokenValidFor($token, 'uploader');
+        return $this->assertTokenValidFor($token, 'uploader');
     }
 
     public function isValidAdminToken(string $token): bool
@@ -68,8 +70,8 @@ class TokensRepository
         return $this->isTokenValidFor($token, 'admin');
     }
 
-    public function assertValidAdminToken(string $token): void
+    public function assertValidAdminToken(string $token): bool
     {
-        $this->assertTokenValidFor($token, 'admin');
+        return $this->assertTokenValidFor($token, 'admin');
     }
 }
