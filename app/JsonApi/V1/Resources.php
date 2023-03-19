@@ -5,6 +5,8 @@ namespace App\JsonApi\V1;
 use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Modem, NrComponent};
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
 use Tobyz\JsonApiServer\Context;
@@ -64,6 +66,10 @@ class Resources
             $type->creatable($uploaderOnlyCreate);
             $type->updatable($uploaderOnlyUpdate);
             $type->deletable($adminOnlyDelete);
+
+            $type->filter('deviceFullName', function (Builder $query, $value, Context $context) {
+                $query->where(DB::raw('CONCAT_WS(" ", devices.manufacturer, devices.device_name, devices.model_name)'), 'LIKE', "%$value%");
+            });
         });
 
         $this->server->resourceType('modems', new EloquentAdapter(Modem::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate, $adminOnlyDelete) {
