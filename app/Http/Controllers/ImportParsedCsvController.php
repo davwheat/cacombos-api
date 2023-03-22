@@ -213,6 +213,10 @@ class ImportParsedCsvController extends JsonController
                     $ccData['ULmod'] = "16qam";
                 }
 
+                if (empty($ccData['mimo'])) {
+                    $ccData['mimo'] = 1;
+                }
+
                 $ccs[] = LteComponent::firstOrCreate(
                     [
                         'band' => $ccData['band'],
