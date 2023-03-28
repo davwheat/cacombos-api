@@ -30,12 +30,6 @@ class TokensRepository
         $tokenRank = self::TOKEN_RANK[$tokenType] ?? 0;
         $tokenObj = $this->queryToken($token)->first();
 
-        // Obscure token in logs
-        Log::debug('Token:      ' . substr($token, 0, 5) . '...');
-        Log::debug('Token type: ' . $tokenType);
-        Log::debug('Token rank: ' . $tokenRank);
-        Log::debug('Req. rank:  ' . self::TOKEN_RANK[$tokenObj->type] ?? -1);
-
         if ($tokenObj === null) {
             return false;
         }
