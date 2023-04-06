@@ -92,6 +92,8 @@ class ParseLogController extends JsonController
      */
     public function callParser(string $logFormat, array $logs): array
     {
+        clock()->event('Running log parser')->begin();
+
         $output = [];
 
         $filePaths = $this->writeLogsToTempFiles($logs);
@@ -130,8 +132,12 @@ class ParseLogController extends JsonController
         } catch (\Exception $e) {
             $this->cleanUpTempFiles($filePaths);
 
+            clock()->event('Running log parser')->end();
+
             throw $e;
         }
+
+        clock()->event('Running log parser')->end();
     }
 
     public function writeLogsToTempFiles(array $logs): array

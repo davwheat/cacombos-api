@@ -26,6 +26,8 @@ class Resources
 
     public function __invoke()
     {
+        clock()->event('Registering JSON:API models')->begin();
+
         $uploaderOnlyCreate = function (Context $context): bool {
             return ($this->requiresAuthentication)($context->getRequest(), 'uploader');
         };
@@ -221,5 +223,7 @@ class Resources
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
         });
+
+        clock()->event('Registering JSON:API models')->end();
     }
 }

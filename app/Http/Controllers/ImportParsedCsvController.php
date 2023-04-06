@@ -99,6 +99,8 @@ class ImportParsedCsvController extends JsonController
 
     protected function propogateCombosToDelete(array $csvData): void
     {
+        clock()->event('Finding combos to remove')->begin();
+
         $comboQuery = $this->capabilitySet->combos();
 
         // Remove unlinked combos
@@ -142,13 +144,19 @@ class ImportParsedCsvController extends JsonController
                     ->get('id')
             );
         }
+
+        clock()->event('Finding combos to remove')->end();
     }
 
     protected function removeCombosFromDeletion(array|Collection|Combo $combos)
     {
+        clock()->event('Removing unused combos')->begin();
+
         $this->combosToDelete = $this->combosToDelete->diff(
             $combos instanceof Collection ? $combos : collect($combos)
         );
+
+        clock()->event('Removing unused combos')->end();
     }
 
     protected function parseCsvsToModels(array $csvData): void
@@ -158,15 +166,21 @@ class ImportParsedCsvController extends JsonController
         $nrCsv = Arr::get($csvData, 'nrCsv');
 
         if (!empty($eutraCsv)) {
+            clock()->event('Parsing EUTRA CSV')->begin();
             $this->parseEutraCsvToModels($eutraCsv);
+            clock()->event('Parsing EUTRA CSV')->end();
         }
 
         if (!empty($eutranrCsv)) {
+            clock()->event('Parsing EUTRA-NR CSV')->begin();
             $this->parseEutraNrCsvToModels($eutranrCsv);
+            clock()->event('Parsing EUTRA-NR CSV')->end();
         }
 
         if (!empty($nrCsv)) {
+            clock()->event('Parsing NR CSV')->begin();
             $this->parseNrCsvToModels($nrCsv);
+            clock()->event('Parsing NR CSV')->end();
         }
     }
 
