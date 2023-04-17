@@ -15,6 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \BeyondCode\ServerTiming\Middleware\ServerTimingMiddleware::class,
+        \SimpleAsFuck\LaravelPerformanceLog\Middleware\PerformanceMiddleware::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
