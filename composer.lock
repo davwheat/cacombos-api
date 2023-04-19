@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4be6e56a9100dcbfaf9d2ba61fdd683",
+    "content-hash": "cd9010c8b9cb984fec964ce20fd14e4d",
     "packages": [
         {
             "name": "beyondcode/laravel-server-timing",
