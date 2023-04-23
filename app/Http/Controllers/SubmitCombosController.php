@@ -26,7 +26,7 @@ class SubmitCombosController extends JsonController
             'deviceName'     => 'required|string|max:255',
             'deviceModel'    => 'required|string|max:255',
             'deviceFirmware' => 'required|string|max:255',
-            'comment'        => 'required|string|max:2500',
+            'comment'        => 'string|max:2500',
             'log'            => [new File(25 * 1024 * 1024)],
         ]);
 
