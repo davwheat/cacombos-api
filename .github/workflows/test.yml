@@ -2,8 +2,7 @@ name: Laravel Sail PHPUnit
 
 on:
   push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   test:
