@@ -87,7 +87,10 @@ class ParseLogController extends JsonController
         }
 
         $this->response = $this->response->withHeader('Content-Type', 'application/json');
-        return json_encode($output);
+
+        $out = array_map(fn ($out) => $out['output'], $output);
+
+        return $out;
     }
 
     public function getParserType(string $format): string
@@ -198,7 +201,7 @@ class ParseLogController extends JsonController
 
         exec($command, $output, $return);
 
-        return ['code' => $return, 'output' => $output];
+        return ['code' => $return, 'output' => json_decode(Arr::join($output, PHP_EOL), true)];
     }
 
     private function transformOptions(string $type, array $options): array
@@ -206,6 +209,15 @@ class ParseLogController extends JsonController
         switch ($type) {
             case 'qualcomm-nr':
                 $options[] = ['--multiple0xB826'];
+
+                // Rename inputENDC option to input
+                $options = array_map(function ($option) {
+                    if ($option[0] === '--inputENDC') {
+                        $option[0] = '--input';
+                    }
+
+                    return $option;
+                }, $options);
                 break;
         }
 
