@@ -6,11 +6,22 @@ on:
 
 jobs:
   test:
+    name: Run all tests
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Debug
+        run: |
+          # Show UID
+          echo "UID: $UID"
+          # Show GID
+          echo "GID: $GID"
+          # Show current user
+          echo "Current user: $(whoami)"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
