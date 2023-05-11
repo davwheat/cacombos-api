@@ -17,6 +17,16 @@ class ParseLogTest extends TestCase
         'x-auth-token' => "admin"
     ];
 
+    private function remove_metadata_from_output(array $output): array
+    {
+        return array_map(function ($item) {
+            unset($item['metadata']);
+            unset($item['timestamp']);
+            unset($item['parserVersion']);
+            return $item;
+        }, $output);
+    }
+
     /**
      * Cannot parse a log without a valid token.
      */
@@ -64,6 +74,9 @@ class ParseLogTest extends TestCase
     //         'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
     //     ], ParseLogTest::$auth);
 
+    //     // echo ($response->getContent());
+    //     // ob_flush();
+
     //     $response->assertStatus(422);
     //     $this->assertStringContainsString('Invalid log format', $response->getContent() ?: '');
     // }
@@ -78,9 +91,64 @@ class ParseLogTest extends TestCase
             'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
         ], ParseLogTest::$auth);
 
-        // $response->assertStatus(200);
-        $response->assertContent('');
+        $response->assertStatus(200);
+
+        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.json'), true)];
+        $actual_json = json_decode($response->getContent(), true);
+
+        $expected_json = $this->remove_metadata_from_output($expected_json);
+        $actual_json = $this->remove_metadata_from_output($actual_json);
+
+        $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
-        $this->assertStringContainsString('DL', $response->getContent() ?: '');
+
+        $this->assertEquals(json_encode($expected_json), json_encode($actual_json));
+    }
+
+    /**
+     * Can parse Qualcomm EUTRA-NR log.
+     */
+    public function test_can_parse_qcom_eutranr_log(): void
+    {
+        $response = $this->post('/v1/actions/parse-log', [
+            'logFormat' => 'qualcomm',
+            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+        ], ParseLogTest::$auth);
+
+        $response->assertStatus(200);
+
+        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.json'), true)];
+        $actual_json = json_decode($response->getContent(), true);
+
+        $expected_json = $this->remove_metadata_from_output($expected_json);
+        $actual_json = $this->remove_metadata_from_output($actual_json);
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'application/json');
+
+        $this->assertEquals(json_encode($expected_json), json_encode($actual_json));
+    }
+
+    /**
+     * Can parse and merge Qualcomm EUTRA and NR log.
+     */
+    public function test_can_parse_and_merge_qcom_eutra_and_eutranr_log(): void
+    {
+        $response = $this->post('/v1/actions/parse-log', [
+            'logFormat' => 'qualcomm',
+            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
+            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+        ], ParseLogTest::$auth);
+
+        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.json'), true), json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.json'), true)];
+        $actual_json = json_decode($response->getContent(), true);
+
+        $expected_json = $this->remove_metadata_from_output($expected_json);
+        $actual_json = $this->remove_metadata_from_output($actual_json);
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'application/json');
+
+        $this->assertEquals(json_encode($expected_json), json_encode($actual_json));
     }
 }
