@@ -47,7 +47,12 @@ jobs:
         run: |
           ./vendor/bin/sail up -d
 
+      - name: Run database migrations
+        run: |
+          ./vendor/bin/sail artisan migrate
+
       - name: Run PHPUnit tests
+        # This automatically seeds the DB
         run: ./vendor/bin/sail artisan test
 
       - name: Stop Laravel Sail
