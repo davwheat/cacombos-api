@@ -67,19 +67,30 @@ class ParseLogTest extends TestCase
     /**
      * Cannot parse a log with invalid data.
      */
-    // public function test_cannot_parse_log_with_invalid_data(): void
-    // {
-    //     $response = $this->post('/v1/actions/parse-log', [
-    //         'logFormat' => 'qualcomm',
-    //         'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
-    //     ], ParseLogTest::$auth);
+    public function test_cannot_parse_log_with_invalid_data(): void
+    {
+        $response = $this->post('/v1/actions/parse-log', [
+            'logFormat' => 'qualcomm',
+            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+        ], ParseLogTest::$auth);
 
-    //     // echo ($response->getContent());
-    //     // ob_flush();
+        $response->assertStatus(422);
+        $this->assertStringContainsString('Parser failed to find any capability data in one or more of the provided log files', $response->getContent() ?: '');
+    }
 
-    //     $response->assertStatus(422);
-    //     $this->assertStringContainsString('Invalid log format', $response->getContent() ?: '');
-    // }
+    /**
+     * Cannot parse a log with nonsensical format name.
+     */
+    public function test_cannot_parse_log_with_unsupported_format(): void
+    {
+        $response = $this->post('/v1/actions/parse-log', [
+            'logFormat' => 'not-a-format',
+            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+        ], ParseLogTest::$auth);
+
+        $response->assertStatus(422);
+        $this->assertStringContainsString('The selected log format is invalid.', $response->getContent() ?: '');
+    }
 
     /**
      * Can parse Qualcomm EUTRA log.
