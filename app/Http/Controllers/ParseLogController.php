@@ -86,6 +86,24 @@ class ParseLogController extends JsonController
             ];
         }
 
+        foreach ($output as &$out) {
+            $outputLines = $out['output'];
+
+            Arr::forget($outputLines, ['logType', 'parserVersion', 'timestamp', 'metadata']);
+
+            // Error if one or more parser call outputs have no capability data
+            if (count($outputLines) === 0) {
+                $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+                return [
+                    'errors' => [
+                        'detail' => 'Parser failed to find any capability data in one or more of the provided log files.',
+                        'meta' => $out['output']
+                    ]
+                ];
+            }
+        }
+
         $this->response = $this->response->withHeader('Content-Type', 'application/json');
 
         $out = array_map(fn ($out) => $out['output'], $output);
