@@ -3,11 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
-use function PHPUnit\Framework\assertContains;
-use function PHPUnit\Framework\assertStringContainsString;
 
 class ParseLogTest extends TestCase
 {
