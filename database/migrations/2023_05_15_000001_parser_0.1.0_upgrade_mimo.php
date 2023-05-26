@@ -2,7 +2,6 @@
 
 use App\Models\LteComponent;
 use App\Models\Mimo;
-use App\Models\Modulation;
 use App\Models\NrComponent;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -30,9 +29,9 @@ return new class extends Migration
         Schema::create('components_mimos', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('lte_component_id')->constrained('nr_components')->index()->nullable();
-            $table->foreignId('nr_component_id')->constrained('lte_components')->index()->nullable();
-            $table->foreignId('mimo_id')->constrained('mimos')->index()->nullable(false);
+            $table->foreignId('lte_component_id')->index()->nullable()->constrained('nr_components');
+            $table->foreignId('nr_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('mimo_id')->index()->nullable(false)->constrained('mimos');
 
             $table->index(['lte_component_id', 'mimo_id']);
             $table->index(['nr_component_id', 'mimo_id']);

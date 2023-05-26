@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\LteComponent;
-use App\Models\Mimo;
-use App\Models\Modulation;
-use App\Models\NrComponent;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("nr_bands", function (Blueprint $table) {
+        Schema::create("nr_bands", function (Blueprint $table) {
             $table->id();
 
             $table->smallInteger("band")->unsigned()->index();
@@ -26,34 +22,34 @@ return new class extends Migration
             $table->integer("max_uplink_duty_cycle")->nullable();
         });
 
-        Schema::table("nr_bands_mimo", function (Blueprint $table) {
-            $table->foreignId('nr_band_id')->constrained('nr_bands')->index()->nullable(false);
-            $table->foreignId('mimo_id')->constrained('mimos')->index()->nullable(false);
-
-            $table->primary(['nr_band_id', 'mimo_id']);
-        });
-
-        Schema::table("nr_bands_modulations", function (Blueprint $table) {
-            $table->foreignId('nr_band_id')->constrained('nr_bands')->index()->nullable(false);
-            $table->foreignId('modulation_id')->constrained('modulations')->index()->nullable(false);
-
-            $table->primary(['nr_band_id', 'modulation_id']);
-        });
-
-        Schema::table("nr_bands_nr_bandwidths", function (Blueprint $table) {
-            $table->foreignId('nr_band_id')->constrained('nr_bands')->index()->nullable(false);
-            $table->foreignId('bandwidth_id')->constrained('nr_bandwidths')->index()->nullable(false);
-
-            $table->primary(['nr_band_id', 'bandwidth_id']);
-        });
-
-        Schema::table("nr_bandwidths", function (Blueprint $table) {
+        Schema::create("nr_bandwidths", function (Blueprint $table) {
             $table->id();
 
             $table->integer("scs")->unsigned()->index();
 
             $table->json('bandwidths_dl');
             $table->json('bandwidths_ul');
+        });
+
+        Schema::create("nr_bands_mimo", function (Blueprint $table) {
+            $table->foreignId('nr_band_id')->index()->nullable(false)->constrained('nr_bands');
+            $table->foreignId('mimo_id')->index()->nullable(false)->constrained('mimos');
+
+            $table->primary(['nr_band_id', 'mimo_id']);
+        });
+
+        Schema::create("nr_bands_modulations", function (Blueprint $table) {
+            $table->foreignId('nr_band_id')->index()->nullable(false)->constrained('nr_bands');
+            $table->foreignId('modulation_id')->index()->nullable(false)->constrained('modulations');
+
+            $table->primary(['nr_band_id', 'modulation_id']);
+        });
+
+        Schema::create("nr_bands_nr_bandwidths", function (Blueprint $table) {
+            $table->foreignId('nr_band_id')->index()->nullable(false)->constrained('nr_bands');
+            $table->foreignId('bandwidth_id')->index()->nullable(false)->constrained('nr_bandwidths');
+
+            $table->primary(['nr_band_id', 'bandwidth_id']);
         });
     }
 

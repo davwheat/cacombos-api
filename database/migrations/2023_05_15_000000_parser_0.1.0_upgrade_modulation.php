@@ -29,9 +29,9 @@ return new class extends Migration
         Schema::create('components_modulations', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('lte_component_id')->constrained('nr_components')->index()->nullable();
-            $table->foreignId('nr_component_id')->constrained('lte_components')->index()->nullable();
-            $table->foreignId('modulation_id')->constrained('modulations')->index()->nullable(false);
+            $table->foreignId('lte_component_id')->index()->nullable()->constrained('nr_components');
+            $table->foreignId('nr_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('modulation_id')->index()->nullable(false)->constrained('modulations');
 
             $table->index(['lte_component_id', 'modulation_id']);
             $table->index(['nr_component_id', 'modulation_id']);
