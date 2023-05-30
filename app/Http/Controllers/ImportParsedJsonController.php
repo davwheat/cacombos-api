@@ -120,7 +120,7 @@ class ImportParsedJsonController extends JsonController
         clock()->event('Removing unused combos')->end();
     }
 
-    protected function parseJsonToModels(array $csvData): void
+    protected function parseJsonToModels(array $jsonData): void
     {
         $eutraCsv = Arr::get($csvData, 'eutraCsv');
         $eutranrCsv = Arr::get($csvData, 'eutranrCsv');
@@ -143,6 +143,14 @@ class ImportParsedJsonController extends JsonController
             $this->parseNrCsvToModels($nrCsv);
             clock()->event('Parsing NR CSV')->end();
         }
+    }
+
+    protected function parseNrBandsJsonToModels(array $nrBands)
+    {
+        $nrBands = collect($nrBands);
+
+        $nrBands->each(function ($nrBand) {
+        });
     }
 
     protected function parseEutraCsvToModels(string $csvData): void
