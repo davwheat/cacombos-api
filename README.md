@@ -1,10 +1,10 @@
-# CA Combos API v2
+# mobilecombos.com backend API
 
-This is a rewritten API for a potential CA Combos (https://cacombos.com) competitor.
+This is the backend API for mobilecombos.com. This works in unison with the [standalone frontend](https://github.com/mobilecombos/website-frontend) to fully implement the website's features.
 
 ## Local development
 
-This project is written in PHP with Laravel 9.
+This project is written in PHP with Laravel 10.
 
 To run this locally, you should use Laravel Sail and Composer.
 
@@ -77,10 +77,24 @@ This provides some basic data to test the API with.
 sail artisan db:seed
 ```
 
+### Run tests
+
+The API includes various basic tests, with more being added throughout development.
+
+You can use `sail` to run these, provided the Docker containers are running.
+
+```
+sail up -d
+sail artisan db:reset
+sail artisan migrate
+
+sail artisan test
+```
+
 ## Using the API
 
 The API is available under the `v1` suffix, in order to allow for future breaking changes, and backwards compatibility.
 
 The API complies with the JSON:API standard, exposing models as resources, and using the `filter`, `sort` and `include` query parameters.
 
-For example, to list all devices, including their modems, you can perform a GET request against `/v1/devices?include=modem`.
+For example, to list all devices, including their modems, you can perform a GET request against `/v1/api/devices?include=modem&sort=-releaseDate`.
