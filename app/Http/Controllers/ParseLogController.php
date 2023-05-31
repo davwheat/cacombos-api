@@ -18,12 +18,12 @@ class ParseLogController extends JsonController
     protected RequiresAuthentication $requiresAuthentication;
 
     public const VALID_LOG_FORMATS = [
-        'nsg' => 'N',
+        'nsg'      => 'N',
         'qualcomm' => null,
 
         // Internal use only
         'qualcomm-lte' => 'Q',
-        'qualcomm-nr' => 'QNR',
+        'qualcomm-nr'  => 'QNR',
     ];
 
     public function __construct(RequiresAuthentication $requiresAuthentication)
@@ -81,8 +81,8 @@ class ParseLogController extends JsonController
             return [
                 'errors' => [
                     'detail' => 'Parser failed to execute with the provided log files.',
-                    'meta' => !$debug ? null : $output
-                ]
+                    'meta'   => !$debug ? null : $output,
+                ],
             ];
         }
 
@@ -98,8 +98,8 @@ class ParseLogController extends JsonController
                 return [
                     'errors' => [
                         'detail' => 'Parser failed to find any capability data in one or more of the provided log files.',
-                        'meta' => $out['output']
-                    ]
+                        'meta'   => $out['output'],
+                    ],
                 ];
             }
         }
@@ -142,17 +142,17 @@ class ParseLogController extends JsonController
             $logPassed = false;
 
             if (Arr::has($filePaths, 'eutraLog')) {
-                $options[] = ["--input", escapeshellarg($filePaths['eutraLog'])];
+                $options[] = ['--input', escapeshellarg($filePaths['eutraLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'eutranrLog')) {
-                $options[] = ["--inputENDC", escapeshellarg($filePaths['eutranrLog'])];
+                $options[] = ['--inputENDC', escapeshellarg($filePaths['eutranrLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'nrLog')) {
-                $options[] = ["--inputNR", escapeshellarg($filePaths['nrLog'])];
+                $options[] = ['--inputNR', escapeshellarg($filePaths['nrLog'])];
                 $logPassed = true;
             }
 

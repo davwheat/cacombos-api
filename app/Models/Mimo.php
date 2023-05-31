@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property int $mimo
- * @property boolean $is_ul
+ * @property int  $id
+ * @property int  $mimo
+ * @property bool $is_ul
  */
 class Mimo extends Model
 {

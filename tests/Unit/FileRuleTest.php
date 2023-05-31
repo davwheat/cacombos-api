@@ -2,9 +2,8 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Facades\Validator;
 use App\Rules\File;
-use App\Rules\FileOrString;
+use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\UploadedFileInterface;
 use Tests\UnitTestCase;
 
@@ -68,7 +67,7 @@ class FileRuleTest extends UnitTestCase
 
     /**
      * An array of files is not a valid file.
-     * 
+     *
      * @return void
      */
     public function test_that_array_of_files_is_not_valid_file()

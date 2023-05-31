@@ -10,7 +10,7 @@ class ParseLogTest extends TestCase
     use RefreshDatabase;
 
     protected static $auth = [
-        'x-auth-token' => "admin"
+        'x-auth-token' => 'admin',
     ];
 
     private function remove_metadata_from_output(array $output): array
@@ -19,6 +19,7 @@ class ParseLogTest extends TestCase
             unset($item['metadata']);
             unset($item['timestamp']);
             unset($item['parserVersion']);
+
             return $item;
         }, $output);
     }
@@ -67,7 +68,7 @@ class ParseLogTest extends TestCase
     {
         $response = $this->post('/v1/actions/parse-log', [
             'logFormat' => 'qualcomm',
-            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+            'eutraLog'  => file_get_contents(__DIR__.'/../Data/Log/invalid.txt'),
         ], ParseLogTest::$auth);
 
         $response->assertStatus(422);
@@ -81,7 +82,7 @@ class ParseLogTest extends TestCase
     {
         $response = $this->post('/v1/actions/parse-log', [
             'logFormat' => 'not-a-format',
-            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+            'eutraLog'  => file_get_contents(__DIR__.'/../Data/Log/invalid.txt'),
         ], ParseLogTest::$auth);
 
         $response->assertStatus(422);
@@ -95,12 +96,12 @@ class ParseLogTest extends TestCase
     {
         $response = $this->post('/v1/actions/parse-log', [
             'logFormat' => 'qualcomm',
-            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
+            'eutraLog'  => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.txt'),
         ], ParseLogTest::$auth);
 
         $response->assertStatus(200);
 
-        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.json'), true)];
+        $expected_json = [json_decode(file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.json'), true)];
         $actual_json = json_decode($response->getContent(), true);
 
         $expected_json = $this->remove_metadata_from_output($expected_json);
@@ -118,13 +119,13 @@ class ParseLogTest extends TestCase
     public function test_can_parse_qcom_eutranr_log(): void
     {
         $response = $this->post('/v1/actions/parse-log', [
-            'logFormat' => 'qualcomm',
-            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+            'logFormat'  => 'qualcomm',
+            'eutranrLog' => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.txt'),
         ], ParseLogTest::$auth);
 
         $response->assertStatus(200);
 
-        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.json'), true)];
+        $expected_json = [json_decode(file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.json'), true)];
         $actual_json = json_decode($response->getContent(), true);
 
         $expected_json = $this->remove_metadata_from_output($expected_json);
@@ -142,12 +143,12 @@ class ParseLogTest extends TestCase
     public function test_can_parse_and_merge_qcom_eutra_and_eutranr_log(): void
     {
         $response = $this->post('/v1/actions/parse-log', [
-            'logFormat' => 'qualcomm',
-            'eutraLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
-            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+            'logFormat'  => 'qualcomm',
+            'eutraLog'   => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.txt'),
+            'eutranrLog' => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.txt'),
         ], ParseLogTest::$auth);
 
-        $expected_json = [json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.json'), true), json_decode(file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.json'), true)];
+        $expected_json = [json_decode(file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.json'), true), json_decode(file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.json'), true)];
         $actual_json = json_decode($response->getContent(), true);
 
         $expected_json = $this->remove_metadata_from_output($expected_json);

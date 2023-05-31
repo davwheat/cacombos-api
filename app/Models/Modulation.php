@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
+ * @property int    $id
  * @property string $modulation
- * @property boolean $is_ul
+ * @property bool   $is_ul
  */
 class Modulation extends Model
 {

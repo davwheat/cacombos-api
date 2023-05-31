@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -19,7 +18,7 @@ return new class extends Migration
         Schema::create('mimos', function (Blueprint $table) {
             $table->id();
 
-            $table->tinyInteger("mimo")->unsigned();
+            $table->tinyInteger('mimo')->unsigned();
             $table->boolean('is_ul')->nullable(false);
 
             $table->unique(['mimo', 'is_ul']);
@@ -42,12 +41,12 @@ return new class extends Migration
             $ulMimo = $nrComponent->ul_mimo;
 
             $newDlMimo = $dlMimo ? Mimo::firstOrCreate([
-                'mimo' => $dlMimo,
+                'mimo'  => $dlMimo,
                 'is_ul' => false,
             ]) : null;
 
             $newUlMimo = $ulMimo ? Mimo::firstOrCreate([
-                'mimo' => $ulMimo,
+                'mimo'  => $ulMimo,
                 'is_ul' => true,
             ]) : null;
 
@@ -64,15 +63,14 @@ return new class extends Migration
             $hasUl = $lteComponent->ul_class !== null;
 
             $newDlMimo = $dlMimo ? Mimo::firstOrCreate([
-                'mimo' => $dlMimo,
+                'mimo'  => $dlMimo,
                 'is_ul' => false,
             ]) : null;
 
             $newUlMimo = $hasUl ? Mimo::firstOrCreate([
-                'mimo' => 1,
+                'mimo'  => 1,
                 'is_ul' => true,
             ]) : null;
-
 
             if ($newDlMimo !== null) {
                 $lteComponent->mimos()->attach($newDlMimo);

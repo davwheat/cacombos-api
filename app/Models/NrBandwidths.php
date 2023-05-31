@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property int $scs
+ * @property int   $id
+ * @property int   $scs
  * @property array $bandwidths_dl
  * @property array $bandwidths_ul
  */

@@ -21,21 +21,21 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('tokens')->insert([
             [
-                'token' => 'admin',
-                'comment' => '',
+                'token'         => 'admin',
+                'comment'       => '',
                 'expires_after' => now()->addDays(7),
-                'created_at' => now(),
-                'updated_at' => now(),
-                'type' => 'admin',
+                'created_at'    => now(),
+                'updated_at'    => now(),
+                'type'          => 'admin',
             ],
             [
-                'token' => 'admin-expired',
-                'comment' => '',
+                'token'         => 'admin-expired',
+                'comment'       => '',
                 'expires_after' => now()->addDays(-1),
-                'created_at' => now(),
-                'updated_at' => now(),
-                'type' => 'admin',
-            ]
+                'created_at'    => now(),
+                'updated_at'    => now(),
+                'type'          => 'admin',
+            ],
         ]);
 
         DB::table('modems')->insert([
