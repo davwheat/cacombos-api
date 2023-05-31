@@ -161,7 +161,7 @@ class Resources
             $type->deletable($adminOnlyDelete);
         });
 
-        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('combos', new EloquentAdapter(Combo::class), function (Type $type) {
             $type->attribute('uuid')
                 ->filterable();
 
@@ -182,17 +182,17 @@ class Resources
                 ->includable()
                 ->withoutLinkage()
                 // ->filterable()
-            ;
+;
 
             $type->hasMany('nrComponents')
                 ->type('nr-components')
                 ->includable()
                 ->withoutLinkage()
                 // ->filterable()
-            ;
+;
         });
 
-        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');
@@ -207,7 +207,7 @@ class Resources
             $type->attribute('updatedAt')->sortable();
         });
 
-        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) use ($uploaderOnlyCreate, $uploaderOnlyUpdate) {
+        $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) {
             $type->attribute('band')->filterable();
 
             $type->attribute('dlClass');

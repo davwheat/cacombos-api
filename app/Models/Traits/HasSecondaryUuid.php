@@ -3,7 +3,7 @@
 namespace App\Models\Traits;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use \Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 trait HasSecondaryUuid
 {

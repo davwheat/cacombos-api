@@ -11,7 +11,6 @@ use Illuminate\Validation\Rule;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-
 class ParseAndImportLogController extends JsonController
 {
     protected RequiresAuthentication $requiresAuthentication;
@@ -28,7 +27,7 @@ class ParseAndImportLogController extends JsonController
     }
 
     /**
-     * Stub -- never called
+     * Stub -- never called.
      */
     public function handle(ServerRequestInterface $request): array|string|int|bool|null
     {
@@ -52,11 +51,11 @@ class ParseAndImportLogController extends JsonController
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
         $validator = Validator::make($body, [
-            'logFormat' => ['required', 'string', Rule::in(array_keys($this->parseLogController::VALID_LOG_FORMATS))],
-            'eutraLog' => ['required_without_all:eutranrLog,nrLog', new FileOrString()],
-            'eutranrLog' => ['required_without_all:eutraLog,nrLog', new FileOrString()],
-            'nrLog' => ['required_without_all:eutraLog,eutranrLog', new FileOrString()],
-            'deviceId' => 'required|exists:devices,id',
+            'logFormat'       => ['required', 'string', Rule::in(array_keys($this->parseLogController::VALID_LOG_FORMATS))],
+            'eutraLog'        => ['required_without_all:eutranrLog,nrLog', new FileOrString()],
+            'eutranrLog'      => ['required_without_all:eutraLog,nrLog', new FileOrString()],
+            'nrLog'           => ['required_without_all:eutraLog,eutranrLog', new FileOrString()],
+            'deviceId'        => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);
 
@@ -64,7 +63,7 @@ class ParseAndImportLogController extends JsonController
             $this->response = $this->response->withStatus(HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
 
             return $this->writeResponse([
-                'errors' => $validator->errors()->jsonSerialize()
+                'errors' => $validator->errors()->jsonSerialize(),
             ]);
         }
 
@@ -85,14 +84,14 @@ class ParseAndImportLogController extends JsonController
         /**
          * Ideally, I would implement a better output format in the parser
          * itself, and I might still do that in the future.
-         * 
+         *
          * It's hard to ascertain which CSV is which in the STDOUT output
          * when using the Qualcomm hexdump log type, since you only input
          * two files, and this can produce either 1, 2, or 3 depending on
          * the device's capability. These 1 or 2 could be in any combination,
          * and it's not realistic to be able to tell which is which purely
          * from the output without some form of heuristics.
-         * 
+         *
          * This is the best way I can think of doing it for now.
          */
         if ($body['logFormat'] === 'qualcomm') {
@@ -109,7 +108,7 @@ class ParseAndImportLogController extends JsonController
         }
 
         $importBody = [
-            'deviceId' => $body['deviceId'],
+            'deviceId'        => $body['deviceId'],
             'capabilitySetId' => $body['capabilitySetId'],
         ];
 

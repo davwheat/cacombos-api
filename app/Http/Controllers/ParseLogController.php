@@ -17,7 +17,7 @@ class ParseLogController extends JsonController
     protected RequiresAuthentication $requiresAuthentication;
 
     public const VALID_LOG_FORMATS = [
-        'nsg' => 'N',
+        'nsg'      => 'N',
         'qualcomm' => 'QALL',
     ];
 
@@ -28,24 +28,24 @@ class ParseLogController extends JsonController
         parent::__construct();
     }
 
-    public function handle(ServerRequestInterface $request): array | string | int | bool | null
+    public function handle(ServerRequestInterface $request): array|string|int|bool|null
     {
         ($this->requiresAuthentication)($request, 'parser', true);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
         $validator = Validator::make($body, [
-            'logFormat' => ['required', 'string', Rule::in(array_keys(self::VALID_LOG_FORMATS))],
-            'eutraLog' => ['required_without_all:eutranrLog,nrLog', new FileOrString()],
+            'logFormat'  => ['required', 'string', Rule::in(array_keys(self::VALID_LOG_FORMATS))],
+            'eutraLog'   => ['required_without_all:eutranrLog,nrLog', new FileOrString()],
             'eutranrLog' => ['required_without_all:eutraLog,nrLog', new FileOrString()],
-            'nrLog' => ['required_without_all:eutraLog,eutranrLog', new FileOrString()],
+            'nrLog'      => ['required_without_all:eutraLog,eutranrLog', new FileOrString()],
         ]);
 
         if ($validator->fails()) {
             $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
             return [
-                'errors' => $validator->errors()->jsonSerialize()
+                'errors' => $validator->errors()->jsonSerialize(),
             ];
         }
 
@@ -61,8 +61,8 @@ class ParseLogController extends JsonController
             return [
                 'errors' => [
                     'detail' => 'Parser failed to execute with the provided log files.',
-                    'meta' => !$debug ? null : ['output' => $output['output']]
-                ]
+                    'meta'   => !$debug ? null : ['output' => $output['output']],
+                ],
             ];
         }
 
@@ -72,7 +72,7 @@ class ParseLogController extends JsonController
             $this->response = $this->response->withHeader('Content-Type', 'text/plain');
         }
 
-        return explode(PHP_EOL . PHP_EOL, implode(PHP_EOL, $output['output']));
+        return explode(PHP_EOL.PHP_EOL, implode(PHP_EOL, $output['output']));
     }
 
     public function getParserType(string $format): ?array
@@ -106,17 +106,17 @@ class ParseLogController extends JsonController
             $logPassed = false;
 
             if (Arr::has($filePaths, 'eutraLog')) {
-                $options[] = ["-i", escapeshellarg($filePaths['eutraLog'])];
+                $options[] = ['-i', escapeshellarg($filePaths['eutraLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'eutranrLog')) {
-                $options[] = ["-inputENDC", escapeshellarg($filePaths['eutranrLog'])];
+                $options[] = ['-inputENDC', escapeshellarg($filePaths['eutranrLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'nrLog')) {
-                $options[] = ["-inputNR", escapeshellarg($filePaths['nrLog'])];
+                $options[] = ['-inputNR', escapeshellarg($filePaths['nrLog'])];
                 $logPassed = true;
             }
 
@@ -145,7 +145,7 @@ class ParseLogController extends JsonController
         $tempFiles = [];
 
         /**
-         * @var string $key
+         * @var string                       $key
          * @var UploadedFileInterface|string $log
          */
         foreach ($logs as $key => $log) {

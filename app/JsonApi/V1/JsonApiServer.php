@@ -23,7 +23,7 @@ class JsonApiServer
     public function requestHandler(ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
     {
         if (!$this->server) {
-            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url') . $this->apiPath);
+            $this->server = new \Tobyz\JsonApiServer\JsonApi(Config::get('app.url').$this->apiPath);
 
             $this->addResources();
 
@@ -39,7 +39,9 @@ class JsonApiServer
             $response = $this->server->handle($request);
         } catch (\Exception $e) {
             // Visualise errors in debug mode
-            if (config('app.debug') && !($e instanceof ErrorProviderInterface)) throw $e;
+            if (config('app.debug') && !($e instanceof ErrorProviderInterface)) {
+                throw $e;
+            }
 
             $response = $this->server->error($e);
         }

@@ -6,9 +6,9 @@ use App\Mail\SubmitCombos;
 use App\Rules\File;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
-use Illuminate\Support\Facades\Mail;
 
 class SubmitCombosController extends JsonController
 {
@@ -22,20 +22,19 @@ class SubmitCombosController extends JsonController
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
         $validator = Validator::make($body, [
-            'fromUser' => 'nullable|email',
-            'deviceName' => 'required|string|max:255',
-            'deviceModel' => 'required|string|max:255',
+            'fromUser'       => 'nullable|email',
+            'deviceName'     => 'required|string|max:255',
+            'deviceModel'    => 'required|string|max:255',
             'deviceFirmware' => 'required|string|max:255',
-            'comment' => 'required|string|max:2500',
-            'log' => [new File(25 * 1024 * 1024)],
+            'comment'        => 'required|string|max:2500',
+            'log'            => [new File(25 * 1024 * 1024)],
         ]);
-
 
         if ($validator->fails()) {
             $this->response = $this->response->withStatus(HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
 
             return [
-                'errors' => $validator->errors()->jsonSerialize()
+                'errors' => $validator->errors()->jsonSerialize(),
             ];
         }
 
@@ -62,9 +61,9 @@ class SubmitCombosController extends JsonController
 
         return [
             'errors' => [
-                'title' => 'Failed to notify admin',
-                'status' => HttpResponse::HTTP_INTERNAL_SERVER_ERROR
-            ]
+                'title'  => 'Failed to notify admin',
+                'status' => HttpResponse::HTTP_INTERNAL_SERVER_ERROR,
+            ],
         ];
     }
 }

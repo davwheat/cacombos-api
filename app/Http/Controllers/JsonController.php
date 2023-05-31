@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Nyholm\Psr7\Response;
 
 abstract class JsonController extends Controller
 {
@@ -30,5 +30,5 @@ abstract class JsonController extends Controller
         return $this->response;
     }
 
-    abstract function handle(ServerRequestInterface $request): array | string | int | bool | null;
+    abstract public function handle(ServerRequestInterface $request): array|string|int|bool|null;
 }

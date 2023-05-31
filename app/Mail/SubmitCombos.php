@@ -12,7 +12,8 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class SubmitCombos extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected ?string $fromUser;
     protected string $deviceName;
@@ -35,7 +36,9 @@ class SubmitCombos extends Mailable
         $this->comment = $comment;
         $this->log = $log;
 
-        if ($fromUser !== null) $this->replyTo($fromUser);
+        if ($fromUser !== null) {
+            $this->replyTo($fromUser);
+        }
     }
 
     /**
@@ -60,11 +63,11 @@ class SubmitCombos extends Mailable
         return new Content(
             markdown: 'emails.submitcombos',
             with: [
-                'fromUser' => $this->fromUser,
-                'deviceName' => $this->deviceName,
-                'deviceModel' => $this->deviceModel,
+                'fromUser'       => $this->fromUser,
+                'deviceName'     => $this->deviceName,
+                'deviceModel'    => $this->deviceModel,
                 'deviceFirmware' => $this->deviceFirmware,
-                'comment' => $this->comment,
+                'comment'        => $this->comment,
             ]
         );
     }
@@ -84,7 +87,7 @@ class SubmitCombos extends Mailable
             Attachment::fromData(
                 fn () => $this->log->getStream()->getContents(),
                 name: $this->log->getClientFilename(),
-            )
+            ),
         ];
     }
 }

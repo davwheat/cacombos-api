@@ -15,23 +15,24 @@ class FileOrString implements InvokableRule
     }
 
     /**
-     * @param string $attribute
-     * @param mixed $value
+     * @param string   $attribute
+     * @param mixed    $value
      * @param \Closure $fail
+     *
      * @return void
      */
-    public function __invoke($attribute,  $value, $fail)
+    public function __invoke($attribute, $value, $fail)
     {
         if (!is_string($value) && !($value instanceof UploadedFileInterface)) {
             $fail('The :attribute must either be a string or file.');
         }
 
-        if (($value instanceof UploadedFileInterface)) {
+        if ($value instanceof UploadedFileInterface) {
             /**
              * @var UploadedFileInterface $value
              */
             if ($this->maxSize > 0 && $value->getSize() > $this->maxSize) {
-                $fail('The :attribute must be less than ' . $this->maxSize . ' bytes.');
+                $fail('The :attribute must be less than '.$this->maxSize.' bytes.');
             }
         }
     }

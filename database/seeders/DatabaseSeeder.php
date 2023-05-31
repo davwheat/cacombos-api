@@ -21,47 +21,47 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('tokens')->insert([
             [
-                'token' => 'testabc',
-                'comment' => '',
+                'token'      => 'testabc',
+                'comment'    => '',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ]);
 
         DB::table('modems')->insert([
             [
-                'uuid' => Uuid::uuid4(),
-                'name' => 'Shannon 5300',
+                'uuid'       => Uuid::uuid4(),
+                'name'       => 'Shannon 5300',
                 'created_at' => now(),
                 'updated_at' => now(),
             ], [
-                'uuid' => Uuid::uuid4(),
-                'name' => 'Shannon 5123b',
+                'uuid'       => Uuid::uuid4(),
+                'name'       => 'Shannon 5123b',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ]);
 
         DB::table('devices')->insert([
             [
-                'uuid' => Uuid::uuid4(),
-                'device_name' => 'Pixel 6 Pro',
-                'model_name' => 'GLU0G',
+                'uuid'         => Uuid::uuid4(),
+                'device_name'  => 'Pixel 6 Pro',
+                'model_name'   => 'GLU0G',
                 'manufacturer' => 'Google',
-                'modem_id' => 2,
+                'modem_id'     => 2,
                 'release_date' => '2021-10-28',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ],
             [
-                'uuid' => Uuid::uuid4(),
-                'device_name' => 'Pixel 7 Pro',
-                'model_name' => 'GP4BC',
+                'uuid'         => Uuid::uuid4(),
+                'device_name'  => 'Pixel 7 Pro',
+                'model_name'   => 'GP4BC',
                 'manufacturer' => 'Google',
-                'modem_id' => 1,
+                'modem_id'     => 1,
                 'release_date' => '2022-10-13',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ],
         ]);
 
@@ -71,8 +71,8 @@ class DatabaseSeeder extends Seeder
         $p7pro_a13->save();
 
         $p7pro_a13_ee = new CapabilitySet();
-        $p7pro_a13_ee->description = "EE";
-        $p7pro_a13_ee->plmn = "234-30";
+        $p7pro_a13_ee->description = 'EE';
+        $p7pro_a13_ee->plmn = '234-30';
         $p7pro_a13_ee->deviceFirmware()->associate($p7pro_a13);
         $p7pro_a13_ee->save();
     }
