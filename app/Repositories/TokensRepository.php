@@ -3,14 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\Token;
-use Illuminate\Support\Facades\Log;
 
 class TokensRepository
 {
     protected const TOKEN_RANK = [
-        'parser' => 25,
+        'parser'   => 25,
         'uploader' => 50,
-        'admin' => 100,
+        'admin'    => 100,
     ];
 
     protected function queryToken(string $token)

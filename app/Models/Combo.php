@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property string $uuid
- * @property string $combo_string
- * @property int $capability_set_id
- * @property array $bandwidth_combination_set
- * @property CapabilitySet $capabilitySet
- * @property Collection<LteComponent> $lteComponents
- * @property Collection<NrComponent> $nrComponents
+ * @property int                        $id
+ * @property string                     $uuid
+ * @property string                     $combo_string
+ * @property int                        $capability_set_id
+ * @property array                      $bandwidth_combination_set
+ * @property CapabilitySet              $capabilitySet
+ * @property Collection<LteComponent>   $lteComponents
+ * @property Collection<NrComponent>    $nrComponents
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */

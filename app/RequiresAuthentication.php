@@ -14,7 +14,7 @@ class RequiresAuthentication
         $this->tokens = $tokens;
     }
 
-    public function __invoke(ServerRequestInterface $request, string $type = "admin", bool $assert = false): bool
+    public function __invoke(ServerRequestInterface $request, string $type = 'admin', bool $assert = false): bool
     {
         $tokenArr = $request->getHeader('X-Auth-Token');
         $token = $tokenArr[0] ?? null;
@@ -28,7 +28,7 @@ class RequiresAuthentication
         $type = str_replace(' ', '', $type);
 
         $methodName = "Valid{$type}Token";
-        $methodName = ($assert ? 'assert' : 'is') . $methodName;
+        $methodName = ($assert ? 'assert' : 'is').$methodName;
 
         $result = $this->tokens->$methodName($token);
 

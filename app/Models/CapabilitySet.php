@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property string $uuid
- * @property string $description
- * @property ?string $plmn
- * @property DeviceFirmware $deviceFirmware
- * @property Collection<Combo> $combos
+ * @property int                        $id
+ * @property string                     $uuid
+ * @property string                     $description
+ * @property ?string                    $plmn
+ * @property DeviceFirmware             $deviceFirmware
+ * @property Collection<Combo>          $combos
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */

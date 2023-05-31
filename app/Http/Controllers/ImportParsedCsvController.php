@@ -14,8 +14,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Psr\Http\Message\ServerRequestInterface;
 use League\Csv\Reader;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ImportParsedCsvController extends JsonController
 {
@@ -35,17 +35,17 @@ class ImportParsedCsvController extends JsonController
         parent::__construct();
     }
 
-    public function handle(ServerRequestInterface $request): array | string | int | bool | null
+    public function handle(ServerRequestInterface $request): array|string|int|bool|null
     {
         ($this->requiresAuthentication)($request, 'uploader', true);
 
         $body = array_merge($request->getParsedBody(), $request->getUploadedFiles());
 
         $validator = Validator::make($body, [
-            'eutraCsv' => ['required_with:eutranrCsv|required_without:nrCsv', new FileOrString()],
-            'eutranrCsv' => ['required_without_all:eutraCsv,nrCsv', new FileOrString()],
-            'nrCsv' => ['required_without_all:eutraCsv,eutranrCsv', new FileOrString()],
-            'deviceId' => 'required|exists:devices,id',
+            'eutraCsv'        => ['required_with:eutranrCsv|required_without:nrCsv', new FileOrString()],
+            'eutranrCsv'      => ['required_without_all:eutraCsv,nrCsv', new FileOrString()],
+            'nrCsv'           => ['required_without_all:eutraCsv,eutranrCsv', new FileOrString()],
+            'deviceId'        => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
         ]);
 
@@ -53,13 +53,13 @@ class ImportParsedCsvController extends JsonController
             $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
             return [
-                'errors' => $validator->errors()->jsonSerialize()
+                'errors' => $validator->errors()->jsonSerialize(),
             ];
         }
 
         $csvData = Arr::only($body, ['eutraCsv', 'eutranrCsv', 'nrCsv']);
 
-        # For each CSV, if they are files, convert to strings
+        // For each CSV, if they are files, convert to strings
         foreach ($csvData as $key => $csv) {
             if (!is_string($csv)) {
                 $csvData[$key] = $csv->getStream()->getContents();
@@ -78,9 +78,9 @@ class ImportParsedCsvController extends JsonController
             return [
                 'errors' => [
                     'capabilitySetId' => [
-                        'The selected capability set is invalid.'
-                    ]
-                ]
+                        'The selected capability set is invalid.',
+                    ],
+                ],
             ];
         }
 
@@ -199,9 +199,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string' => $comboData['combo'],
+                    'combo_string'              => $comboData['combo'],
                     'bandwidth_combination_set' => json_encode(explode(', ', $comboData['bsc'])),
-                    'capability_set_id' => $this->capabilitySet->id,
+                    'capability_set_id'         => $this->capabilitySet->id,
                 ],
                 [
                     'bandwidth_combination_set' => explode(', ', $comboData['bsc']),
@@ -220,11 +220,11 @@ class ImportParsedCsvController extends JsonController
                 }
 
                 if ($ccData['DLmod'] === 'null') {
-                    $ccData['DLmod'] = "64qam";
+                    $ccData['DLmod'] = '64qam';
                 }
 
                 if ($ccData['ULmod'] === 'null') {
-                    $ccData['ULmod'] = "16qam";
+                    $ccData['ULmod'] = '16qam';
                 }
 
                 if (empty($ccData['mimo'])) {
@@ -233,12 +233,12 @@ class ImportParsedCsvController extends JsonController
 
                 $ccs[] = LteComponent::firstOrCreate(
                     [
-                        'band' => $ccData['band'],
-                        'dl_class' => $ccData['class'],
-                        'mimo' => $ccData['mimo'],
-                        'ul_class' => $ccData['ul'],
-                        'dl_modulation' => $ccData['DLmod'],
-                        'ul_modulation' => $ccData['ULmod'],
+                        'band'            => $ccData['band'],
+                        'dl_class'        => $ccData['class'],
+                        'mimo'            => $ccData['mimo'],
+                        'ul_class'        => $ccData['ul'],
+                        'dl_modulation'   => $ccData['DLmod'],
+                        'ul_modulation'   => $ccData['ULmod'],
                         'component_index' => $i - 1,
                     ]
                 );
@@ -270,9 +270,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string' => $comboData['combo'],
+                    'combo_string'              => $comboData['combo'],
                     'bandwidth_combination_set' => null,
-                    'capability_set_id' => $this->capabilitySet->id,
+                    'capability_set_id'         => $this->capabilitySet->id,
                 ]
             );
 
@@ -292,12 +292,12 @@ class ImportParsedCsvController extends JsonController
 
                 $lteCCs[] = LteComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['DL']), // "7A" -> "7"
-                        'dl_class' => substr($ccData['DL'], -1, 1), // "7A" -> "A"
-                        'mimo' => $ccData['mimo DL'],
-                        'ul_class' => null,
-                        'dl_modulation' => null,
-                        'ul_modulation' => null,
+                        'band'            => intval($ccData['DL']), // "7A" -> "7"
+                        'dl_class'        => substr($ccData['DL'], -1, 1), // "7A" -> "A"
+                        'mimo'            => $ccData['mimo DL'],
+                        'ul_class'        => null,
+                        'dl_modulation'   => null,
+                        'ul_modulation'   => null,
                         'component_index' => $i - 1,
                     ]
                 );
@@ -313,11 +313,11 @@ class ImportParsedCsvController extends JsonController
 
                 $lteCCs[] = LteComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['UL']), // "7A" -> "7"
-                        'dl_class' => null,
-                        'ul_class' => substr($ccData['UL'], -1, 1), // "7A" -> "A"
-                        'dl_modulation' => null,
-                        'ul_modulation' => strtolower($ccData['MOD UL']), // "64QAM" -> "64qam"
+                        'band'            => intval($ccData['UL']), // "7A" -> "7"
+                        'dl_class'        => null,
+                        'ul_class'        => substr($ccData['UL'], -1, 1), // "7A" -> "A"
+                        'dl_modulation'   => null,
+                        'ul_modulation'   => strtolower($ccData['MOD UL']), // "64QAM" -> "64qam"
                         'component_index' => $i - 1,
                     ]
                 );
@@ -333,16 +333,16 @@ class ImportParsedCsvController extends JsonController
 
                 $nrCCs[] = NrComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['NR DL']), // "78A" -> "78"
-                        'dl_class' => substr($ccData['NR DL'], -1, 1),  // "78A" -> "A"
-                        'ul_class' => null,
-                        'bandwidth' => $ccData['NR BW'],
+                        'band'               => intval($ccData['NR DL']), // "78A" -> "78"
+                        'dl_class'           => substr($ccData['NR DL'], -1, 1),  // "78A" -> "A"
+                        'ul_class'           => null,
+                        'bandwidth'          => $ccData['NR BW'],
                         'subcarrier_spacing' => $ccData['NR SCS'],
-                        'dl_mimo' => $ccData['mimo NR DL'],
-                        'ul_mimo' => null,
-                        'dl_modulation' => 'qam256',
-                        'ul_modulation' => null,
-                        'component_index' => $i - 1,
+                        'dl_mimo'            => $ccData['mimo NR DL'],
+                        'ul_mimo'            => null,
+                        'dl_modulation'      => 'qam256',
+                        'ul_modulation'      => null,
+                        'component_index'    => $i - 1,
                     ]
                 );
             }
@@ -357,17 +357,17 @@ class ImportParsedCsvController extends JsonController
 
                 $nrCCs[] = NrComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['NR UL']), // "78A" -> "78"
+                        'band'     => intval($ccData['NR UL']), // "78A" -> "78"
                         'dl_class' => null,
                         'ul_class' => substr($ccData['NR UL'], -1, 1), // "78A" -> "A"
                         // 'bandwidth' => $ccData['NR BW'],
-                        'bandwidth' => null,
+                        'bandwidth'          => null,
                         'subcarrier_spacing' => $ccData['NR SCS'],
-                        'dl_mimo' => null,
-                        'ul_mimo' => $ccData['mimo NR UL'],
-                        'dl_modulation' => null,
-                        'ul_modulation' => $ccData['NR UL MOD'],
-                        'component_index' => $i - 1,
+                        'dl_mimo'            => null,
+                        'ul_mimo'            => $ccData['mimo NR UL'],
+                        'dl_modulation'      => null,
+                        'ul_modulation'      => $ccData['NR UL MOD'],
+                        'component_index'    => $i - 1,
                     ]
                 );
             }
@@ -399,9 +399,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string' => $comboData['combo'],
+                    'combo_string'              => $comboData['combo'],
                     'bandwidth_combination_set' => null,
-                    'capability_set_id' => $this->capabilitySet->id,
+                    'capability_set_id'         => $this->capabilitySet->id,
                 ]
             );
 
@@ -419,16 +419,16 @@ class ImportParsedCsvController extends JsonController
 
                 $nrCCs[] = NrComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['NR DL']), // "78A" -> "78"
-                        'dl_class' => substr($ccData['NR DL'], -1, 1),  // "78A" -> "A"
-                        'ul_class' => null,
-                        'bandwidth' => $ccData['NR BW'],
+                        'band'               => intval($ccData['NR DL']), // "78A" -> "78"
+                        'dl_class'           => substr($ccData['NR DL'], -1, 1),  // "78A" -> "A"
+                        'ul_class'           => null,
+                        'bandwidth'          => $ccData['NR BW'],
                         'subcarrier_spacing' => $ccData['NR SCS'],
-                        'dl_mimo' => $ccData['mimo NR DL'],
-                        'ul_mimo' => null,
-                        'dl_modulation' => 'qam256',
-                        'ul_modulation' => null,
-                        'component_index' => $i - 1,
+                        'dl_mimo'            => $ccData['mimo NR DL'],
+                        'ul_mimo'            => null,
+                        'dl_modulation'      => 'qam256',
+                        'ul_modulation'      => null,
+                        'component_index'    => $i - 1,
                     ]
                 );
             }
@@ -443,16 +443,16 @@ class ImportParsedCsvController extends JsonController
 
                 $nrCCs[] = NrComponent::firstOrCreate(
                     [
-                        'band' => intval($ccData['NR UL']), // "78A" -> "78"
-                        'dl_class' => null,
-                        'ul_class' => substr($ccData['NR UL'], -1, 1), // "78A" -> "A"
-                        'bandwidth' => $ccData['NR BW'],
+                        'band'               => intval($ccData['NR UL']), // "78A" -> "78"
+                        'dl_class'           => null,
+                        'ul_class'           => substr($ccData['NR UL'], -1, 1), // "78A" -> "A"
+                        'bandwidth'          => $ccData['NR BW'],
                         'subcarrier_spacing' => $ccData['NR SCS'],
-                        'dl_mimo' => null,
-                        'ul_mimo' => $ccData['mimo NR UL'],
-                        'dl_modulation' => null,
-                        'ul_modulation' => $ccData['NR UL MOD'],
-                        'component_index' => $i - 1,
+                        'dl_mimo'            => null,
+                        'ul_mimo'            => $ccData['mimo NR UL'],
+                        'dl_modulation'      => null,
+                        'ul_modulation'      => $ccData['NR UL MOD'],
+                        'component_index'    => $i - 1,
                     ]
                 );
             }
