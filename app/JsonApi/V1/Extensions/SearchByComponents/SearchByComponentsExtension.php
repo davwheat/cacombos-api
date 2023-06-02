@@ -6,11 +6,11 @@ use App\Models\Device;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use JsonApiPhp\JsonApi as Structure;
-use Tobyz\JsonApiServer\Context;
-use Tobyz\JsonApiServer\Extension\Extension;
 use Psr\Http\Message\ResponseInterface;
+use Tobyz\JsonApiServer\Context;
 use Tobyz\JsonApiServer\Exception\BadRequestException;
 use Tobyz\JsonApiServer\Exception\MethodNotAllowedException;
+use Tobyz\JsonApiServer\Extension\Extension;
 use Tobyz\JsonApiServer\Serializer;
 
 use function Tobyz\JsonApiServer\json_api_response;
@@ -22,7 +22,7 @@ class SearchByComponentsExtension extends Extension
         return 'http://mobilecombos.com/ext/search-by-components';
     }
 
-    function queryToSQL($query)
+    public function queryToSQL($query)
     {
         $addSlashes = str_replace('?', "'?'", $query->toSql());
 
@@ -82,9 +82,9 @@ class SearchByComponentsExtension extends Extension
                     'deviceFirmwares' => [
                         'capabilitySets' => [
                             'combos' => [
-                                'nrComponents' => [],
-                                'lteComponents' => []
-                            ]
+                                'nrComponents'  => [],
+                                'lteComponents' => [],
+                            ],
                         ],
                     ],
                 ]
@@ -115,7 +115,7 @@ class SearchByComponentsExtension extends Extension
             if (!isset($searchWithQuantity[$hash])) {
                 $searchWithQuantity[$hash] = [
                     'quantity' => 1,
-                    'query' => $componentQuery
+                    'query'    => $componentQuery,
                 ];
             } else {
                 $searchWithQuantity[$hash]['quantity']++;
@@ -123,7 +123,7 @@ class SearchByComponentsExtension extends Extension
         }
 
         foreach ($searchWithQuantity as $componentQuery) {
-            $relation = 'deviceFirmwares.capabilitySets.combos.' .
+            $relation = 'deviceFirmwares.capabilitySets.combos.'.
                 (strtolower(Arr::get($componentQuery, 'query.type')) === 'nr' ? 'nrComponents'
                     : 'lteComponents');
 
