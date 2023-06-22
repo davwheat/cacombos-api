@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Combo extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+
     use Traits\HasSecondaryUuid;
 
     public $fillable = [
