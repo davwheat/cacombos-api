@@ -28,8 +28,8 @@ return new class() extends Migration {
         Schema::create('components_mimos', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('lte_component_id')->index()->nullable()->constrained('nr_components');
-            $table->foreignId('nr_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('lte_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('nr_component_id')->index()->nullable()->constrained('nr_components');
             $table->foreignId('mimo_id')->index()->nullable(false)->constrained('mimos');
 
             $table->index(['lte_component_id', 'mimo_id']);

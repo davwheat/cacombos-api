@@ -7,7 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -22,23 +23,33 @@ return new class() extends Migration {
             $table->boolean('is_ul')->nullable(false);
 
             $table->unique(['modulation', 'is_ul']);
-            $table->index(['modulation', 'is_ul']);
         });
 
         Schema::create('components_modulations', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('lte_component_id')->index()->nullable()->constrained('nr_components');
-            $table->foreignId('nr_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('lte_component_id')->index()->nullable()->constrained('lte_components');
+            $table->foreignId('nr_component_id')->index()->nullable()->constrained('nr_components');
             $table->foreignId('modulation_id')->index()->nullable(false)->constrained('modulations');
 
             $table->index(['lte_component_id', 'modulation_id']);
             $table->index(['nr_component_id', 'modulation_id']);
         });
 
-        NrComponent::all()->each(function ($nrComponent) {
+        NrComponent::all()->each(function (NrComponent $nrComponent) {
             $dlMod = $nrComponent->dl_modulation;
             $ulMod = $nrComponent->ul_modulation;
+
+            // Convert qam256 to 256qam, etc.
+            if (str_starts_with($dlMod, 'qam')) {
+                $dlMod = str_replace('qam', '', $dlMod);
+                $dlMod .= "qam";
+            }
+
+            if (str_starts_with($ulMod, 'qam')) {
+                $ulMod = str_replace('qam', '', $ulMod);
+                $ulMod .= "qam";
+            }
 
             $newDlMod = $dlMod ? Modulation::firstOrCreate([
                 'modulation' => $dlMod,

@@ -44,6 +44,20 @@ return new class() extends Migration {
 
             $table->primary(['nr_band_id', 'bandwidth_id']);
         });
+
+        Schema::create('nr_bands_mimo', function (Blueprint $table) {
+            $table->foreignId('nr_band_id')->index()->nullable(false)->constrained('nr_bands');
+            $table->foreignId('mimo_id')->index()->nullable(false)->constrained('mimos');
+
+            $table->primary(['nr_band_id', 'mimo_id']);
+        });
+
+        Schema::create('nr_bands_modulations', function (Blueprint $table) {
+            $table->foreignId('nr_band_id')->index()->nullable(false)->constrained('nr_bands');
+            $table->foreignId('modulation_id')->index()->nullable(false)->constrained('modulations');
+
+            $table->primary(['nr_band_id', 'modulation_id']);
+        });
     }
 
     /**
@@ -58,6 +72,6 @@ return new class() extends Migration {
 
         Schema::drop('nr_bands_mimo');
         Schema::drop('nr_bands_modulations');
-        Schema::drop('nr_bands_bandwidths');
+        Schema::drop('nr_bands_nr_bandwidths');
     }
 };
