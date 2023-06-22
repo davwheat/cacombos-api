@@ -11,10 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?string                    $ul_class
  * @property ?int                       $bandwidth
  * @property ?int                       $subcarrier_spacing
- * @property ?int                       $dl_mimo
- * @property ?int                       $ul_mimo
- * @property ?string                    $dl_modulation
- * @property ?string                    $ul_modulation
  * @property int                        $component_index
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
@@ -27,10 +23,16 @@ class NrComponent extends Model
         'ul_class',
         'bandwidth',
         'subcarrier_spacing',
-        'dl_mimo',
-        'ul_mimo',
-        'dl_modulation',
-        'ul_modulation',
         'component_index',
     ];
+
+    public function modulations()
+    {
+        return $this->belongsToMany(Modulation::class, 'components_modulations');
+    }
+
+    public function mimos()
+    {
+        return $this->belongsToMany(Mimo::class, 'components_mimos');
+    }
 }

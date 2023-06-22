@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Mimo extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+
     public $fillable = [
         'mimo',
         'is_ul',

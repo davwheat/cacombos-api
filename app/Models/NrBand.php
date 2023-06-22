@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NrBand extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+
     public $fillable = [
         'band',
         'rate_matching_lte_crs',
