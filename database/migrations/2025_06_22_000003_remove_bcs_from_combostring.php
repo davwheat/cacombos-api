@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\Combo;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-return new class() extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,7 +12,7 @@ return new class() extends Migration
     public function up()
     {
         DB::table('combos')->update([
-            'combo_string' => DB::raw('REGEXP_REPLACE(combo_string, "-(\\\\d+|mAll|m\\\\d+)$", "")')
+            'combo_string' => DB::raw('REGEXP_REPLACE(combo_string, "-(\\\\d+|mAll|m\\\\d+)$", "")'),
         ]);
     }
 

@@ -32,8 +32,8 @@ class LteCaParser
         $collection = new Collection();
 
         $combo = Combo::firstOrCreate([
-            'combo_string' => $this->lteCaToComboString($combo),
-            'capability_set_id' => $this->capabilitySet->id,
+            'combo_string'              => $this->lteCaToComboString($combo),
+            'capability_set_id'         => $this->capabilitySet->id,
             'bandwidth_combination_set' => $this->getBcs($combo),
         ]);
 
@@ -46,11 +46,13 @@ class LteCaParser
 
     protected function getBcs(array $combo): ?array
     {
-        if (empty($combo['bcs'])) return [];
+        if (empty($combo['bcs'])) {
+            return [];
+        }
 
         switch ($combo['bcs']['type']) {
             case 'all':
-                return ["all"];
+                return ['all'];
 
             case 'multi':
                 return $combo['bcs']['value'];
