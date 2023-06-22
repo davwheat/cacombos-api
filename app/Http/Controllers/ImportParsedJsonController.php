@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\Device;
-use App\Models\LteComponent;
-use App\Models\NrComponent;
 use App\RequiresAuthentication;
 use App\Rules\FileOrString;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,7 +12,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use League\Csv\Reader;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
@@ -122,8 +119,6 @@ class ImportParsedJsonController extends JsonController
 
     protected function parseJsonToModels(array $jsonData): void
     {
-
-
         if (!empty($eutraCsv)) {
             clock()->event('Parsing EUTRA data')->begin();
             $this->parseEutraCsvToModels($eutraCsv);

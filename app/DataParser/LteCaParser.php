@@ -2,9 +2,8 @@
 
 namespace App\DataParser;
 
-use Illuminate\Database\Eloquent\Collection;
-
 use App\Models\Combo;
+use Illuminate\Database\Eloquent\Collection;
 
 class LteCaParser
 {
