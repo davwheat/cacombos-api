@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -43,12 +42,12 @@ return new class() extends Migration
             // Convert qam256 to 256qam, etc.
             if (str_starts_with($dlMod, 'qam')) {
                 $dlMod = str_replace('qam', '', $dlMod);
-                $dlMod .= "qam";
+                $dlMod .= 'qam';
             }
 
             if (str_starts_with($ulMod, 'qam')) {
                 $ulMod = str_replace('qam', '', $ulMod);
-                $ulMod .= "qam";
+                $ulMod .= 'qam';
             }
 
             $newDlMod = $dlMod ? Modulation::firstOrCreate([
