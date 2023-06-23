@@ -96,7 +96,7 @@ class LteCaParser
 
         foreach ($combo['components'] as $i => $component) {
             /**
-             * @var int $i
+             * @var int   $i
              * @var array $component
              */
             $model = new LteComponent();
@@ -115,7 +115,7 @@ class LteCaParser
             foreach ($dlMimo as $m) {
                 if (empty($this->mimoCache['dl'][$m])) {
                     $this->mimoCache['dl'][$m] = Mimo::firstOrCreate([
-                        'mimo' => $m,
+                        'mimo'  => $m,
                         'is_ul' => false,
                     ]);
 
@@ -126,7 +126,7 @@ class LteCaParser
             foreach ($ulMimo as $m) {
                 if (empty($this->mimoCache['ul'][$m])) {
                     $this->mimoCache['ul'][$m] = Mimo::firstOrCreate([
-                        'mimo' => $m,
+                        'mimo'  => $m,
                         'is_ul' => true,
                     ]);
 
