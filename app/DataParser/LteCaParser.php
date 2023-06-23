@@ -5,12 +5,15 @@ namespace App\DataParser;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
+use App\Models\Mimo;
 use Illuminate\Database\Eloquent\Collection;
 
 class LteCaParser
 {
-    private array $data;
-    private CapabilitySet $capabilitySet;
+    protected array $data;
+    protected CapabilitySet $capabilitySet;
+
+    protected $mimoCache = ['ul' => [], 'dl' => []];
 
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
     {
@@ -37,9 +40,7 @@ class LteCaParser
             'bandwidth_combination_set' => $this->getBcs($combo),
         ]);
 
-        foreach ($combo['components'] as $lteCa) {
-            $collection->push($this->parseLteCaComponent($lteCa));
-        }
+        $models = $this->getComponentModels($combo['components']);
 
         return $collection;
     }
@@ -66,11 +67,80 @@ class LteCaParser
         }
     }
 
-    protected function parseLteCaComponent(array $combo): ?LteComponent
+    protected function getMimoFromComponent(array $component, bool $isUl): ?array
     {
-        // TODO
+        $key = $isUl ? 'mimoUl' : 'mimoDl';
 
-        return null;
+        if (empty($component[$key])) {
+            return null;
+        }
+
+        $mimoData = $component[$key];
+
+        switch ($mimoData['type']) {
+            case 'single':
+                return [$mimoData['value']];
+
+            case 'mixed':
+                return $mimoData['value'];
+
+            case 'empty':
+            default:
+                return null;
+        }
+    }
+
+    protected function getComponentModels(array $combo): Collection
+    {
+        $models = new Collection();
+
+        foreach ($combo['components'] as $i => $component) {
+            /**
+             * @var int $i
+             * @var array $component
+             */
+            $model = new LteComponent();
+
+            $model->band = $component['band'];
+            $model->dl_class = $component['bwClassDl'];
+            $model->ul_class = $component['bwClassUl'];
+
+            $dlMimo = $this->getMimoFromComponent($component, false);
+            $ulMimo = $this->getMimoFromComponent($component, true);
+
+            $mimoModels = new Collection();
+
+            // Find and attach MIMO models
+
+            foreach ($dlMimo as $m) {
+                if (empty($this->mimoCache['dl'][$m])) {
+                    $this->mimoCache['dl'][$m] = Mimo::firstOrCreate([
+                        'mimo' => $m,
+                        'is_ul' => false,
+                    ]);
+
+                    $mimoModels->push($this->mimoCache['dl'][$m]);
+                }
+            }
+
+            foreach ($ulMimo as $m) {
+                if (empty($this->mimoCache['ul'][$m])) {
+                    $this->mimoCache['ul'][$m] = Mimo::firstOrCreate([
+                        'mimo' => $m,
+                        'is_ul' => true,
+                    ]);
+
+                    $mimoModels->push($this->mimoCache['ul'][$m]);
+                }
+            }
+
+            $model->saveOrFail();
+            $model->mimos()->attach($mimoModels->pluck('id'));
+
+            $models->push($model);
+        }
+
+        return $models;
     }
 
     protected function lteCaToComboString(array $combo): string

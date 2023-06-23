@@ -22,7 +22,6 @@ return new class() extends Migration {
             $table->boolean('is_ul')->nullable(false);
 
             $table->unique(['mimo', 'is_ul']);
-            $table->index(['mimo', 'is_ul']);
         });
 
         Schema::create('components_mimos', function (Blueprint $table) {
