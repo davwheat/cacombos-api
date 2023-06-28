@@ -180,16 +180,14 @@ class Resources
             $type->hasMany('lteComponents')
                 ->type('lte-components')
                 ->includable()
-                ->withoutLinkage()
+                ->withoutLinkage();
                 // ->filterable()
-;
 
             $type->hasMany('nrComponents')
                 ->type('nr-components')
                 ->includable()
-                ->withoutLinkage()
+                ->withoutLinkage();
                 // ->filterable()
-;
         });
 
         $this->server->resourceType('lte-components', new EloquentAdapter(LteComponent::class), function (Type $type) {
