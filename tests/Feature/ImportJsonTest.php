@@ -162,8 +162,8 @@ class ImportJsonTest extends TestCase
                         ],
                     ],
                     [
-                        'band'      => 32,
-                        'bwClassDl' => 'A',
+                        'band'         => 32,
+                        'bwClassDl'    => 'A',
                         'modulationDl' => [
                             'type'  => 'empty',
                         ],
