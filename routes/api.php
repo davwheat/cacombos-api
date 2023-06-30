@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImportParsedCsvController;
+use App\Http\Controllers\ImportParsedJsonController;
 use App\Http\Controllers\ParseAndImportLogController;
 use App\Http\Controllers\ParseLogController;
 use App\Http\Controllers\SubmitCombosController;
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['cache.headers']], function () {
         Route::group(['prefix' => 'actions'], function () {
             Route::post('/parse-log', [ParseLogController::class, 'requestHandler']);
             Route::post('/import-csv', [ImportParsedCsvController::class, 'requestHandler']);
+            Route::post('/import-json', [ImportParsedJsonController::class, 'requestHandler']);
             Route::post('/parse-import-log', [ParseAndImportLogController::class, 'requestHandler']);
             Route::post('/submit-combos', [SubmitCombosController::class, 'requestHandler']);
         });
