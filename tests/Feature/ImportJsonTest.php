@@ -19,9 +19,9 @@ class ImportJsonTest extends TestCase
 
     protected static $lte_ca_data = [
         'lteca' => [
-            0 => [
+            [
                 'components' => [
-                    0 => [
+                    [
                         'band'      => 1,
                         'bwClassDl' => 'A',
                         'bwClassUl' => 'A',
@@ -48,9 +48,9 @@ class ImportJsonTest extends TestCase
                     'value' => 0,
                 ],
             ],
-            1 => [
+            [
                 'components' => [
-                    0 => [
+                    [
                         'band'      => 3,
                         'bwClassDl' => 'A',
                         'bwClassUl' => 'A',
@@ -72,14 +72,10 @@ class ImportJsonTest extends TestCase
                         ],
                     ],
                 ],
-                'bcs' => [
-                    'type'  => 'single',
-                    'value' => 0,
-                ],
             ],
-            2 => [
+            [
                 'components' => [
-                    0 => [
+                    [
                         'band'      => 7,
                         'bwClassDl' => 'C',
                         'bwClassUl' => 'C',
@@ -104,6 +100,74 @@ class ImportJsonTest extends TestCase
                 'bcs' => [
                     'type'  => 'multi',
                     'value' => [1, 2, 3],
+                ],
+            ],
+            [
+                'components' => [
+                    [
+                        'band'      => 1,
+                        'bwClassDl' => 'A',
+                        'bwClassUl' => 'A',
+                        'mimoDl'    => [
+                            'type'  => 'single',
+                            'value' => 4,
+                        ],
+                        'mimoUl' => [
+                            'type'  => 'single',
+                            'value' => 1,
+                        ],
+                        'modulationDl' => [
+                            'type'  => 'single',
+                            'value' => 'qam256',
+                        ],
+                        'modulationUl' => [
+                            'type'  => 'single',
+                            'value' => 'qam64',
+                        ],
+                    ],
+                ],
+                'bcs' => [
+                    'type'  => 'all',
+                ],
+            ],
+            [
+                'components' => [
+                    [
+                        'band'      => 1,
+                        'bwClassDl' => 'A',
+                        'bwClassUl' => 'A',
+                        'mimoDl'    => [
+                            'type'  => 'single',
+                            'value' => 4,
+                        ],
+                        'mimoUl' => [
+                            'type'  => 'single',
+                            'value' => 1,
+                        ],
+                        'modulationDl' => [
+                            'type'  => 'single',
+                            'value' => 'qam256',
+                        ],
+                        'modulationUl' => [
+                            'type'  => 'single',
+                            'value' => 'qam64',
+                        ],
+                    ],
+                    [
+                        'band'      => 3,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => [
+                            'type'  => 'single',
+                            'value' => 4,
+                        ],
+                        'modulationDl' => [
+                            'type'  => 'single',
+                            'value' => 'qam256',
+                        ],
+                    ],
+                ],
+                'bcs' => [
+                    'type'  => 'empty',
                 ],
             ],
         ],
@@ -163,6 +227,6 @@ class ImportJsonTest extends TestCase
         $testingCapabilitySet->refresh();
         $combos = $testingCapabilitySet->combos()->get();
 
-        $this->assertEquals(3, $combos->count());
+        $this->assertEquals(5, $combos->count());
     }
 }

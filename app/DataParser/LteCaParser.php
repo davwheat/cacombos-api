@@ -101,8 +101,17 @@ class LteCaParser
 
             $model->band = $component['band'];
 
-            $model->dl_class = $component['bwClassDl'];
-            $model->ul_class = $component['bwClassUl'];
+            if (empty($component['bwClassDl'])) {
+                $model->dl_class = null;
+            } else {
+                $model->dl_class = $component['bwClassDl'];
+            }
+
+            if (empty($component['bwClassUl'])) {
+                $model->ul_class = null;
+            } else {
+                $model->ul_class = $component['bwClassUl'];
+            }
 
             $model->component_index = $i;
 
@@ -113,25 +122,29 @@ class LteCaParser
 
             // Find and attach MIMO models
 
-            foreach ($dlMimo as $m) {
-                if (empty($this->mimoCache['dl'][$m])) {
-                    $this->mimoCache['dl'][$m] = Mimo::firstOrCreate([
-                        'mimo'  => $m,
-                        'is_ul' => false,
-                    ]);
+            if (!empty($dlMimo)) {
+                foreach ($dlMimo as $m) {
+                    if (empty($this->mimoCache['dl'][$m])) {
+                        $this->mimoCache['dl'][$m] = Mimo::firstOrCreate([
+                            'mimo'  => $m,
+                            'is_ul' => false,
+                        ]);
 
-                    $mimoModels->push($this->mimoCache['dl'][$m]);
+                        $mimoModels->push($this->mimoCache['dl'][$m]);
+                    }
                 }
             }
 
-            foreach ($ulMimo as $m) {
-                if (empty($this->mimoCache['ul'][$m])) {
-                    $this->mimoCache['ul'][$m] = Mimo::firstOrCreate([
-                        'mimo'  => $m,
-                        'is_ul' => true,
-                    ]);
+            if (!empty($ulMimo)) {
+                foreach ($ulMimo as $m) {
+                    if (empty($this->mimoCache['ul'][$m])) {
+                        $this->mimoCache['ul'][$m] = Mimo::firstOrCreate([
+                            'mimo'  => $m,
+                            'is_ul' => true,
+                        ]);
 
-                    $mimoModels->push($this->mimoCache['ul'][$m]);
+                        $mimoModels->push($this->mimoCache['ul'][$m]);
+                    }
                 }
             }
 
