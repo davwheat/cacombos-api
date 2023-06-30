@@ -33,7 +33,7 @@ class Device extends Model
 
     public function capabilitySets()
     {
-        return $this->hasMany(CapabilitySet::class);
+        return $this->hasManyThrough(CapabilitySet::class, DeviceFirmware::class);
     }
 
     public function modem()

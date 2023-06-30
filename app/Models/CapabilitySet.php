@@ -19,6 +19,11 @@ class CapabilitySet extends Model
 {
     use Traits\HasSecondaryUuid;
 
+    public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->deviceFirmware()->get()->first()->device();
+    }
+
     public function deviceFirmware(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(DeviceFirmware::class);
