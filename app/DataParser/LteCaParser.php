@@ -32,13 +32,16 @@ class LteCaParser
 
     protected function parseLteCaCombo(array $comboData): Combo
     {
+        /** @var Combo */
         $comboModel = Combo::firstOrCreate([
             'combo_string'              => $this->lteCaToComboString($comboData),
             'capability_set_id'         => $this->capabilitySet->id,
             'bandwidth_combination_set' => $this->getBcs($comboData),
         ]);
 
-        $this->getComponentModels($comboData, $comboModel);
+        $lteComponents = $this->getComponentModels($comboData, $comboModel);
+
+        $comboModel->lteComponents()->saveMany($lteComponents);
 
         return $comboModel;
     }
@@ -187,6 +190,31 @@ class LteCaParser
 
             if (isset($lteCa['bwClassUl'])) {
                 $component .= $lteCa['bwClassUl'];
+            }
+
+            if (isset($lteCa['mimoUl'])) {
+                switch ($lteCa['mimoUl']['type']) {
+                    case 'single':
+                        $val = $lteCa['mimoUl']['value'];
+
+                        if ($val !== 1) {
+                            $component .= $val;
+                        }
+                        break;
+
+                    case 'mixed':
+                        /** @var array */
+                        $allValues = $lteCa['mimoUl']['value'];
+                        $val = max($allValues);
+
+                        if ($val !== 1) {
+                            $component .= max($allValues);
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
 
             $comboStringComponents[] = $component;
