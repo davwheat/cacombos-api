@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\CapabilitySet;
 use App\Models\Device;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class ImportJsonTest extends TestCase
@@ -23,87 +22,87 @@ class ImportJsonTest extends TestCase
             0 => [
                 'components' => [
                     0 => [
-                        'band' => 1,
+                        'band'      => 1,
                         'bwClassDl' => 'A',
                         'bwClassUl' => 'A',
-                        'mimoDl' => [
-                            'type' => 'single',
+                        'mimoDl'    => [
+                            'type'  => 'single',
                             'value' => 4,
                         ],
                         'mimoUl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 1,
                         ],
                         'modulationDl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 'qam256',
                         ],
                         'modulationUl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 'qam64',
                         ],
                     ],
                 ],
                 'bcs' => [
-                    'type' => 'single',
+                    'type'  => 'single',
                     'value' => 0,
                 ],
             ],
             1 => [
                 'components' => [
                     0 => [
-                        'band' => 3,
+                        'band'      => 3,
                         'bwClassDl' => 'A',
                         'bwClassUl' => 'A',
-                        'mimoDl' => [
-                            'type' => 'single',
+                        'mimoDl'    => [
+                            'type'  => 'single',
                             'value' => 4,
                         ],
                         'mimoUl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 1,
                         ],
                         'modulationDl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 'qam256',
                         ],
                         'modulationUl' => [
-                            'type' => 'single',
+                            'type'  => 'single',
                             'value' => 'qam64',
                         ],
                     ],
                 ],
                 'bcs' => [
-                    'type' => 'single',
+                    'type'  => 'single',
                     'value' => 0,
                 ],
             ],
             2 => [
                 'components' => [
                     0 => [
-                        'band' => 7,
+                        'band'      => 7,
                         'bwClassDl' => 'C',
                         'bwClassUl' => 'C',
-                        'mimoDl' => [
-                            'type' => 'mixed',
+                        'mimoDl'    => [
+                            'type'  => 'mixed',
                             'value' => [2, 4],
                         ],
                         'mimoUl' => [
-                            'type' => 'mixed',
+                            'type'  => 'mixed',
                             'value' => [1, 2],
                         ],
                         'modulationDl' => [
-                            'type' => 'mixed',
+                            'type'  => 'mixed',
                             'value' => ['qam256', 'qam1024'],
                         ],
                         'modulationUl' => [
-                            'type' => 'mixed',
+                            'type'  => 'mixed',
                             'value' => ['qam64', 'qam256'],
                         ],
                     ],
                 ],
                 'bcs' => [
-                    'type' => 'multi',
+                    'type'  => 'multi',
                     'value' => [1, 2, 3],
                 ],
             ],
@@ -127,7 +126,7 @@ class ImportJsonTest extends TestCase
      */
     public function test_cannot_parse_log_with_invalid_device_id(): void
     {
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => "test", 'deviceId' => Device::first()->id, 'capabilitySetId' => 99999999], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => Device::first()->id, 'capabilitySetId' => 99999999], ImportJsonTest::$auth);
 
         $response->assertStatus(422);
         $response->assertJson(['errors' => ['capabilitySetId' => []]]);
@@ -139,7 +138,7 @@ class ImportJsonTest extends TestCase
      */
     public function test_cannot_parse_log_with_invalid_capability_set_id(): void
     {
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => "test", 'deviceId' => 99999999, 'capabilitySetId' => CapabilitySet::first()->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => 99999999, 'capabilitySetId' => CapabilitySet::first()->id], ImportJsonTest::$auth);
 
         $response->assertStatus(422);
         $response->assertJson(['errors' => ['deviceId' => []]]);
