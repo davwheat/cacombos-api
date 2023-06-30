@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataParser\LteCaParser;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\Device;
@@ -119,23 +120,17 @@ class ImportParsedJsonController extends JsonController
 
     protected function parseJsonToModels(array $jsonData): void
     {
-        if (!empty($eutraCsv)) {
-            clock()->event('Parsing EUTRA data')->begin();
-            $this->parseEutraCsvToModels($eutraCsv);
-            clock()->event('Parsing EUTRA data')->end();
-        }
+        clock()->event('Parsing EUTRA data')->begin();
+        $this->parseEutraDataToModels($jsonData);
+        clock()->event('Parsing EUTRA data')->end();
 
-        if (!empty($eutranrCsv)) {
-            clock()->event('Parsing EUTRA-NR CSV')->begin();
-            $this->parseEutraNrCsvToModels($eutranrCsv);
-            clock()->event('Parsing EUTRA-NR CSV')->end();
-        }
+        // clock()->event('Parsing EUTRA-NR CSV')->begin();
+        // $this->parseEutraNrCsvToModels($jsonData);
+        // clock()->event('Parsing EUTRA-NR CSV')->end();
 
-        if (!empty($nrCsv)) {
-            clock()->event('Parsing NR CSV')->begin();
-            $this->parseNrCsvToModels($nrCsv);
-            clock()->event('Parsing NR CSV')->end();
-        }
+        // clock()->event('Parsing NR CSV')->begin();
+        // $this->parseNrCsvToModels($jsonData);
+        // clock()->event('Parsing NR CSV')->end();
     }
 
     protected function parseEutraDataToModels(array $jsonData): void
@@ -144,7 +139,10 @@ class ImportParsedJsonController extends JsonController
 
         if (!empty($lteCaData)) {
             clock()->event('Parsing LTE CA data')->begin();
-            $this->parseLteCaJsonToModels($lteCaData);
+
+            $lteCaParser = new LteCaParser($lteCaData, $this->capabilitySet);
+            $lteCaParser->parseAndInsertAllModels();
+
             clock()->event('Parsing LTE CA data')->end();
         }
     }
