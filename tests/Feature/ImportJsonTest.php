@@ -160,9 +160,12 @@ class ImportJsonTest extends TestCase
                             'type'  => 'single',
                             'value' => 4,
                         ],
+                    ],
+                    [
+                        'band'      => 32,
+                        'bwClassDl' => 'A',
                         'modulationDl' => [
-                            'type'  => 'single',
-                            'value' => 'qam256',
+                            'type'  => 'empty',
                         ],
                     ],
                 ],
