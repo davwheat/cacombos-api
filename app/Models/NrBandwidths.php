@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NrBandwidths extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+
     protected $casts = [
         'bandwidths_dl' => 'array',
         'bandwidths_ul' => 'array',

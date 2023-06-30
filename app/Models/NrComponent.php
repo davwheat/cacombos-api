@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NrComponent extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+    
     public $fillable = [
         'band',
         'dl_class',

@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LteComponent extends Model
 {
+    // Disable timestamps
+    public $timestamps = false;
+
     public $fillable = [
         'band',
         'dl_class',
