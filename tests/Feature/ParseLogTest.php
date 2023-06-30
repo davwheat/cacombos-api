@@ -33,7 +33,6 @@ class ParseLogTest extends TestCase
 
         $response->assertStatus(403);
     }
-    use RefreshDatabase;
 
     /**
      * Cannot parse a log without any data.
