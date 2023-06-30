@@ -6,6 +6,7 @@ use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
 use App\Models\Mimo;
+use App\Models\Modulation;
 use Illuminate\Database\Eloquent\Collection;
 
 class LteCaParser
@@ -14,6 +15,7 @@ class LteCaParser
     protected CapabilitySet $capabilitySet;
 
     protected $mimoCache = ['ul' => [], 'dl' => []];
+    protected $modulationCache = ['ul' => [], 'dl' => []];
 
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
     {
@@ -91,6 +93,29 @@ class LteCaParser
         }
     }
 
+    protected function getModulationFromComponent(array $component, bool $isUl): ?array
+    {
+        $key = $isUl ? 'modulationUl' : 'modulationDl';
+
+        if (empty($component[$key])) {
+            return null;
+        }
+
+        $modData = $component[$key];
+
+        switch ($modData['type']) {
+            case 'single':
+                return [$modData['value']];
+
+            case 'mixed':
+                return $modData['value'];
+
+            case 'empty':
+            default:
+                return null;
+        }
+    }
+
     protected function getComponentModels(array $combo, Combo $comboModel): Collection
     {
         $models = new Collection();
@@ -151,9 +176,43 @@ class LteCaParser
                 }
             }
 
+            $dlMod = $this->getModulationFromComponent($component, false);
+            $ulMod = $this->getModulationFromComponent($component, true);
+
+            $modModels = new Collection();
+
+            // Find and attach Modulation models
+
+            if (!empty($dlMod)) {
+                foreach ($dlMod as $m) {
+                    if (empty($this->modulationCache['dl'][$m])) {
+                        $this->modulationCache['dl'][$m] = Modulation::firstOrCreate([
+                            'modulation' => $m,
+                            'is_ul'      => false,
+                        ]);
+                    }
+
+                    $modModels->push($this->modulationCache['dl'][$m]);
+                }
+            }
+
+            if (!empty($ulMod)) {
+                foreach ($ulMod as $m) {
+                    if (empty($this->modulationCache['ul'][$m])) {
+                        $this->modulationCache['ul'][$m] = Modulation::firstOrCreate([
+                            'modulation' => $m,
+                            'is_ul'      => true,
+                        ]);
+                    }
+
+                    $modModels->push($this->modulationCache['ul'][$m]);
+                }
+            }
+
             $model->saveOrFail();
 
             $model->mimos()->sync($mimoModels->pluck('id'));
+            $model->modulations()->sync($modModels->pluck('id'));
 
             $models->push($model);
         }
