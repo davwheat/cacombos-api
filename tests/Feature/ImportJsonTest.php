@@ -146,7 +146,7 @@ class ImportJsonTest extends TestCase
                         ],
                         'mimoUl' => [
                             'type'  => 'single',
-                            'value' => 1,
+                            'value' => 2,
                         ],
                         'modulationDl' => [
                             'type'  => 'single',
@@ -159,10 +159,11 @@ class ImportJsonTest extends TestCase
                     ],
                     [
                         'band'      => 3,
-                        'bwClassDl' => 'A',
                         'mimoDl'    => [
-                            'type'  => 'single',
-                            'value' => 4,
+                            'type'  => 'empty',
+                        ],
+                        'mimoUl' => [
+                            'type'  => 'empty',
                         ],
                     ],
                     [
@@ -316,7 +317,7 @@ class ImportJsonTest extends TestCase
         $combo = $combos->get(4);
 
         $this->assertArraySubset([
-            'combo_string'      => '1A4A-3A4-32A',
+            'combo_string'      => '1A4A2-3-32A',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
         $this->assertSame(null, $combo->bandwidth_combination_set);
@@ -333,7 +334,7 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame(Arr::except($comboComponents->get(1)->getAttributes(), 'id'), [
             'band'            => 3,
-            'dl_class'        => 'A',
+            'dl_class'        => null,
             'ul_class'        => null,
             'component_index' => 1,
         ]);
