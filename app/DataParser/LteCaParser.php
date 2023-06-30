@@ -21,28 +21,26 @@ class LteCaParser
         $this->capabilitySet = $capabilitySet;
     }
 
-    public function parseAndInsertModels(): void
+    public function parseAndInsertAllModels(): void
     {
         $collection = new Collection();
 
         foreach ($this->data as $lteCa) {
-            $collection->push($this->parseLteCa($lteCa));
+            $collection->push($this->parseLteCaCombo($lteCa));
         }
     }
 
-    protected function parseLteCa(array $combo): Collection
+    protected function parseLteCaCombo(array $comboData): Combo
     {
-        $collection = new Collection();
-
-        $combo = Combo::firstOrCreate([
-            'combo_string'              => $this->lteCaToComboString($combo),
+        $comboModel = Combo::firstOrCreate([
+            'combo_string'              => $this->lteCaToComboString($comboData),
             'capability_set_id'         => $this->capabilitySet->id,
-            'bandwidth_combination_set' => $this->getBcs($combo),
+            'bandwidth_combination_set' => $this->getBcs($comboData),
         ]);
 
-        $models = $this->getComponentModels($combo['components']);
+        $this->getComponentModels($comboData, $comboModel);
 
-        return $collection;
+        return $comboModel;
     }
 
     protected function getBcs(array $combo): ?array
@@ -90,7 +88,7 @@ class LteCaParser
         }
     }
 
-    protected function getComponentModels(array $combo): Collection
+    protected function getComponentModels(array $combo, Combo $comboModel): Collection
     {
         $models = new Collection();
 
@@ -102,8 +100,11 @@ class LteCaParser
             $model = new LteComponent();
 
             $model->band = $component['band'];
+
             $model->dl_class = $component['bwClassDl'];
             $model->ul_class = $component['bwClassUl'];
+
+            $model->component_index = $i;
 
             $dlMimo = $this->getMimoFromComponent($component, false);
             $ulMimo = $this->getMimoFromComponent($component, true);
@@ -157,12 +158,12 @@ class LteCaParser
             if (isset($lteCa['mimoDl'])) {
                 switch ($lteCa['mimoDl']['type']) {
                     case 'single':
-                        $component .= $lteCa['mimoDl']['type']['value'];
+                        $component .= $lteCa['mimoDl']['value'];
                         break;
 
                     case 'mixed':
                         /** @var array */
-                        $allValues = $lteCa['mimoDl']['type']['value'];
+                        $allValues = $lteCa['mimoDl']['value'];
                         $component .= max($allValues);
                         break;
 
