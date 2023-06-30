@@ -5,6 +5,9 @@ namespace Tests\Feature;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\Device;
+use App\Models\LteComponent;
+use App\Models\Mimo;
+use App\Models\Modulation;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
@@ -237,6 +240,10 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame(5, $combos->count());
 
+        // ##############################
+        // Combo 1
+        // ##############################
+
         /** @var Combo */
         $combo = $combos->get(0);
 
@@ -255,6 +262,19 @@ class ImportJsonTest extends TestCase
             'ul_class'        => 'A',
             'component_index' => 0,
         ]);
+
+        /** @var LteComponent */
+        $cc = $comboComponents->first();
+
+        $this->assertSame($cc->dl_mimos()->count(), 1);
+        $this->assertSame($cc->ul_mimos()->count(), 1);
+
+        $this->assertSame(4, $cc->dl_mimos()->first()->mimo);
+        $this->assertSame(1, $cc->ul_mimos()->first()->mimo);
+
+        // ##############################
+        // Combo 2
+        // ##############################
 
         /** @var Combo */
         $combo = $combos->get(1);
@@ -275,6 +295,10 @@ class ImportJsonTest extends TestCase
             'component_index' => 0,
         ]);
 
+        // ##############################
+        // Combo 3
+        // ##############################
+
         /** @var Combo */
         $combo = $combos->get(2);
 
@@ -294,6 +318,43 @@ class ImportJsonTest extends TestCase
             'component_index' => 0,
         ]);
 
+        /** @var LteComponent */
+        $cc = $comboComponents->first();
+
+        // Mimos
+
+        $this->assertSame($cc->dl_mimos()->count(), 2);
+        $this->assertSame($cc->ul_mimos()->count(), 2);
+
+        $dlMimos = $cc->dl_mimos()->get()->map(function (Mimo $mimo) {
+            return $mimo->mimo;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing([2, 4], $dlMimos);
+
+        $ulMimos = $cc->ul_mimos()->get()->map(function (Mimo $mimo) {
+            return $mimo->mimo;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing([1, 2], $ulMimos);
+
+        // Modulation
+
+        $this->assertSame($cc->dl_modulations()->count(), 2);
+        $this->assertSame($cc->ul_modulations()->count(), 2);
+
+        $dlMimos = $cc->dl_modulations()->get()->map(function (Modulation $mod) {
+            return $mod->modulation;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing(['qam256', 'qam1024'], $dlMimos);
+
+        $ulMimos = $cc->ul_modulations()->get()->map(function (Modulation $mod) {
+            return $mod->modulation;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing(['qam64', 'qam256'], $ulMimos);
+
+        // ##############################
+        // Combo 4
+        // ##############################
+
         /** @var Combo */
         $combo = $combos->get(3);
 
@@ -312,6 +373,28 @@ class ImportJsonTest extends TestCase
             'ul_class'        => 'A',
             'component_index' => 0,
         ]);
+
+        /** @var LteComponent */
+        $cc = $comboComponents->first();
+
+        // Modulation
+
+        $this->assertSame($cc->dl_modulations()->count(), 1);
+        $this->assertSame($cc->ul_modulations()->count(), 1);
+
+        $dlMimos = $cc->dl_modulations()->get()->map(function (Modulation $mod) {
+            return $mod->modulation;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing(['qam256'], $dlMimos);
+
+        $ulMimos = $cc->ul_modulations()->get()->map(function (Modulation $mod) {
+            return $mod->modulation;
+        })->values()->toArray();
+        $this->assertEqualsCanonicalizing(['qam64'], $ulMimos);
+
+        // ##############################
+        // Combo 5
+        // ##############################
 
         /** @var Combo */
         $combo = $combos->get(4);
@@ -345,5 +428,31 @@ class ImportJsonTest extends TestCase
             'ul_class'        => null,
             'component_index' => 2,
         ]);
+
+        /** @var LteComponent */
+        $cc = $comboComponents->get(1);
+
+        // Mimos
+
+        $this->assertSame($cc->dl_mimos()->count(), 0);
+        $this->assertSame($cc->ul_mimos()->count(), 0);
+
+        // Modulation
+
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ul_modulations()->count(), 0);
+
+        /** @var LteComponent */
+        $cc = $comboComponents->get(2);
+
+        // Mimos
+
+        $this->assertSame($cc->dl_mimos()->count(), 0);
+        $this->assertSame($cc->ul_mimos()->count(), 0);
+
+        // Modulation
+
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ul_modulations()->count(), 0);
     }
 }
