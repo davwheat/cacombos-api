@@ -132,9 +132,9 @@ class LteCaParser
                             'mimo'  => $m,
                             'is_ul' => false,
                         ]);
-
-                        $mimoModels->push($this->mimoCache['dl'][$m]);
                     }
+
+                    $mimoModels->push($this->mimoCache['dl'][$m]);
                 }
             }
 
@@ -145,14 +145,15 @@ class LteCaParser
                             'mimo'  => $m,
                             'is_ul' => true,
                         ]);
-
-                        $mimoModels->push($this->mimoCache['ul'][$m]);
                     }
+
+                    $mimoModels->push($this->mimoCache['ul'][$m]);
                 }
             }
 
             $model->saveOrFail();
-            $model->mimos()->attach($mimoModels->pluck('id'));
+
+            $model->mimos()->sync($mimoModels->pluck('id'));
 
             $models->push($model);
         }
