@@ -225,7 +225,7 @@ class ImportJsonTest extends TestCase
         /** @var CapabilitySet */
         $testingCapabilitySet = CapabilitySet::first();
         /** @var Device */
-        $testingDevice = $testingCapabilitySet->device()->first();
+        $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$lte_ca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
 
@@ -233,7 +233,7 @@ class ImportJsonTest extends TestCase
         $this->assertSame('null', $response->getContent());
 
         $testingCapabilitySet->refresh();
-        $combos = $testingCapabilitySet->combos()->get();
+        $combos = $testingCapabilitySet->combos;
 
         $this->assertSame(5, $combos->count());
 
@@ -246,7 +246,7 @@ class ImportJsonTest extends TestCase
         ], $combo->getAttributes());
         $this->assertSame([0], $combo->bandwidth_combination_set);
 
-        $comboComponents = $combo->lteComponents()->get();
+        $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
 
         $this->assertSame(Arr::except($comboComponents->first()->getAttributes(), 'id'), [
@@ -265,7 +265,7 @@ class ImportJsonTest extends TestCase
         ], $combo->getAttributes());
         $this->assertSame([], $combo->bandwidth_combination_set);
 
-        $comboComponents = $combo->lteComponents()->get();
+        $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
 
         $this->assertSame(Arr::except($comboComponents->first()->getAttributes(), 'id'), [
@@ -284,7 +284,7 @@ class ImportJsonTest extends TestCase
         ], $combo->getAttributes());
         $this->assertSame([1, 2, 3], $combo->bandwidth_combination_set);
 
-        $comboComponents = $combo->lteComponents()->get();
+        $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
 
         $this->assertSame(Arr::except($comboComponents->first()->getAttributes(), 'id'), [
@@ -303,7 +303,7 @@ class ImportJsonTest extends TestCase
         ], $combo->getAttributes());
         $this->assertSame(['all'], $combo->bandwidth_combination_set);
 
-        $comboComponents = $combo->lteComponents()->get();
+        $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
 
         $this->assertSame(Arr::except($comboComponents->first()->getAttributes(), 'id'), [
@@ -322,7 +322,7 @@ class ImportJsonTest extends TestCase
         ], $combo->getAttributes());
         $this->assertSame(null, $combo->bandwidth_combination_set);
 
-        $comboComponents = $combo->lteComponents()->get();
+        $comboComponents = $combo->lteComponents;
         $this->assertSame(3, $comboComponents->count());
 
         $this->assertSame(Arr::except($comboComponents->get(0)->getAttributes(), 'id'), [
