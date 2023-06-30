@@ -6,7 +6,7 @@ use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\Device;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use Illuminate\Foundation\Testing\RefreshDatabase; //
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
