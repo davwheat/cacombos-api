@@ -6,11 +6,10 @@ use App\DataParser\ElementParser\BcsParser;
 use App\DataParser\ElementParser\ComponentLteParser;
 use App\DataParser\ElementParser\MimoParser;
 use App\DataParser\ElementParser\ModulationParser;
+use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
-use App\Models\Mimo;
-use App\Models\Modulation;
 use Illuminate\Database\Eloquent\Collection;
 
 class LteCaParser implements DataParser
@@ -23,14 +22,19 @@ class LteCaParser implements DataParser
     protected BcsParser $bcsParser;
     protected ComponentLteParser $componentLteParser;
 
+    protected ComboStringGenerator $comboStringGenerator;
+
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
     {
         $this->data = $lteCaData;
         $this->capabilitySet = $capabilitySet;
+
         $this->mimoParser = new MimoParser();
         $this->modulationParser = new ModulationParser();
         $this->bcsParser = new BcsParser();
         $this->componentLteParser = new ComponentLteParser();
+
+        $this->comboStringGenerator = new ComboStringGenerator();
     }
 
     public function parseAndInsertAllModels(): void
@@ -44,14 +48,14 @@ class LteCaParser implements DataParser
 
     protected function parseLteCaCombo(array $comboData): Combo
     {
+        $lteComponents = $this->getComponentLteModels($comboData);
+
         /** @var Combo */
         $comboModel = Combo::firstOrCreate([
-            'combo_string'                    => $this->lteCaToComboString($comboData),
+            'combo_string'                    => $this->lteCaToComboString($lteComponents->all()),
             'capability_set_id'               => $this->capabilitySet->id,
             'bandwidth_combination_set_eutra' => $this->getBcs($comboData),
         ]);
-
-        $lteComponents = $this->getComponentLteModels($comboData);
 
         $comboModel->lteComponents()->saveMany($lteComponents);
 
@@ -71,68 +75,8 @@ class LteCaParser implements DataParser
         return $this->componentLteParser->getModelsFromData($combo, 'components');
     }
 
-    protected function lteCaToComboString(array $combo): string
+    protected function lteCaToComboString(array $components): string
     {
-        $comboStringComponents = [];
-
-        foreach ($combo['components'] as $lteCa) {
-            $component = $lteCa['band'];
-
-            if (isset($lteCa['bwClassDl'])) {
-                $component .= $lteCa['bwClassDl'];
-            }
-
-            if (isset($lteCa['mimoDl'])) {
-                switch ($lteCa['mimoDl']['type']) {
-                    case 'single':
-                        $component .= $lteCa['mimoDl']['value'];
-                        break;
-
-                    case 'mixed':
-                        /** @var array */
-                        $allValues = $lteCa['mimoDl']['value'];
-                        $component .= max($allValues);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            if (isset($lteCa['bwClassUl'])) {
-                $component .= $lteCa['bwClassUl'];
-            }
-
-            if (isset($lteCa['mimoUl'])) {
-                switch ($lteCa['mimoUl']['type']) {
-                    case 'single':
-                        $val = $lteCa['mimoUl']['value'];
-
-                        if ($val !== 1) {
-                            $component .= $val;
-                        }
-                        break;
-
-                    case 'mixed':
-                        /** @var array */
-                        $allValues = $lteCa['mimoUl']['value'];
-                        $val = max($allValues);
-
-                        if ($val !== 1) {
-                            $component .= max($allValues);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            $comboStringComponents[] = $component;
-        }
-
-        $comboString = implode('-', $comboStringComponents);
-
-        return $comboString;
+        return $this->comboStringGenerator->getComboStringFromComponents($components);
     }
 }
