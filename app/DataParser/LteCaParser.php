@@ -2,6 +2,7 @@
 
 namespace App\DataParser;
 
+use App\DataParser\ElementParser\BcsParser;
 use App\DataParser\ElementParser\ComponentLteParser;
 use App\DataParser\ElementParser\MimoParser;
 use App\DataParser\ElementParser\ModulationParser;
@@ -19,6 +20,7 @@ class LteCaParser implements DataParser
 
     protected MimoParser $mimoParser;
     protected ModulationParser $modulationParser;
+    protected BcsParser $bcsParser;
     protected ComponentLteParser $componentLteParser;
 
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
@@ -27,6 +29,7 @@ class LteCaParser implements DataParser
         $this->capabilitySet = $capabilitySet;
         $this->mimoParser = new MimoParser();
         $this->modulationParser = new ModulationParser();
+        $this->bcsParser = new BcsParser();
         $this->componentLteParser = new ComponentLteParser();
     }
 
@@ -57,24 +60,7 @@ class LteCaParser implements DataParser
 
     protected function getBcs(array $combo): ?array
     {
-        if (empty($combo['bcs'])) {
-            return [];
-        }
-
-        switch ($combo['bcs']['type']) {
-            case 'all':
-                return ['all'];
-
-            case 'multi':
-                return $combo['bcs']['value'];
-
-            case 'single':
-                return [$combo['bcs']['value']];
-
-            default:
-            case 'empty':
-                return null;
-        }
+        return $this->bcsParser->getBcsFromData($combo, 'bcs');
     }
 
     /**
