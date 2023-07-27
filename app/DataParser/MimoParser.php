@@ -13,7 +13,7 @@ class MimoParser
     /**
      * @return Collection<Mimo>
      */
-    public function getMimoModelsFromData(array $data, string $attribute, bool $isUl): Collection
+    public function getModelsFromData(array $data, string $attribute, bool $isUl): Collection
     {
         $mimoData = Arr::get($data, $attribute);
         $value = $this->getMimoIntArray($mimoData);

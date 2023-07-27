@@ -13,7 +13,7 @@ class ModulationParser
     /**
      * @return Collection<Modulation>
      */
-    public function getModulationModelsFromData(array $data, string $attribute, bool $isUl): Collection
+    public function getModelsFromData(array $data, string $attribute, bool $isUl): Collection
     {
         $modData = Arr::get($data, $attribute);
         $value = $this->getModStringArray($modData);

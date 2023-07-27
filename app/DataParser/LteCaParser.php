@@ -77,7 +77,7 @@ class LteCaParser implements DataParser
      */
     protected function getMimosFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->mimoParser->getMimoModelsFromData($component, $isUl ? 'mimoUl' : 'mimoDl', $isUl);
+        return $this->mimoParser->getModelsFromData($component, $isUl ? 'mimoUl' : 'mimoDl', $isUl);
     }
 
     /**
@@ -85,7 +85,7 @@ class LteCaParser implements DataParser
      */
     protected function getModulationsFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->modulationParser->getModulationModelsFromData($component, $isUl ? 'modulationUl' : 'modulationDl', $isUl);
+        return $this->modulationParser->getModelsFromData($component, $isUl ? 'modulationUl' : 'modulationDl', $isUl);
     }
 
     protected function getComponentModels(array $combo, Combo $comboModel): Collection
