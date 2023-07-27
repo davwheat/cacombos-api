@@ -46,8 +46,8 @@ class LteCaParser implements DataParser
     {
         /** @var Combo */
         $comboModel = Combo::firstOrCreate([
-            'combo_string'              => $this->lteCaToComboString($comboData),
-            'capability_set_id'         => $this->capabilitySet->id,
+            'combo_string'                    => $this->lteCaToComboString($comboData),
+            'capability_set_id'               => $this->capabilitySet->id,
             'bandwidth_combination_set_eutra' => $this->getBcs($comboData),
         ]);
 

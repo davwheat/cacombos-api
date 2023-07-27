@@ -199,9 +199,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string'              => $comboData['combo'],
+                    'combo_string'                    => $comboData['combo'],
                     'bandwidth_combination_set_eutra' => json_encode(explode(', ', $comboData['bsc'])),
-                    'capability_set_id'         => $this->capabilitySet->id,
+                    'capability_set_id'               => $this->capabilitySet->id,
                 ],
                 [
                     'bandwidth_combination_set_eutra' => explode(', ', $comboData['bsc']),
@@ -270,9 +270,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string'              => $comboData['combo'],
+                    'combo_string'                    => $comboData['combo'],
                     'bandwidth_combination_set_eutra' => null,
-                    'capability_set_id'         => $this->capabilitySet->id,
+                    'capability_set_id'               => $this->capabilitySet->id,
                 ]
             );
 
@@ -399,9 +399,9 @@ class ImportParsedCsvController extends JsonController
             /** @var Combo $combo */
             $combo = Combo::firstOrCreate(
                 [
-                    'combo_string'              => $comboData['combo'],
+                    'combo_string'                    => $comboData['combo'],
                     'bandwidth_combination_set_eutra' => null,
-                    'capability_set_id'         => $this->capabilitySet->id,
+                    'capability_set_id'               => $this->capabilitySet->id,
                 ]
             );
 
