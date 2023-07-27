@@ -2,6 +2,7 @@
 
 namespace App\DataParser;
 
+use App\DataParser\ElementParser\ComponentLteParser;
 use App\DataParser\ElementParser\MimoParser;
 use App\DataParser\ElementParser\ModulationParser;
 use App\Models\CapabilitySet;
@@ -18,6 +19,7 @@ class LteCaParser implements DataParser
 
     protected MimoParser $mimoParser;
     protected ModulationParser $modulationParser;
+    protected ComponentLteParser $componentLteParser;
 
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
     {
@@ -25,6 +27,7 @@ class LteCaParser implements DataParser
         $this->capabilitySet = $capabilitySet;
         $this->mimoParser = new MimoParser();
         $this->modulationParser = new ModulationParser();
+        $this->componentLteParser = new ComponentLteParser();
     }
 
     public function parseAndInsertAllModels(): void
@@ -45,7 +48,7 @@ class LteCaParser implements DataParser
             'bandwidth_combination_set' => $this->getBcs($comboData),
         ]);
 
-        $lteComponents = $this->getComponentModels($comboData, $comboModel);
+        $lteComponents = $this->getComponentLteModels($comboData);
 
         $comboModel->lteComponents()->saveMany($lteComponents);
 
@@ -90,52 +93,14 @@ class LteCaParser implements DataParser
         return $this->modulationParser->getModelsFromData($component, $isUl ? 'modulationUl' : 'modulationDl', $isUl);
     }
 
-    protected function getComponentModels(array $combo, Combo $comboModel): Collection
+    /**
+     * @return Collection<LteComponent>
+     */
+    protected function getComponentLteModels(array $combo): Collection
     {
-        $models = new Collection();
-
-        foreach ($combo['components'] as $i => $component) {
-            /**
-             * @var int   $i
-             * @var array $component
-             */
-            $model = new LteComponent();
-
-            $model->band = $component['band'];
-
-            if (empty($component['bwClassDl'])) {
-                $model->dl_class = null;
-            } else {
-                $model->dl_class = $component['bwClassDl'];
-            }
-
-            if (empty($component['bwClassUl'])) {
-                $model->ul_class = null;
-            } else {
-                $model->ul_class = $component['bwClassUl'];
-            }
-
-            $model->component_index = $i;
-
-            $allMimos = collect()
-                ->concat($this->getMimosFromComponent($component, false))
-                ->concat($this->getMimosFromComponent($component, true));
-
-            $allModulations = collect()
-                ->concat($this->getModulationsFromComponent($component, false))
-                ->concat($this->getModulationsFromComponent($component, true));
-
-            $model->saveOrFail();
-
-            // Attach MIMOs and modulations to saved component
-            $model->mimos()->sync($allMimos->pluck('id'));
-            $model->modulations()->sync($allModulations->pluck('id'));
-
-            $models->push($model);
-        }
-
-        return $models;
+        return $this->componentLteParser->getModelsFromData($combo);
     }
+
 
     protected function lteCaToComboString(array $combo): string
     {
