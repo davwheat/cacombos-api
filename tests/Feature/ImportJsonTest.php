@@ -221,9 +221,9 @@ class ImportJsonTest extends TestCase
     }
 
     /**
-     * Cannot parse a log without a valid capability set ID.
+     * Can import a valid lte ca data JSON output.
      */
-    public function test_parses_lte_ca_data(): void
+    public function test_imports_lte_ca_data(): void
     {
         /** @var CapabilitySet */
         $testingCapabilitySet = CapabilitySet::first();
