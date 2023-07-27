@@ -14,13 +14,15 @@ class LteCaParser implements DataParser
     protected array $data;
     protected CapabilitySet $capabilitySet;
 
-    protected $mimoCache = ['ul' => [], 'dl' => []];
-    protected $modulationCache = ['ul' => [], 'dl' => []];
+    protected MimoParser $mimoParser;
+    protected ModulationParser $modulationParser;
 
     public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
     {
         $this->data = $lteCaData;
         $this->capabilitySet = $capabilitySet;
+        $this->mimoParser = new MimoParser();
+        $this->modulationParser = new ModulationParser();
     }
 
     public function parseAndInsertAllModels(): void
@@ -70,50 +72,20 @@ class LteCaParser implements DataParser
         }
     }
 
-    protected function getMimoFromComponent(array $component, bool $isUl): ?array
+    /**
+     * @return Collection<Mimo>
+     */
+    protected function getMimosFromComponent(array $component, bool $isUl): Collection
     {
-        $key = $isUl ? 'mimoUl' : 'mimoDl';
-
-        if (empty($component[$key])) {
-            return null;
-        }
-
-        $mimoData = $component[$key];
-
-        switch ($mimoData['type']) {
-            case 'single':
-                return [$mimoData['value']];
-
-            case 'mixed':
-                return $mimoData['value'];
-
-            case 'empty':
-            default:
-                return null;
-        }
+        return $this->mimoParser->getMimoModelsFromData($component, $isUl ? "mimoUl" : "mimoDl", $isUl);
     }
 
-    protected function getModulationFromComponent(array $component, bool $isUl): ?array
+    /**
+     * @return Collection<Modulation>
+     */
+    protected function getModulationsFromComponent(array $component, bool $isUl): Collection
     {
-        $key = $isUl ? 'modulationUl' : 'modulationDl';
-
-        if (empty($component[$key])) {
-            return null;
-        }
-
-        $modData = $component[$key];
-
-        switch ($modData['type']) {
-            case 'single':
-                return [$modData['value']];
-
-            case 'mixed':
-                return $modData['value'];
-
-            case 'empty':
-            default:
-                return null;
-        }
+        return $this->modulationParser->getModulationModelsFromData($component, $isUl ? "modulationUl" : "modulationDl", $isUl);
     }
 
     protected function getComponentModels(array $combo, Combo $comboModel): Collection
@@ -143,76 +115,19 @@ class LteCaParser implements DataParser
 
             $model->component_index = $i;
 
-            $dlMimo = $this->getMimoFromComponent($component, false);
-            $ulMimo = $this->getMimoFromComponent($component, true);
+            $allMimos = collect()
+                ->concat($this->getMimosFromComponent($component, false))
+                ->concat($this->getMimosFromComponent($component, true));
 
-            $mimoModels = new Collection();
-
-            // Find and attach MIMO models
-
-            if (!empty($dlMimo)) {
-                foreach ($dlMimo as $m) {
-                    if (empty($this->mimoCache['dl'][$m])) {
-                        $this->mimoCache['dl'][$m] = Mimo::firstOrCreate([
-                            'mimo'  => $m,
-                            'is_ul' => false,
-                        ]);
-                    }
-
-                    $mimoModels->push($this->mimoCache['dl'][$m]);
-                }
-            }
-
-            if (!empty($ulMimo)) {
-                foreach ($ulMimo as $m) {
-                    if (empty($this->mimoCache['ul'][$m])) {
-                        $this->mimoCache['ul'][$m] = Mimo::firstOrCreate([
-                            'mimo'  => $m,
-                            'is_ul' => true,
-                        ]);
-                    }
-
-                    $mimoModels->push($this->mimoCache['ul'][$m]);
-                }
-            }
-
-            $dlMod = $this->getModulationFromComponent($component, false);
-            $ulMod = $this->getModulationFromComponent($component, true);
-
-            $modModels = new Collection();
-
-            // Find and attach Modulation models
-
-            if (!empty($dlMod)) {
-                foreach ($dlMod as $m) {
-                    if (empty($this->modulationCache['dl'][$m])) {
-                        $this->modulationCache['dl'][$m] = Modulation::firstOrCreate([
-                            'modulation' => $m,
-                            'is_ul'      => false,
-                        ]);
-                    }
-
-                    $modModels->push($this->modulationCache['dl'][$m]);
-                }
-            }
-
-            if (!empty($ulMod)) {
-                foreach ($ulMod as $m) {
-                    if (empty($this->modulationCache['ul'][$m])) {
-                        $this->modulationCache['ul'][$m] = Modulation::firstOrCreate([
-                            'modulation' => $m,
-                            'is_ul'      => true,
-                        ]);
-                    }
-
-                    $modModels->push($this->modulationCache['ul'][$m]);
-                }
-            }
+            $allModulations = collect()
+                ->concat($this->getModulationsFromComponent($component, false))
+                ->concat($this->getModulationsFromComponent($component, true));
 
             $model->saveOrFail();
 
-            $model->mimos()->sync($mimoModels->pluck('id'));
-            $model->modulations()->sync($modModels->pluck('id'));
+            // Attach MIMOs and modulations to saved component
+            $model->mimos()->sync($allMimos->pluck('id'));
+            $model->modulations()->sync($allModulations->pluck('id'));
 
             $models->push($model);
         }
