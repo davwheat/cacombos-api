@@ -9,10 +9,10 @@ class ComboStringGenerator
 {
     public function getComboStringFromComponents(array $components): string
     {
-
         foreach ($components as $c) {
             if (!($c instanceof LteComponent || $c instanceof NrComponent)) {
                 var_dump($c);
+
                 throw new \InvalidArgumentException('Invalid array passed: one or more elements are not of instances of NrComponent or LteComponent');
             }
         }
@@ -35,7 +35,6 @@ class ComboStringGenerator
          * @var LteComponent|NrComponent $component
          */
         foreach ($components as $component) {
-
             $str = $component instanceof NrComponent ? 'n' : '';
             $str .= $component->band;
 
