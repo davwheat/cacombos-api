@@ -54,7 +54,7 @@ class ModulationParser
                 if (empty($cache[$m])) {
                     $cache[$m] = Modulation::firstOrCreate([
                         'modulation'  => $m,
-                        'is_ul' => $isUl,
+                        'is_ul'       => $isUl,
                     ]);
                 }
 
