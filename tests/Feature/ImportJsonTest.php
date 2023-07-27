@@ -251,7 +251,7 @@ class ImportJsonTest extends TestCase
             'combo_string'      => '1A4A',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
-        $this->assertSame([0], $combo->bandwidth_combination_set);
+        $this->assertSame([0], $combo->bandwidth_combination_set_eutra);
 
         $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
@@ -283,7 +283,7 @@ class ImportJsonTest extends TestCase
             'combo_string'      => '3A4A',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
-        $this->assertSame([], $combo->bandwidth_combination_set);
+        $this->assertSame([], $combo->bandwidth_combination_set_eutra);
 
         $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
@@ -306,7 +306,7 @@ class ImportJsonTest extends TestCase
             'combo_string'      => '7C4C2',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
-        $this->assertSame([1, 2, 3], $combo->bandwidth_combination_set);
+        $this->assertSame([1, 2, 3], $combo->bandwidth_combination_set_eutra);
 
         $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
@@ -362,7 +362,7 @@ class ImportJsonTest extends TestCase
             'combo_string'      => '1A4A',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
-        $this->assertSame(['all'], $combo->bandwidth_combination_set);
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_eutra);
 
         $comboComponents = $combo->lteComponents;
         $this->assertSame(1, $comboComponents->count());
@@ -403,7 +403,7 @@ class ImportJsonTest extends TestCase
             'combo_string'      => '1A4A2-3-32A',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
-        $this->assertSame(null, $combo->bandwidth_combination_set);
+        $this->assertSame(null, $combo->bandwidth_combination_set_eutra);
 
         $comboComponents = $combo->lteComponents;
         $this->assertSame(3, $comboComponents->count());
