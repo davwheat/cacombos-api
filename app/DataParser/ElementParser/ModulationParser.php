@@ -1,27 +1,27 @@
 <?php
 
-namespace App\DataParser;
+namespace App\DataParser\ElementParser;
 
-use App\Models\Mimo;
+use App\Models\Modulation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
-class MimoParser
+class ModulationParser
 {
-    private $mimoCache = ['ul' => [], 'dl' => []];
+    private $modCache = ['ul' => [], 'dl' => []];
 
     /**
-     * @return Collection<Mimo>
+     * @return Collection<Modulation>
      */
     public function getModelsFromData(array $data, string $attribute, bool $isUl): Collection
     {
-        $mimoData = Arr::get($data, $attribute);
-        $value = $this->getMimoIntArray($mimoData);
+        $modData = Arr::get($data, $attribute);
+        $value = $this->getModStringArray($modData);
 
         return $this->getModel($value, $isUl);
     }
 
-    private function getMimoIntArray(?array $data): ?array
+    private function getModStringArray(?array $data): ?array
     {
         if (empty($data)) {
             return null;
@@ -41,27 +41,27 @@ class MimoParser
     }
 
     /**
-     * @return Collection<Mimo>
+     * @return Collection<Modulation>
      */
     private function getModel(?array $value, bool $isUl): Collection
     {
-        $cache = &$this->mimoCache[$isUl ? 'ul' : 'dl'];
+        $cache = &$this->modCache[$isUl ? 'ul' : 'dl'];
 
-        $mimoModels = new Collection();
+        $modulationModels = new Collection();
 
         if (!empty($value)) {
             foreach ($value as $m) {
                 if (empty($cache[$m])) {
-                    $cache[$m] = Mimo::firstOrCreate([
-                        'mimo'  => $m,
-                        'is_ul' => $isUl,
+                    $cache[$m] = Modulation::firstOrCreate([
+                        'modulation'  => $m,
+                        'is_ul'       => $isUl,
                     ]);
                 }
 
-                $mimoModels->push($cache[$m]);
+                $modulationModels->push($cache[$m]);
             }
         }
 
-        return $mimoModels;
+        return $modulationModels;
     }
 }

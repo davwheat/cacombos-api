@@ -2,6 +2,8 @@
 
 namespace App\DataParser;
 
+use App\DataParser\ElementParser\MimoParser;
+use App\DataParser\ElementParser\ModulationParser;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;

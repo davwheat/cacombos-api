@@ -1,27 +1,27 @@
 <?php
 
-namespace App\DataParser;
+namespace App\DataParser\ElementParser;
 
-use App\Models\Modulation;
+use App\Models\Mimo;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
-class ModulationParser
+class MimoParser
 {
-    private $modCache = ['ul' => [], 'dl' => []];
+    private $mimoCache = ['ul' => [], 'dl' => []];
 
     /**
-     * @return Collection<Modulation>
+     * @return Collection<Mimo>
      */
     public function getModelsFromData(array $data, string $attribute, bool $isUl): Collection
     {
-        $modData = Arr::get($data, $attribute);
-        $value = $this->getModStringArray($modData);
+        $mimoData = Arr::get($data, $attribute);
+        $value = $this->getMimoIntArray($mimoData);
 
         return $this->getModel($value, $isUl);
     }
 
-    private function getModStringArray(?array $data): ?array
+    private function getMimoIntArray(?array $data): ?array
     {
         if (empty($data)) {
             return null;
@@ -41,27 +41,27 @@ class ModulationParser
     }
 
     /**
-     * @return Collection<Modulation>
+     * @return Collection<Mimo>
      */
     private function getModel(?array $value, bool $isUl): Collection
     {
-        $cache = &$this->modCache[$isUl ? 'ul' : 'dl'];
+        $cache = &$this->mimoCache[$isUl ? 'ul' : 'dl'];
 
-        $modulationModels = new Collection();
+        $mimoModels = new Collection();
 
         if (!empty($value)) {
             foreach ($value as $m) {
                 if (empty($cache[$m])) {
-                    $cache[$m] = Modulation::firstOrCreate([
-                        'modulation'  => $m,
-                        'is_ul'       => $isUl,
+                    $cache[$m] = Mimo::firstOrCreate([
+                        'mimo'  => $m,
+                        'is_ul' => $isUl,
                     ]);
                 }
 
-                $modulationModels->push($cache[$m]);
+                $mimoModels->push($cache[$m]);
             }
         }
 
-        return $modulationModels;
+        return $mimoModels;
     }
 }
