@@ -21,19 +21,19 @@ class ComponentLteParser
     /**
      * @return Collection<LteComponent>
      */
-    public function getModelsFromData(array $data): Collection
+    public function getModelsFromData(array $data, string $attribute): Collection
     {
-        return $this->getLteComponentModels($data);
+        return $this->getLteComponentModels($data[$attribute]);
     }
 
     /**
      * @return Collection<LteComponent>
      */
-    private function getLteComponentModels(array $combo): Collection
+    private function getLteComponentModels(array $components): Collection
     {
         $models = new Collection();
 
-        foreach ($combo['components'] as $i => $component) {
+        foreach ($components as $i => $component) {
             /**
              * @var int   $i
              * @var array $component
