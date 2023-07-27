@@ -81,7 +81,7 @@ class ComponentLteParser
      */
     private function getMimosFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->mimoParser->getModelsFromData($component, $isUl ? "mimoUl" : "mimoDl", $isUl);
+        return $this->mimoParser->getModelsFromData($component, $isUl ? 'mimoUl' : 'mimoDl', $isUl);
     }
 
     /**
@@ -89,6 +89,6 @@ class ComponentLteParser
      */
     private function getModulationsFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->modulationParser->getModelsFromData($component, $isUl ? "modulationUl" : "modulationDl", $isUl);
+        return $this->modulationParser->getModelsFromData($component, $isUl ? 'modulationUl' : 'modulationDl', $isUl);
     }
 }

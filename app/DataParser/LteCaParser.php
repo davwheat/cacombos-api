@@ -101,7 +101,6 @@ class LteCaParser implements DataParser
         return $this->componentLteParser->getModelsFromData($combo);
     }
 
-
     protected function lteCaToComboString(array $combo): string
     {
         $comboStringComponents = [];
