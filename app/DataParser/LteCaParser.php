@@ -9,7 +9,7 @@ use App\Models\Mimo;
 use App\Models\Modulation;
 use Illuminate\Database\Eloquent\Collection;
 
-class LteCaParser
+class LteCaParser implements DataParser
 {
     protected array $data;
     protected CapabilitySet $capabilitySet;
