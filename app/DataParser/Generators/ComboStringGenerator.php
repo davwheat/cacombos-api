@@ -11,8 +11,6 @@ class ComboStringGenerator
     {
         foreach ($components as $c) {
             if (!($c instanceof LteComponent || $c instanceof NrComponent)) {
-                var_dump($c);
-
                 throw new \InvalidArgumentException('Invalid array passed: one or more elements are not of instances of NrComponent or LteComponent');
             }
         }
