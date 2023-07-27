@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?string                    $dl_class
  * @property ?string                    $ul_class
  * @property ?int                       $bandwidth
+ * @property bool                       $supports_90mhz_bw
  * @property ?int                       $subcarrier_spacing
  * @property int                        $component_index
  * @property \Illuminate\Support\Carbon $created_at
@@ -25,6 +26,7 @@ class NrComponent extends Model
         'dl_class',
         'ul_class',
         'bandwidth',
+        'supports_90mhz_bw',
         'subcarrier_spacing',
         'component_index',
     ];
