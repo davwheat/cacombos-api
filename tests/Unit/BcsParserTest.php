@@ -8,7 +8,7 @@ use Tests\UnitTestCase;
 class BcsParserTest extends UnitTestCase
 {
     /**
-     * Gets correct value for "all" BCS
+     * Gets correct value for "all" BCS.
      */
     public function test_get_all_bcs()
     {
@@ -16,7 +16,7 @@ class BcsParserTest extends UnitTestCase
 
         $bcs = $p->getBcsFromData([
             'components' => [],
-            'bcs' => [
+            'bcs'        => [
                 'type' => 'all',
             ],
         ], 'bcs');
@@ -25,7 +25,7 @@ class BcsParserTest extends UnitTestCase
     }
 
     /**
-     * Get correct value for multi BCS
+     * Get correct value for multi BCS.
      */
     public function test_get_multi_bcs()
     {
@@ -33,8 +33,8 @@ class BcsParserTest extends UnitTestCase
 
         $bcs = $p->getBcsFromData([
             'components' => [],
-            'bcs' => [
-                'type' => 'multi',
+            'bcs'        => [
+                'type'  => 'multi',
                 'value' => ['a', 'b', 'c'],
             ],
         ], 'bcs');
@@ -43,7 +43,7 @@ class BcsParserTest extends UnitTestCase
     }
 
     /**
-     * Get correct value for single BCS
+     * Get correct value for single BCS.
      */
     public function test_get_single_bcs()
     {
@@ -51,8 +51,8 @@ class BcsParserTest extends UnitTestCase
 
         $bcs = $p->getBcsFromData([
             'components' => [],
-            'bcs' => [
-                'type' => 'single',
+            'bcs'        => [
+                'type'  => 'single',
                 'value' => 'a',
             ],
         ], 'bcs');
@@ -61,7 +61,7 @@ class BcsParserTest extends UnitTestCase
     }
 
     /**
-     * Get correct value for empty BCS
+     * Get correct value for empty BCS.
      */
     public function test_get_empty_bcs()
     {
@@ -69,7 +69,7 @@ class BcsParserTest extends UnitTestCase
 
         $bcs = $p->getBcsFromData([
             'components' => [],
-            'bcs' => [
+            'bcs'        => [
                 'type' => 'empty',
             ],
         ], 'bcs');

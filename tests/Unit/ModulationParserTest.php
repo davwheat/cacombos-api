@@ -53,8 +53,8 @@ class ModulationParserTest extends UnitTestCase
         $p = new ModulationParser();
 
         $mod = $p->getModelsFromData($this->getComponentData([
-            'type' => 'single',
-            'value' => 'qpsk'
+            'type'  => 'single',
+            'value' => 'qpsk',
         ]), 'modulationDl', false);
 
         $mod = $mod->map(
@@ -69,8 +69,8 @@ class ModulationParserTest extends UnitTestCase
         $p = new ModulationParser();
 
         $mod = $p->getModelsFromData($this->getComponentData([
-            'type' => 'single',
-            'value' => 'qpsk'
+            'type'  => 'single',
+            'value' => 'qpsk',
         ]), 'modulationDl', true);
 
         $mod = $mod->map(
@@ -85,13 +85,13 @@ class ModulationParserTest extends UnitTestCase
         $p = new ModulationParser();
 
         $mod = $p->getModelsFromData($this->getComponentData([
-            'type' => 'mixed',
+            'type'  => 'mixed',
             'value' => [
                 'qpsk',
                 '16qam',
                 '64qam',
                 '256qam',
-            ]
+            ],
         ]), 'modulationDl', false);
 
         $mod = $mod->map(
