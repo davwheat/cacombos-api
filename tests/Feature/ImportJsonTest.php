@@ -185,138 +185,138 @@ class ImportJsonTest extends TestCase
     ];
 
     protected static $endc_data = [
-        "endc" => [
+        'endc' => [
             [
-                "componentsLte" => [
+                'componentsLte' => [
                     [
-                        "band" => 66,
-                        "bwClassDl" => "A",
-                        "bwClassUl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 4],
-                        "mimoUl" => ["type" => "single", "value" => 1],
-                        "modulationUl" => ["type" => "single", "value" => "qam256"],
+                        'band'         => 66,
+                        'bwClassDl'    => 'A',
+                        'bwClassUl'    => 'A',
+                        'mimoDl'       => ['type' => 'single', 'value' => 4],
+                        'mimoUl'       => ['type' => 'single', 'value' => 1],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
                     ],
                     [
-                        "band" => 66,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
+                        'band'      => 66,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
                     ],
                     [
-                        "band" => 13,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                    ],
-                ],
-                "componentsNr" => [
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "G",
-                        "bwClassUl" => "G",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "mimoUl" => ["type" => "single", "value" => 2],
-                        "modulationUl" => ["type" => "single", "value" => "qam256"],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
+                        'band'      => 13,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
                     ],
                 ],
-                "bcsEutra" => [
-                    "type" => "all",
+                'componentsNr' => [
+                    [
+                        'band'         => 261,
+                        'bwClassDl'    => 'G',
+                        'bwClassUl'    => 'G',
+                        'mimoDl'       => ['type' => 'single', 'value' => 2],
+                        'mimoUl'       => ['type' => 'single', 'value' => 2],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
+                        'maxBw'        => 100,
+                        'maxScs'       => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
                 ],
-                "bcsNr" => [
-                    "type" => "all",
+                'bcsEutra' => [
+                    'type' => 'all',
                 ],
-                "bcsIntraEndc" => [
-                    "type" => "all",
+                'bcsNr' => [
+                    'type' => 'all',
+                ],
+                'bcsIntraEndc' => [
+                    'type' => 'all',
                 ],
             ],
             [
-                "componentsLte" => [
+                'componentsLte' => [
                     [
-                        "band" => 66,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 4],
+                        'band'      => 66,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 4],
                     ],
                     [
-                        "band" => 66,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
+                        'band'      => 66,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
                     ],
                     [
-                        "band" => 13,
-                        "bwClassDl" => "A",
-                        "bwClassUl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "mimoUl" => ["type" => "single", "value" => 1],
-                        "modulationUl" => ["type" => "single", "value" => "qam256"],
-                    ],
-                ],
-                "componentsNr" => [
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "G",
-                        "bwClassUl" => "G",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "mimoUl" => ["type" => "single", "value" => 2],
-                        "modulationUl" => ["type" => "single", "value" => "qam256"],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
-                    ],
-                    [
-                        "band" => 261,
-                        "bwClassDl" => "A",
-                        "mimoDl" => ["type" => "single", "value" => 2],
-                        "maxBw" => 100,
-                        "maxScs" => 120,
+                        'band'         => 13,
+                        'bwClassDl'    => 'A',
+                        'bwClassUl'    => 'A',
+                        'mimoDl'       => ['type' => 'single', 'value' => 2],
+                        'mimoUl'       => ['type' => 'single', 'value' => 1],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
                     ],
                 ],
-                "bcsEutra" => [
-                    "type" => "single",
-                    "value" => 1,
+                'componentsNr' => [
+                    [
+                        'band'         => 261,
+                        'bwClassDl'    => 'G',
+                        'bwClassUl'    => 'G',
+                        'mimoDl'       => ['type' => 'single', 'value' => 2],
+                        'mimoUl'       => ['type' => 'single', 'value' => 2],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
+                        'maxBw'        => 100,
+                        'maxScs'       => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
+                    [
+                        'band'      => 261,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'     => 100,
+                        'maxScs'    => 120,
+                    ],
                 ],
-                "bcsNr" => [
-                    "type" => "multi",
-                    "value" => [1, 2, 3],
+                'bcsEutra' => [
+                    'type'  => 'single',
+                    'value' => 1,
                 ],
-                "bcsIntraEndc" => [
-                    "type" => "empty",
+                'bcsNr' => [
+                    'type'  => 'multi',
+                    'value' => [1, 2, 3],
                 ],
-            ]
-        ]
+                'bcsIntraEndc' => [
+                    'type' => 'empty',
+                ],
+            ],
+        ],
     ];
 
     /**
@@ -656,13 +656,13 @@ class ImportJsonTest extends TestCase
         $this->assertSame(4, $nrComboComponents->count());
 
         $this->assertEqualsCanonicalizing(Arr::except($nrComboComponents->first()->getAttributes(), 'id'), [
-            'band'            => 261,
-            'dl_class'        => 'G',
-            'ul_class'        => 'G',
-            'component_index' => 0,
+            'band'               => 261,
+            'dl_class'           => 'G',
+            'ul_class'           => 'G',
+            'component_index'    => 0,
             'subcarrier_spacing' => 120,
-            'bandwidth' => 100,
-            'supports_90mhz_bw' => null
+            'bandwidth'          => 100,
+            'supports_90mhz_bw'  => null,
         ]);
 
         /** @var NrComponent */

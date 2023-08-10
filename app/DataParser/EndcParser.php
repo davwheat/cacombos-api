@@ -48,7 +48,6 @@ class EndcParser implements DataParser
         $collection = new Collection();
 
         foreach ($this->data as $lteCa) {
-
             $collection->push($this->parseEndcCombo($lteCa));
         }
     }
@@ -66,10 +65,10 @@ class EndcParser implements DataParser
 
         /** @var Combo */
         $comboModel = Combo::firstOrCreate([
-            'combo_string'              => $this->enDcToComboString($allComponents->all()),
-            'capability_set_id'         => $this->capabilitySet->id,
-            'bandwidth_combination_set_eutra' => $bcsEutra,
-            'bandwidth_combination_set_nr' => $bcsNr,
+            'combo_string'                         => $this->enDcToComboString($allComponents->all()),
+            'capability_set_id'                    => $this->capabilitySet->id,
+            'bandwidth_combination_set_eutra'      => $bcsEutra,
+            'bandwidth_combination_set_nr'         => $bcsNr,
             'bandwidth_combination_set_intra_endc' => $bcsIntraEndc,
         ]);
 
@@ -84,7 +83,7 @@ class EndcParser implements DataParser
      */
     protected function getMimosFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->mimoParser->getModelsFromData($component, $isUl ? "mimoUl" : "mimoDl", $isUl);
+        return $this->mimoParser->getModelsFromData($component, $isUl ? 'mimoUl' : 'mimoDl', $isUl);
     }
 
     /**
@@ -92,7 +91,7 @@ class EndcParser implements DataParser
      */
     protected function getModulationsFromComponent(array $component, bool $isUl): Collection
     {
-        return $this->modulationParser->getModelsFromData($component, $isUl ? "modulationUl" : "modulationDl", $isUl);
+        return $this->modulationParser->getModelsFromData($component, $isUl ? 'modulationUl' : 'modulationDl', $isUl);
     }
 
     /**

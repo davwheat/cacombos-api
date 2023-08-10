@@ -40,8 +40,8 @@ class Combo extends Model
      * @var array
      */
     protected $casts = [
-        'bandwidth_combination_set_eutra'     => 'array',
-        'bandwidth_combination_set_nr'        => 'array',
+        'bandwidth_combination_set_eutra'      => 'array',
+        'bandwidth_combination_set_nr'         => 'array',
         'bandwidth_combination_set_intra_endc' => 'array',
     ];
 
