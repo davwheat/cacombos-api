@@ -24,10 +24,11 @@ class ComboStringGenerator
                 return 1;
             }
 
-            return $a->band <=> $b->band;
+            return $b->band <=> $a->band;
         });
 
-        $comboStringComponents = [];
+        $comboStringComponentsLte = [];
+        $comboStringComponentsNr = [];
 
         /**
          * @var LteComponent|NrComponent $component
@@ -56,10 +57,17 @@ class ComboStringGenerator
                 }
             }
 
-            $comboStringComponents[] = $str;
+            if ($component instanceof NrComponent) {
+                $comboStringComponentsNr[] = $str;
+            } else {
+                $comboStringComponentsLte[] = $str;
+            }
         }
 
-        $comboString = implode('-', $comboStringComponents);
+        $comboStringLte = implode('-', $comboStringComponentsLte);
+        $comboStringNr = implode('-', $comboStringComponentsNr);
+
+        $comboString = implode('_', array_filter([$comboStringLte, $comboStringNr]));
 
         return $comboString;
     }

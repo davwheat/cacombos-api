@@ -184,6 +184,141 @@ class ImportJsonTest extends TestCase
         ],
     ];
 
+    protected static $endc_data = [
+        "endc" => [
+            [
+                "componentsLte" => [
+                    [
+                        "band" => 66,
+                        "bwClassDl" => "A",
+                        "bwClassUl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 4],
+                        "mimoUl" => ["type" => "single", "value" => 1],
+                        "modulationUl" => ["type" => "single", "value" => "qam256"],
+                    ],
+                    [
+                        "band" => 66,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                    ],
+                    [
+                        "band" => 13,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                    ],
+                ],
+                "componentsNr" => [
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "G",
+                        "bwClassUl" => "G",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "mimoUl" => ["type" => "single", "value" => 2],
+                        "modulationUl" => ["type" => "single", "value" => "qam256"],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                ],
+                "bcsEutra" => [
+                    "type" => "all",
+                ],
+                "bcsNr" => [
+                    "type" => "all",
+                ],
+                "bcsIntraEndc" => [
+                    "type" => "all",
+                ],
+            ],
+            [
+                "componentsLte" => [
+                    [
+                        "band" => 66,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 4],
+                    ],
+                    [
+                        "band" => 66,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                    ],
+                    [
+                        "band" => 13,
+                        "bwClassDl" => "A",
+                        "bwClassUl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "mimoUl" => ["type" => "single", "value" => 1],
+                        "modulationUl" => ["type" => "single", "value" => "qam256"],
+                    ],
+                ],
+                "componentsNr" => [
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "G",
+                        "bwClassUl" => "G",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "mimoUl" => ["type" => "single", "value" => 2],
+                        "modulationUl" => ["type" => "single", "value" => "qam256"],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                    [
+                        "band" => 261,
+                        "bwClassDl" => "A",
+                        "mimoDl" => ["type" => "single", "value" => 2],
+                        "maxBw" => 100,
+                        "maxScs" => 120,
+                    ],
+                ],
+                "bcsEutra" => [
+                    "type" => "single",
+                    "value" => 1,
+                ],
+                "bcsNr" => [
+                    "type" => "multi",
+                    "value" => [1, 2, 3],
+                ],
+                "bcsIntraEndc" => [
+                    "type" => "empty",
+                ],
+            ]
+        ]
+    ];
+
     /**
      * Cannot parse a log without any data.
      */
@@ -400,7 +535,7 @@ class ImportJsonTest extends TestCase
         $combo = $combos->get(4);
 
         $this->assertArraySubset([
-            'combo_string'      => '1A4A2-3-32A',
+            'combo_string'      => '32A-3-1A4A2',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
         $this->assertSame(null, $combo->bandwidth_combination_set_eutra);
@@ -454,5 +589,100 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame($cc->dl_modulations()->count(), 0);
         $this->assertSame($cc->ul_modulations()->count(), 0);
+    }
+
+    /**
+     * Can import a valid ENDC data JSON output.
+     */
+    public function test_imports_endc_data(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$endc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+        $combos = $testingCapabilitySet->combos;
+
+        $this->assertSame(2, $combos->count());
+
+        // ##############################
+        // Combo 1
+        // ##############################
+
+        /** @var Combo */
+        $combo = $combos->get(0);
+
+        $this->assertArraySubset([
+            'combo_string'      => '66A4A-66A2-13A2_n261G2G2-n261A2-n261A2-n261A2',
+            'capability_set_id' => $testingCapabilitySet->id,
+        ], $combo->getAttributes());
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_eutra);
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_nr);
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_intra_endc);
+
+        // LTE components
+        $lteComboComponents = $combo->lteComponents;
+        $this->assertSame(3, $lteComboComponents->count());
+
+        $this->assertSame(Arr::except($lteComboComponents->first()->getAttributes(), 'id'), [
+            'band'            => 66,
+            'dl_class'        => 'A',
+            'ul_class'        => 'A',
+            'component_index' => 0,
+        ]);
+
+        /** @var LteComponent */
+        $cc = $lteComboComponents->first();
+
+        $this->assertSame($cc->dl_mimos()->count(), 1);
+        $this->assertSame($cc->ul_mimos()->count(), 1);
+
+        $this->assertSame(4, $cc->dl_mimos()->first()->mimo);
+        $this->assertSame(1, $cc->ul_mimos()->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations()->count(), 1);
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+
+        $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
+
+        // NR components
+        $nrComboComponents = $combo->nrComponents;
+        $this->assertSame(4, $nrComboComponents->count());
+
+        $this->assertEqualsCanonicalizing(Arr::except($nrComboComponents->first()->getAttributes(), 'id'), [
+            'band'            => 261,
+            'dl_class'        => 'G',
+            'ul_class'        => 'G',
+            'component_index' => 0,
+            'subcarrier_spacing' => 120,
+            'bandwidth' => 100,
+            'supports_90mhz_bw' => null
+        ]);
+
+        /** @var NrComponent */
+        $cc = $nrComboComponents->first();
+
+        $this->assertSame($cc->dl_mimos()->count(), 1);
+        $this->assertSame($cc->ul_mimos()->count(), 1);
+
+        $this->assertSame(2, $cc->dl_mimos()->first()->mimo);
+        $this->assertSame(2, $cc->ul_mimos()->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations()->count(), 1);
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+
+        $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
+
+        // ##############################
+        // Combo 2
+        // ##############################
+
+        // ...
     }
 }

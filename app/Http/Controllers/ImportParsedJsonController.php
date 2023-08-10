@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataParser\EndcParser;
 use App\DataParser\LteCaParser;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
@@ -124,13 +125,9 @@ class ImportParsedJsonController extends JsonController
         $this->parseEutraDataToModels($jsonData);
         clock()->event('Parsing EUTRA data')->end();
 
-        // clock()->event('Parsing EUTRA-NR CSV')->begin();
-        // $this->parseEutraNrCsvToModels($jsonData);
-        // clock()->event('Parsing EUTRA-NR CSV')->end();
-
-        // clock()->event('Parsing NR CSV')->begin();
-        // $this->parseNrCsvToModels($jsonData);
-        // clock()->event('Parsing NR CSV')->end();
+        clock()->event('Parsing NR NSA data')->begin();
+        $this->parseEndcDataToModels($jsonData);
+        clock()->event('Parsing NR NSA data')->end();
     }
 
     protected function parseEutraDataToModels(array $jsonData): void
@@ -144,6 +141,20 @@ class ImportParsedJsonController extends JsonController
             $lteCaParser->parseAndInsertAllModels();
 
             clock()->event('Parsing LTE CA data')->end();
+        }
+    }
+
+    protected function parseEndcDataToModels(array $jsonData): void
+    {
+        $endcData = Arr::get($jsonData, 'endc');
+
+        if (!empty($endcData)) {
+            clock()->event('Parsing ENDC data')->begin();
+
+            $endcParser = new EnDcParser($endcData, $this->capabilitySet);
+            $endcParser->parseAndInsertAllModels();
+
+            clock()->event('Parsing ENDC data')->end();
         }
     }
 }
