@@ -40,9 +40,6 @@ jobs:
           sed -i 's/WWWUSER=1000/WWWUSER=1001/g' .env
           sed -i 's/WWWGROUP=1000/WWWGROUP=1001/g' .env
 
-          # Use root MySQL user - fixes parallel testing
-          sed -i 's/DB_USERNAME=sail/DB_USERNAME=root/g' .env
-
           # Generate application key
           php artisan key:generate
 
@@ -62,7 +59,7 @@ jobs:
 
       - name: Run PHPUnit tests
         # This automatically seeds the DB
-        run: ./vendor/bin/sail artisan test --parallel --coverage --coverage-clover coverage.xml
+        run: ./vendor/bin/sail artisan test --coverage --coverage-clover coverage.xml
         env:
           XDEBUG_MODE: coverage
 
