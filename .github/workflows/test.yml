@@ -51,6 +51,7 @@ jobs:
 
       - name: Start Laravel Sail
         run: |
+          ./vendor/bin/sail pull
           ./vendor/bin/sail up -d
 
       - name: Run database migrations
