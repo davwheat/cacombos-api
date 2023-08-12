@@ -632,7 +632,10 @@ class ImportJsonTest extends TestCase
         $nrComboComponents = $combo->nrComponents;
         $this->assertSame(3, $nrComboComponents->count());
 
-        $this->assertEqualsCanonicalizing(Arr::except($nrComboComponents->first()->getAttributes(), 'id'), [
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(0);
+
+        $this->assertEqualsCanonicalizing(Arr::except($cc->getAttributes(), 'id'), [
             'band'               => 261,
             'dl_class'           => 'G',
             'ul_class'           => 'G',
@@ -641,9 +644,6 @@ class ImportJsonTest extends TestCase
             'bandwidth'          => 100,
             'supports_90mhz_bw'  => null,
         ]);
-
-        /** @var NrComponent */
-        $cc = $nrComboComponents->first();
 
         $this->assertSame($cc->dl_mimos()->count(), 1);
         $this->assertSame($cc->ul_mimos()->count(), 1);
@@ -656,9 +656,38 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
 
-        $this->assertSame($cc->supports_90mhz_bw, null);
-        $this->assertSame($cc->bandwidth, 100);
-        $this->assertSame($cc->subcarrier_spacing, 120);
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(2);
+
+        $this->assertArraySubset(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 261,
+            'dl_class'           => null,
+            'ul_class'           => null,
+            'component_index'    => 2,
+            'subcarrier_spacing' => null,
+            'bandwidth'          => null,
+            'supports_90mhz_bw'  => true,
+        ]);
+
+        $this->assertSame($cc->dl_mimos()->count(), 2);
+        $this->assertSame($cc->ul_mimos()->count(), 0);
+
+        $dl_mimos = $cc->dl_mimos()->get()->pluck('mimo')->toArray();
+        $this->assertEqualsCanonicalizing([2, 4], $dl_mimos);
+
+        $this->assertSame($cc->ul_modulations()->count(), 0);
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+
+        $this->assertSame($cc->supports_90mhz_bw, true);
+        $this->assertSame($cc->max_bandwidth, null);
+        $this->assertSame($cc->subcarrier_spacing, null);
+
+        // ##############################
+        // Combo 2
+        // ##############################
+
+        // ...
+    }
 
         /** @var NrComponent */
         $cc = $nrComboComponents->last();
