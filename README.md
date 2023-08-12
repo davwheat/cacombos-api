@@ -1,5 +1,7 @@
 # mobilecombos.com backend API
 
+[![codecov](https://codecov.io/gh/mobilecombos/backend-api/branch/master/graph/badge.svg?token=iQubs8aOkQ)](https://codecov.io/gh/mobilecombos/backend-api)
+
 This is the backend API for mobilecombos.com. This works in unison with the [standalone frontend](https://github.com/mobilecombos/website-frontend) to fully implement the website's features.
 
 ## Local development
