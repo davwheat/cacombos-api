@@ -32,6 +32,17 @@ class NrBand extends Model
         'max_uplink_duty_cycle',
     ];
 
+    public function getFrequencyRange(): FrequencyRange
+    {
+        if ($this->band > 256) {
+            return FrequencyRange::FR2;
+        } else if ($this->band >= 255) {
+            return FrequencyRange::NonTerrestrial;
+        }
+
+        return FrequencyRange::FR1;
+    }
+
     public function ulMimo()
     {
         return $this->hasOne(Mimo::class, 'ul_mimo_id');
@@ -56,4 +67,12 @@ class NrBand extends Model
     {
         return $this->belongsToMany(NrBandwidths::class, 'nr_bands_nr_bandwidths', 'nr_band_id', 'bandwidth_id');
     }
+}
+
+enum FrequencyRange
+{
+    case FR1;
+    case FR2;
+    /** Unused */
+    case NonTerrestrial;
 }
