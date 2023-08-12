@@ -39,7 +39,7 @@ class ComboStringGenerator
 
             if (isset($component->dl_class)) {
                 $str .= $component->dl_class;
-            } else if ($component->dl_mimos()->exists()) {
+            } elseif ($component->dl_mimos()->exists()) {
                 $str .= 'X';
             }
 
@@ -49,7 +49,7 @@ class ComboStringGenerator
 
             if (isset($component->ul_class)) {
                 $str .= $component->ul_class;
-            } else if ($component->ul_mimos()->exists()) {
+            } elseif ($component->ul_mimos()->exists()) {
                 $str .= 'X';
             }
 

@@ -11,8 +11,6 @@ use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
-use App\Models\Mimo;
-use App\Models\Modulation;
 use App\Models\NrComponent;
 use Illuminate\Database\Eloquent\Collection;
 

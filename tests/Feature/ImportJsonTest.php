@@ -226,8 +226,8 @@ class ImportJsonTest extends TestCase
                         'maxScs'    => 120,
                     ],
                     [
-                        'band'      => 261,
-                        'mimoDl'    => ['type' => 'mixed', 'value' => [2, 4]],
+                        'band'             => 261,
+                        'mimoDl'           => ['type' => 'mixed', 'value' => [2, 4]],
                         'bw90mhzSupported' => true,
                     ],
                 ],
@@ -679,7 +679,7 @@ class ImportJsonTest extends TestCase
         // ##############################
         // Combo 2
         // ##############################
-        
+
         // ...
     }
 }
