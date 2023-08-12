@@ -36,8 +36,6 @@ class NrBand extends Model
     {
         if ($this->band > 256) {
             return FrequencyRange::FR2;
-        } elseif ($this->band >= 255) {
-            return FrequencyRange::NonTerrestrial;
         }
 
         return FrequencyRange::FR1;
@@ -73,6 +71,4 @@ enum FrequencyRange
 {
     case FR1;
     case FR2;
-    /** Unused */
-    case NonTerrestrial;
 }
