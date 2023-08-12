@@ -31,6 +31,10 @@ class NrComponent extends Model
         'component_index',
     ];
 
+    protected $casts = [
+        'supports_90mhz_bw' => 'boolean',
+    ];
+
     public function modulations()
     {
         return $this->belongsToMany(Modulation::class, 'components_modulations');
