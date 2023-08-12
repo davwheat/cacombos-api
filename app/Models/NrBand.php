@@ -36,7 +36,7 @@ class NrBand extends Model
     {
         if ($this->band > 256) {
             return FrequencyRange::FR2;
-        } else if ($this->band >= 255) {
+        } elseif ($this->band >= 255) {
             return FrequencyRange::NonTerrestrial;
         }
 
