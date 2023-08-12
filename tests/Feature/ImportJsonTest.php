@@ -227,17 +227,8 @@ class ImportJsonTest extends TestCase
                     ],
                     [
                         'band'      => 261,
-                        'bwClassDl' => 'A',
-                        'mimoDl'    => ['type' => 'single', 'value' => 2],
-                        'maxBw'     => 100,
-                        'maxScs'    => 120,
-                    ],
-                    [
-                        'band'      => 261,
-                        'bwClassDl' => 'A',
-                        'mimoDl'    => ['type' => 'single', 'value' => 2],
-                        'maxBw'     => 100,
-                        'maxScs'    => 120,
+                        'mimoDl'    => ['type' => 'mixed', 'value' => [2, 4]],
+                        'bw90mhzSupported' => true,
                     ],
                 ],
                 'bcsEutra' => [
@@ -281,20 +272,6 @@ class ImportJsonTest extends TestCase
                         'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
                         'maxBw'        => 100,
                         'maxScs'       => 120,
-                    ],
-                    [
-                        'band'      => 261,
-                        'bwClassDl' => 'A',
-                        'mimoDl'    => ['type' => 'single', 'value' => 2],
-                        'maxBw'     => 100,
-                        'maxScs'    => 120,
-                    ],
-                    [
-                        'band'      => 261,
-                        'bwClassDl' => 'A',
-                        'mimoDl'    => ['type' => 'single', 'value' => 2],
-                        'maxBw'     => 100,
-                        'maxScs'    => 120,
                     ],
                     [
                         'band'      => 261,
@@ -619,7 +596,7 @@ class ImportJsonTest extends TestCase
         $combo = $combos->get(0);
 
         $this->assertArraySubset([
-            'combo_string'      => '66A4A-66A2-13A2_n261G2G2-n261A2-n261A2-n261A2',
+            'combo_string'      => '66A4A-66A2-13A2_n261G2G2-n261A2-n261X4',
             'capability_set_id' => $testingCapabilitySet->id,
         ], $combo->getAttributes());
         $this->assertSame(['all'], $combo->bandwidth_combination_set_eutra);
@@ -653,7 +630,7 @@ class ImportJsonTest extends TestCase
 
         // NR components
         $nrComboComponents = $combo->nrComponents;
-        $this->assertSame(4, $nrComboComponents->count());
+        $this->assertSame(3, $nrComboComponents->count());
 
         $this->assertEqualsCanonicalizing(Arr::except($nrComboComponents->first()->getAttributes(), 'id'), [
             'band'               => 261,
@@ -679,10 +656,30 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
 
+        $this->assertSame($cc->supports_90mhz_bw, null);
+        $this->assertSame($cc->bandwidth, 100);
+        $this->assertSame($cc->subcarrier_spacing, 120);
+
+        /** @var NrComponent */
+        $cc = $nrComboComponents->last();
+
+        $this->assertSame($cc->dl_mimos()->count(), 2);
+        $this->assertSame($cc->ul_mimos()->count(), 0);
+
+        $dl_mimos = $cc->dl_mimos()->get()->pluck('mimo')->toArray();
+        $this->assertEqualsCanonicalizing([2, 4], $dl_mimos);
+
+        $this->assertSame($cc->ul_modulations()->count(), 0);
+        $this->assertSame($cc->dl_modulations()->count(), 0);
+
+        $this->assertSame($cc->supports_90mhz_bw, true);
+        $this->assertSame($cc->max_bandwidth, null);
+        $this->assertSame($cc->subcarrier_spacing, null);
+
         // ##############################
         // Combo 2
         // ##############################
-
+        
         // ...
     }
 }
