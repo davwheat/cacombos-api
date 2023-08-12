@@ -168,12 +168,12 @@ class ImportParsedJsonController extends JsonController
         $nrcaData = Arr::get($jsonData, 'nrca');
 
         if (!empty($nrcaData)) {
-            clock()->event("Parsing ENDC data")->begin();
+            clock()->event('Parsing ENDC data')->begin();
 
             $nrcaParser = new NrCaParser($nrcaData, $this->capabilitySet);
             $nrcaParser->parseAndInsertAllModels();
 
-            clock()->event("Parsing ENDC data")->end();
+            clock()->event('Parsing ENDC data')->end();
         }
     }
 }
