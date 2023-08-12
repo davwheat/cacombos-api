@@ -39,6 +39,8 @@ class ComboStringGenerator
 
             if (isset($component->dl_class)) {
                 $str .= $component->dl_class;
+            } else if ($component->dl_mimos()->exists()) {
+                $str .= 'X';
             }
 
             if ($component->dl_mimos()->count() > 0) {
@@ -47,6 +49,8 @@ class ComboStringGenerator
 
             if (isset($component->ul_class)) {
                 $str .= $component->ul_class;
+            } else if ($component->ul_mimos()->exists()) {
+                $str .= 'X';
             }
 
             if ($component->ul_mimos()->count() > 0) {
