@@ -296,6 +296,61 @@ class ImportJsonTest extends TestCase
         ],
     ];
 
+    protected static $nrca_data = [
+        'nrca' => [
+            [
+                'componentsNr' => [
+                    [
+                        'band'         => 78,
+                        'bwClassDl'    => 'A',
+                        'bwClassUl'    => 'A',
+                        'mimoDl'       => ['type' => 'single', 'value' => 4],
+                        'mimoUl'       => ['type' => 'single', 'value' => 1],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
+                        'modulationDl' => ['type' => 'single', 'value' => 'qam1024'],
+                        'maxBw'        => 100,
+                        'maxScs'       => 60,
+                        'bw90mhzSupported' => true,
+                    ],
+                    [
+                        'band'      => 78,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'mixed', 'value' => [4, 2]],
+                        'bw90mhzSupported' => true,
+                    ],
+                    [
+                        'band'      => 28,
+                        'bwClassDl' => 'A',
+                        'mimoDl'    => ['type' => 'single', 'value' => 2],
+                        'maxBw'        => 40,
+                        'maxScs'       => 30,
+                    ],
+                ],
+                'bcs' => [
+                    'type' => 'all',
+                ],
+            ],
+            [
+                'componentsNr' => [
+                    [
+                        'band'         => 78,
+                        'bwClassDl'    => 'A',
+                        'bwClassUl'    => 'A',
+                        'mimoDl'       => ['type' => 'single', 'value' => 4],
+                        'mimoUl'       => ['type' => 'single', 'value' => 1],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
+                        'maxBw'        => 100,
+                        'maxScs'       => 60,
+                        'bw90mhzSupported' => false,
+                    ],
+                ],
+                'bcs' => [
+                    'type' => 'empty',
+                ],
+            ],
+        ],
+    ];
+
     /**
      * Cannot parse a log without any data.
      */
@@ -689,8 +744,80 @@ class ImportJsonTest extends TestCase
         // ...
     }
 
+    /**
+     * Can import a valid NR CA data JSON output.
+     */
+    public function test_imports_nrca_data(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nrca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+        $combos = $testingCapabilitySet->combos;
+
+        $this->assertSame(2, $combos->count());
+
+        // ##############################
+        // Combo 1
+        // ##############################
+
+        /** @var Combo */
+        $combo = $combos->get(0);
+
+        $this->assertArraySubset([
+            'combo_string'      => 'n78A4A-n78A4-n28A2',
+            'capability_set_id' => $testingCapabilitySet->id,
+        ], $combo->getAttributes());
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_nr);
+
+        // NR components
+        $nrComboComponents = $combo->nrComponents;
+        $this->assertSame(3, $nrComboComponents->count());
+
         /** @var NrComponent */
-        $cc = $nrComboComponents->last();
+        $cc = $nrComboComponents->get(0);
+
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 78,
+            'dl_class'           => 'A',
+            'ul_class'           => 'A',
+            'bandwidth'          => 100,
+            'subcarrier_spacing' => 60,
+            'component_index'    => 0,
+            'supports_90mhz_bw'  => 1,
+        ]);
+
+        $this->assertSame($cc->dl_mimos()->count(), 1);
+        $this->assertSame($cc->ul_mimos()->count(), 1);
+
+        $this->assertSame(4, $cc->dl_mimos()->first()->mimo);
+        $this->assertSame(1, $cc->ul_mimos()->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations()->count(), 1);
+        $this->assertSame($cc->dl_modulations()->count(), 1);
+
+        $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
+        $this->assertSame('qam1024', $cc->dl_modulations()->first()->modulation);
+
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(1);
+
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 78,
+            'dl_class'           => 'A',
+            'ul_class'           => null,
+            'bandwidth'          => null,
+            'subcarrier_spacing' => null,
+            'component_index'    => 1,
+            'supports_90mhz_bw'  => 1,
+        ]);
 
         $this->assertSame($cc->dl_mimos()->count(), 2);
         $this->assertSame($cc->ul_mimos()->count(), 0);
@@ -701,9 +828,26 @@ class ImportJsonTest extends TestCase
         $this->assertSame($cc->ul_modulations()->count(), 0);
         $this->assertSame($cc->dl_modulations()->count(), 0);
 
-        $this->assertSame($cc->supports_90mhz_bw, true);
-        $this->assertSame($cc->max_bandwidth, null);
-        $this->assertSame($cc->subcarrier_spacing, null);
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(2);
+
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 28,
+            'dl_class'           => 'A',
+            'ul_class'           => null,
+            'bandwidth'          => 40,
+            'subcarrier_spacing' => 30,
+            'component_index'    => 2,
+            'supports_90mhz_bw'  => null,
+        ]);
+
+        $this->assertSame($cc->dl_mimos()->count(), 1);
+        $this->assertSame($cc->ul_mimos()->count(), 0);
+
+        $this->assertSame(2, $cc->dl_mimos()->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations()->count(), 0);
+        $this->assertSame($cc->dl_modulations()->count(), 0);
 
         // ##############################
         // Combo 2

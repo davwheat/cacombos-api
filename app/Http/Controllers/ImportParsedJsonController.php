@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataParser\EndcParser;
 use App\DataParser\LteCaParser;
+use App\DataParser\NrCaParser;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\Device;
@@ -128,6 +129,10 @@ class ImportParsedJsonController extends JsonController
         clock()->event('Parsing NR NSA data')->begin();
         $this->parseEndcDataToModels($jsonData);
         clock()->event('Parsing NR NSA data')->end();
+
+        clock()->event('Parsing NR CA data')->begin();
+        $this->parseNrcaDataToModels($jsonData);
+        clock()->event('Parsing NR CA data')->end();
     }
 
     protected function parseEutraDataToModels(array $jsonData): void
@@ -151,10 +156,24 @@ class ImportParsedJsonController extends JsonController
         if (!empty($endcData)) {
             clock()->event('Parsing ENDC data')->begin();
 
-            $endcParser = new EnDcParser($endcData, $this->capabilitySet);
+            $endcParser = new EndcParser($endcData, $this->capabilitySet);
             $endcParser->parseAndInsertAllModels();
 
             clock()->event('Parsing ENDC data')->end();
+        }
+    }
+
+    protected function parseNrcaDataToModels(array $jsonData): void
+    {
+        $nrcaData = Arr::get($jsonData, 'nrca');
+
+        if (!empty($nrcaData)) {
+            clock()->event("Parsing ENDC data")->begin();
+
+            $nrcaParser = new NrCaParser($nrcaData, $this->capabilitySet);
+            $nrcaParser->parseAndInsertAllModels();
+
+            clock()->event("Parsing ENDC data")->end();
         }
     }
 }
