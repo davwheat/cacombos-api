@@ -635,13 +635,13 @@ class ImportJsonTest extends TestCase
         /** @var NrComponent */
         $cc = $nrComboComponents->get(0);
 
-        $this->assertEqualsCanonicalizing(Arr::except($cc->getAttributes(), 'id'), [
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
             'band'               => 261,
             'dl_class'           => 'G',
             'ul_class'           => 'G',
-            'component_index'    => 0,
-            'subcarrier_spacing' => 120,
             'bandwidth'          => 100,
+            'subcarrier_spacing' => 120,
+            'component_index'    => 0,
             'supports_90mhz_bw'  => null,
         ]);
 
@@ -659,14 +659,14 @@ class ImportJsonTest extends TestCase
         /** @var NrComponent */
         $cc = $nrComboComponents->get(2);
 
-        $this->assertArraySubset(Arr::except($cc->getAttributes(), 'id'), [
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
             'band'               => 261,
             'dl_class'           => null,
             'ul_class'           => null,
-            'component_index'    => 2,
-            'subcarrier_spacing' => null,
             'bandwidth'          => null,
-            'supports_90mhz_bw'  => true,
+            'subcarrier_spacing' => null,
+            'component_index'    => 2,
+            'supports_90mhz_bw'  => 1,
         ]);
 
         $this->assertSame($cc->dl_mimos()->count(), 2);
