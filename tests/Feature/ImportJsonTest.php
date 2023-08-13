@@ -437,7 +437,7 @@ class ImportJsonTest extends TestCase
             'jsonData' => json_encode([
                 'lteCategoryDl' => 14,
                 'lteCategoryUl' => 2,
-            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id
+            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id,
         ], ImportJsonTest::$auth);
 
         $response->assertStatus(200);
@@ -463,7 +463,7 @@ class ImportJsonTest extends TestCase
             'jsonData' => json_encode([
                 // Placeholder data
                 'lteca' => [],
-            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id
+            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id,
         ], ImportJsonTest::$auth);
 
         $response->assertStatus(200);
@@ -474,7 +474,6 @@ class ImportJsonTest extends TestCase
         $this->assertSame($testingCapabilitySet->lte_category_dl, null);
         $this->assertSame($testingCapabilitySet->lte_category_ul, null);
     }
-
 
     /**
      * Can import a valid lte ca data JSON output.
