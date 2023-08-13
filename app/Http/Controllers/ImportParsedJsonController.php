@@ -123,6 +123,10 @@ class ImportParsedJsonController extends JsonController
 
     protected function parseJsonToModels(array $jsonData): void
     {
+        $this->capabilitySet->lte_category_dl = Arr::get($jsonData, 'lteCategoryDl', null);
+        $this->capabilitySet->lte_category_ul = Arr::get($jsonData, 'lteCategoryUl', null);
+        $this->capabilitySet->save();
+
         clock()->event('Parsing EUTRA data')->begin();
         $this->parseEutraDataToModels($jsonData);
         clock()->event('Parsing EUTRA data')->end();

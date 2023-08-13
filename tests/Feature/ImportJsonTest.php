@@ -424,6 +424,59 @@ class ImportJsonTest extends TestCase
     }
 
     /**
+     * Can import a LTE categories from JSON output.
+     */
+    public function test_imports_lte_category(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', [
+            'jsonData' => json_encode([
+                'lteCategoryDl' => 14,
+                'lteCategoryUl' => 2,
+            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id
+        ], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+
+        $this->assertSame($testingCapabilitySet->lte_category_dl, 14);
+        $this->assertSame($testingCapabilitySet->lte_category_ul, 2);
+    }
+
+    /**
+     * Can import a LTE categories from JSON output.
+     */
+    public function test_imports_blank_lte_category(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', [
+            'jsonData' => json_encode([
+                // Placeholder data
+                'lteca' => [],
+            ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id
+        ], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+
+        $this->assertSame($testingCapabilitySet->lte_category_dl, null);
+        $this->assertSame($testingCapabilitySet->lte_category_ul, null);
+    }
+
+
+    /**
      * Can import a valid lte ca data JSON output.
      */
     public function test_imports_lte_ca_data(): void

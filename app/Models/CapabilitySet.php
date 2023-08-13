@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                     $uuid
  * @property string                     $description
  * @property ?string                    $plmn
+ * @property ?int                       $lte_category_dl
+ * @property ?int                       $lte_category_ul
  * @property DeviceFirmware             $deviceFirmware
  * @property Collection<Combo>          $combos
  * @property \Illuminate\Support\Carbon $created_at
