@@ -892,7 +892,6 @@ class ImportJsonTest extends TestCase
         // ...
     }
 
-
     /**
      * Can import a valid NR-DC data JSON output.
      */
