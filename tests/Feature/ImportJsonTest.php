@@ -351,6 +351,42 @@ class ImportJsonTest extends TestCase
         ],
     ];
 
+    protected static $nrdc_data = [
+        'nrdc' => [
+            [
+                'componentsFr1' => [
+                    [
+                        'band'             => 78,
+                        'bwClassDl'        => 'A',
+                        'bwClassUl'        => 'A',
+                        'mimoDl'           => ['type' => 'single', 'value' => 4],
+                        'mimoUl'           => ['type' => 'single', 'value' => 2],
+                        'modulationUl'     => ['type' => 'single', 'value' => 'qam256'],
+                        'modulationDl'     => ['type' => 'single', 'value' => 'qam256'],
+                        'maxBw'            => 100,
+                        'maxScs'           => 60,
+                        'bw90mhzSupported' => true,
+                    ],
+                ],
+                'componentsFr2' => [
+                    [
+                        'band'         => 261,
+                        'bwClassDl'    => 'G',
+                        'bwClassUl'    => 'G',
+                        'mimoDl'       => ['type' => 'single', 'value' => 2],
+                        'mimoUl'       => ['type' => 'single', 'value' => 1],
+                        'modulationUl' => ['type' => 'single', 'value' => 'qam256'],
+                        'maxBw'        => 400,
+                        'maxScs'       => 120,
+                    ],
+                ],
+                'bcs' => [
+                    'type' => 'all',
+                ],
+            ],
+        ],
+    ];
+
     /**
      * Cannot parse a log without any data.
      */
@@ -848,6 +884,100 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame($cc->ul_modulations()->count(), 0);
         $this->assertSame($cc->dl_modulations()->count(), 0);
+
+        // ##############################
+        // Combo 2
+        // ##############################
+
+        // ...
+    }
+
+
+    /**
+     * Can import a valid NR-DC data JSON output.
+     */
+    public function test_imports_nrdc_data(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nrdc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+        $combos = $testingCapabilitySet->combos;
+
+        $this->assertSame(1, $combos->count());
+
+        // ##############################
+        // Combo 1
+        // ##############################
+
+        /** @var Combo */
+        $combo = $combos->get(0);
+
+        $this->assertArraySubset([
+            'combo_string'      => 'n261G2G-n78A4A2',
+            'capability_set_id' => $testingCapabilitySet->id,
+        ], $combo->getAttributes());
+        $this->assertSame(['all'], $combo->bandwidth_combination_set_nr);
+
+        // NR components
+        $nrComboComponents = $combo->nrComponents;
+        $this->assertSame(2, $nrComboComponents->count());
+
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(0);
+
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 78,
+            'dl_class'           => 'A',
+            'ul_class'           => 'A',
+            'bandwidth'          => 100,
+            'subcarrier_spacing' => 60,
+            'component_index'    => 0,
+            'supports_90mhz_bw'  => 1,
+        ]);
+
+        $this->assertSame($cc->dl_mimos->count(), 1);
+        $this->assertSame($cc->ul_mimos->count(), 1);
+
+        $this->assertSame(4, $cc->dl_mimos->first()->mimo);
+        $this->assertSame(2, $cc->ul_mimos->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations->count(), 1);
+        $this->assertSame($cc->dl_modulations->count(), 1);
+
+        $this->assertSame('qam256', $cc->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $cc->dl_modulations->first()->modulation);
+
+        /** @var NrComponent */
+        $cc = $nrComboComponents->get(1);
+
+        $this->assertSame(Arr::except($cc->getAttributes(), 'id'), [
+            'band'               => 261,
+            'dl_class'           => 'G',
+            'ul_class'           => 'G',
+            'bandwidth'          => 400,
+            'subcarrier_spacing' => 120,
+            'component_index'    => 1,
+            'supports_90mhz_bw'  => null,
+        ]);
+
+        $this->assertSame($cc->dl_mimos->count(), 1);
+        $this->assertSame($cc->ul_mimos->count(), 1);
+
+        $this->assertSame(2, $cc->dl_mimos->first()->mimo);
+        $this->assertSame(1, $cc->ul_mimos->first()->mimo);
+
+        $this->assertSame($cc->ul_modulations->count(), 1);
+        $this->assertSame($cc->dl_modulations->count(), 0);
+
+        $this->assertSame('qam256', $cc->ul_modulations->first()->modulation);
 
         // ##############################
         // Combo 2
