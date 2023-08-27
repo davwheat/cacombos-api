@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataParser\EndcParser;
 use App\DataParser\LteCaParser;
+use App\DataParser\LteSupportedBandsParser;
 use App\DataParser\NrCaParser;
 use App\DataParser\NrDcParser;
 use App\Models\CapabilitySet;
@@ -142,6 +143,10 @@ class ImportParsedJsonController extends JsonController
         clock()->event('Parsing NR DC data')->begin();
         $this->parseNrDcDataToModels($jsonData);
         clock()->event('Parsing NR DC data')->end();
+
+        clock()->event('Parsing supported LTE bands')->begin();
+        $this->parseSupportedLteBandsToModels($jsonData);
+        clock()->event('Parsing supported LTE bands')->end();
     }
 
     protected function parseEutraDataToModels(array $jsonData): void
@@ -197,6 +202,20 @@ class ImportParsedJsonController extends JsonController
             $nrcaParser->parseAndInsertAllModels();
 
             clock()->event('Parsing NRDC data')->end();
+        }
+    }
+
+    protected function parseSupportedLteBandsToModels(array $jsonData): void
+    {
+        $supportedBandsData = Arr::get($jsonData, 'lteBands');
+
+        if (!empty($supportedBandsData)) {
+            clock()->event('Parsing supported LTE bands data')->begin();
+
+            $supportedBandsParser = new LteSupportedBandsParser($supportedBandsData, $this->capabilitySet);
+            $supportedBandsParser->parseAndInsertAllModels();
+
+            clock()->event('Parsing supported LTE bands data')->end();
         }
     }
 }
