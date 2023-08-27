@@ -25,6 +25,7 @@ class SupportedLteBand extends Model
     public $fillable = [
         'band',
         'power_class',
+        'capability_set_id',
     ];
 
     public function capabilitySet()

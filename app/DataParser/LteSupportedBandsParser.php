@@ -48,6 +48,7 @@ class LteSupportedBandsParser implements DataParser
         $model = SupportedLteBand::firstOrCreate([
             'band'                    => Arr::get($band, 'band'),
             'power_class'             => Arr::get($band, 'powerClass'),
+            'capability_set_id'       => $this->capabilitySet->id,
         ]);
 
         $model->mimos()->saveMany($this->getMimoModels($band));
