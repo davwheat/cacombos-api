@@ -23,7 +23,7 @@ class CapabilitySet extends Model
 
     public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->deviceFirmware()->get()->first()->device();
+        return $this->deviceFirmware()->first()->device();
     }
 
     public function deviceFirmware(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -34,5 +34,10 @@ class CapabilitySet extends Model
     public function combos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Combo::class);
+    }
+
+    public function supportedLteBands(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SupportedLteBand::class);
     }
 }
