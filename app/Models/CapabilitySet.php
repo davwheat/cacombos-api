@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?int                       $lte_category_ul
  * @property DeviceFirmware             $deviceFirmware
  * @property Collection<Combo>          $combos
+ * @property Collection<SupportedLteBand> $supportedLteBands
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
