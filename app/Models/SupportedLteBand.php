@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int                        $id
- * @property int                        $band
- * @property string|null                $power_class
- * @property CapabilitySet              $capabilitySet
- * @property Collection<Modulation>     $modulations
- * @property Collection<Modulation>     $dl_modulations
- * @property Collection<Modulation>     $ul_modulations
- * @property Collection<Mimo>           $mimos
- * @property Collection<Mimo>           $dl_mimos
- * @property Collection<Mimo>           $ul_mimos
+ * @property int                    $id
+ * @property int                    $band
+ * @property string|null            $power_class
+ * @property CapabilitySet          $capabilitySet
+ * @property Collection<Modulation> $modulations
+ * @property Collection<Modulation> $dl_modulations
+ * @property Collection<Modulation> $ul_modulations
+ * @property Collection<Mimo>       $mimos
+ * @property Collection<Mimo>       $dl_mimos
+ * @property Collection<Mimo>       $ul_mimos
  */
 class SupportedLteBand extends Model
 {
