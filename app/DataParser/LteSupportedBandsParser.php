@@ -10,7 +10,9 @@ use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
+use App\Models\SupportedLteBand;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class LteSupportedBandsParser implements DataParser
 {
@@ -19,64 +21,54 @@ class LteSupportedBandsParser implements DataParser
 
     protected MimoParser $mimoParser;
     protected ModulationParser $modulationParser;
-    protected BcsParser $bcsParser;
-    protected ComponentLteParser $componentLteParser;
 
-    protected ComboStringGenerator $comboStringGenerator;
-
-    public function __construct(array $lteCaData, CapabilitySet $capabilitySet)
+    public function __construct(array $supportedBandsData, CapabilitySet $capabilitySet)
     {
-        $this->data = $lteCaData;
+        $this->data = $supportedBandsData;
         $this->capabilitySet = $capabilitySet;
 
         $this->mimoParser = new MimoParser();
         $this->modulationParser = new ModulationParser();
-        $this->bcsParser = new BcsParser();
-        $this->componentLteParser = new ComponentLteParser();
-
-        $this->comboStringGenerator = new ComboStringGenerator();
     }
 
     public function parseAndInsertAllModels(): void
     {
         $collection = new Collection();
 
-        foreach ($this->data as $lteCa) {
-            $collection->push($this->parseLteCaCombo($lteCa));
+        foreach ($this->data as $band) {
+            $collection->push($this->parseSupportedLteBand($band));
         }
+
+        $this->capabilitySet->supportedLteBands()->saveMany($collection);
     }
 
-    protected function parseLteCaCombo(array $comboData): Combo
+    protected function parseSupportedLteBand(array $band): SupportedLteBand
     {
-        $lteComponents = $this->getComponentLteModels($comboData);
-
-        /** @var Combo */
-        $comboModel = Combo::firstOrCreate([
-            'combo_string'                    => $this->lteCaToComboString($lteComponents->all()),
-            'capability_set_id'               => $this->capabilitySet->id,
-            'bandwidth_combination_set_eutra' => $this->getBcs($comboData),
+        /** @var SupportedLteBand */
+        $model = SupportedLteBand::firstOrCreate([
+            'band'                    => Arr::get($band, 'band'),
+            'power_class'             => Arr::get($band, 'powerClass'),
         ]);
 
-        $comboModel->lteComponents()->saveMany($lteComponents);
+        $model->mimos()->saveMany($this->getMimoModels($band));
+        $model->modulations()->saveMany($this->getModulationModels($band));
 
-        return $comboModel;
+        return $model;
     }
 
-    protected function getBcs(array $combo): ?array
+    protected function getMimoModels(array $band): Collection
     {
-        return $this->bcsParser->getBcsFromData($combo, 'bcs');
+        $mimoDl = $this->mimoParser->getModelsFromData($band, 'mimoDl', false);
+        $mimoUl = $this->mimoParser->getModelsFromData($band, 'mimoUl', true);
+
+        return $mimoDl->merge($mimoUl);
     }
 
-    /**
-     * @return Collection<LteComponent>
-     */
-    protected function getComponentLteModels(array $combo): Collection
+    protected function getModulationModels(array $band): Collection
     {
-        return $this->componentLteParser->getModelsFromData($combo, 'components');
-    }
+        $modDl = $this->modulationParser->getModelsFromData($band, 'modulationDl', false);
+        $modUl = $this->modulationParser->getModelsFromData($band, 'modulationUl', true);
 
-    protected function lteCaToComboString(array $components): string
-    {
-        return $this->comboStringGenerator->getComboStringFromComponents($components);
+        return $modDl->merge($modUl);
     }
 }
