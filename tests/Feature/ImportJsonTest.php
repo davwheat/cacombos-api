@@ -391,7 +391,7 @@ class ImportJsonTest extends TestCase
     protected static $lte_bands = [
         'lteBands' => [
             [
-                'band' => 20,
+                'band'      => 20,
                 'mimoDl'    => [
                     'type'  => 'single',
                     'value' => 4,
@@ -411,7 +411,7 @@ class ImportJsonTest extends TestCase
                 'powerClass' => 'none',
             ],
             [
-                'band' => 41,
+                'band'      => 41,
                 'mimoDl'    => [
                     'type'  => 'single',
                     'value' => 4,
@@ -1083,7 +1083,6 @@ class ImportJsonTest extends TestCase
         // ...
     }
 
-
     /**
      * Can import supported LTE bands from JSON output.
      */
@@ -1112,7 +1111,7 @@ class ImportJsonTest extends TestCase
         $band = $bands->get(0);
 
         $this->assertArraySubset([
-            'band'      => 20,
+            'band'        => 20,
             'power_class' => 'none',
         ], $band->getAttributes());
 
@@ -1136,7 +1135,7 @@ class ImportJsonTest extends TestCase
         $band = $bands->get(1);
 
         $this->assertArraySubset([
-            'band'      => 41,
+            'band'        => 41,
             'power_class' => 'pc1dot5',
         ], $band->getAttributes());
 

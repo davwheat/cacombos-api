@@ -2,14 +2,9 @@
 
 namespace App\DataParser;
 
-use App\DataParser\ElementParser\BcsParser;
-use App\DataParser\ElementParser\ComponentLteParser;
 use App\DataParser\ElementParser\MimoParser;
 use App\DataParser\ElementParser\ModulationParser;
-use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
-use App\Models\Combo;
-use App\Models\LteComponent;
 use App\Models\SupportedLteBand;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
