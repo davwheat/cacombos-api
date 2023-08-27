@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?bool                      $supports_90mhz_bw
  * @property ?int                       $subcarrier_spacing
  * @property int                        $component_index
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
  */
 class NrComponent extends Model
 {
