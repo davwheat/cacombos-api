@@ -35,12 +35,12 @@ class SupportedLteBand extends Model
 
     public function modulations()
     {
-        return $this->belongsToMany(Modulation::class, 'components_modulations');
+        return $this->belongsToMany(Modulation::class, 'supported_lte_bands_modulations');
     }
 
     public function mimos()
     {
-        return $this->belongsToMany(Mimo::class, 'components_mimos');
+        return $this->belongsToMany(Mimo::class, 'supported_lte_bands_mimos');
     }
 
     public function dl_mimos()
