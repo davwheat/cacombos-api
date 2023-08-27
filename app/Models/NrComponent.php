@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int                        $id
- * @property int                        $band
- * @property ?string                    $dl_class
- * @property ?string                    $ul_class
- * @property ?int                       $bandwidth
- * @property ?bool                      $supports_90mhz_bw
- * @property ?int                       $subcarrier_spacing
- * @property int                        $component_index
+ * @property int     $id
+ * @property int     $band
+ * @property ?string $dl_class
+ * @property ?string $ul_class
+ * @property ?int    $bandwidth
+ * @property ?bool   $supports_90mhz_bw
+ * @property ?int    $subcarrier_spacing
+ * @property int     $component_index
  */
 class NrComponent extends Model
 {

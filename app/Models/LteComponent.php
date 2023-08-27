@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int                        $id
- * @property int                        $band
- * @property ?string                    $dl_class
- * @property ?string                    $ul_class
- * @property int                        $component_index
+ * @property int     $id
+ * @property int     $band
+ * @property ?string $dl_class
+ * @property ?string $ul_class
+ * @property int     $component_index
  */
 class LteComponent extends Model
 {

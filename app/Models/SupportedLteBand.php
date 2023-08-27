@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int                        $id
- * @property int                        $band
- * @property string|null                $power_class
+ * @property int         $id
+ * @property int         $band
+ * @property string|null $power_class
  */
 class SupportedLteBand extends Model
 {
