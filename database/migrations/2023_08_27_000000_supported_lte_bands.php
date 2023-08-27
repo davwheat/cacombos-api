@@ -15,7 +15,7 @@ return new class() extends Migration {
         Schema::create('supported_lte_bands', function (Blueprint $table) {
             $table->id();
 
-            $table->string('band')->index();
+            $table->integer('band')->index()->unsigned();
             $table->string('power_class', 32)->nullable()->index();
 
             $table->foreignId('capability_set_id')->index()->constrained('capability_sets')->cascadeOnDelete()->cascadeOnUpdate();
