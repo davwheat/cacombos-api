@@ -8,6 +8,7 @@ use App\Models\Device;
 use App\Models\LteComponent;
 use App\Models\Mimo;
 use App\Models\Modulation;
+use App\Models\SupportedLteBand;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
@@ -383,6 +384,51 @@ class ImportJsonTest extends TestCase
                 'bcs' => [
                     'type' => 'all',
                 ],
+            ],
+        ],
+    ];
+
+    protected static $lte_bands = [
+        'lteBands' => [
+            [
+                'band' => 20,
+                'mimoDl'    => [
+                    'type'  => 'single',
+                    'value' => 4,
+                ],
+                'mimoUl' => [
+                    'type'  => 'single',
+                    'value' => 1,
+                ],
+                'modulationDl' => [
+                    'type'  => 'single',
+                    'value' => 'qam256',
+                ],
+                'modulationUl' => [
+                    'type'  => 'single',
+                    'value' => 'qam64',
+                ],
+                'powerClass' => 'none',
+            ],
+            [
+                'band' => 41,
+                'mimoDl'    => [
+                    'type'  => 'single',
+                    'value' => 4,
+                ],
+                'mimoUl' => [
+                    'type'  => 'single',
+                    'value' => 1,
+                ],
+                'modulationDl' => [
+                    'type'  => 'single',
+                    'value' => 'qam1024',
+                ],
+                'modulationUl' => [
+                    'type'  => 'single',
+                    'value' => 'qam256',
+                ],
+                'powerClass' => 'pc1dot5',
             ],
         ],
     ];
@@ -1035,5 +1081,75 @@ class ImportJsonTest extends TestCase
         // ##############################
 
         // ...
+    }
+
+
+    /**
+     * Can import supported LTE bands from JSON output.
+     */
+    public function test_imports_lte_bands_data(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$lte_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+        $bands = $testingCapabilitySet->supportedLteBands;
+
+        $this->assertSame(2, $bands->count());
+
+        // ##############################
+        // Band 1
+        // ##############################
+
+        /** @var SupportedLteBand */
+        $band = $bands->get(0);
+
+        $this->assertArraySubset([
+            'band'      => 20,
+            'power_class' => 'none',
+        ], $band->getAttributes());
+
+        $this->assertSame($band->dl_mimos->count(), 1);
+        $this->assertSame($band->ul_mimos->count(), 1);
+
+        $this->assertSame(4, $band->dl_mimos->first()->mimo);
+        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+
+        $this->assertSame($band->dl_modulations->count(), 1);
+        $this->assertSame($band->ul_modulations->count(), 1);
+
+        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
+        $this->assertSame('qam64', $band->ul_modulations->first()->modulation);
+
+        // ##############################
+        // Band 2
+        // ##############################
+
+        /** @var SupportedLteBand */
+        $band = $bands->get(1);
+
+        $this->assertArraySubset([
+            'band'      => 41,
+            'power_class' => 'pc1dot5',
+        ], $band->getAttributes());
+
+        $this->assertSame($band->dl_mimos->count(), 1);
+        $this->assertSame($band->ul_mimos->count(), 1);
+
+        $this->assertSame(4, $band->dl_mimos->first()->mimo);
+        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+
+        $this->assertSame($band->dl_modulations->count(), 1);
+        $this->assertSame($band->ul_modulations->count(), 1);
+
+        $this->assertSame('qam1024', $band->dl_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
     }
 }
