@@ -2,7 +2,7 @@
 
 namespace App\JsonApi\V1;
 
-use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Modem, NrComponent};
+use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Mimo, Modem, Modulation, NrBand, NrComponent, SupportedNrBand};
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
 use Illuminate\Database\Eloquent\Builder;
@@ -139,6 +139,11 @@ class Resources
                     }
                 });
 
+            $type->attribute('lteCategoryDl');
+            $type->attribute('lteCategoryUl');
+
+            $type->attribute('parserMetadata');
+
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
 
@@ -156,6 +161,16 @@ class Resources
                 ->filterable()
                 ->writable();
 
+            $type->hasMany('supportedNrBands')
+                ->type('supportedNrBands')
+                ->includable()
+                ->withoutLinkage();
+
+            $type->hasMany('supportedLteBands')
+                ->type('supportedLteBands')
+                ->includable()
+                ->withoutLinkage();
+
             $type->creatable($uploaderOnlyCreate);
             $type->updatable($uploaderOnlyUpdate);
             $type->deletable($adminOnlyDelete);
@@ -166,7 +181,9 @@ class Resources
                 ->filterable();
 
             $type->attribute('comboString')->filterable();
-            $type->attribute('bandwidthCombinationSet');
+            $type->attribute('bandwidthCombinationSetEutra');
+            $type->attribute('bandwidthCombinationSetNr');
+            $type->attribute('bandwidthCombinationSetIntraEndc');
 
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
@@ -195,14 +212,25 @@ class Resources
 
             $type->attribute('dlClass');
             $type->attribute('ulClass');
-            $type->attribute('mimo');
-            $type->attribute('ulMimo');
-            $type->attribute('dlModulation');
-            $type->attribute('ulModulation');
             $type->attribute('componentIndex');
 
-            $type->attribute('createdAt')->sortable();
-            $type->attribute('updatedAt')->sortable();
+            $type->hasMany('dlMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+
+            $type->hasMany('dlModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
         });
 
         $this->server->resourceType('nr-components', new EloquentAdapter(NrComponent::class), function (Type $type) {
@@ -211,16 +239,95 @@ class Resources
             $type->attribute('dlClass');
             $type->attribute('ulClass');
             $type->attribute('bandwidth');
+            $type->attribute('supports90mhzBw');
             $type->attribute('subcarrierSpacing');
-            $type->attribute('dlMimo');
-            $type->attribute('ulMimo');
-            $type->attribute('dlModulation');
-            $type->attribute('ulModulation');
             $type->attribute('componentIndex');
 
-            $type->attribute('createdAt')->sortable();
-            $type->attribute('updatedAt')->sortable();
+            $type->hasMany('dlMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+
+            $type->hasMany('dlModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
         });
+
+        $this->server->resourceType('mimos', new EloquentAdapter(Mimo::class), function (Type $type) {
+            $type->attribute('id')->filterable();
+            $type->attribute('mimo')->filterable();
+            $type->attribute('isUl')->filterable();
+        });
+
+        $this->server->resourceType('modulations', new EloquentAdapter(Modulation::class), function (Type $type) {
+            $type->attribute('id')->filterable();
+            $type->attribute('modulation')->filterable();
+            $type->attribute('isUl')->filterable();
+        });
+
+        $this->server->resourceType('supported-nr-bands', new EloquentAdapter(SupportedNrBand::class), function (Type $type) {
+            $type->attribute('id')->filterable();
+            $type->attribute('band')->filterable();
+            $type->attribute('rateMatchingLteCrs');
+            $type->attribute('powerClass');
+            $type->attribute('maxUplinkDutyCycle');
+            $type->attribute('bandwidths');
+            $type->attribute('supportsEndc');
+            $type->attribute('supportsSa');
+
+            $type->hasMany('dlMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+
+            $type->hasMany('dlModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+        });
+
+        $this->server->resourceType('supported-lte-bands', new EloquentAdapter(SupportedNrBand::class), function (Type $type) {
+            $type->attribute('id')->filterable();
+            $type->attribute('band')->filterable();
+            $type->attribute('powerClass');
+
+            $type->hasMany('dlMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulMimos')
+                ->type('mimos')
+                ->includable()
+                ->withoutLinkage();
+
+            $type->hasMany('dlModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+            $type->hasMany('ulModulations')
+                ->type('modulations')
+                ->includable()
+                ->withoutLinkage();
+        });
+
+
 
         clock()->event('Registering JSON:API models')->end();
     }
