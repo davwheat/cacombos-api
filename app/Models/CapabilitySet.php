@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?string                      $plmn
  * @property ?int                         $lte_category_dl
  * @property ?int                         $lte_category_ul
+ * @property ?array                       $parser_metadata
  * @property DeviceFirmware               $deviceFirmware
  * @property Collection<Combo>            $combos
  * @property Collection<SupportedLteBand> $supportedLteBands
@@ -22,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
 class CapabilitySet extends Model
 {
     use Traits\HasSecondaryUuid;
+
+    protected $casts = [
+        'parser_metadata' => 'array',
+    ];
 
     public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

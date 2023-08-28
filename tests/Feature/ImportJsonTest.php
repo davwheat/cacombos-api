@@ -1347,4 +1347,36 @@ class ImportJsonTest extends TestCase
         $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
         $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
     }
+
+    /**
+     * Can import supported NR bands from JSON output.
+     */
+    public function test_imports_parser_metadata(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $meta = [
+            'parserName'    => 'test',
+            'parserType'    => 'test',
+            'parserVersion' => '1.0.0',
+        ];
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode([
+            'nrBandsNsaEutra' => [
+                ['band' => 28],
+            ],
+            'timestamp' => 0,
+            'metadata' => $meta,
+        ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+
+        $this->assertSame(['metadata' => $meta, 'timestamp' => 0], $testingCapabilitySet->parser_metadata);
+    }
 }

@@ -89,10 +89,13 @@ class ImportParsedJsonController extends JsonController
             ];
         }
 
-        $this->propogateCombosToDelete($jsonData);
+        $this->propogateCombosToDelete();
 
         DB::transaction(function () use ($jsonData) {
             $this->parseJsonToModels($jsonData);
+
+            $this->capabilitySet->parser_metadata = Arr::only($jsonData, ['metadata', 'parserVersion', 'timestamp']);
+            $this->capabilitySet->save();
 
             // Delete unneeded combos
             Combo::whereIn('id', $this->combosToDelete->pluck('id'))->delete();
@@ -102,7 +105,7 @@ class ImportParsedJsonController extends JsonController
         return null;
     }
 
-    protected function propogateCombosToDelete(array $jsonData): void
+    protected function propogateCombosToDelete(): void
     {
         clock()->event('Finding combos to remove')->begin();
 
