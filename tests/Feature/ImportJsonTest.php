@@ -1369,7 +1369,7 @@ class ImportJsonTest extends TestCase
                 ['band' => 28],
             ],
             'timestamp' => 0,
-            'metadata' => $meta,
+            'metadata'  => $meta,
         ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
 
         $response->assertStatus(200);
