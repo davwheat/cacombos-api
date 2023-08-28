@@ -9,6 +9,7 @@ use App\Models\LteComponent;
 use App\Models\Mimo;
 use App\Models\Modulation;
 use App\Models\SupportedLteBand;
+use App\Models\SupportedNrBand;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
@@ -429,6 +430,96 @@ class ImportJsonTest extends TestCase
                     'value' => 'qam256',
                 ],
                 'powerClass' => 'pc1dot5',
+            ],
+        ],
+    ];
+
+    protected static $nr_bands = [
+        'nrNsaBandsEutra' => [
+            [
+                "band" => 1,
+                'mimoDl' => [
+                    'type' => 'single',
+                    'value' => 4
+                ],
+                'mimoUl' => [
+                    'type' => 'single',
+                    'value' => 1
+                ],
+            ],
+        ],
+        'nrSaBandsEutra' => [
+            [
+                "band" => 7,
+                'modulationDl' => [
+                    'type' => 'single',
+                    'value' => 'qam1024'
+                ],
+                'modulationUl' => [
+                    'type' => 'single',
+                    'value' => 'qam1024'
+                ],
+            ],
+        ],
+        'nrBands' => [
+            [
+                'band' => 1,
+                'modulationDl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                'modulationUl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                "maxUplinkDutyCycle" => 1,
+                "powerClass" => "pc3",
+                'bandwidths' => [
+                    [
+                        'scs' => 15,
+                        'bandwidthsDl' => [50, 40, 30, 25, 20, 15, 10, 5],
+                        'bandwidthsUl' => [50, 40, 30, 25, 20, 15, 10, 5],
+                    ]
+                ],
+                'rateMatchingLteCrs' => true,
+            ],
+            [
+                'band' => 3,
+                'modulationDl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                'modulationUl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                'bandwidths' => [
+                    [
+                        'scs' => 15,
+                        'bandwidthsDl' => [40, 30, 25, 20, 15, 10, 5],
+                        'bandwidthsUl' => [40, 30, 25, 20, 15, 10, 5],
+                    ]
+                ],
+                'rateMatchingLteCrs' => true,
+            ],
+            [
+                'band' => 7,
+                'modulationDl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                'modulationUl' => [
+                    'type' => 'single',
+                    'value' => 'qam256'
+                ],
+                'bandwidths' => [
+                    [
+                        'scs' => 15,
+                        'bandwidthsDl' => [50, 40, 30, 25, 20, 15, 10, 5],
+                        'bandwidthsUl' => [50, 40, 30, 25, 20, 15, 10, 5],
+                    ]
+                ],
+                'rateMatchingLteCrs' => true,
             ],
         ],
     ];
@@ -1149,6 +1240,111 @@ class ImportJsonTest extends TestCase
         $this->assertSame($band->ul_modulations->count(), 1);
 
         $this->assertSame('qam1024', $band->dl_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+    }
+
+    /**
+     * Can import supported NR bands from JSON output.
+     */
+    public function test_imports_nr_bands_data(): void
+    {
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
+
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nr_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+
+        $response->assertStatus(200);
+        $this->assertSame('null', $response->getContent());
+
+        $testingCapabilitySet->refresh();
+        $bands = $testingCapabilitySet->supportedNrBands;
+
+        $this->assertSame(3, $bands->count());
+
+        // ##############################
+        // Band 1
+        // ##############################
+
+        /** @var SupportedNrBand */
+        $band = $bands->get(0);
+
+        $this->assertArraySubset([
+            'band'        => 1,
+            'max_uplink_duty_cycle' => 1,
+            'power_class' => "pc3",
+            'rate_matching_lte_crs' => 1,
+            'supports_endc' => 1,
+            'supports_sa' => 0,
+        ], $band->getAttributes());
+
+        $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][0]['bandwidths']);
+
+        $this->assertSame($band->dl_mimos->count(), 1);
+        $this->assertSame($band->ul_mimos->count(), 1);
+
+        $this->assertSame(4, $band->dl_mimos->first()->mimo);
+        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+
+        $this->assertSame($band->dl_modulations->count(), 1);
+        $this->assertSame($band->ul_modulations->count(), 1);
+
+        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+
+        // ##############################
+        // Band 2
+        // ##############################
+
+        /** @var SupportedNrBand */
+        $band = $bands->get(1);
+
+        $this->assertArraySubset([
+            'band'        => 3,
+            'max_uplink_duty_cycle' => null,
+            'power_class' => null,
+            'rate_matching_lte_crs' => 1,
+            'supports_endc' => 0,
+            'supports_sa' => 0,
+        ], $band->getAttributes());
+
+        $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][1]['bandwidths']);
+
+        $this->assertSame($band->dl_mimos->count(), 0);
+        $this->assertSame($band->ul_mimos->count(), 0);
+
+        $this->assertSame($band->dl_modulations->count(), 1);
+        $this->assertSame($band->ul_modulations->count(), 1);
+
+        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+
+        // ##############################
+        // Band 3
+        // ##############################
+
+        /** @var SupportedNrBand */
+        $band = $bands->get(2);
+
+        $this->assertArraySubset([
+            'band'        => 7,
+            'max_uplink_duty_cycle' => null,
+            'power_class' => null,
+            'rate_matching_lte_crs' => 1,
+            'supports_endc' => 0,
+            'supports_sa' => 1,
+        ], $band->getAttributes());
+
+        $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][2]['bandwidths']);
+
+        $this->assertSame($band->dl_mimos->count(), 0);
+        $this->assertSame($band->ul_mimos->count(), 0);
+
+        $this->assertSame($band->dl_modulations->count(), 1);
+        $this->assertSame($band->ul_modulations->count(), 1);
+
+        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
         $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
     }
 }
