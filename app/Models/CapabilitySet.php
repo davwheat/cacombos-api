@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property DeviceFirmware               $deviceFirmware
  * @property Collection<Combo>            $combos
  * @property Collection<SupportedLteBand> $supportedLteBands
+ * @property Collection<SupportedNrBand>  $supportedNrBands
  * @property \Illuminate\Support\Carbon   $created_at
  * @property \Illuminate\Support\Carbon   $updated_at
  */
@@ -40,5 +41,10 @@ class CapabilitySet extends Model
     public function supportedLteBands(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(SupportedLteBand::class);
+    }
+
+    public function supportedNrBands(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SupportedNrBand::class);
     }
 }
