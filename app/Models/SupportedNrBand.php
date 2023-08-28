@@ -42,6 +42,15 @@ class SupportedNrBand extends Model
         'bandwidths' => 'array',
     ];
 
+    public function getFrequencyRange(): FrequencyRange
+    {
+        if ($this->band > 256) {
+            return FrequencyRange::FR2;
+        }
+
+        return FrequencyRange::FR1;
+    }
+
     public function capabilitySet()
     {
         return $this->belongsTo(CapabilitySet::class);
@@ -76,4 +85,10 @@ class SupportedNrBand extends Model
     {
         return $this->modulations()->where('is_ul', true);
     }
+}
+
+enum FrequencyRange
+{
+    case FR1;
+    case FR2;
 }
