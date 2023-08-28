@@ -327,8 +327,6 @@ class Resources
                 ->withoutLinkage();
         });
 
-
-
         clock()->event('Registering JSON:API models')->end();
     }
 }
