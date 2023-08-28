@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                    $band
  * @property int|null               $max_uplink_duty_cycle
  * @property string|null            $power_class
- * @property boolean|null           $rate_matching_lte_crs
- * @property ?array                  $bandwidths
- * @property boolean|null           $supports_endc
- * @property boolean|null           $supports_sa
+ * @property bool|null              $rate_matching_lte_crs
+ * @property ?array                 $bandwidths
+ * @property bool|null              $supports_endc
+ * @property bool|null              $supports_sa
  * @property CapabilitySet          $capabilitySet
  * @property Collection<Modulation> $modulations
  * @property Collection<Modulation> $dl_modulations
@@ -39,7 +39,7 @@ class SupportedNrBand extends Model
     ];
 
     protected $casts = [
-        'bandwidths' => 'array'
+        'bandwidths' => 'array',
     ];
 
     public function capabilitySet()

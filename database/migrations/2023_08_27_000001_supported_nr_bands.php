@@ -16,7 +16,7 @@ return new class() extends Migration {
             $table->id();
 
             $table->integer('band')->index()->unsigned();
-            $table->integer("max_uplink_duty_cycle")->nullable();
+            $table->integer('max_uplink_duty_cycle')->nullable();
             $table->string('power_class', 32)->nullable()->index();
             $table->boolean('rate_matching_lte_crs')->nullable();
             $table->json('bandwidths')->nullable();

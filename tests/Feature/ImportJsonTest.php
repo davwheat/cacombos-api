@@ -437,87 +437,87 @@ class ImportJsonTest extends TestCase
     protected static $nr_bands = [
         'nrNsaBandsEutra' => [
             [
-                "band" => 1,
+                'band'   => 1,
                 'mimoDl' => [
-                    'type' => 'single',
-                    'value' => 4
+                    'type'  => 'single',
+                    'value' => 4,
                 ],
                 'mimoUl' => [
-                    'type' => 'single',
-                    'value' => 1
+                    'type'  => 'single',
+                    'value' => 1,
                 ],
             ],
         ],
         'nrSaBandsEutra' => [
             [
-                "band" => 7,
+                'band'         => 7,
                 'modulationDl' => [
-                    'type' => 'single',
-                    'value' => 'qam1024'
+                    'type'  => 'single',
+                    'value' => 'qam1024',
                 ],
                 'modulationUl' => [
-                    'type' => 'single',
-                    'value' => 'qam1024'
+                    'type'  => 'single',
+                    'value' => 'qam1024',
                 ],
             ],
         ],
         'nrBands' => [
             [
-                'band' => 1,
+                'band'         => 1,
                 'modulationDl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
                 'modulationUl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
-                "maxUplinkDutyCycle" => 1,
-                "powerClass" => "pc3",
-                'bandwidths' => [
+                'maxUplinkDutyCycle' => 1,
+                'powerClass'         => 'pc3',
+                'bandwidths'         => [
                     [
-                        'scs' => 15,
+                        'scs'          => 15,
                         'bandwidthsDl' => [50, 40, 30, 25, 20, 15, 10, 5],
                         'bandwidthsUl' => [50, 40, 30, 25, 20, 15, 10, 5],
-                    ]
+                    ],
                 ],
                 'rateMatchingLteCrs' => true,
             ],
             [
-                'band' => 3,
+                'band'         => 3,
                 'modulationDl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
                 'modulationUl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
                 'bandwidths' => [
                     [
-                        'scs' => 15,
+                        'scs'          => 15,
                         'bandwidthsDl' => [40, 30, 25, 20, 15, 10, 5],
                         'bandwidthsUl' => [40, 30, 25, 20, 15, 10, 5],
-                    ]
+                    ],
                 ],
                 'rateMatchingLteCrs' => true,
             ],
             [
-                'band' => 7,
+                'band'         => 7,
                 'modulationDl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
                 'modulationUl' => [
-                    'type' => 'single',
-                    'value' => 'qam256'
+                    'type'  => 'single',
+                    'value' => 'qam256',
                 ],
                 'bandwidths' => [
                     [
-                        'scs' => 15,
+                        'scs'          => 15,
                         'bandwidthsDl' => [50, 40, 30, 25, 20, 15, 10, 5],
                         'bandwidthsUl' => [50, 40, 30, 25, 20, 15, 10, 5],
-                    ]
+                    ],
                 ],
                 'rateMatchingLteCrs' => true,
             ],
@@ -1271,12 +1271,12 @@ class ImportJsonTest extends TestCase
         $band = $bands->get(0);
 
         $this->assertArraySubset([
-            'band'        => 1,
+            'band'                  => 1,
             'max_uplink_duty_cycle' => 1,
-            'power_class' => "pc3",
+            'power_class'           => 'pc3',
             'rate_matching_lte_crs' => 1,
-            'supports_endc' => 1,
-            'supports_sa' => 0,
+            'supports_endc'         => 1,
+            'supports_sa'           => 0,
         ], $band->getAttributes());
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][0]['bandwidths']);
@@ -1301,12 +1301,12 @@ class ImportJsonTest extends TestCase
         $band = $bands->get(1);
 
         $this->assertArraySubset([
-            'band'        => 3,
+            'band'                  => 3,
             'max_uplink_duty_cycle' => null,
-            'power_class' => null,
+            'power_class'           => null,
             'rate_matching_lte_crs' => 1,
-            'supports_endc' => 0,
-            'supports_sa' => 0,
+            'supports_endc'         => 0,
+            'supports_sa'           => 0,
         ], $band->getAttributes());
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][1]['bandwidths']);
@@ -1328,12 +1328,12 @@ class ImportJsonTest extends TestCase
         $band = $bands->get(2);
 
         $this->assertArraySubset([
-            'band'        => 7,
+            'band'                  => 7,
             'max_uplink_duty_cycle' => null,
-            'power_class' => null,
+            'power_class'           => null,
             'rate_matching_lte_crs' => 1,
-            'supports_endc' => 0,
-            'supports_sa' => 1,
+            'supports_endc'         => 0,
+            'supports_sa'           => 1,
         ], $band->getAttributes());
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][2]['bandwidths']);

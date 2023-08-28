@@ -24,7 +24,7 @@ class NrSupportedBandsParser implements DataParser
      * **NOTE:** This parser requires an input containing `nrBands`, `nrNsaBandsEutra`, and/or `nrSaBandsEutra` data
      * rather than just the content of one of those arrays.
      *
-     * @param array $data
+     * @param array         $data
      * @param CapabilitySet $capabilitySet
      */
     public function __construct(array $data, CapabilitySet $capabilitySet)
