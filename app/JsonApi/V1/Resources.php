@@ -5,6 +5,7 @@ namespace App\JsonApi\V1;
 use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Mimo, Modem, Modulation, NrBand, NrComponent, SupportedNrBand};
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
+use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -26,7 +27,7 @@ class Resources
 
     public function __invoke()
     {
-        clock()->event('Registering JSON:API models')->begin();
+        ServerTiming::start('Registering JSON:API models');
 
         $uploaderOnlyCreate = function (Context $context): bool {
             return ($this->requiresAuthentication)($context->getRequest(), 'uploader');
@@ -327,6 +328,6 @@ class Resources
                 ->withoutLinkage();
         });
 
-        clock()->event('Registering JSON:API models')->end();
+        ServerTiming::stop('Registering JSON:API models');
     }
 }

@@ -13,6 +13,7 @@ use App\Models\Combo;
 use App\Models\Device;
 use App\RequiresAuthentication;
 use App\Rules\FileOrString;
+use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -107,23 +108,23 @@ class ImportParsedJsonController extends JsonController
 
     protected function propogateCombosToDelete(): void
     {
-        clock()->event('Finding combos to remove')->begin();
+        ServerTiming::start('Finding combos to remove');
 
         // Delete all combos currently present in the capability set
         $this->combosToDelete = $this->capabilitySet->combos()->get('id');
 
-        clock()->event('Finding combos to remove')->end();
+        ServerTiming::stop('Finding combos to remove');
     }
 
     protected function removeCombosFromDeletion(array|Collection|Combo $combos)
     {
-        clock()->event('Removing unused combos')->begin();
+        ServerTiming::start('Removing unused combos');
 
         $this->combosToDelete = $this->combosToDelete->diff(
             $combos instanceof Collection ? $combos : collect($combos)
         );
 
-        clock()->event('Removing unused combos')->end();
+        ServerTiming::stop('Removing unused combos');
     }
 
     protected function parseJsonToModels(array $jsonData): void
@@ -132,29 +133,29 @@ class ImportParsedJsonController extends JsonController
         $this->capabilitySet->lte_category_ul = Arr::get($jsonData, 'lteCategoryUl', null);
         $this->capabilitySet->save();
 
-        clock()->event('Parsing EUTRA data')->begin();
+        ServerTiming::start('Parsing EUTRA data');
         $this->parseEutraDataToModels($jsonData);
-        clock()->event('Parsing EUTRA data')->end();
+        ServerTiming::stop('Parsing EUTRA data');
 
-        clock()->event('Parsing NR NSA data')->begin();
+        ServerTiming::start('Parsing NR NSA data');
         $this->parseEndcDataToModels($jsonData);
-        clock()->event('Parsing NR NSA data')->end();
+        ServerTiming::stop('Parsing NR NSA data');
 
-        clock()->event('Parsing NR CA data')->begin();
+        ServerTiming::start('Parsing NR CA data');
         $this->parseNrCaDataToModels($jsonData);
-        clock()->event('Parsing NR CA data')->end();
+        ServerTiming::stop('Parsing NR CA data');
 
-        clock()->event('Parsing NR DC data')->begin();
+        ServerTiming::start('Parsing NR DC data');
         $this->parseNrDcDataToModels($jsonData);
-        clock()->event('Parsing NR DC data')->end();
+        ServerTiming::stop('Parsing NR DC data');
 
-        clock()->event('Parsing supported LTE bands')->begin();
+        ServerTiming::start('Parsing supported LTE bands');
         $this->parseSupportedLteBandsToModels($jsonData);
-        clock()->event('Parsing supported LTE bands')->end();
+        ServerTiming::stop('Parsing supported LTE bands');
 
-        clock()->event('Parsing supported NR bands')->begin();
+        ServerTiming::start('Parsing supported NR bands');
         $this->parseSupportedNrBandsToModels($jsonData);
-        clock()->event('Parsing supported NR bands')->end();
+        ServerTiming::stop('Parsing supported NR bands');
     }
 
     protected function parseEutraDataToModels(array $jsonData): void
@@ -162,12 +163,12 @@ class ImportParsedJsonController extends JsonController
         $lteCaData = Arr::get($jsonData, 'lteca');
 
         if (!empty($lteCaData)) {
-            clock()->event('Parsing LTE CA data')->begin();
+            ServerTiming::start('Parsing LTE CA data');
 
             $lteCaParser = new LteCaParser($lteCaData, $this->capabilitySet);
             $lteCaParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing LTE CA data')->end();
+            ServerTiming::stop('Parsing LTE CA data');
         }
     }
 
@@ -176,12 +177,12 @@ class ImportParsedJsonController extends JsonController
         $endcData = Arr::get($jsonData, 'endc');
 
         if (!empty($endcData)) {
-            clock()->event('Parsing ENDC data')->begin();
+            ServerTiming::start('Parsing ENDC data');
 
             $endcParser = new EndcParser($endcData, $this->capabilitySet);
             $endcParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing ENDC data')->end();
+            ServerTiming::stop('Parsing ENDC data');
         }
     }
 
@@ -190,12 +191,12 @@ class ImportParsedJsonController extends JsonController
         $nrcaData = Arr::get($jsonData, 'nrca');
 
         if (!empty($nrcaData)) {
-            clock()->event('Parsing NRCA data')->begin();
+            ServerTiming::start('Parsing NRCA data');
 
             $nrcaParser = new NrCaParser($nrcaData, $this->capabilitySet);
             $nrcaParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing NRCA data')->end();
+            ServerTiming::stop('Parsing NRCA data');
         }
     }
 
@@ -204,12 +205,12 @@ class ImportParsedJsonController extends JsonController
         $nrdcData = Arr::get($jsonData, 'nrdc');
 
         if (!empty($nrdcData)) {
-            clock()->event('Parsing NRDC data')->begin();
+            ServerTiming::start('Parsing NRDC data');
 
             $nrcaParser = new NrDcParser($nrdcData, $this->capabilitySet);
             $nrcaParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing NRDC data')->end();
+            ServerTiming::stop('Parsing NRDC data');
         }
     }
 
@@ -218,12 +219,12 @@ class ImportParsedJsonController extends JsonController
         $supportedBandsData = Arr::get($jsonData, 'lteBands');
 
         if (!empty($supportedBandsData)) {
-            clock()->event('Parsing supported LTE bands data')->begin();
+            ServerTiming::start('Parsing supported LTE bands data');
 
             $supportedBandsParser = new LteSupportedBandsParser($supportedBandsData, $this->capabilitySet);
             $supportedBandsParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing supported LTE bands data')->end();
+            ServerTiming::stop('Parsing supported LTE bands data');
         }
     }
 
@@ -232,13 +233,13 @@ class ImportParsedJsonController extends JsonController
         $supportedBandsData = Arr::only($jsonData, ['nrBands', 'nrNsaBandsEutra', 'nrSaBandsEutra']);
 
         if (count($supportedBandsData) > 0) {
-            clock()->event('Parsing supported NR bands data')->begin();
+            ServerTiming::start('Parsing supported NR bands data');
 
             // Different input required to other parsers
             $supportedBandsParser = new NrSupportedBandsParser($supportedBandsData, $this->capabilitySet);
             $supportedBandsParser->parseAndInsertAllModels();
 
-            clock()->event('Parsing supported NR bands data')->end();
+            ServerTiming::stop('Parsing supported NR bands data');
         }
     }
 }

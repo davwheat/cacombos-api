@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
 use App\Rules\FileOrString;
+use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -128,7 +129,7 @@ class ParseLogController extends JsonController
      */
     public function callParser(string $logFormat, array $logs): array
     {
-        clock()->event('Running log parser')->begin();
+        ServerTiming::start('Running log parser');
 
         $output = [];
 
@@ -168,12 +169,12 @@ class ParseLogController extends JsonController
         } catch (\Exception $e) {
             $this->cleanUpTempFiles($filePaths);
 
-            clock()->event('Running log parser')->end();
+            ServerTiming::stop('Running log parser');
 
             throw $e;
         }
 
-        clock()->event('Running log parser')->end();
+        ServerTiming::stop('Running log parser');
     }
 
     public function writeLogsToTempFiles(array $logs): array

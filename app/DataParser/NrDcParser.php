@@ -10,6 +10,7 @@ use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\NrComponent;
+use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Database\Eloquent\Collection;
 
 class NrDcParser implements DataParser
@@ -42,23 +43,23 @@ class NrDcParser implements DataParser
         $collection = new Collection();
 
         foreach ($this->data as $i => $lteCa) {
-            clock()->event("Parsing combo $i")->begin();
+            ServerTiming::start("Parsing combo $i");
             $collection->push($this->parseNrcaCombo($lteCa));
-            clock()->event("Parsing combo $i")->end();
+            ServerTiming::stop("Parsing combo $i");
         }
     }
 
     protected function parseNrcaCombo(array $comboData): Combo
     {
-        clock()->event('Extracting BCS')->begin();
+        ServerTiming::start('Extracting BCS');
         $bcsNr = $this->bcsParser->getBcsFromData($comboData, 'bcs');
-        clock()->event('Extracting BCS')->end();
+        ServerTiming::stop('Extracting BCS');
 
-        clock()->event('Extracting FR1 and FR2 components')->begin();
+        ServerTiming::start('Extracting FR1 and FR2 components');
         $nrComponents = $this->getComponentNrModels($comboData);
-        clock()->event('Extracting FR1 and FR2 components')->end();
+        ServerTiming::stop('Extracting FR1 and FR2 components');
 
-        clock()->event('Saving models')->begin();
+        ServerTiming::start('Saving models');
         /** @var Combo */
         $comboModel = Combo::firstOrCreate([
             'combo_string'                         => $this->nrcaToComboString($nrComponents->all()),
@@ -67,7 +68,7 @@ class NrDcParser implements DataParser
         ]);
 
         $comboModel->nrComponents()->saveMany($nrComponents);
-        clock()->event('Saving models')->end();
+        ServerTiming::stop('Saving models');
 
         return $comboModel;
     }

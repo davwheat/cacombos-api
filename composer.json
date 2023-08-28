@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1.0",
-        "beyondcode/laravel-server-timing": "^1.4.0",
+        "beyondcode/laravel-server-timing": "^1.4",
         "doctrine/dbal": "^3.6.5",
         "guzzlehttp/guzzle": "^7.7.0",
         "itsgoingd/clockwork": "^v5.1.12",
