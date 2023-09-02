@@ -77,10 +77,10 @@ class ParseImportLogTest extends TestCase
         $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/parse-import-log', [
-            'logFormat' => 'qualcomm',
-            'eutraLog'  => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+            'logFormat'       => 'qualcomm',
+            'eutraLog'        => file_get_contents(__DIR__.'/../Data/Log/invalid.txt'),
             'capabilitySetId' => $testingCapabilitySet->id,
-            'deviceId'  => $testingDevice->id,
+            'deviceId'        => $testingDevice->id,
 
         ], static::$auth);
 
@@ -99,10 +99,10 @@ class ParseImportLogTest extends TestCase
         $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/parse-import-log', [
-            'logFormat' => 'not-a-format',
-            'eutraLog'  => file_get_contents(__DIR__ . '/../Data/Log/invalid.txt'),
+            'logFormat'       => 'not-a-format',
+            'eutraLog'        => file_get_contents(__DIR__.'/../Data/Log/invalid.txt'),
             'capabilitySetId' => $testingCapabilitySet->id,
-            'deviceId'  => $testingDevice->id,
+            'deviceId'        => $testingDevice->id,
         ], static::$auth);
 
         $response->assertStatus(422);
@@ -120,10 +120,10 @@ class ParseImportLogTest extends TestCase
         $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/parse-import-log', [
-            'logFormat' => 'qualcomm',
-            'eutraLog'  => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
+            'logFormat'       => 'qualcomm',
+            'eutraLog'        => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.txt'),
             'capabilitySetId' => $testingCapabilitySet->id,
-            'deviceId'  => $testingDevice->id,
+            'deviceId'        => $testingDevice->id,
         ], static::$auth);
 
         $actual_json = json_decode($response->getContent(), true);
@@ -145,10 +145,10 @@ class ParseImportLogTest extends TestCase
         $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/parse-import-log', [
-            'logFormat'  => 'qualcomm',
-            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+            'logFormat'       => 'qualcomm',
+            'eutranrLog'      => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.txt'),
             'capabilitySetId' => $testingCapabilitySet->id,
-            'deviceId'  => $testingDevice->id,
+            'deviceId'        => $testingDevice->id,
         ], static::$auth);
 
         $actual_json = json_decode($response->getContent(), true);
@@ -170,11 +170,11 @@ class ParseImportLogTest extends TestCase
         $testingDevice = $testingCapabilitySet->device;
 
         $response = $this->post('/v1/actions/parse-import-log', [
-            'logFormat'  => 'qualcomm',
-            'eutraLog'   => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b0cd.txt'),
-            'eutranrLog' => file_get_contents(__DIR__ . '/../Data/Log/Qualcomm/b826.txt'),
+            'logFormat'       => 'qualcomm',
+            'eutraLog'        => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b0cd.txt'),
+            'eutranrLog'      => file_get_contents(__DIR__.'/../Data/Log/Qualcomm/b826.txt'),
             'capabilitySetId' => $testingCapabilitySet->id,
-            'deviceId'  => $testingDevice->id,
+            'deviceId'        => $testingDevice->id,
         ], static::$auth);
 
         $actual_json = json_decode($response->getContent(), true);
