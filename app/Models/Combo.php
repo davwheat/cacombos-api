@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int                        $id
- * @property string                     $uuid
  * @property string                     $combo_string
  * @property int                        $capability_set_id
  * @property ?array                     $bandwidth_combination_set_eutra
@@ -23,8 +22,6 @@ class Combo extends Model
 {
     // Disable timestamps
     public $timestamps = false;
-
-    use Traits\HasSecondaryUuid;
 
     public $fillable = [
         'combo_string',
