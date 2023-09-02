@@ -11,6 +11,7 @@ use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\NrComponent;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class NrCaParser implements DataParser
 {
@@ -39,29 +40,57 @@ class NrCaParser implements DataParser
 
     public function parseAndInsertAllModels(): void
     {
-        $collection = new Collection();
+        $modelAttributes = [];
+        $nrComponentIds = [];
 
-        foreach ($this->data as $lteCa) {
-            $collection->push($this->parseNrcaCombo($lteCa));
+        foreach ($this->data as $i => $jsonData) {
+            $data = $this->parseNrcaCombo($jsonData);
+
+            $modelAttributes[$i] = $data[0];
+            $nrComponentIds[$i] = $data[1];
         }
+
+        // Insert
+        Combo::insert($modelAttributes);
+        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+
+        $i = -1;
+
+        // Insert component IDs
+        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
+            $i++;
+
+            /** @var array */
+            $nr = $nrComponentIds[$i];
+
+            $values = [];
+
+            foreach ($nr as $nrId) {
+                $values[] = [
+                    'combo_id'         => $id,
+                    'lte_component_id' => null,
+                    'nr_component_id'  => $nrId,
+                ];
+            }
+
+            return $values;
+        }, $comboIds)));
     }
 
-    protected function parseNrcaCombo(array $comboData): Combo
+    protected function parseNrcaCombo(array $comboData): array
     {
         $bcsNr = $this->bcsParser->getBcsFromData($comboData, 'bcs');
 
         $nrComponents = $this->getComponentNrModels($comboData);
 
-        /** @var Combo */
-        $comboModel = Combo::firstOrCreate([
+        // Manually generate combo attributes for mass insertion later
+        $attributes = [
             'combo_string'                         => $this->nrcaToComboString($nrComponents->all()),
             'capability_set_id'                    => $this->capabilitySet->id,
-            'bandwidth_combination_set_nr'         => $bcsNr,
-        ]);
+            'bandwidth_combination_set_nr'         => json_encode($bcsNr),
+        ];
 
-        $comboModel->nrComponents()->saveMany($nrComponents);
-
-        return $comboModel;
+        return [$attributes, $nrComponents->pluck('id')->toArray()];
     }
 
     /**

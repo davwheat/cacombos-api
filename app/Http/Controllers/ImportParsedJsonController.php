@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
@@ -93,14 +94,18 @@ class ImportParsedJsonController extends JsonController
         $this->propogateCombosToDelete();
 
         DB::transaction(function () use ($jsonData) {
+            Schema::disableForeignKeyConstraints();
+
+            // Delete unneeded combos
+            Combo::whereIn('id', $this->combosToDelete->pluck('id'))->delete();
+            $this->combosToDelete = $this->combosToDelete->empty();
+
             $this->parseJsonToModels($jsonData);
 
             $this->capabilitySet->parser_metadata = Arr::only($jsonData, ['metadata', 'parserVersion', 'timestamp']);
             $this->capabilitySet->save();
 
-            // Delete unneeded combos
-            Combo::whereIn('id', $this->combosToDelete->pluck('id'))->delete();
-            $this->combosToDelete = $this->combosToDelete->empty();
+            Schema::enableForeignKeyConstraints();
         });
 
         return null;

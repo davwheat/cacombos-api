@@ -12,6 +12,7 @@ use App\Models\Combo;
 use App\Models\NrComponent;
 use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class NrDcParser implements DataParser
 {
@@ -40,37 +41,55 @@ class NrDcParser implements DataParser
 
     public function parseAndInsertAllModels(): void
     {
-        $collection = new Collection();
+        $modelAttributes = [];
+        $nrComponentIds = [];
 
-        foreach ($this->data as $i => $lteCa) {
-            ServerTiming::start("Parsing combo $i");
-            $collection->push($this->parseNrcaCombo($lteCa));
-            ServerTiming::stop("Parsing combo $i");
+        foreach ($this->data as $i => $jsonData) {
+            $data = $this->parseNrDcCombo($jsonData);
+
+            $modelAttributes[$i] = $data[0];
+            $nrComponentIds[$i] = $data[1];
         }
+
+        // Insert
+        Combo::insert($modelAttributes);
+        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+
+        $i = -1;
+
+        // Insert component IDs
+        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
+            $i++;
+
+            /** @var array */
+            $nr = $nrComponentIds[$i];
+
+            $values = [];
+
+            foreach ($nr as $nrId) {
+                $values[] = [
+                    'combo_id'         => $id,
+                    'lte_component_id' => null,
+                    'nr_component_id'  => $nrId,
+                ];
+            }
+
+            return $values;
+        }, $comboIds)));
     }
 
-    protected function parseNrcaCombo(array $comboData): Combo
+    protected function parseNrDcCombo(array $comboData): array
     {
-        ServerTiming::start('Extracting BCS');
         $bcsNr = $this->bcsParser->getBcsFromData($comboData, 'bcs');
-        ServerTiming::stop('Extracting BCS');
-
-        ServerTiming::start('Extracting FR1 and FR2 components');
         $nrComponents = $this->getComponentNrModels($comboData);
-        ServerTiming::stop('Extracting FR1 and FR2 components');
 
-        ServerTiming::start('Saving models');
-        /** @var Combo */
-        $comboModel = Combo::firstOrCreate([
+        $attributes = [
             'combo_string'                         => $this->nrcaToComboString($nrComponents->all()),
             'capability_set_id'                    => $this->capabilitySet->id,
-            'bandwidth_combination_set_nr'         => $bcsNr,
-        ]);
+            'bandwidth_combination_set_nr'         => json_encode($bcsNr),
+        ];
 
-        $comboModel->nrComponents()->saveMany($nrComponents);
-        ServerTiming::stop('Saving models');
-
-        return $comboModel;
+        return [$attributes, $nrComponents->pluck('id')->toArray()];
     }
 
     /**

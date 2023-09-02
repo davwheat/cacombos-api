@@ -13,6 +13,7 @@ use App\Models\Combo;
 use App\Models\LteComponent;
 use App\Models\NrComponent;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class EndcParser implements DataParser
 {
@@ -43,14 +44,56 @@ class EndcParser implements DataParser
 
     public function parseAndInsertAllModels(): void
     {
-        $collection = new Collection();
+        $modelAttributes = [];
+        $lteComponentIds = [];
+        $nrComponentIds = [];
 
-        foreach ($this->data as $lteCa) {
-            $collection->push($this->parseEndcCombo($lteCa));
+        foreach ($this->data as $i => $jsonData) {
+            $data = $this->parseEndcCombo($jsonData);
+
+            $modelAttributes[$i] = $data[0];
+            $lteComponentIds[$i] = $data[1];
+            $nrComponentIds[$i] = $data[2];
         }
+
+        // Insert
+        Combo::insert($modelAttributes);
+        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+
+        $i = -1;
+
+        // Insert component IDs
+        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $lteComponentIds, $nrComponentIds) {
+            $i++;
+
+            /** @var array */
+            $lte = $lteComponentIds[$i];
+            /** @var array */
+            $nr = $nrComponentIds[$i];
+
+            $values = [];
+
+            foreach ($lte as $lteId) {
+                $values[] = [
+                    'combo_id'         => $id,
+                    'lte_component_id' => $lteId,
+                    'nr_component_id'  => null,
+                ];
+            }
+
+            foreach ($nr as $nrId) {
+                $values[] = [
+                    'combo_id'         => $id,
+                    'lte_component_id' => null,
+                    'nr_component_id'  => $nrId,
+                ];
+            }
+
+            return $values;
+        }, $comboIds)));
     }
 
-    protected function parseEndcCombo(array $comboData): Combo
+    protected function parseEndcCombo(array $comboData): array
     {
         $bcsNr = $this->bcsParser->getBcsFromData($comboData, 'bcsNr');
         $bcsEutra = $this->bcsParser->getBcsFromData($comboData, 'bcsEutra');
@@ -61,19 +104,16 @@ class EndcParser implements DataParser
 
         $allComponents = collect()->concat($lteComponents)->concat($nrComponents);
 
-        /** @var Combo */
-        $comboModel = Combo::firstOrCreate([
+        // Manually generate combo attributes for mass insertion later
+        $attributes = [
             'combo_string'                         => $this->enDcToComboString($allComponents->all()),
             'capability_set_id'                    => $this->capabilitySet->id,
-            'bandwidth_combination_set_eutra'      => $bcsEutra,
-            'bandwidth_combination_set_nr'         => $bcsNr,
-            'bandwidth_combination_set_intra_endc' => $bcsIntraEndc,
-        ]);
+            'bandwidth_combination_set_eutra'      => json_encode($bcsEutra),
+            'bandwidth_combination_set_nr'         => json_encode($bcsNr),
+            'bandwidth_combination_set_intra_endc' => json_encode($bcsIntraEndc),
+        ];
 
-        $comboModel->lteComponents()->saveMany($lteComponents);
-        $comboModel->nrComponents()->saveMany($nrComponents);
-
-        return $comboModel;
+        return [$attributes, $lteComponents->pluck('id')->toArray(), $nrComponents->pluck('id')->toArray()];
     }
 
     /**

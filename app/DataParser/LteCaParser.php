@@ -11,6 +11,7 @@ use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\LteComponent;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class LteCaParser implements DataParser
 {
@@ -39,27 +40,57 @@ class LteCaParser implements DataParser
 
     public function parseAndInsertAllModels(): void
     {
-        $collection = new Collection();
+        $modelAttributes = [];
+        $lteComponentIds = [];
 
-        foreach ($this->data as $lteCa) {
-            $collection->push($this->parseLteCaCombo($lteCa));
+        foreach ($this->data as $i => $jsonData) {
+            $data = $this->parseLteCaCombo($jsonData);
+
+            $modelAttributes[$i] = $data[0];
+            $lteComponentIds[$i] = $data[1];
         }
+
+        // Insert
+        Combo::insert($modelAttributes);
+        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+
+        $i = -1;
+
+        // Insert component IDs
+        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $lteComponentIds) {
+            $i++;
+
+            /** @var array */
+            $lte = $lteComponentIds[$i];
+
+            $values = [];
+
+            foreach ($lte as $lteId) {
+                $values[] = [
+                    'combo_id'         => $id,
+                    'lte_component_id' => $lteId,
+                    'nr_component_id'  => null,
+                ];
+            }
+
+            return $values;
+        }, $comboIds)));
     }
 
-    protected function parseLteCaCombo(array $comboData): Combo
+    protected function parseLteCaCombo(array $comboData): array
     {
         $lteComponents = $this->getComponentLteModels($comboData);
 
-        /** @var Combo */
-        $comboModel = Combo::firstOrCreate([
-            'combo_string'                    => $this->lteCaToComboString($lteComponents->all()),
-            'capability_set_id'               => $this->capabilitySet->id,
-            'bandwidth_combination_set_eutra' => $this->getBcs($comboData),
-        ]);
+        // Manually generate combo attributes for mass insertion later
+        $attributes = [
+            'combo_string'                         => $this->lteCaToComboString($lteComponents->all()),
+            'capability_set_id'                    => $this->capabilitySet->id,
+            'bandwidth_combination_set_eutra'      => json_encode($this->getBcs($comboData)),
+        ];
 
-        $comboModel->lteComponents()->saveMany($lteComponents);
+        $d = [$attributes, $lteComponents->pluck('id')->toArray()];
 
-        return $comboModel;
+        return $d;
     }
 
     protected function getBcs(array $combo): ?array

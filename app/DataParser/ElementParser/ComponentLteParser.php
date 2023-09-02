@@ -64,7 +64,7 @@ class ComponentLteParser
                 ->concat($this->getModulationsFromComponent($component, false))
                 ->concat($this->getModulationsFromComponent($component, true));
 
-            $model->saveOrFail();
+            $model->save();
 
             // Attach MIMOs and modulations to saved component
             $model->mimos()->sync($allMimos->pluck('id'));
