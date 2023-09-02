@@ -60,7 +60,6 @@ class NrCaParser implements DataParser
             ->toArray();
 
         if (count($comboIds) !== count($nrComponentIds)) {
-
             $cCombo = count($comboIds);
             $cNr = count($nrComponentIds);
 
