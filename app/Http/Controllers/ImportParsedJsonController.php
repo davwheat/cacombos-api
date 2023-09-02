@@ -121,17 +121,6 @@ class ImportParsedJsonController extends JsonController
         ServerTiming::stop('Finding combos to remove');
     }
 
-    protected function removeCombosFromDeletion(array|Collection|Combo $combos)
-    {
-        ServerTiming::start('Removing unused combos');
-
-        $this->combosToDelete = $this->combosToDelete->diff(
-            $combos instanceof Collection ? $combos : collect($combos)
-        );
-
-        ServerTiming::stop('Removing unused combos');
-    }
-
     protected function parseJsonToModels(array $jsonData): void
     {
         $this->capabilitySet->lte_category_dl = Arr::get($jsonData, 'lteCategoryDl', null);
