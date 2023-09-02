@@ -52,7 +52,11 @@ class LteCaParser implements DataParser
 
         // Insert
         Combo::insert($modelAttributes);
-        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)
+            ->whereDoesntHave('nrComponents')
+            ->whereDoesntHave('lteComponents')
+            ->pluck('id')
+            ->toArray();
 
         $i = -1;
 

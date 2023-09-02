@@ -12,6 +12,7 @@ use App\Models\Combo;
 use App\Models\NrComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class NrCaParser implements DataParser
 {
@@ -52,7 +53,24 @@ class NrCaParser implements DataParser
 
         // Insert
         Combo::insert($modelAttributes);
-        $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)->pluck('id')->toArray();
+        $comboIds = Combo::query()->where('capability_set_id', $this->capabilitySet->id)
+            ->whereDoesntHave('nrComponents')
+            ->whereDoesntHave('lteComponents')
+            ->pluck('id')
+            ->toArray();
+
+        if (count($comboIds) !== count($nrComponentIds)) {
+
+            $cCombo = count($comboIds);
+            $cNr = count($nrComponentIds);
+
+            if ($cCombo > $cNr) {
+                // Dump extras
+                var_dump(array_slice($comboIds, $cNr));
+            }
+
+            throw new UnprocessableEntityHttpException("Combo IDs ($cCombo) and component IDs ($cNr) length do not match");
+        }
 
         $i = -1;
 
@@ -98,7 +116,7 @@ class NrCaParser implements DataParser
      */
     protected function getComponentNrModels(array $combo)
     {
-        return $this->componentNrParser->getModelsFromData($combo, 'componentsNr');
+        return $this->componentNrParser->getModelsFromData($combo, 'components');
     }
 
     protected function nrcaToComboString(array $components): string
