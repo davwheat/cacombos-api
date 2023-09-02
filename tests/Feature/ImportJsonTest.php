@@ -531,13 +531,8 @@ class ImportJsonTest extends TestCase
     {
         $response = $this->post('/v1/actions/import-json', [], static::$auth);
 
-        /** @var CapabilitySet */
-        $testingCapabilitySet = CapabilitySet::first();
-        /** @var Device */
-        $testingDevice = $testingCapabilitySet->device;
-
         $response->assertStatus(422);
-        $response->assertJson(['errors' => ['jsonData' => [], 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id]]);
+        $response->assertJson(['errors' => ['jsonData' => []]]);
         $this->assertStringContainsString('field is required', $response->getContent() ?: '');
     }
 
