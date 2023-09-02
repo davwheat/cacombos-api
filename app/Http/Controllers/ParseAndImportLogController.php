@@ -74,12 +74,10 @@ class ParseAndImportLogController extends JsonController
 
         $parseResponse->getBody()->seek(0);
 
-        $parsedBody = json_decode($parseResponse->getBody()->getContents(), true);
-
         $importBody = [
             'deviceId'        => $body['deviceId'],
             'capabilitySetId' => $body['capabilitySetId'],
-            'jsonData'        => $parsedBody,
+            'jsonData'        => $parseResponse->getBody()->getContents(),
         ];
 
         $importResponse = $this->importParsedJsonController->requestHandler($request->withParsedBody($importBody));
