@@ -529,10 +529,15 @@ class ImportJsonTest extends TestCase
      */
     public function test_cannot_parse_log_without_data(): void
     {
-        $response = $this->post('/v1/actions/import-json', [], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', [], static::$auth);
+
+        /** @var CapabilitySet */
+        $testingCapabilitySet = CapabilitySet::first();
+        /** @var Device */
+        $testingDevice = $testingCapabilitySet->device;
 
         $response->assertStatus(422);
-        $response->assertJson(['errors' => ['jsonData' => [], 'deviceId' => [], 'capabilitySetId' => []]]);
+        $response->assertJson(['errors' => ['jsonData' => [], 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id]]);
         $this->assertStringContainsString('field is required', $response->getContent() ?: '');
     }
 
@@ -541,7 +546,7 @@ class ImportJsonTest extends TestCase
      */
     public function test_cannot_parse_log_with_invalid_device_id(): void
     {
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => Device::first()->id, 'capabilitySetId' => 99999999], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => Device::first()->id, 'capabilitySetId' => 99999999], static::$auth);
 
         $response->assertStatus(422);
         $response->assertJson(['errors' => ['capabilitySetId' => []]]);
@@ -553,7 +558,7 @@ class ImportJsonTest extends TestCase
      */
     public function test_cannot_parse_log_with_invalid_capability_set_id(): void
     {
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => 99999999, 'capabilitySetId' => CapabilitySet::first()->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => 'test', 'deviceId' => 99999999, 'capabilitySetId' => CapabilitySet::first()->id], static::$auth);
 
         $response->assertStatus(422);
         $response->assertJson(['errors' => ['deviceId' => []]]);
@@ -575,7 +580,7 @@ class ImportJsonTest extends TestCase
                 'lteCategoryDl' => 14,
                 'lteCategoryUl' => 2,
             ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id,
-        ], ImportJsonTest::$auth);
+        ], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -601,7 +606,7 @@ class ImportJsonTest extends TestCase
                 // Placeholder data
                 'lteca' => [],
             ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id,
-        ], ImportJsonTest::$auth);
+        ], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -622,7 +627,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$lte_ca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$lte_ca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -858,7 +863,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$endc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$endc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -979,7 +984,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nrca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$nrca_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -1091,7 +1096,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nrdc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$nrdc_data), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -1184,7 +1189,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$lte_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$lte_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -1253,7 +1258,7 @@ class ImportJsonTest extends TestCase
         /** @var Device */
         $testingDevice = $testingCapabilitySet->device;
 
-        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(ImportJsonTest::$nr_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        $response = $this->post('/v1/actions/import-json', ['jsonData' => json_encode(static::$nr_bands), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
@@ -1370,7 +1375,7 @@ class ImportJsonTest extends TestCase
             ],
             'timestamp' => 0,
             'metadata'  => $meta,
-        ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], ImportJsonTest::$auth);
+        ]), 'deviceId' => $testingDevice->id, 'capabilitySetId' => $testingCapabilitySet->id], static::$auth);
 
         $response->assertStatus(200);
         $this->assertSame('null', $response->getContent());
