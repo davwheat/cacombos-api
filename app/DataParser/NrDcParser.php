@@ -10,7 +10,6 @@ use App\DataParser\Generators\ComboStringGenerator;
 use App\Models\CapabilitySet;
 use App\Models\Combo;
 use App\Models\NrComponent;
-use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -58,7 +57,7 @@ class NrDcParser implements DataParser
         $i = -1;
 
         // Insert component IDs
-        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
+        DB::table('combo_components')->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
             $i++;
 
             /** @var array */

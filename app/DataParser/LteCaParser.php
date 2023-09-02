@@ -57,7 +57,7 @@ class LteCaParser implements DataParser
         $i = -1;
 
         // Insert component IDs
-        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $lteComponentIds) {
+        DB::table('combo_components')->insert(array_merge(...array_map(function ($id) use (&$i, $lteComponentIds) {
             $i++;
 
             /** @var array */

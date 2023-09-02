@@ -57,7 +57,7 @@ class NrCaParser implements DataParser
         $i = -1;
 
         // Insert component IDs
-        DB::table("combo_components")->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
+        DB::table('combo_components')->insert(array_merge(...array_map(function ($id) use (&$i, $nrComponentIds) {
             $i++;
 
             /** @var array */
