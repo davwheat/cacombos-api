@@ -47,6 +47,7 @@ class Resources
             $type->attribute('modelName')->sortable()->writable();
             $type->attribute('manufacturer')->sortable()->writable();
             $type->attribute('releaseDate')->sortable()->writable();
+
             $type->attribute('createdAt')->sortable();
             $type->attribute('updatedAt')->sortable();
 
