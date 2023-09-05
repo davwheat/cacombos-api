@@ -262,19 +262,16 @@ class Resources
         });
 
         $this->server->resourceType('mimos', new EloquentAdapter(Mimo::class), function (Type $type) {
-            $type->attribute('id')->filterable();
             $type->attribute('mimo')->filterable();
             $type->attribute('isUl')->filterable();
         });
 
         $this->server->resourceType('modulations', new EloquentAdapter(Modulation::class), function (Type $type) {
-            $type->attribute('id')->filterable();
             $type->attribute('modulation')->filterable();
             $type->attribute('isUl')->filterable();
         });
 
         $this->server->resourceType('supported-nr-bands', new EloquentAdapter(SupportedNrBand::class), function (Type $type) {
-            $type->attribute('id')->filterable();
             $type->attribute('band')->filterable();
             $type->attribute('rateMatchingLteCrs');
             $type->attribute('powerClass');
@@ -303,7 +300,6 @@ class Resources
         });
 
         $this->server->resourceType('supported-lte-bands', new EloquentAdapter(SupportedNrBand::class), function (Type $type) {
-            $type->attribute('id')->filterable();
             $type->attribute('band')->filterable();
             $type->attribute('powerClass');
 
