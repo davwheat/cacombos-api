@@ -33,22 +33,22 @@ class LteComponent extends Model
         return $this->belongsToMany(Mimo::class, 'components_mimos');
     }
 
-    public function dl_mimos()
+    public function dlMimos()
     {
         return $this->mimos()->where('is_ul', false);
     }
 
-    public function ul_mimos()
+    public function ulMimos()
     {
         return $this->mimos()->where('is_ul', true);
     }
 
-    public function dl_modulations()
+    public function dlModulations()
     {
         return $this->modulations()->where('is_ul', false);
     }
 
-    public function ul_modulations()
+    public function ulModulations()
     {
         return $this->modulations()->where('is_ul', true);
     }
