@@ -925,16 +925,16 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => null,
         ]);
 
-        $this->assertSame($cc->dl_mimos()->count(), 1);
-        $this->assertSame($cc->ul_mimos()->count(), 1);
+        $this->assertSame($cc->dlMimos()->count(), 1);
+        $this->assertSame($cc->ulMimos()->count(), 1);
 
-        $this->assertSame(2, $cc->dl_mimos()->first()->mimo);
-        $this->assertSame(2, $cc->ul_mimos()->first()->mimo);
+        $this->assertSame(2, $cc->dlMimos()->first()->mimo);
+        $this->assertSame(2, $cc->ulMimos()->first()->mimo);
 
-        $this->assertSame($cc->ul_modulations()->count(), 1);
-        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ulModulations()->count(), 1);
+        $this->assertSame($cc->dlModulations()->count(), 0);
 
-        $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
+        $this->assertSame('qam256', $cc->ulModulations()->first()->modulation);
 
         /** @var NrComponent */
         $cc = $nrComboComponents->get(2);
@@ -949,14 +949,14 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => 1,
         ]);
 
-        $this->assertSame($cc->dl_mimos()->count(), 2);
-        $this->assertSame($cc->ul_mimos()->count(), 0);
+        $this->assertSame($cc->dlMimos()->count(), 2);
+        $this->assertSame($cc->ulMimos()->count(), 0);
 
-        $dl_mimos = $cc->dl_mimos()->get()->pluck('mimo')->toArray();
-        $this->assertEqualsCanonicalizing([2, 4], $dl_mimos);
+        $dlMimos = $cc->dlMimos()->get()->pluck('mimo')->toArray();
+        $this->assertEqualsCanonicalizing([2, 4], $dlMimos);
 
-        $this->assertSame($cc->ul_modulations()->count(), 0);
-        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ulModulations()->count(), 0);
+        $this->assertSame($cc->dlModulations()->count(), 0);
 
         $this->assertSame($cc->supports_90mhz_bw, true);
         $this->assertSame($cc->max_bandwidth, null);
@@ -1019,17 +1019,17 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => 1,
         ]);
 
-        $this->assertSame($cc->dl_mimos()->count(), 1);
-        $this->assertSame($cc->ul_mimos()->count(), 1);
+        $this->assertSame($cc->dlMimos()->count(), 1);
+        $this->assertSame($cc->ulMimos()->count(), 1);
 
-        $this->assertSame(4, $cc->dl_mimos()->first()->mimo);
-        $this->assertSame(1, $cc->ul_mimos()->first()->mimo);
+        $this->assertSame(4, $cc->dlMimos()->first()->mimo);
+        $this->assertSame(1, $cc->ulMimos()->first()->mimo);
 
-        $this->assertSame($cc->ul_modulations()->count(), 1);
-        $this->assertSame($cc->dl_modulations()->count(), 1);
+        $this->assertSame($cc->ulModulations()->count(), 1);
+        $this->assertSame($cc->dlModulations()->count(), 1);
 
-        $this->assertSame('qam256', $cc->ul_modulations()->first()->modulation);
-        $this->assertSame('qam1024', $cc->dl_modulations()->first()->modulation);
+        $this->assertSame('qam256', $cc->ulModulations()->first()->modulation);
+        $this->assertSame('qam1024', $cc->dlModulations()->first()->modulation);
 
         /** @var NrComponent */
         $cc = $nrComboComponents->get(1);
@@ -1044,14 +1044,14 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => 1,
         ]);
 
-        $this->assertSame($cc->dl_mimos()->count(), 2);
-        $this->assertSame($cc->ul_mimos()->count(), 0);
+        $this->assertSame($cc->dlMimos()->count(), 2);
+        $this->assertSame($cc->ulMimos()->count(), 0);
 
-        $dl_mimos = $cc->dl_mimos()->get()->pluck('mimo')->toArray();
-        $this->assertEqualsCanonicalizing([2, 4], $dl_mimos);
+        $dlMimos = $cc->dlMimos()->get()->pluck('mimo')->toArray();
+        $this->assertEqualsCanonicalizing([2, 4], $dlMimos);
 
-        $this->assertSame($cc->ul_modulations()->count(), 0);
-        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ulModulations()->count(), 0);
+        $this->assertSame($cc->dlModulations()->count(), 0);
 
         /** @var NrComponent */
         $cc = $nrComboComponents->get(2);
@@ -1066,13 +1066,13 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => null,
         ]);
 
-        $this->assertSame($cc->dl_mimos()->count(), 1);
-        $this->assertSame($cc->ul_mimos()->count(), 0);
+        $this->assertSame($cc->dlMimos()->count(), 1);
+        $this->assertSame($cc->ulMimos()->count(), 0);
 
-        $this->assertSame(2, $cc->dl_mimos()->first()->mimo);
+        $this->assertSame(2, $cc->dlMimos()->first()->mimo);
 
-        $this->assertSame($cc->ul_modulations()->count(), 0);
-        $this->assertSame($cc->dl_modulations()->count(), 0);
+        $this->assertSame($cc->ulModulations()->count(), 0);
+        $this->assertSame($cc->dlModulations()->count(), 0);
 
         // ##############################
         // Combo 2
@@ -1131,17 +1131,17 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => 1,
         ]);
 
-        $this->assertSame($cc->dl_mimos->count(), 1);
-        $this->assertSame($cc->ul_mimos->count(), 1);
+        $this->assertSame($cc->dlMimos->count(), 1);
+        $this->assertSame($cc->ulMimos->count(), 1);
 
-        $this->assertSame(4, $cc->dl_mimos->first()->mimo);
-        $this->assertSame(2, $cc->ul_mimos->first()->mimo);
+        $this->assertSame(4, $cc->dlMimos->first()->mimo);
+        $this->assertSame(2, $cc->ulMimos->first()->mimo);
 
-        $this->assertSame($cc->ul_modulations->count(), 1);
-        $this->assertSame($cc->dl_modulations->count(), 1);
+        $this->assertSame($cc->ulModulations->count(), 1);
+        $this->assertSame($cc->dlModulations->count(), 1);
 
-        $this->assertSame('qam256', $cc->ul_modulations->first()->modulation);
-        $this->assertSame('qam256', $cc->dl_modulations->first()->modulation);
+        $this->assertSame('qam256', $cc->ulModulations->first()->modulation);
+        $this->assertSame('qam256', $cc->dlModulations->first()->modulation);
 
         /** @var NrComponent */
         $cc = $nrComboComponents->get(1);
@@ -1156,16 +1156,16 @@ class ImportJsonTest extends TestCase
             'supports_90mhz_bw'  => null,
         ]);
 
-        $this->assertSame($cc->dl_mimos->count(), 1);
-        $this->assertSame($cc->ul_mimos->count(), 1);
+        $this->assertSame($cc->dlMimos->count(), 1);
+        $this->assertSame($cc->ulMimos->count(), 1);
 
-        $this->assertSame(2, $cc->dl_mimos->first()->mimo);
-        $this->assertSame(1, $cc->ul_mimos->first()->mimo);
+        $this->assertSame(2, $cc->dlMimos->first()->mimo);
+        $this->assertSame(1, $cc->ulMimos->first()->mimo);
 
-        $this->assertSame($cc->ul_modulations->count(), 1);
-        $this->assertSame($cc->dl_modulations->count(), 0);
+        $this->assertSame($cc->ulModulations->count(), 1);
+        $this->assertSame($cc->dlModulations->count(), 0);
 
-        $this->assertSame('qam256', $cc->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $cc->ulModulations->first()->modulation);
 
         // ##############################
         // Combo 2
@@ -1206,17 +1206,17 @@ class ImportJsonTest extends TestCase
             'power_class' => 'none',
         ], $band->getAttributes());
 
-        $this->assertSame($band->dl_mimos->count(), 1);
-        $this->assertSame($band->ul_mimos->count(), 1);
+        $this->assertSame($band->dlMimos->count(), 1);
+        $this->assertSame($band->ulMimos->count(), 1);
 
-        $this->assertSame(4, $band->dl_mimos->first()->mimo);
-        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+        $this->assertSame(4, $band->dlMimos->first()->mimo);
+        $this->assertSame(1, $band->ulMimos->first()->mimo);
 
-        $this->assertSame($band->dl_modulations->count(), 1);
-        $this->assertSame($band->ul_modulations->count(), 1);
+        $this->assertSame($band->dlModulations->count(), 1);
+        $this->assertSame($band->ulModulations->count(), 1);
 
-        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
-        $this->assertSame('qam64', $band->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->dlModulations->first()->modulation);
+        $this->assertSame('qam64', $band->ulModulations->first()->modulation);
 
         // ##############################
         // Band 2
@@ -1230,17 +1230,17 @@ class ImportJsonTest extends TestCase
             'power_class' => 'pc1dot5',
         ], $band->getAttributes());
 
-        $this->assertSame($band->dl_mimos->count(), 1);
-        $this->assertSame($band->ul_mimos->count(), 1);
+        $this->assertSame($band->dlMimos->count(), 1);
+        $this->assertSame($band->ulMimos->count(), 1);
 
-        $this->assertSame(4, $band->dl_mimos->first()->mimo);
-        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+        $this->assertSame(4, $band->dlMimos->first()->mimo);
+        $this->assertSame(1, $band->ulMimos->first()->mimo);
 
-        $this->assertSame($band->dl_modulations->count(), 1);
-        $this->assertSame($band->ul_modulations->count(), 1);
+        $this->assertSame($band->dlModulations->count(), 1);
+        $this->assertSame($band->ulModulations->count(), 1);
 
-        $this->assertSame('qam1024', $band->dl_modulations->first()->modulation);
-        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+        $this->assertSame('qam1024', $band->dlModulations->first()->modulation);
+        $this->assertSame('qam256', $band->ulModulations->first()->modulation);
     }
 
     /**
@@ -1281,17 +1281,17 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][0]['bandwidths']);
 
-        $this->assertSame($band->dl_mimos->count(), 1);
-        $this->assertSame($band->ul_mimos->count(), 1);
+        $this->assertSame($band->dlMimos->count(), 1);
+        $this->assertSame($band->ulMimos->count(), 1);
 
-        $this->assertSame(4, $band->dl_mimos->first()->mimo);
-        $this->assertSame(1, $band->ul_mimos->first()->mimo);
+        $this->assertSame(4, $band->dlMimos->first()->mimo);
+        $this->assertSame(1, $band->ulMimos->first()->mimo);
 
-        $this->assertSame($band->dl_modulations->count(), 1);
-        $this->assertSame($band->ul_modulations->count(), 1);
+        $this->assertSame($band->dlModulations->count(), 1);
+        $this->assertSame($band->ulModulations->count(), 1);
 
-        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
-        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->dlModulations->first()->modulation);
+        $this->assertSame('qam256', $band->ulModulations->first()->modulation);
 
         // ##############################
         // Band 2
@@ -1311,14 +1311,14 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][1]['bandwidths']);
 
-        $this->assertSame($band->dl_mimos->count(), 0);
-        $this->assertSame($band->ul_mimos->count(), 0);
+        $this->assertSame($band->dlMimos->count(), 0);
+        $this->assertSame($band->ulMimos->count(), 0);
 
-        $this->assertSame($band->dl_modulations->count(), 1);
-        $this->assertSame($band->ul_modulations->count(), 1);
+        $this->assertSame($band->dlModulations->count(), 1);
+        $this->assertSame($band->ulModulations->count(), 1);
 
-        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
-        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->dlModulations->first()->modulation);
+        $this->assertSame('qam256', $band->ulModulations->first()->modulation);
 
         // ##############################
         // Band 3
@@ -1338,14 +1338,14 @@ class ImportJsonTest extends TestCase
 
         $this->assertSame($band->bandwidths, static::$nr_bands['nrBands'][2]['bandwidths']);
 
-        $this->assertSame($band->dl_mimos->count(), 0);
-        $this->assertSame($band->ul_mimos->count(), 0);
+        $this->assertSame($band->dlMimos->count(), 0);
+        $this->assertSame($band->ulMimos->count(), 0);
 
-        $this->assertSame($band->dl_modulations->count(), 1);
-        $this->assertSame($band->ul_modulations->count(), 1);
+        $this->assertSame($band->dlModulations->count(), 1);
+        $this->assertSame($band->ulModulations->count(), 1);
 
-        $this->assertSame('qam256', $band->dl_modulations->first()->modulation);
-        $this->assertSame('qam256', $band->ul_modulations->first()->modulation);
+        $this->assertSame('qam256', $band->dlModulations->first()->modulation);
+        $this->assertSame('qam256', $band->ulModulations->first()->modulation);
     }
 
     /**

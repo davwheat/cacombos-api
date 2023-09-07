@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null            $power_class
  * @property CapabilitySet          $capabilitySet
  * @property Collection<Modulation> $modulations
- * @property Collection<Modulation> $dl_modulations
- * @property Collection<Modulation> $ul_modulations
+ * @property Collection<Modulation> $dlModulations
+ * @property Collection<Modulation> $ulModulations
  * @property Collection<Mimo>       $mimos
- * @property Collection<Mimo>       $dl_mimos
- * @property Collection<Mimo>       $ul_mimos
+ * @property Collection<Mimo>       $dlMimos
+ * @property Collection<Mimo>       $ulMimos
  */
 class SupportedLteBand extends Model
 {
@@ -43,22 +43,22 @@ class SupportedLteBand extends Model
         return $this->belongsToMany(Mimo::class, 'supported_lte_bands_mimos');
     }
 
-    public function dl_mimos()
+    public function dlMimos()
     {
         return $this->mimos()->where('is_ul', false);
     }
 
-    public function ul_mimos()
+    public function ulMimos()
     {
         return $this->mimos()->where('is_ul', true);
     }
 
-    public function dl_modulations()
+    public function dlModulations()
     {
         return $this->modulations()->where('is_ul', false);
     }
 
-    public function ul_modulations()
+    public function ulModulations()
     {
         return $this->modulations()->where('is_ul', true);
     }
