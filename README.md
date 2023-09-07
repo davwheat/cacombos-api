@@ -15,7 +15,7 @@ To run this locally, you should use Laravel Sail and Composer.
 ### Requirements
 
 -   Docker
--   PHP 8.1 locally
+-   PHP 8.2 locally
 -   Composer 2 or later
 -   Linux (including via WSL)
 
