@@ -301,7 +301,7 @@ class ImportJsonTest extends TestCase
     protected static $nrca_data = [
         'nrca' => [
             [
-                'componentsNr' => [
+                'components' => [
                     [
                         'band'             => 78,
                         'bwClassDl'        => 'A',
@@ -333,7 +333,7 @@ class ImportJsonTest extends TestCase
                 ],
             ],
             [
-                'componentsNr' => [
+                'components' => [
                     [
                         'band'             => 78,
                         'bwClassDl'        => 'A',
