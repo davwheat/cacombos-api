@@ -6,14 +6,13 @@ use App\JsonApi\V1\Auth;
 use App\Models\Device;
 use Illuminate\Support\Facades\DB;
 use Tobyz\JsonApiServer\Context;
-use Tobyz\JsonApiServer\Laravel\EloquentResource;
-use Tobyz\JsonApiServer\Schema\Field;
 use Tobyz\JsonApiServer\Endpoint;
+use Tobyz\JsonApiServer\Laravel\EloquentResource;
 use Tobyz\JsonApiServer\Laravel\Filter\Scope;
 use Tobyz\JsonApiServer\Laravel\Filter\Where;
 use Tobyz\JsonApiServer\Laravel\Filter\WhereHas;
 use Tobyz\JsonApiServer\Laravel\Sort\SortColumn;
-use Tobyz\JsonApiServer\Resource\Creatable;
+use Tobyz\JsonApiServer\Schema\Field;
 
 class DevicesResource extends EloquentResource
 {
@@ -73,7 +72,7 @@ class DevicesResource extends EloquentResource
                 $query,
                 string|array $value,
                 Context $context,
-            ) => $query->where(DB::raw('CONCAT_WS(" ", devices.manufacturer, devices.device_name, devices.model_name)'), 'LIKE', "%$value%"))
+            ) => $query->where(DB::raw('CONCAT_WS(" ", devices.manufacturer, devices.device_name, devices.model_name)'), 'LIKE', "%$value%")),
         ];
     }
 

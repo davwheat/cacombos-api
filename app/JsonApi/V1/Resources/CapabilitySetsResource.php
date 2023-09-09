@@ -4,18 +4,13 @@ namespace App\JsonApi\V1\Resources;
 
 use App\JsonApi\V1\Auth;
 use App\Models\CapabilitySet;
-use App\Models\DeviceFirmware;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Tobyz\JsonApiServer\Context;
-use Tobyz\JsonApiServer\Laravel\EloquentResource;
-use Tobyz\JsonApiServer\Schema\Field;
 use Tobyz\JsonApiServer\Endpoint;
-use Tobyz\JsonApiServer\Laravel\Filter\Scope;
+use Tobyz\JsonApiServer\Laravel\EloquentResource;
 use Tobyz\JsonApiServer\Laravel\Filter\Where;
 use Tobyz\JsonApiServer\Laravel\Sort\SortColumn;
 use Tobyz\JsonApiServer\Resource\Creatable;
-use Tobyz\JsonApiServer\Schema\Sort;
+use Tobyz\JsonApiServer\Schema\Field;
 
 use function Tobyz\JsonApiServer\Laravel\rules;
 

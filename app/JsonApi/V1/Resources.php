@@ -2,17 +2,10 @@
 
 namespace App\JsonApi\V1;
 
-use App\JsonApi\V1\Resources\CapabilitySetsResource;
 use App\Models\{CapabilitySet, Combo, Device, DeviceFirmware, LteComponent, Mimo, Modem, Modulation, NrBand, NrComponent, SupportedNrBand};
 use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
 use BeyondCode\ServerTiming\Facades\ServerTiming;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Tobyz\JsonApiServer\Adapter\EloquentAdapter;
-use Tobyz\JsonApiServer\Context;
-use Tobyz\JsonApiServer\Schema\Type;
 
 class Resources
 {

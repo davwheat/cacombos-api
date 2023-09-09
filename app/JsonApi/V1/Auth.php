@@ -7,14 +7,14 @@ use Tobyz\JsonApiServer\Context;
 
 class Auth
 {
-    static function uploaderOrAbove(Context $context): bool
+    public static function uploaderOrAbove(Context $context): bool
     {
         $ra = new RequiresAuthentication(resolve(TokensRepository::class));
 
         return $ra($context->getRequest(), 'uploader');
     }
 
-    static function adminOrAbove(Context $context): bool
+    public static function adminOrAbove(Context $context): bool
     {
         $ra = new RequiresAuthentication(resolve(TokensRepository::class));
 
