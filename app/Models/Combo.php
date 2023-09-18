@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int                        $id
- * @property string                     $uuid
  * @property string                     $combo_string
  * @property int                        $capability_set_id
- * @property array                      $bandwidth_combination_set
+ * @property ?array                     $bandwidth_combination_set_eutra
+ * @property ?array                     $bandwidth_combination_set_nr
+ * @property ?array                     $bandwidth_combination_set_intra_endc
  * @property CapabilitySet              $capabilitySet
  * @property Collection<LteComponent>   $lteComponents
  * @property Collection<NrComponent>    $nrComponents
@@ -19,11 +20,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Combo extends Model
 {
-    use Traits\HasSecondaryUuid;
+    // Disable timestamps
+    public $timestamps = false;
 
     public $fillable = [
         'combo_string',
-        'bandwidth_combination_set',
+        'bandwidth_combination_set_eutra',
+        'bandwidth_combination_set_nr',
+        'bandwidth_combination_set_intra_endc',
         'capability_set_id',
     ];
 
@@ -33,7 +37,9 @@ class Combo extends Model
      * @var array
      */
     protected $casts = [
-        'bandwidth_combination_set' => 'array',
+        'bandwidth_combination_set_eutra'      => 'array',
+        'bandwidth_combination_set_nr'         => 'array',
+        'bandwidth_combination_set_intra_endc' => 'array',
     ];
 
     public function capabilitySet()

@@ -1,0 +1,5498 @@
+TickTime : 3850.947
+Exy LTE RRC OTA Packet
+ Direction : Uplink
+ul-dcch
+ message -> c1 -> ueCapabilityInformation
+  rrc-TransactionIdentifier : 2
+  criticalExtensions -> c1 -> ueCapabilityInformation-r8
+   ue-CapabilityRAT-ContainerList
+    [0]
+     rat-Type : eutra
+     ueCapabilityRAT-Container
+      accessStratumRelease : rel15
+      ue-Category : 4
+      pdcp-Parameters
+       supportedROHC-Profiles
+        profile0x0001-r15 : true
+        profile0x0002-r15 : true
+        profile0x0003-r15 : false
+        profile0x0004-r15 : true
+        profile0x0006-r15 : false
+        profile0x0101-r15 : false
+        profile0x0102-r15 : false
+        profile0x0103-r15 : false
+        profile0x0104-r15 : false
+       maxNumberROHC-ContextSessions : cs24
+      phyLayerParameters
+       ue-TxAntennaSelectionSupported : false
+       ue-SpecificRefSigsSupported : false
+      rf-Parameters
+       supportedBandListEUTRA
+        [0]
+         bandEUTRA : 1
+         halfDuplex : false
+        [1]
+         bandEUTRA : 3
+         halfDuplex : false
+        [2]
+         bandEUTRA : 7
+         halfDuplex : false
+        [3]
+         bandEUTRA : 8
+         halfDuplex : false
+        [4]
+         bandEUTRA : 20
+         halfDuplex : false
+        [5]
+         bandEUTRA : 28
+         halfDuplex : false
+        [6]
+         bandEUTRA : 32
+         halfDuplex : false
+        [7]
+         bandEUTRA : 38
+         halfDuplex : false
+        [8]
+         bandEUTRA : 40
+         halfDuplex : false
+        [9]
+         bandEUTRA : 46
+         halfDuplex : false
+      measParameters
+       bandListEUTRA
+        [0]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [1]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [2]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [3]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [4]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [5]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [6]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [7]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [8]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+        [9]
+         interFreqBandList
+          [0]
+           interFreqNeedForGaps : true
+          [1]
+           interFreqNeedForGaps : true
+          [2]
+           interFreqNeedForGaps : true
+          [3]
+           interFreqNeedForGaps : true
+          [4]
+           interFreqNeedForGaps : true
+          [5]
+           interFreqNeedForGaps : true
+          [6]
+           interFreqNeedForGaps : true
+          [7]
+           interFreqNeedForGaps : true
+          [8]
+           interFreqNeedForGaps : true
+          [9]
+           interFreqNeedForGaps : true
+         interRAT-BandList
+          [0]
+           interRAT-NeedForGaps : true
+          [1]
+           interRAT-NeedForGaps : true
+          [2]
+           interRAT-NeedForGaps : true
+          [3]
+           interRAT-NeedForGaps : true
+      featureGroupIndicators
+       Intra-subframe freq hopping for PUSCH scheduled by UL grant; DCI format 3a; Aperiodic CQI/PMI/RI report on PUSCH: Mode 2-0 & 2-2 : not supported
+       Simultaneous CQI & ACK/NACK on PUCCH (format 2a/2b); Absolute TPC command for PUSCH; Resource alloc type 1 for PDSCH; Periodic CQI/PMI/RI report on PUCCH: Mode 2-0 & 2-1 : supported
+       5bit RLC UM SN; 7bit PDCP SN : supported
+       Short DRX cycle : supported
+       Long DRX cycle; DRX command MAC control element : supported
+       Prioritised bit rate : supported
+       RLC UM : supported
+       EUTRA RRC_CONNECTED to UTRA CELL_DCH PS handover : supported
+       EUTRA RRC_CONNECTED to GERAN GSM_Dedicated handover : supported
+       EUTRA RRC_CONNECTED to GERAN (Packet) Idle by Cell Change Order; EUTRA RRC_CONNECTED to GERAN (Packet) Idle by Cell Change Order with NACC : supported
+       EUTRA RRC_CONNECTED to CDMA2000 1xRTT CS Active handover : not supported
+       EUTRA RRC_CONNECTED to CDMA2000 HRPD Active handover : not supported
+       Inter-frequency handover (within FDD or TDD) : supported
+       Measurement reporting event: Event A4 - Neighbour > threshold; Measurement reporting event: Event A5 - Serving < threshold1 & Neighbour > threshold2 : supported
+       Measurement reporting event: Event B1 - Neighbour > threshold : supported
+       non-ANR related periodical measurement reporting : supported
+       ANR related intra-frequency measurement reporting events : supported
+       ANR related inter-frequency measurement reporting events : supported
+       ANR related inter-RAT measurement reporting events : supported
+       SRB1 and SRB2 for DCCH + 8x AM DRB; SRB1 and SRB2 for DCCH + 5x AM DRB + 3x UM DRB (if indicator 7 is supported) : supported
+       Predefined intra- and inter-subframe frequency hopping for PUSCH with N_sb > 1; Predefined inter-subframe frequency hopping for PUSCH with N_sb > 1 : supported
+       UTRAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode : supported
+       GERAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode : supported
+       1xRTT measurements, reporting and measurement reporting event B2 in E-UTRA connected mode : not supported
+       Inter-frequency measurements and reporting in E-UTRA connected mode : supported
+       HRPD measurements, reporting and measurement reporting event B2 in E-UTRA connected mode : not supported
+       EUTRA RRC_CONNECTED to UTRA CELL_DCH CS handover : supported
+       TTI bundling : supported
+       Semi-Persistent Scheduling : supported
+       Handover between FDD and TDD : supported
+       Mechanisms defined for cells broadcasting multi band information : supported
+      interRAT-Parameters
+       utraFDD
+        supportedBandListUTRA-FDD
+         [0] : bandI
+         [1] : bandVIII
+       geran
+        supportedBandListGERAN
+         [0] : gsm1800
+         [1] : gsm900E
+        interRAT-PS-HO-ToGERAN : false
+      nonCriticalExtension
+       phyLayerParameters-v920
+        enhancedDualLayerTDD-r9 : supported
+       interRAT-ParametersGERAN-v920
+        dtm-r9 : supported
+        e-RedirectionGERAN-r9 : supported
+       interRAT-ParametersUTRA-v920
+        e-RedirectionUTRA-r9 : supported
+       csg-ProximityIndicationParameters-r9
+       neighCellSI-AcquisitionParameters-r9
+       son-Parameters-r9
+        rach-Report-r9 : supported
+       nonCriticalExtension
+        lateNonCriticalExtension
+         featureGroupIndRel9Add-r9
+          Inter-RAT ANR features for UTRAN FDD : supported
+          Inter-RAT ANR features for GERAN : supported
+          Inter-RAT ANR features for 1xRTT : not supported
+          Inter-RAT ANR features for HRPD : not supported
+          Inter-RAT ANR features for UTRAN TDD : not supported
+          EUTRA RRC_CONNECTED to UTRA TDD CELL_DCH PS handover : not supported
+          UTRAN TDD measurements, reporting and measurement reporting event B2 in E-UTRA connected mode : not supported
+          EUTRA RRC_CONNECTED to UTRA TDD CELL_DCH CS handover : not supported
+          Measurement reporting event: Event B1 - Neighbour > threshold for UTRAN FDD : not supported
+          DCI format 3a : not supported
+         nonCriticalExtension
+          nonCriticalExtension
+           nonCriticalExtension
+            nonCriticalExtension
+             nonCriticalExtension
+              otdoa-PositioningCapabilities-r10
+               otdoa-UE-Assisted-r10 : supported
+              nonCriticalExtension
+               nonCriticalExtension
+                rf-Parameters-v10i0
+                 supportedBandCombination-v10i0
+                  [0]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [1]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [2]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [3]
+                  [4]
+                  [5]
+                  [6]
+                  [7]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [8]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [9]
+                  [10]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [11]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [12]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [13]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [14]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [15]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [16]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [17]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [18]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [19]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [20]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [21]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [22]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [23]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [24]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [25]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [26]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [27]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [28]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [29]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [30]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [31]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [32]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [33]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [34]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [35]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [36]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [37]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [38]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [39]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [40]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [41]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [42]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [43]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [44]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [45]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [46]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [47]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [48]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [49]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [50]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [51]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [52]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [53]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [54]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [2]
+                     bandParametersDL-v10i0
+                      [0]
+                  [55]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                  [56]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                  [57]
+                   bandParameterList-v10i0
+                    [0]
+                     bandParametersDL-v10i0
+                      [0]
+                       fourLayerTM3-TM4-r10 : supported
+                    [1]
+                     bandParametersDL-v10i0
+                      [0]
+                nonCriticalExtension
+                 nonCriticalExtension
+                  nonCriticalExtension
+                   rf-Parameters-v12b0
+                    maxLayersMIMO-Indication-r12 : supported
+        nonCriticalExtension
+         ue-Category-v1020 : 7
+         phyLayerParameters-v1020
+          tm9-With-8Tx-FDD-r10 : supported
+         rf-Parameters-v1020
+          supportedBandCombination-r10
+           [0]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [1]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [2]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [3]
+            [0]
+             bandEUTRA-r10 : 8
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [4]
+            [0]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [5]
+            [0]
+             bandEUTRA-r10 : 28
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [6]
+            [0]
+             bandEUTRA-r10 : 32
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [7]
+            [0]
+             bandEUTRA-r10 : 38
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [8]
+            [0]
+             bandEUTRA-r10 : 40
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [9]
+            [0]
+             bandEUTRA-r10 : 46
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [10]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [11]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [12]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [13]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [14]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [15]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [16]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [17]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [18]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [19]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [20]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [21]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [22]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [23]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [24]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [25]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [26]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [27]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [28]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [29]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [30]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [31]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [32]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [33]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [34]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [35]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [36]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [37]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [38]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [39]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [40]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [41]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [42]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [43]
+            [0]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [44]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [45]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [46]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 3
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [47]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [48]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [49]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [50]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [51]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [52]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [53]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [54]
+            [0]
+             bandEUTRA-r10 : 1
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [2]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [55]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : c
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+           [56]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+           [57]
+            [0]
+             bandEUTRA-r10 : 7
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : c
+               supportedMIMO-CapabilityDL-r10 : fourLayers
+            [1]
+             bandEUTRA-r10 : 20
+             bandParametersUL-r10
+              [0]
+               ca-BandwidthClassUL-r10 : a
+             bandParametersDL-r10
+              [0]
+               ca-BandwidthClassDL-r10 : a
+               supportedMIMO-CapabilityDL-r10 : twoLayers
+         measParameters-v1020
+          bandCombinationListEUTRA-r10
+           [0]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [1]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [2]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [3]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [4]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [5]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [6]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [7]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [8]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [9]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [10]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [11]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [12]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [13]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [14]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [15]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [16]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [17]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [18]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [19]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [20]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [21]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [22]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [23]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [24]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [25]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [26]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [27]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [28]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [29]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [30]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [31]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [32]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [33]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [34]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [35]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [36]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [37]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [38]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [39]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [40]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [41]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [42]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [43]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [44]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [45]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [46]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [47]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [48]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [49]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [50]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [51]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [52]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [53]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [54]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [55]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [56]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+           [57]
+            interFreqBandList
+             [0]
+              interFreqNeedForGaps : true
+             [1]
+              interFreqNeedForGaps : true
+             [2]
+              interFreqNeedForGaps : true
+             [3]
+              interFreqNeedForGaps : true
+             [4]
+              interFreqNeedForGaps : true
+             [5]
+              interFreqNeedForGaps : true
+             [6]
+              interFreqNeedForGaps : true
+             [7]
+              interFreqNeedForGaps : true
+             [8]
+              interFreqNeedForGaps : true
+             [9]
+              interFreqNeedForGaps : true
+            interRAT-BandList
+             [0]
+              interRAT-NeedForGaps : true
+             [1]
+              interRAT-NeedForGaps : true
+             [2]
+              interRAT-NeedForGaps : true
+             [3]
+              interRAT-NeedForGaps : true
+         featureGroupIndRel10-r10
+          DMRS with OCC (orthogonal cover code) and SGH (sequence group hopping) disabling : not supported
+          Trigger type 1 SRS (aperiodic SRS) transmission (Up to X ports) : not supported
+          PDSCH TM9 when up to 4 CSI reference signal ports are configured : supported
+          PDSCH TM9 for TDD when 8 CSI reference signal ports are configured : supported
+          PUCCH RM2-0 when PDSCH TM9 is configured and RM2-1 when PDSCH TM9 and up to 4 CSI reference signal ports are configured : not supported
+          PUCCH RM2-1 when PDSCH TM9 and 8 CSI reference signal ports are configured : not supported
+          PUSCH RM2-0 when PDSCH TM9 is configured and RM2-2 when PDSCH TM9 and up to 4 CSI reference signal ports are configured : not supported
+          PUSCH RM2-2 when PDSCH TM9 and 8 CSI reference signal ports are configured : not supported
+          PUCCH RM1-1 submode 1 : not supported
+          PUCCH RM1-1 submode 2 : not supported
+          Measurement reporting trigger Event A6 : supported
+          SCell addition within the Handover to EUTRA procedure : supported
+          Trigger type 0 SRS (periodic SRS) transmission on X Serving Cells : supported
+          Reporting of both UTRA CPICH RSCP and Ec/N0 in a Measurement Report : supported
+          Time domain ICIC RLM/RRM / ICIC RRM / ICIC CSI measurement sf restriction for the serving cell / neighbour cells : not supported
+          Relative transmit phase continuity for spatial multiplexing in UL : not supported
+         nonCriticalExtension
+          rf-Parameters-v1060
+           supportedBandCombinationExt-r10
+            [0]
+            [1]
+            [2]
+            [3]
+            [4]
+            [5]
+            [6]
+            [7]
+            [8]
+            [9]
+            [10]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [11]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [12]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [13]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [14]
+            [15]
+            [16]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [17]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [18]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [19]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [20]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [21]
+            [22]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [23]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [24]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [25]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [26]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [27]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [28]
+            [29]
+            [30]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [31]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [32]
+            [33]
+            [34]
+            [35]
+            [36]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [37]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [38]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [39]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [40]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [41]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [42]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [43]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [44]
+            [45]
+            [46]
+            [47]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [48]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [49]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [50]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [51]
+             supportedBandwidthCombinationSet-r10 : '11000000 00000000 00000000 00000000'B(3221225472)
+            [52]
+            [53]
+            [54]
+            [55]
+             supportedBandwidthCombinationSet-r10 : '11100000 00000000 00000000 00000000'B(3758096384)
+            [56]
+            [57]
+          nonCriticalExtension
+           nonCriticalExtension
+            pdcp-Parameters-v1130
+             pdcp-SN-Extension-r11 : supported
+            phyLayerParameters-v1130
+             crs-InterfHandl-r11 : supported
+            rf-Parameters-v1130
+            measParameters-v1130
+            interRAT-ParametersCDMA2000-v1130
+            otherParameters-r11
+            nonCriticalExtension
+             ue-Category-v1170 : 10
+             nonCriticalExtension
+              rf-Parameters-v1180
+               freqBandRetrieval-r11 : supported
+               requestedBands-r11
+                [0] : 3
+                [1] : 1
+                [2] : 7
+                [3] : 20
+              nonCriticalExtension
+               ue-Category-v11a0 : 12
+               nonCriticalExtension
+                rf-Parameters-v1250
+                 supportedBandListEUTRA-v1250
+                  [0]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [1]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [2]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [3]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [4]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [5]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [6]
+                   dl-256QAM-r12 : supported
+                  [7]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [8]
+                   dl-256QAM-r12 : supported
+                   ul-64QAM-r12 : supported
+                  [9]
+                   dl-256QAM-r12 : supported
+                 freqBandPriorityAdjustment-r12 : supported
+                ue-CategoryDL-r12 : 12
+                ue-CategoryUL-r12 : 13
+                measParameters-v1250
+                 extendedMaxMeasId-r12 : supported
+                nonCriticalExtension
+                 ue-CategoryDL-v1260 : 16
+                 nonCriticalExtension
+                  nonCriticalExtension
+                   nonCriticalExtension
+                    pdcp-Parameters-v1310
+                    rlc-Parameters-v1310
+                    rf-Parameters-v1310
+                     eNB-RequestedParameters-r13
+                      requestedCCsDL-r13 : 5
+                      requestedCCsUL-r13 : 2
+                     maximumCCsRetrieval-r13 : supported
+                     skipFallbackCombinations-r13 : supported
+                    interRAT-ParametersWLAN-r13
+                    laa-Parameters-r13
+                     downlinkLAA-r13 : supported
+                    wlan-IW-Parameters-v1310
+                    lwip-Parameters-r13
+                    nonCriticalExtension
+                     nonCriticalExtension
+                      ue-CategoryDL-v1330 : 18
+                      nonCriticalExtension
+                       nonCriticalExtension
+                        ce-Parameters-v1350
+                        nonCriticalExtension
+                         nonCriticalExtension
+                          phyLayerParameters-v1430
+                          rlc-Parameters-v1430
+                          rf-Parameters-v1430
+                           diffFallbackCombReport-r14 : supported
+                          otherParameters-v1430
+                          ce-Parameters-v1430
+                          nonCriticalExtension
+                           lwa-Parameters-v1440
+                           mac-Parameters-v1440
+                           nonCriticalExtension
+                            otherParameters-v1450
+                            nonCriticalExtension
+                             otherParameters-v1460
+                             nonCriticalExtension
+                              irat-ParametersNR-r15
+                               en-DC-r15 : supported
+                               supportedBandListEN-DC-r15
+                                [0]
+                                 bandNR-r15 : 28
+                                [1]
+                                 bandNR-r15 : 78
+                                [2]
+                                 bandNR-r15 : 3
+                                [3]
+                                 bandNR-r15 : 7
+                                [4]
+                                 bandNR-r15 : 1
+                              featureSetsEUTRA-r15
+                               featureSetsDL-r15
+                                [0]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 0
+                                [1]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 1
+                                [2]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 0
+                                  [1] : 0
+                                [3]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 1
+                                  [1] : 0
+                                [4]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 0
+                                  [1] : 1
+                                [5]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 1
+                                  [1] : 1
+                                [6]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 0
+                                  [1] : 0
+                                  [2] : 0
+                                [7]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 1
+                                  [1] : 1
+                                  [2] : 1
+                                [8]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 0
+                                  [1] : 0
+                                  [2] : 0
+                                  [3] : 0
+                                [9]
+                                 featureSetPerCC-ListDL-r15
+                                  [0] : 1
+                                  [1] : 1
+                                  [2] : 1
+                                  [3] : 1
+                               featureSetsDL-PerCC-r15
+                                [0]
+                                 fourLayerTM3-TM4-r15 : supported
+                                 supportedMIMO-CapabilityDL-MRDC-r15 : fourLayers
+                                 supportedCSI-Proc-r15 : n1
+                                [1]
+                                 supportedMIMO-CapabilityDL-MRDC-r15 : twoLayers
+                                 supportedCSI-Proc-r15 : n1
+                               featureSetsUL-r15
+                                [0]
+                                 featureSetPerCC-ListUL-r15
+                                  [0] : 0
+                                [1]
+                                 featureSetPerCC-ListUL-r15
+                                  [0] : 1
+                                [2]
+                                 featureSetPerCC-ListUL-r15
+                                  [0] : 0
+                                  [1] : 1
+                                [3]
+                                 featureSetPerCC-ListUL-r15
+                                  [0] : 1
+                                  [1] : 1
+                               featureSetsUL-PerCC-r15
+                                [0]
+                                 supportedMIMO-CapabilityUL-r15 : twoLayers
+                                [1]
+                              pdcp-ParametersNR-r15
+                               rohc-Profiles-r15
+                                profile0x0001-r15 : true
+                                profile0x0002-r15 : true
+                                profile0x0003-r15 : false
+                                profile0x0004-r15 : true
+                                profile0x0006-r15 : false
+                                profile0x0101-r15 : false
+                                profile0x0102-r15 : false
+                                profile0x0103-r15 : false
+                                profile0x0104-r15 : false
+                               rohc-ContextMaxSessions-r15 : cs16
+                               rohc-ProfilesUL-Only-r15
+                                profile0x0006-r15 : false
+                               outOfOrderDelivery-r15 : supported
+                               sn-SizeLo-r15 : supported
+                              nonCriticalExtension
+                               measParameters-v1520
+                               nonCriticalExtension
+                                nonCriticalExtension
+                                 otherParameters-v1540
+                                 irat-ParametersNR-v1540
+                                  ims-VoiceOverNR-FR1-r15 : supported
+                                 nonCriticalExtension
+                                  phyLayerParameters-v1550
+                                  mac-Parameters-v1550
+                                  fdd-Add-UE-EUTRA-Capabilities-v1550
+                                  tdd-Add-UE-EUTRA-Capabilities-v1550
+                                  nonCriticalExtension
+                                   pdcp-ParametersNR-v1560
+                                   irat-ParametersNR-v1560
+                                   fdd-Add-UE-EUTRA-Capabilities-v1560
+                                    pdcp-ParametersNR-v1560
+                                   tdd-Add-UE-EUTRA-Capabilities-v1560
+                                    pdcp-ParametersNR-v1560
+                                   nonCriticalExtension
+                                    nonCriticalExtension
+                                     neighCellSI-AcquisitionParameters-v15a0
+                                     nonCriticalExtension
+                                      otherParameters-v1610
+                                      mmtel-Parameters-v1610
+                                      ue-BasedNetwPerfMeasParameters-v1610
+    [1]
+     rat-Type : utra
+     ueCapabilityRAT-Container
+      interRATHandoverInfo
+       predefinedConfigStatusList -> absent : null
+       uE-SecurityInformation -> present
+        start-CS : '00000000 00000000 0010'B(2)
+       ue-CapabilityContainer -> present
+        ue-RadioAccessCapability
+         pdcp-Capability
+          losslessSRNS-RelocationSupport : false
+          supportForRfc2507 -> notSupported : null
+         rlc-Capability
+          totalRLC-AM-BufferSize : kb1000
+          maximumRLC-WindowSize : mws2047
+          maximumAM-EntityNumber : am8
+         transportChannelCapability
+          dl-TransChCapability
+           maxNoBitsReceived : b6400
+           maxConvCodeBitsReceived : b640
+           turboDecodingSupport -> supported : b6400
+           maxSimultaneousTransChs : e8
+           maxSimultaneousCCTrCH-Count : 1
+           maxReceivedTransportBlocks : tb32
+           maxNumberOfTFC : tfc128
+           maxNumberOfTF : tf64
+          ul-TransChCapability
+           maxNoBitsTransmitted : b6400
+           maxConvCodeBitsTransmitted : b640
+           turboEncodingSupport -> supported : b6400
+           maxSimultaneousTransChs : e8
+           modeSpecificInfo -> fdd : null
+           maxTransmittedBlocks : tb16
+           maxNumberOfTFC : tfc64
+           maxNumberOfTF : tf32
+         rf-Capability
+         physicalChannelCapability
+          fddPhysChCapability
+           downlinkPhysChCapability
+            maxNoDPCH-PDSCH-Codes : 1
+            maxNoPhysChBitsReceived : b19200
+            supportForSF-512 : false
+            dummy : false
+            dummy2 -> notSupported : null
+           uplinkPhysChCapability
+            maxNoDPDCH-BitsTransmitted : b9600
+            dummy : false
+         ue-MultiModeRAT-Capability
+          multiRAT-CapabilityList
+           supportOfGSM : true
+           supportOfMulticarrier : false
+          multiModeCapability : fdd
+         securityCapability
+          cipheringAlgorithmCap
+           uea2 : false
+           uea1 : true
+           uea0 : true
+          integrityProtectionAlgorithmCap
+           uia2 : false
+           uia1 : true
+         ue-positioning-Capability
+          standaloneLocMethodsSupported : true
+          ue-BasedOTDOA-Supported : false
+          networkAssistedGPS-Supported : bothNetworkAndUE-Based
+          supportForUE-GPS-TimingOfCellFrames : false
+          supportForIPDL : false
+        ue-RadioAccessCapability-v370ext
+         ue-RadioAccessCapabBandFDDList
+          [0]
+           radioFrequencyBandFDD : fdd2100
+           fddRF-Capability
+            ue-PowerClass : class3
+            txRxFrequencySeparation : default-TxRx-separation
+           measurementCapability
+            compressedModeMeasCapabFDDList
+             [0]
+              radioFrequencyBandFDD : fdd2100
+              dl-MeasurementsFDD : true
+              ul-MeasurementsFDD : true
+            compressedModeMeasCapabGSMList
+             [0]
+              radioFrequencyBandGSM : gsm900E
+              dl-MeasurementsGSM : true
+              ul-MeasurementsGSM : true
+             [1]
+              radioFrequencyBandGSM : gsm1800
+              dl-MeasurementsGSM : true
+              ul-MeasurementsGSM : true
+       v390NonCriticalExtensions -> present
+        interRATHandoverInfo-v390ext
+         dl-PhysChCapabilityFDD-v380ext
+        v3a0NonCriticalExtensions
+         interRATHandoverInfo-v3a0ext
+         laterNonCriticalExtensions
+          interRATHandoverInfo-v3d0ext
+          interRATHandoverInfo-r3-add-ext
+           interRATHandoverInfo-v690ext1
+            ue-RadioAccessCapability-v650ext
+             ue-RadioAccessCapabBandFDDList2
+              [0]
+               radioFrequencyBandFDD2 : bandVIII
+               fddRF-Capability
+                ue-PowerClass : class3
+                txRxFrequencySeparation : default-TxRx-separation
+               measurementCapability2
+                compressedModeMeasCapabFDDList
+                 [0]
+                  radioFrequencyBandFDD : fdd2100
+                  dl-MeasurementsFDD : true
+                  ul-MeasurementsFDD : true
+                 [1]
+                  radioFrequencyBandFDD2 : bandVIII
+                  dl-MeasurementsFDD : true
+                  ul-MeasurementsFDD : true
+                compressedModeMeasCapabGSMList
+                 [0]
+                  radioFrequencyBandGSM : gsm900E
+                  dl-MeasurementsGSM : true
+                  ul-MeasurementsGSM : true
+                 [1]
+                  radioFrequencyBandGSM : gsm1800
+                  dl-MeasurementsGSM : true
+                  ul-MeasurementsGSM : true
+             ue-RadioAccessCapabBandFDDList-ext
+              [0]
+               radioFrequencyBandFDD : fdd2100
+               compressedModeMeasCapabFDDList-ext
+                [0]
+                 radioFrequencyBandFDD2 : bandVIII
+                 dl-MeasurementsFDD : true
+                 ul-MeasurementsFDD : true
+          v3g0NonCriticalExtensions
+           interRATHandoverInfo-v3g0ext
+           v4b0NonCriticalExtensions
+            interRATHandoverInfo-v4b0ext
+             accessStratumReleaseIndicator : rel-9
+            v4d0NonCriticalExtensions
+             interRATHandoverInfo-v4d0ext
+             v590NonCriticalExtensions
+              interRATHandoverInfo-v590ext
+              v690NonCriticalExtensions
+               interRATHandoverInfo-v690ext
+                ue-SecurityInformation2
+                 start-PS : '00000000 00000001 0111'B(23)
+                ue-RadioAccessCapabilityComp2
+                 fddPhysicalChannelCapab-hspdsch-edch
+                  dl-CapabilityWithSimultaneousHS-DSCHConfig : kbps384
+                  physicalChannelCapabComp-hspdsch-r6 : 10
+                  physicalChannelCapability-edch-r6
+                   fdd-edch -> supported
+                    edch-PhysicalLayerCategory : 6
+               v6b0NonCriticalExtensions
+                interRATHandoverInfo-v6b0ext
+                v6e0NonCriticalExtensions
+                 interRATHandoverInfo-v6e0ext
+                  supportForFDPCH : true
+                 v770NonCriticalExtensions
+                  interRATHandoverInfo-v770ext
+                   ue-RadioAccessCapabilityInfo
+                    physicalChannelCapability
+                    mac-ehsSupport : true
+                   ue-RadioAccessCapabilityComp2
+                    hsdsch-physical-layer-category-ext : 14
+                    enhancedFdpch : true
+                    discontinuousDpcchTransmission : true
+                    slotFormat4 : true
+                  v790nonCriticalExtensions
+                   interRATHandoverInfo-v790ext
+                   v860NonCriticalExtensions
+                    interRATHandoverInfo-v860ext
+                     ue-RadioAccessCapabilityComp2
+                      hsdsch-physical-layer-category-ext2 : 24
+
+
+On Wed, 10 May 2023, 22:34 David Wheatley, <david@davwheat.dev> wrote:
+TickTime : 3133.803
+Exy LTE RRC OTA Packet
+ Direction : Uplink
+ul-dcch
+ message -> c1 -> ueCapabilityInformation
+  rrc-TransactionIdentifier : 2
+  criticalExtensions -> c1 -> ueCapabilityInformation-r8
+   ue-CapabilityRAT-ContainerList
+    [0]
+     rat-Type : nr
+     ueCapabilityRAT-Container
+      accessStratumRelease : rel16
+      pdcp-Parameters
+       supportedROHC-Profiles
+        profile0x0000 : true
+        profile0x0001 : true
+        profile0x0002 : true
+        profile0x0003 : false
+        profile0x0004 : true
+        profile0x0006 : false
+        profile0x0101 : false
+        profile0x0102 : false
+        profile0x0103 : false
+        profile0x0104 : false
+       maxNumberROHC-ContextSessions : cs16
+       continueROHC-Context : supported
+       outOfOrderDelivery : supported
+       shortSN : supported
+      rlc-Parameters
+       am-WithShortSN : supported
+       um-WithShortSN : supported
+       um-WithLongSN : supported
+      mac-Parameters
+       mac-ParametersCommon
+       mac-ParametersXDD-Diff
+        logicalChannelSR-DelayTimer : supported
+        longDRX-Cycle : supported
+        shortDRX-Cycle : supported
+        multipleSR-Configurations : supported
+      phy-Parameters
+       phy-ParametersCommon
+        csi-RS-CFRA-ForHO : supported
+        nzp-CSI-RS-IntefMgmt : supported
+        precoderGranularityCORESET : supported
+        dynamicHARQ-ACK-Codebook : supported
+        semiStaticHARQ-ACK-Codebook : supported
+        dynamicBetaOffsetInd-HARQ-ACK-CSI : supported
+        ra-Type0-PUSCH : supported
+        dynamicSwitchRA-Type0-1-PDSCH : supported
+        dynamicSwitchRA-Type0-1-PUSCH : supported
+        pdsch-MappingTypeA : supported
+        pdsch-MappingTypeB : supported
+        interleavingVRB-ToPRB-PDSCH : supported
+        pusch-RepetitionMultiSlots : supported
+        pdsch-RepetitionMultiSlots : supported
+        downlinkSPS : supported
+        cbg-TransIndication-DL : supported
+        cbg-FlushIndication-DL : supported
+        rateMatchingResrcSetSemi-Static : supported
+        rateMatchingResrcSetDynamic : supported
+        bwp-SwitchingDelay : type2
+        maxNumberSearchSpaces : n10
+        rateMatchingCtrlResrcSetDynamic : supported
+        maxLayersMIMO-Indication : supported
+       phy-ParametersXDD-Diff
+        twoPUCCH-F0-2-ConsecSymbols : supported
+        twoDifferentTPC-Loop-PUSCH : supported
+        dl-SchedulingOffset-PDSCH-TypeA : supported
+        dl-SchedulingOffset-PDSCH-TypeB : supported
+        ul-SchedulingOffset : supported
+       phy-ParametersFRX-Diff
+        twoFL-DMRS : '11'B(3)
+        supportedDMRS-TypeDL : type1And2
+        supportedDMRS-TypeUL : type1And2
+        semiOpenLoopCSI : supported
+        twoPUCCH-F0-2-ConsecSymbols : supported
+        pucch-F2-WithFH : supported
+        pucch-F3-WithFH : supported
+        pucch-F4-WithFH : supported
+        mux-SR-HARQ-ACK-CSI-PUCCH-MultiPerSlot : supported
+        uci-CodeBlockSegmentation : supported
+        twoPUCCH-AnyOthersInSlot : supported
+        pdcch-BlindDetectionCA : 8
+        absoluteTPC-Command : supported
+        pusch-HalfPi-BPSK : supported
+        pucch-F3-4-HalfPi-BPSK : supported
+        almostContiguousCP-OFDM-UL : supported
+        sp-CSI-RS : supported
+        multipleCORESET : supported
+        mux-SR-HARQ-ACK-CSI-PUCCH-OncePerSlot
+         sameSymbol : supported
+         diffSymbol : supported
+        mux-SR-HARQ-ACK-PUCCH : supported
+        dl-SchedulingOffset-PDSCH-TypeA : supported
+        dl-SchedulingOffset-PDSCH-TypeB : supported
+        oneFL-DMRS-TwoAdditionalDMRS-UL : supported
+        twoFL-DMRS-TwoAdditionalDMRS-UL : supported
+        oneFL-DMRS-ThreeAdditionalDMRS-UL : supported
+       phy-ParametersFR1
+        pdcch-MonitoringSingleOccasion : supported
+        scs-60kHz : supported
+        pdsch-256QAM-FR1 : supported
+        pdsch-RE-MappingFR1-PerSymbol : n20
+        pdsch-RE-MappingFR1-PerSlot : n112
+      rf-Parameters
+       supportedBandListNR
+        [0]
+         bandNR : 28
+         mimo-ParametersPerBand
+          tci-StatePDSCH
+           maxNumberConfiguredTCIstatesPerCC : n16
+           maxNumberActiveTCI-PerBWP : n1
+          additionalActiveTCI-StatePDCCH : supported
+          pusch-TransCoherence : nonCoherent
+          periodicBeamReport : supported
+          aperiodicBeamReport : supported
+          sp-BeamReportPUCCH : supported
+          sp-BeamReportPUSCH : supported
+          maxNumberRxBeam : 8
+          maxNumberNonGroupBeamReporting : n4
+          groupBeamReporting : supported
+          maxNumberCSI-RS-BFD : 2
+          maxNumberCSI-RS-SSB-CBD : 8
+          dummy2 : supported
+          dummy3 : 1
+          beamReportTiming
+           scs-15kHz : sym8
+           scs-30kHz : sym28
+           scs-60kHz : sym28
+          beamManagementSSB-CSI-RS
+           maxNumberSSB-CSI-RS-ResourceOneTx : n16
+           maxNumberCSI-RS-Resource : n32
+           maxNumberCSI-RS-ResourceTwoTx : n8
+           supportedCSI-RS-Density : oneAndThree
+           maxNumberAperiodicCSI-RS-Resource : n16
+          codebookParameters
+           type1
+            singlePanel
+             supportedCSI-RS-ResourceList
+              [0]
+               maxNumberTxPortsPerResource : p8
+               maxNumberResourcesPerBand : 8
+               totalNumberTxPortsPerBand : 64
+              [1]
+               maxNumberTxPortsPerResource : p16
+               maxNumberResourcesPerBand : 2
+               totalNumberTxPortsPerBand : 32
+              [2]
+               maxNumberTxPortsPerResource : p32
+               maxNumberResourcesPerBand : 3
+               totalNumberTxPortsPerBand : 96
+             modes : mode1
+             maxNumberCSI-RS-PerResourceSet : 4
+          csi-RS-IM-ReceptionForFeedback
+           maxConfigNumberNZP-CSI-RS-PerCC : 8
+           maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC : 64
+           maxConfigNumberCSI-IM-PerCC : n8
+           maxNumberSimultaneousNZP-CSI-RS-PerCC : 8
+           totalNumberPortsSimultaneousNZP-CSI-RS-PerCC : 64
+          csi-ReportFramework
+           maxNumberPeriodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberAperiodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report : 0
+           maxNumberPeriodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-triggeringStatePerCC : n63
+           maxNumberSemiPersistentCSI-PerBWP-ForBeamReport : 0
+           simultaneousCSI-ReportsPerCC : 4
+          csi-RS-ForTracking
+           maxBurstLength : 2
+           maxSimultaneousResourceSetsPerCC : 1
+           maxConfiguredResourceSetsPerCC : 8
+           maxConfiguredResourceSetsAllCC : 16
+         multipleTCI : supported
+         bwp-SameNumerology : upto4
+         bwp-DiffNumerology : upto4
+         pusch-256QAM : supported
+         ue-PowerClass : pc3
+         rateMatchingLTE-CRS : supported
+         channelBWs-DL -> fr1
+          scs-15kHz : '11110110 00'B(984)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         channelBWs-UL -> fr1
+          scs-15kHz : '11110110 00'B(984)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         pucch-SpatialRelInfoMAC-CE : supported
+        [1]
+         bandNR : 78
+         mimo-ParametersPerBand
+          tci-StatePDSCH
+           maxNumberConfiguredTCIstatesPerCC : n16
+           maxNumberActiveTCI-PerBWP : n1
+          additionalActiveTCI-StatePDCCH : supported
+          pusch-TransCoherence : nonCoherent
+          periodicBeamReport : supported
+          aperiodicBeamReport : supported
+          sp-BeamReportPUCCH : supported
+          sp-BeamReportPUSCH : supported
+          maxNumberRxBeam : 8
+          maxNumberNonGroupBeamReporting : n4
+          groupBeamReporting : supported
+          maxNumberCSI-RS-BFD : 2
+          maxNumberCSI-RS-SSB-CBD : 8
+          dummy2 : supported
+          dummy3 : 1
+          beamReportTiming
+           scs-15kHz : sym8
+           scs-30kHz : sym28
+           scs-60kHz : sym28
+          beamManagementSSB-CSI-RS
+           maxNumberSSB-CSI-RS-ResourceOneTx : n16
+           maxNumberCSI-RS-Resource : n32
+           maxNumberCSI-RS-ResourceTwoTx : n8
+           supportedCSI-RS-Density : oneAndThree
+           maxNumberAperiodicCSI-RS-Resource : n16
+          codebookParameters
+           type1
+            singlePanel
+             supportedCSI-RS-ResourceList
+              [0]
+               maxNumberTxPortsPerResource : p8
+               maxNumberResourcesPerBand : 8
+               totalNumberTxPortsPerBand : 64
+              [1]
+               maxNumberTxPortsPerResource : p16
+               maxNumberResourcesPerBand : 2
+               totalNumberTxPortsPerBand : 32
+              [2]
+               maxNumberTxPortsPerResource : p32
+               maxNumberResourcesPerBand : 3
+               totalNumberTxPortsPerBand : 96
+             modes : mode1
+             maxNumberCSI-RS-PerResourceSet : 4
+          csi-RS-IM-ReceptionForFeedback
+           maxConfigNumberNZP-CSI-RS-PerCC : 8
+           maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC : 64
+           maxConfigNumberCSI-IM-PerCC : n8
+           maxNumberSimultaneousNZP-CSI-RS-PerCC : 8
+           totalNumberPortsSimultaneousNZP-CSI-RS-PerCC : 64
+          csi-ReportFramework
+           maxNumberPeriodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberAperiodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report : 0
+           maxNumberPeriodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-triggeringStatePerCC : n63
+           maxNumberSemiPersistentCSI-PerBWP-ForBeamReport : 0
+           simultaneousCSI-ReportsPerCC : 4
+          csi-RS-ForTracking
+           maxBurstLength : 2
+           maxSimultaneousResourceSetsPerCC : 1
+           maxConfiguredResourceSetsPerCC : 8
+           maxConfiguredResourceSetsAllCC : 16
+         multipleTCI : supported
+         bwp-SameNumerology : upto4
+         bwp-DiffNumerology : upto4
+         pusch-256QAM : supported
+         ue-PowerClass : pc2
+         rateMatchingLTE-CRS : supported
+         channelBWs-DL -> fr1
+          scs-15kHz : '00000000 00'B(0)
+          scs-30kHz : '01111111 11'B(511)
+          scs-60kHz : '00000000 00'B(0)
+         channelBWs-UL -> fr1
+          scs-15kHz : '00000000 00'B(0)
+          scs-30kHz : '01111111 11'B(511)
+          scs-60kHz : '00000000 00'B(0)
+         pucch-SpatialRelInfoMAC-CE : supported
+         channelBWs-DL-v1590 -> fr1
+         channelBWs-UL-v1590 -> fr1
+        [2]
+         bandNR : 3
+         mimo-ParametersPerBand
+          tci-StatePDSCH
+           maxNumberConfiguredTCIstatesPerCC : n16
+           maxNumberActiveTCI-PerBWP : n1
+          additionalActiveTCI-StatePDCCH : supported
+          pusch-TransCoherence : nonCoherent
+          periodicBeamReport : supported
+          aperiodicBeamReport : supported
+          sp-BeamReportPUCCH : supported
+          sp-BeamReportPUSCH : supported
+          maxNumberRxBeam : 8
+          maxNumberNonGroupBeamReporting : n4
+          groupBeamReporting : supported
+          maxNumberCSI-RS-BFD : 2
+          maxNumberCSI-RS-SSB-CBD : 8
+          dummy2 : supported
+          dummy3 : 1
+          beamReportTiming
+           scs-15kHz : sym8
+           scs-30kHz : sym28
+           scs-60kHz : sym28
+          beamManagementSSB-CSI-RS
+           maxNumberSSB-CSI-RS-ResourceOneTx : n16
+           maxNumberCSI-RS-Resource : n32
+           maxNumberCSI-RS-ResourceTwoTx : n8
+           supportedCSI-RS-Density : oneAndThree
+           maxNumberAperiodicCSI-RS-Resource : n16
+          codebookParameters
+           type1
+            singlePanel
+             supportedCSI-RS-ResourceList
+              [0]
+               maxNumberTxPortsPerResource : p8
+               maxNumberResourcesPerBand : 8
+               totalNumberTxPortsPerBand : 64
+              [1]
+               maxNumberTxPortsPerResource : p16
+               maxNumberResourcesPerBand : 2
+               totalNumberTxPortsPerBand : 32
+              [2]
+               maxNumberTxPortsPerResource : p32
+               maxNumberResourcesPerBand : 3
+               totalNumberTxPortsPerBand : 96
+             modes : mode1
+             maxNumberCSI-RS-PerResourceSet : 4
+          csi-RS-IM-ReceptionForFeedback
+           maxConfigNumberNZP-CSI-RS-PerCC : 8
+           maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC : 64
+           maxConfigNumberCSI-IM-PerCC : n8
+           maxNumberSimultaneousNZP-CSI-RS-PerCC : 8
+           totalNumberPortsSimultaneousNZP-CSI-RS-PerCC : 64
+          csi-ReportFramework
+           maxNumberPeriodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberAperiodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report : 0
+           maxNumberPeriodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-triggeringStatePerCC : n63
+           maxNumberSemiPersistentCSI-PerBWP-ForBeamReport : 0
+           simultaneousCSI-ReportsPerCC : 4
+          csi-RS-ForTracking
+           maxBurstLength : 2
+           maxSimultaneousResourceSetsPerCC : 1
+           maxConfiguredResourceSetsPerCC : 8
+           maxConfiguredResourceSetsAllCC : 16
+         multipleTCI : supported
+         bwp-SameNumerology : upto4
+         bwp-DiffNumerology : upto4
+         pusch-256QAM : supported
+         ue-PowerClass : pc3
+         rateMatchingLTE-CRS : supported
+         channelBWs-DL -> fr1
+          scs-15kHz : '11111110 00'B(1016)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         channelBWs-UL -> fr1
+          scs-15kHz : '11111110 00'B(1016)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         pucch-SpatialRelInfoMAC-CE : supported
+        [3]
+         bandNR : 7
+         mimo-ParametersPerBand
+          tci-StatePDSCH
+           maxNumberConfiguredTCIstatesPerCC : n16
+           maxNumberActiveTCI-PerBWP : n1
+          additionalActiveTCI-StatePDCCH : supported
+          pusch-TransCoherence : nonCoherent
+          periodicBeamReport : supported
+          aperiodicBeamReport : supported
+          sp-BeamReportPUCCH : supported
+          sp-BeamReportPUSCH : supported
+          maxNumberRxBeam : 8
+          maxNumberNonGroupBeamReporting : n4
+          groupBeamReporting : supported
+          maxNumberCSI-RS-BFD : 2
+          maxNumberCSI-RS-SSB-CBD : 8
+          dummy2 : supported
+          dummy3 : 1
+          beamReportTiming
+           scs-15kHz : sym8
+           scs-30kHz : sym28
+           scs-60kHz : sym28
+          beamManagementSSB-CSI-RS
+           maxNumberSSB-CSI-RS-ResourceOneTx : n16
+           maxNumberCSI-RS-Resource : n32
+           maxNumberCSI-RS-ResourceTwoTx : n8
+           supportedCSI-RS-Density : oneAndThree
+           maxNumberAperiodicCSI-RS-Resource : n16
+          codebookParameters
+           type1
+            singlePanel
+             supportedCSI-RS-ResourceList
+              [0]
+               maxNumberTxPortsPerResource : p8
+               maxNumberResourcesPerBand : 8
+               totalNumberTxPortsPerBand : 64
+              [1]
+               maxNumberTxPortsPerResource : p16
+               maxNumberResourcesPerBand : 2
+               totalNumberTxPortsPerBand : 32
+              [2]
+               maxNumberTxPortsPerResource : p32
+               maxNumberResourcesPerBand : 3
+               totalNumberTxPortsPerBand : 96
+             modes : mode1
+             maxNumberCSI-RS-PerResourceSet : 4
+          csi-RS-IM-ReceptionForFeedback
+           maxConfigNumberNZP-CSI-RS-PerCC : 8
+           maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC : 64
+           maxConfigNumberCSI-IM-PerCC : n8
+           maxNumberSimultaneousNZP-CSI-RS-PerCC : 8
+           totalNumberPortsSimultaneousNZP-CSI-RS-PerCC : 64
+          csi-ReportFramework
+           maxNumberPeriodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberAperiodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report : 0
+           maxNumberPeriodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-triggeringStatePerCC : n63
+           maxNumberSemiPersistentCSI-PerBWP-ForBeamReport : 0
+           simultaneousCSI-ReportsPerCC : 4
+          csi-RS-ForTracking
+           maxBurstLength : 2
+           maxSimultaneousResourceSetsPerCC : 1
+           maxConfiguredResourceSetsPerCC : 8
+           maxConfiguredResourceSetsAllCC : 16
+         multipleTCI : supported
+         bwp-SameNumerology : upto4
+         bwp-DiffNumerology : upto4
+         pusch-256QAM : supported
+         ue-PowerClass : pc3
+         rateMatchingLTE-CRS : supported
+         channelBWs-DL -> fr1
+          scs-15kHz : '11111111 00'B(1020)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         channelBWs-UL -> fr1
+          scs-15kHz : '11111111 00'B(1020)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         pucch-SpatialRelInfoMAC-CE : supported
+        [4]
+         bandNR : 1
+         mimo-ParametersPerBand
+          tci-StatePDSCH
+           maxNumberConfiguredTCIstatesPerCC : n16
+           maxNumberActiveTCI-PerBWP : n1
+          additionalActiveTCI-StatePDCCH : supported
+          pusch-TransCoherence : nonCoherent
+          periodicBeamReport : supported
+          aperiodicBeamReport : supported
+          sp-BeamReportPUCCH : supported
+          sp-BeamReportPUSCH : supported
+          maxNumberRxBeam : 8
+          maxNumberNonGroupBeamReporting : n4
+          groupBeamReporting : supported
+          maxNumberCSI-RS-BFD : 2
+          maxNumberCSI-RS-SSB-CBD : 8
+          dummy2 : supported
+          dummy3 : 1
+          beamReportTiming
+           scs-15kHz : sym8
+           scs-30kHz : sym28
+           scs-60kHz : sym28
+          beamManagementSSB-CSI-RS
+           maxNumberSSB-CSI-RS-ResourceOneTx : n16
+           maxNumberCSI-RS-Resource : n32
+           maxNumberCSI-RS-ResourceTwoTx : n8
+           supportedCSI-RS-Density : oneAndThree
+           maxNumberAperiodicCSI-RS-Resource : n16
+          codebookParameters
+           type1
+            singlePanel
+             supportedCSI-RS-ResourceList
+              [0]
+               maxNumberTxPortsPerResource : p8
+               maxNumberResourcesPerBand : 8
+               totalNumberTxPortsPerBand : 64
+              [1]
+               maxNumberTxPortsPerResource : p16
+               maxNumberResourcesPerBand : 2
+               totalNumberTxPortsPerBand : 32
+              [2]
+               maxNumberTxPortsPerResource : p32
+               maxNumberResourcesPerBand : 3
+               totalNumberTxPortsPerBand : 96
+             modes : mode1
+             maxNumberCSI-RS-PerResourceSet : 4
+          csi-RS-IM-ReceptionForFeedback
+           maxConfigNumberNZP-CSI-RS-PerCC : 8
+           maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC : 64
+           maxConfigNumberCSI-IM-PerCC : n8
+           maxNumberSimultaneousNZP-CSI-RS-PerCC : 8
+           totalNumberPortsSimultaneousNZP-CSI-RS-PerCC : 64
+          csi-ReportFramework
+           maxNumberPeriodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberAperiodicCSI-PerBWP-ForCSI-Report : 2
+           maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report : 0
+           maxNumberPeriodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-PerBWP-ForBeamReport : 2
+           maxNumberAperiodicCSI-triggeringStatePerCC : n63
+           maxNumberSemiPersistentCSI-PerBWP-ForBeamReport : 0
+           simultaneousCSI-ReportsPerCC : 4
+          csi-RS-ForTracking
+           maxBurstLength : 2
+           maxSimultaneousResourceSetsPerCC : 1
+           maxConfiguredResourceSetsPerCC : 8
+           maxConfiguredResourceSetsAllCC : 16
+         multipleTCI : supported
+         bwp-SameNumerology : upto4
+         bwp-DiffNumerology : upto4
+         pusch-256QAM : supported
+         ue-PowerClass : pc3
+         rateMatchingLTE-CRS : supported
+         channelBWs-DL -> fr1
+          scs-15kHz : '11111111 00'B(1020)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         channelBWs-UL -> fr1
+          scs-15kHz : '11111111 00'B(1020)
+          scs-30kHz : '00000000 00'B(0)
+          scs-60kHz : '00000000 00'B(0)
+         pucch-SpatialRelInfoMAC-CE : supported
+      measAndMobParameters
+       measAndMobParametersCommon
+        ssb-RLM : supported
+        ssb-AndCSI-RS-RLM : supported
+        nr-CGI-Reporting : supported
+        independentGapConfig : supported
+        maxNumberCSI-RS-RRM-RS-SINR : n64
+        nr-CGI-Reporting-ENDC : supported
+       measAndMobParametersXDD-Diff
+        intraAndInterF-MeasAndReport : supported
+        eventA-MeasAndReport : supported
+        handoverInterF : supported
+       measAndMobParametersFRX-Diff
+        ss-SINR-Meas : supported
+        csi-RSRP-AndRSRQ-MeasWithSSB : supported
+        csi-RSRP-AndRSRQ-MeasWithoutSSB : supported
+        csi-SINR-Meas : supported
+        handoverInterF : supported
+        maxNumberResource-CSI-RS-RLM : n8
+      fdd-Add-UE-NR-Capabilities
+       phy-ParametersXDD-Diff
+       mac-ParametersXDD-Diff
+      tdd-Add-UE-NR-Capabilities
+       phy-ParametersXDD-Diff
+       mac-ParametersXDD-Diff
+      featureSets
+       featureSetsDownlink
+        [0]
+         featureSetListPerDownlinkCC
+          [0] : 1
+         intraBandFreqSeparationDL : mhz1200
+         scellWithoutSSB : supported
+         csi-RS-MeasSCellWithoutSSB : supported
+         pdcch-MonitoringAnyOccasions : withoutDCI-Gap
+         ue-SpecificUL-DL-Assignment : supported
+         searchSpaceSharingCA-DL : supported
+         pdsch-ProcessingType1-DifferentTB-PerSlot
+          scs-15kHz : upto2
+          scs-30kHz : upto2
+          scs-60kHz : upto2
+        [1]
+         featureSetListPerDownlinkCC
+          [0] : 2
+         intraBandFreqSeparationDL : mhz1200
+         scellWithoutSSB : supported
+         csi-RS-MeasSCellWithoutSSB : supported
+         pdcch-MonitoringAnyOccasions : withoutDCI-Gap
+         ue-SpecificUL-DL-Assignment : supported
+         searchSpaceSharingCA-DL : supported
+         pdsch-ProcessingType1-DifferentTB-PerSlot
+          scs-15kHz : upto2
+          scs-30kHz : upto2
+          scs-60kHz : upto2
+       featureSetsDownlinkPerCC
+        [0]
+         supportedSubcarrierSpacingDL : kHz15
+         supportedBandwidthDL -> fr1 : mhz10
+         maxNumberMIMO-LayersPDSCH : twoLayers
+         supportedModulationOrderDL : qam256
+        [1]
+         supportedSubcarrierSpacingDL : kHz15
+         supportedBandwidthDL -> fr1 : mhz20
+         maxNumberMIMO-LayersPDSCH : fourLayers
+         supportedModulationOrderDL : qam256
+       featureSetsUplink
+        [0]
+         featureSetListPerUplinkCC
+          [0] : 1
+         supportedSRS-Resources
+          maxNumberAperiodicSRS-PerBWP : n1
+          maxNumberAperiodicSRS-PerBWP-PerSlot : 1
+          maxNumberPeriodicSRS-PerBWP : n8
+          maxNumberPeriodicSRS-PerBWP-PerSlot : 1
+          maxNumberSemiPersistentSRS-PerBWP : n1
+          maxNumberSemiPersistentSRS-PerBWP-PerSlot : 1
+          maxNumberSRS-Ports-PerResource : n1
+         twoPUCCH-Group : supported
+        [1]
+         featureSetListPerUplinkCC
+          [0] : 2
+         supportedSRS-Resources
+          maxNumberAperiodicSRS-PerBWP : n1
+          maxNumberAperiodicSRS-PerBWP-PerSlot : 1
+          maxNumberPeriodicSRS-PerBWP : n8
+          maxNumberPeriodicSRS-PerBWP-PerSlot : 1
+          maxNumberSemiPersistentSRS-PerBWP : n1
+          maxNumberSemiPersistentSRS-PerBWP-PerSlot : 1
+          maxNumberSRS-Ports-PerResource : n1
+         twoPUCCH-Group : supported
+       featureSetsUplinkPerCC
+        [0]
+         supportedSubcarrierSpacingUL : kHz15
+         supportedBandwidthUL -> fr1 : mhz10
+         mimo-CB-PUSCH
+          maxNumberMIMO-LayersCB-PUSCH : oneLayer
+          maxNumberSRS-ResourcePerSet : 1
+         supportedModulationOrderUL : qam256
+        [1]
+         supportedSubcarrierSpacingUL : kHz15
+         supportedBandwidthUL -> fr1 : mhz20
+         mimo-CB-PUSCH
+          maxNumberMIMO-LayersCB-PUSCH : oneLayer
+          maxNumberSRS-ResourcePerSet : 1
+         supportedModulationOrderUL : qam256
+       featureSetsDownlink-v1540
+        [0]
+         oneFL-DMRS-TwoAdditionalDMRS-DL : supported
+         additionalDMRS-DL-Alt : supported
+         twoFL-DMRS-TwoAdditionalDMRS-DL : supported
+         oneFL-DMRS-ThreeAdditionalDMRS-DL : supported
+        [1]
+         oneFL-DMRS-TwoAdditionalDMRS-DL : supported
+         additionalDMRS-DL-Alt : supported
+         twoFL-DMRS-TwoAdditionalDMRS-DL : supported
+         oneFL-DMRS-ThreeAdditionalDMRS-DL : supported
+      nonCriticalExtension
+       nonCriticalExtension
+        ims-Parameters
+         ims-ParametersFRX-Diff
+    [1]
+     rat-Type : eutra-nr
+     ueCapabilityRAT-Container
+      measAndMobParametersMRDC
+       measAndMobParametersMRDC-Common
+        independentGapConfig : supported
+       measAndMobParametersMRDC-XDD-Diff
+        sftd-MeasPSCell : supported
+       measAndMobParametersMRDC-FRX-Diff
+        simultaneousRxDataSSB-DiffNumerology : supported
+      rf-ParametersMRDC
+       supportedBandCombinationList
+        [0]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 1
+           ca-BandwidthClassDL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+          [2] -> eutra
+           bandEUTRA : 7
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [3] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 0
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [1]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 1
+           ca-BandwidthClassDL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [2] -> eutra
+           bandEUTRA : 7
+           ca-BandwidthClassDL-EUTRA : c
+          [3] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 1
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [2]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 1
+           ca-BandwidthClassDL-EUTRA : a
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+          [2] -> eutra
+           bandEUTRA : 7
+           ca-BandwidthClassDL-EUTRA : c
+          [3] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 2
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [3]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+          [1] -> eutra
+           bandEUTRA : 7
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [2] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 3
+         ca-ParametersEUTRA
+          supportedBandwidthCombinationSetEUTRA-v1530 : '11'B(3)
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [4]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 7
+           ca-BandwidthClassDL-EUTRA : c
+          [2] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 4
+         ca-ParametersEUTRA
+          supportedBandwidthCombinationSetEUTRA-v1530 : '11'B(3)
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [5]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+          [1] -> eutra
+           bandEUTRA : 20
+           ca-BandwidthClassDL-EUTRA : a
+           ca-BandwidthClassUL-EUTRA : a
+          [2] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 5
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [6]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 20
+           ca-BandwidthClassDL-EUTRA : a
+          [2] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 6
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [7]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> eutra
+           bandEUTRA : 20
+           ca-BandwidthClassDL-EUTRA : a
+          [2] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 7
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+        [8]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+          [2] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+         featureSetCombination : 8
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+         supportedBandwidthCombinationSet : '11'B(3)
+        [9]
+         bandList
+          [0] -> eutra
+           bandEUTRA : 3
+           ca-BandwidthClassDL-EUTRA : c
+           ca-BandwidthClassUL-EUTRA : a
+          [1] -> nr
+           bandNR : 1
+           ca-BandwidthClassDL-NR : a
+           ca-BandwidthClassUL-NR : a
+          [2] -> nr
+           bandNR : 28
+           ca-BandwidthClassDL-NR : a
+         featureSetCombination : 9
+         mrdc-Parameters
+          dynamicPowerSharingENDC : supported
+          simultaneousRxTxInterBandENDC : supported
+          asyncIntraBandENDC : supported
+         supportedBandwidthCombinationSet : '11'B(3)
+       appliedFreqBandListFilter
+        [0] -> bandInformationEUTRA
+         bandEUTRA : 1
+        [1] -> bandInformationEUTRA
+         bandEUTRA : 3
+        [2] -> bandInformationEUTRA
+         bandEUTRA : 7
+        [3] -> bandInformationEUTRA
+         bandEUTRA : 20
+        [4] -> bandInformationNR
+         bandNR : 1
+        [5] -> bandInformationNR
+         bandNR : 28
+       supportedBandCombinationList-v1540
+        [0]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+          [3]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [1]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+          [3]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [2]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+          [3]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [3]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [4]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [5]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [6]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [7]
+         bandList-v1540
+          [0]
+          [1]
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [8]
+         bandList-v1540
+          [0]
+          [1]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+        [9]
+         bandList-v1540
+          [0]
+          [1]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+          [2]
+           srs-TxSwitch
+            supportedSRS-TxPortSwitch : notSupported
+         ca-ParametersNR-v1540
+          csi-RS-IM-ReceptionForFeedbackPerBandComb
+           maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC : 16
+           totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC : 104
+          simultaneousCSI-ReportsAllCC : 8
+       supportedBandCombinationList-v1560
+        [0]
+        [1]
+        [2]
+        [3]
+        [4]
+        [5]
+        [6]
+        [7]
+        [8]
+        [9]
+       supportedBandCombinationList-v1570
+        [0]
+         ca-ParametersEUTRA-v1570
+        [1]
+         ca-ParametersEUTRA-v1570
+        [2]
+         ca-ParametersEUTRA-v1570
+        [3]
+         ca-ParametersEUTRA-v1570
+        [4]
+         ca-ParametersEUTRA-v1570
+        [5]
+         ca-ParametersEUTRA-v1570
+        [6]
+         ca-ParametersEUTRA-v1570
+        [7]
+         ca-ParametersEUTRA-v1570
+        [8]
+         ca-ParametersEUTRA-v1570
+        [9]
+         ca-ParametersEUTRA-v1570
+       supportedBandCombinationList-v1580
+        [0]
+         mrdc-Parameters-v1580
+        [1]
+         mrdc-Parameters-v1580
+        [2]
+         mrdc-Parameters-v1580
+        [3]
+         mrdc-Parameters-v1580
+        [4]
+         mrdc-Parameters-v1580
+        [5]
+         mrdc-Parameters-v1580
+        [6]
+         mrdc-Parameters-v1580
+        [7]
+         mrdc-Parameters-v1580
+        [8]
+         mrdc-Parameters-v1580
+        [9]
+         mrdc-Parameters-v1580
+       supportedBandCombinationList-v1590
+        [0]
+         mrdc-Parameters-v1590
+        [1]
+         mrdc-Parameters-v1590
+        [2]
+         mrdc-Parameters-v1590
+        [3]
+         mrdc-Parameters-v1590
+        [4]
+         mrdc-Parameters-v1590
+        [5]
+         mrdc-Parameters-v1590
+        [6]
+         mrdc-Parameters-v1590
+        [7]
+         mrdc-Parameters-v1590
+        [8]
+         mrdc-Parameters-v1590
+        [9]
+         mrdc-Parameters-v1590
+       supportedBandCombinationList-v1610
+        [0]
+        [1]
+        [2]
+        [3]
+        [4]
+        [5]
+        [6]
+        [7]
+        [8]
+        [9]
+      generalParametersMRDC
+       splitDRB-withUL-Both-MCG-SCG : supported
+       srb3 : supported
+      featureSetCombinations
+       [0]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 1
+          uplinkSetEUTRA : 0
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [2]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [3]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 1
+       [1]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 1
+          uplinkSetEUTRA : 0
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [2]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [3]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 1
+       [2]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 1
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [2]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [3]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 1
+       [3]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [2]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 2
+       [4]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [2]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 2
+       [5]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 0
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 2
+          uplinkSetEUTRA : 2
+        [2]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 2
+       [6]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 2
+          uplinkSetEUTRA : 0
+        [2]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 2
+       [7]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> eutra
+          downlinkSetEUTRA : 2
+          uplinkSetEUTRA : 0
+        [2]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 1
+       [8]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 0
+        [2]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 1
+       [9]
+        [0]
+         [0] -> eutra
+          downlinkSetEUTRA : 3
+          uplinkSetEUTRA : 2
+        [1]
+         [0] -> nr
+          downlinkSetNR : 2
+          uplinkSetNR : 2
+        [2]
+         [0] -> nr
+          downlinkSetNR : 1
+          uplinkSetNR : 0

@@ -21,10 +21,20 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('tokens')->insert([
             [
-                'token'      => 'testabc',
-                'comment'    => '',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'token'         => 'admin',
+                'comment'       => '',
+                'expires_after' => now()->addDays(7),
+                'created_at'    => now(),
+                'updated_at'    => now(),
+                'type'          => 'admin',
+            ],
+            [
+                'token'         => 'admin-expired',
+                'comment'       => '',
+                'expires_after' => now()->addDays(-1),
+                'created_at'    => now(),
+                'updated_at'    => now(),
+                'type'          => 'admin',
             ],
         ]);
 

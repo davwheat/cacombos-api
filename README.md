@@ -1,5 +1,7 @@
 # mobilecombos.com backend API
 
+[![codecov](https://codecov.io/gh/mobilecombos/backend-api/branch/master/graph/badge.svg?token=iQubs8aOkQ)](https://codecov.io/gh/mobilecombos/backend-api)
+
 This is the backend API for mobilecombos.com. This works in unison with the [standalone frontend](https://github.com/mobilecombos/website-frontend) to fully implement the website's features.
 
 ## Local development
@@ -13,7 +15,7 @@ To run this locally, you should use Laravel Sail and Composer.
 ### Requirements
 
 -   Docker
--   PHP 8.1 locally
+-   PHP 8.2 locally
 -   Composer 2 or later
 -   Linux (including via WSL)
 

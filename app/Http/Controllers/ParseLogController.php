@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\RequiresAuthentication;
 use App\Rules\FileOrString;
+use BeyondCode\ServerTiming\Facades\ServerTiming;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ParseLogController extends JsonController
 {
@@ -18,7 +20,11 @@ class ParseLogController extends JsonController
 
     public const VALID_LOG_FORMATS = [
         'nsg'      => 'N',
-        'qualcomm' => 'QALL',
+        'qualcomm' => null,
+
+        // Internal use only
+        'qualcomm-lte' => 'Q',
+        'qualcomm-nr'  => 'QNR',
     ];
 
     public function __construct(RequiresAuthentication $requiresAuthentication)
@@ -52,36 +58,67 @@ class ParseLogController extends JsonController
         $logFormat = Arr::get($body, 'logFormat');
         $logs = Arr::only($body, ['eutraLog', 'eutranrLog', 'nrLog']);
 
-        $output = $this->callParser($logFormat, $logs);
+        $output = [];
 
-        if ($output['code'] !== 0) {
+        if ($logFormat === 'qualcomm') {
+            $lteLogs = Arr::only($logs, ['eutraLog']);
+            if (count($lteLogs) > 0) {
+                $output[] = $this->callParser('qualcomm-lte', $lteLogs);
+            }
+
+            $nrLogs = Arr::only($logs, ['eutranrLog']);
+            if (count($nrLogs) > 0) {
+                $output[] = $this->callParser('qualcomm-nr', $nrLogs);
+            }
+        } else {
+            $output[] = $this->callParser($logFormat, $logs);
+        }
+
+        // If an error occurred in any of the parser calls, return the error.
+        if (count(array_filter($output, fn ($out) => $out['code'] !== 0)) > 0) {
             $debug = App::hasDebugModeEnabled();
             $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 
             return [
                 'errors' => [
                     'detail' => 'Parser failed to execute with the provided log files.',
-                    'meta'   => !$debug ? null : ['output' => $output['output']],
+                    'meta'   => !$debug ? null : $output,
                 ],
             ];
         }
 
-        if ($output['code'] === 0) {
-            $this->response = $this->response->withHeader('Content-Type', 'text/csv');
-        } else {
-            $this->response = $this->response->withHeader('Content-Type', 'text/plain');
+        foreach ($output as &$out) {
+            $outputLines = $out['output'];
+
+            Arr::forget($outputLines, ['logType', 'parserVersion', 'timestamp', 'metadata']);
+
+            // Error if one or more parser call outputs have no capability data
+            if (count($outputLines) === 0) {
+                $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+                return [
+                    'errors' => [
+                        'detail' => 'Parser failed to find any capability data in one or more of the provided log files.',
+                        'meta'   => $out['output'],
+                    ],
+                ];
+            }
         }
 
-        return explode(PHP_EOL.PHP_EOL, implode(PHP_EOL, $output['output']));
+        $this->response = $this->response->withHeader('Content-Type', 'application/json');
+
+        $out = array_map(fn ($out) => $out['output'], $output);
+
+        return $out;
     }
 
-    public function getParserType(string $format): ?array
+    public function getParserType(string $format): string
     {
         // Must include all `VALID_LOG_TYPES`
         $converted = self::VALID_LOG_FORMATS[$format] ?? null;
 
-        if ($converted !== null && !is_array($converted)) {
-            return [$converted, $converted, $converted];
+        if ($converted === null) {
+            throw new HttpException(Response::HTTP_UNPROCESSABLE_ENTITY, 'Invalid log format.');
         }
 
         return $converted;
@@ -92,7 +129,7 @@ class ParseLogController extends JsonController
      */
     public function callParser(string $logFormat, array $logs): array
     {
-        clock()->event('Running log parser')->begin();
+        ServerTiming::start('Running log parser');
 
         $output = [];
 
@@ -101,27 +138,27 @@ class ParseLogController extends JsonController
         try {
             $options = [];
 
-            $options[] = ['--csv'];
+            $options[] = ['--json', '-'];
 
             $logPassed = false;
 
             if (Arr::has($filePaths, 'eutraLog')) {
-                $options[] = ['-i', escapeshellarg($filePaths['eutraLog'])];
+                $options[] = ['--input', escapeshellarg($filePaths['eutraLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'eutranrLog')) {
-                $options[] = ['-inputENDC', escapeshellarg($filePaths['eutranrLog'])];
+                $options[] = ['--inputENDC', escapeshellarg($filePaths['eutranrLog'])];
                 $logPassed = true;
             }
 
             if (Arr::has($filePaths, 'nrLog')) {
-                $options[] = ['-inputNR', escapeshellarg($filePaths['nrLog'])];
+                $options[] = ['--inputNR', escapeshellarg($filePaths['nrLog'])];
                 $logPassed = true;
             }
 
             if (!$logPassed) {
-                throw new \Exception('No log files provided to be parsed.');
+                throw new HttpException(Response::HTTP_UNPROCESSABLE_ENTITY, 'No log files provided to be parsed.');
             }
 
             $output = $this->executeParser($logFormat, $options);
@@ -132,12 +169,12 @@ class ParseLogController extends JsonController
         } catch (\Exception $e) {
             $this->cleanUpTempFiles($filePaths);
 
-            clock()->event('Running log parser')->end();
+            ServerTiming::stop('Running log parser');
 
             throw $e;
         }
 
-        clock()->event('Running log parser')->end();
+        ServerTiming::stop('Running log parser');
     }
 
     public function writeLogsToTempFiles(array $logs): array
@@ -169,7 +206,7 @@ class ParseLogController extends JsonController
         $formatFlag = $this->getParserType($logFormat);
 
         if ($formatFlag === null) {
-            throw new \Exception('Invalid log format.');
+            throw new HttpException(Response::HTTP_UNPROCESSABLE_ENTITY, 'Invalid log format.');
         }
 
         $options[] = ['--type', $formatFlag];
@@ -183,14 +220,23 @@ class ParseLogController extends JsonController
 
         exec($command, $output, $return);
 
-        return ['code' => $return, 'output' => $output];
+        return ['code' => $return, 'output' => json_decode(Arr::join($output, PHP_EOL), true)];
     }
 
     private function transformOptions(string $type, array $options): array
     {
         switch ($type) {
-            case 'qualcomm':
-                $options[] = ['--multi'];
+            case 'qualcomm-nr':
+                $options[] = ['--multiple0xB826'];
+
+                // Rename inputENDC option to input
+                $options = array_map(function ($option) {
+                    if ($option[0] === '--inputENDC') {
+                        $option[0] = '--input';
+                    }
+
+                    return $option;
+                }, $options);
                 break;
         }
 

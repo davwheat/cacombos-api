@@ -21,7 +21,7 @@ class TokensRepository
 
     protected function failsAssert()
     {
-        throw new \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException('No token or invalid token provided.');
+        throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException('No token or invalid token provided.');
     }
 
     protected function isTokenValidFor(string $token, string $tokenType): bool
@@ -36,8 +36,12 @@ class TokensRepository
         return (self::TOKEN_RANK[$tokenObj->type] ?? -1) >= $tokenRank;
     }
 
-    protected function assertTokenValidFor(string $token, string $tokenType): bool
+    protected function assertTokenValidFor(?string $token, string $tokenType): bool
     {
+        if (empty($token)) {
+            $this->failsAssert();
+        }
+
         if (!$this->isTokenValidFor($token, $tokenType)) {
             $this->failsAssert();
         }
@@ -45,32 +49,32 @@ class TokensRepository
         return true;
     }
 
-    public function isValidParserToken(string $token): bool
+    public function isValidParserToken(?string $token): bool
     {
         return $this->isTokenValidFor($token, 'parser');
     }
 
-    public function assertValidParserToken(string $token): bool
+    public function assertValidParserToken(?string $token): bool
     {
         return $this->assertTokenValidFor($token, 'parser');
     }
 
-    public function isValidUploaderToken(string $token): bool
+    public function isValidUploaderToken(?string $token): bool
     {
         return $this->isTokenValidFor($token, 'uploader');
     }
 
-    public function assertValidUploaderToken(string $token): bool
+    public function assertValidUploaderToken(?string $token): bool
     {
         return $this->assertTokenValidFor($token, 'uploader');
     }
 
-    public function isValidAdminToken(string $token): bool
+    public function isValidAdminToken(?string $token): bool
     {
         return $this->isTokenValidFor($token, 'admin');
     }
 
-    public function assertValidAdminToken(string $token): bool
+    public function assertValidAdminToken(?string $token): bool
     {
         return $this->assertTokenValidFor($token, 'admin');
     }
