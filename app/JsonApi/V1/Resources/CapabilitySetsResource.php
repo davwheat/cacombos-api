@@ -35,10 +35,10 @@ class CapabilitySetsResource extends EloquentResource implements Creatable
                 fn (Context $c) => Auth::uploaderOrAbove($c),
             ),
             Endpoint\Update::make()->visible(
-                fn (Context $c) => Auth::uploaderOrAbove($c),
+                fn ($_, Context $c) => Auth::uploaderOrAbove($c),
             ),
             Endpoint\Delete::make()->visible(
-                fn (Context $c) => Auth::adminOrAbove($c),
+                fn ($_, Context $c) => Auth::adminOrAbove($c),
             ),
         ];
     }
