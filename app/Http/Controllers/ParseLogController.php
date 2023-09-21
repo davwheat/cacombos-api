@@ -61,12 +61,13 @@ class ParseLogController extends JsonController
         $output = [];
 
         if ($logFormat === 'qualcomm') {
+            // Special case: nrLog contains ENDC and NR data
             $lteLogs = Arr::only($logs, ['eutraLog']);
             if (count($lteLogs) > 0) {
                 $output[] = $this->callParser('qualcomm-lte', $lteLogs);
             }
 
-            $nrLogs = Arr::only($logs, ['eutranrLog']);
+            $nrLogs = Arr::only($logs, ['nrLog']);
             if (count($nrLogs) > 0) {
                 $output[] = $this->callParser('qualcomm-nr', $nrLogs);
             }
