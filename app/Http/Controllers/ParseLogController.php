@@ -139,7 +139,7 @@ class ParseLogController extends JsonController
         try {
             $options = [];
 
-            $options[] = ["cli", ""];
+            $options[] = ['cli', ''];
             $options[] = ['--json', '-'];
 
             $logPassed = false;
