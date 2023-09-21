@@ -71,7 +71,6 @@ class DevicesResource extends EloquentResource
             Scope::make('deviceFullName')->scope(fn (
                 $query,
                 string|array $value,
-                Context $context,
             ) => $query->where(DB::raw('CONCAT_WS(" ", devices.manufacturer, devices.device_name, devices.model_name)'), 'LIKE', "%$value%")),
         ];
     }
