@@ -9,12 +9,10 @@ use App\DataParser\NrCaParser;
 use App\DataParser\NrDcParser;
 use App\DataParser\NrSupportedBandsParser;
 use App\Models\CapabilitySet;
-use App\Models\Combo;
 use App\Models\Device;
 use App\RequiresAuthentication;
 use App\Rules\FileOrString;
 use BeyondCode\ServerTiming\Facades\ServerTiming;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +47,7 @@ class ImportParsedJsonController extends JsonController
             'jsonData'        => ['required', new FileOrString()],
             'deviceId'        => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
-            'multipleInputs'  => 'nullable|boolean'
+            'multipleInputs'  => 'nullable|boolean',
         ]);
 
         if ($validator->fails()) {
