@@ -55,7 +55,7 @@ class DevicesResource extends EloquentResource
             Field\DateTime::make('updatedAt'),
 
             Field\ToOne::make('modem')->type('modems')->includable()->withoutLinkage()->writable()->required(),
-            Field\ToMany::make('deviceFirmwares')->type('device-firmwares')->includable()->withoutLinkage()->writable(),
+            Field\ToMany::make('deviceFirmwares')->property('device_firmwares')->type('device-firmwares')->includable()->withoutLinkage()->writable(),
         ];
     }
 

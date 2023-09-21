@@ -55,10 +55,10 @@ class CapabilitySetsResource extends EloquentResource implements Creatable
             Field\DateTime::make('createdAt'),
             Field\DateTime::make('updatedAt'),
 
-            Field\ToOne::make('deviceFirmware')->type('device-firmwares')->includable()->withoutLinkage()->writable(),
+            Field\ToOne::make('deviceFirmware')->property('device_firmware')->type('device-firmwares')->includable()->withoutLinkage()->writable(),
             Field\ToMany::make('combos')->type('combos')->includable()->withoutLinkage(),
-            Field\ToMany::make('supportedNrBands')->type('supported-nr-bands')->includable()->withoutLinkage(),
-            Field\ToMany::make('supportedLteBands')->type('supported-lte-bands')->includable()->withoutLinkage(),
+            Field\ToMany::make('supportedNrBands')->property('supported_nr_bands')->type('supported-nr-bands')->includable()->withoutLinkage(),
+            Field\ToMany::make('supportedLteBands')->property('supported_lte_bands')->type('supported-lte-bands')->includable()->withoutLinkage(),
         ];
     }
 

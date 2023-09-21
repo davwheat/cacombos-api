@@ -41,9 +41,9 @@ class CombosResource extends EloquentResource implements Creatable
             Field\DateTime::make('createdAt'),
             Field\DateTime::make('updatedAt'),
 
-            Field\ToOne::make('capabilitySet')->type('capability-sets')->includable()->withoutLinkage(),
-            Field\ToMany::make('lteComponents')->type('lte-components')->includable()->withoutLinkage(),
-            Field\ToMany::make('nrComponents')->type('nr-components')->includable()->withoutLinkage(),
+            Field\ToOne::make('capabilitySet')->property('capability_set')->type('capability-sets')->includable()->withoutLinkage(),
+            Field\ToMany::make('lteComponents')->property('lte_components')->type('lte-components')->includable()->withoutLinkage(),
+            Field\ToMany::make('nrComponents')->property('nr_components')->type('nr-components')->includable()->withoutLinkage(),
         ];
     }
 

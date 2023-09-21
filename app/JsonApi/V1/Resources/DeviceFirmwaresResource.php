@@ -50,7 +50,7 @@ class DeviceFirmwaresResource extends EloquentResource implements Creatable
             Field\DateTime::make('updatedAt'),
 
             Field\ToOne::make('device')->type('devices')->includable()->withoutLinkage()->writable()->required(),
-            Field\ToMany::make('capabilitySets')->type('capability-sets')->includable()->withoutLinkage()->writable(),
+            Field\ToMany::make('capabilitySets')->property('capability_sets')->type('capability-sets')->includable()->withoutLinkage()->writable(),
         ];
     }
 

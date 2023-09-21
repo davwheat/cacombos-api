@@ -41,11 +41,11 @@ class SupportedNrBandsResource extends EloquentResource implements Creatable
             Field\Boolean::make('supportsEndc'),
             Field\Boolean::make('supportsSa'),
 
-            Field\ToMany::make('dlMimos')->type('mimos')->includable()->withoutLinkage(),
-            Field\ToMany::make('ulMimos')->type('mimos')->includable()->withoutLinkage(),
+            Field\ToMany::make('dlMimos')->property('dl_mimos')->type('mimos')->includable()->withoutLinkage(),
+            Field\ToMany::make('ulMimos')->property('ul_mimos')->type('mimos')->includable()->withoutLinkage(),
 
-            Field\ToMany::make('dlModulations')->type('modulations')->includable()->withoutLinkage(),
-            Field\ToMany::make('ulModulations')->type('modulations')->includable()->withoutLinkage(),
+            Field\ToMany::make('dlModulations')->property('dl_modulations')->type('modulations')->includable()->withoutLinkage(),
+            Field\ToMany::make('ulModulations')->property('ul_modulations')->type('modulations')->includable()->withoutLinkage(),
         ];
     }
 
