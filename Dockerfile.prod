@@ -19,7 +19,11 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install dom xml pdo_mysql mbstring exif pcntl bcmath gd redis
+RUN docker-php-ext-install dom xml pdo_mysql mbstring exif pcntl bcmath gd
+
+RUN pecl install --onlyreqdep --force redis \
+  && rm -rf /tmp/pear \
+  && docker-php-ext-enable redis
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
