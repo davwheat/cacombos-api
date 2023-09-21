@@ -230,9 +230,9 @@ class ParseLogController extends JsonController
             case 'qualcomm-nr':
                 $options[] = ['--multiple0xB826'];
 
-                // Rename inputENDC option to input
+                // Rename inputNR option to input
                 $options = array_map(function ($option) {
-                    if ($option[0] === '--inputENDC') {
+                    if ($option[0] === '--inputNR') {
                         $option[0] = '--input';
                     }
 
