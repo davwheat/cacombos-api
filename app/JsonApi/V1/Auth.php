@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1;
 
+use App\Repositories\TokensRepository;
 use App\RequiresAuthentication;
 use Tobyz\JsonApiServer\Context;
 
