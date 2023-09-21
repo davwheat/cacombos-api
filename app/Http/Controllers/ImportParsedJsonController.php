@@ -26,7 +26,6 @@ use Psr\Http\Message\UploadedFileInterface;
 class ImportParsedJsonController extends JsonController
 {
     protected RequiresAuthentication $requiresAuthentication;
-    protected Collection $combosToDelete;
 
     /**
      * @var CapabilitySet
@@ -36,7 +35,6 @@ class ImportParsedJsonController extends JsonController
     public function __construct(RequiresAuthentication $requiresAuthentication)
     {
         $this->requiresAuthentication = $requiresAuthentication;
-        $this->combosToDelete = new Collection();
 
         parent::__construct();
     }
@@ -93,14 +91,13 @@ class ImportParsedJsonController extends JsonController
             ];
         }
 
-        $this->propogateCombosToDelete();
-
         DB::transaction(function () use ($jsonData, $multipleInputs) {
             Schema::disableForeignKeyConstraints();
 
-            // Delete unneeded combos
-            Combo::whereIn('id', $this->combosToDelete->pluck('id'))->delete();
-            $this->combosToDelete = $this->combosToDelete->empty();
+            ServerTiming::start('Deleting old combos');
+            // Delete all combos currently present in the capability set
+            $this->capabilitySet->combos()->delete();
+            ServerTiming::stop('Deleting old combos');
 
             if (!$multipleInputs) {
                 $jsonData = [$jsonData];
@@ -124,16 +121,6 @@ class ImportParsedJsonController extends JsonController
         });
 
         return null;
-    }
-
-    protected function propogateCombosToDelete(): void
-    {
-        ServerTiming::start('Finding combos to remove');
-
-        // Delete all combos currently present in the capability set
-        $this->combosToDelete = $this->capabilitySet->combos()->get('id');
-
-        ServerTiming::stop('Finding combos to remove');
     }
 
     protected function parseJsonToModels(array $jsonData): void
