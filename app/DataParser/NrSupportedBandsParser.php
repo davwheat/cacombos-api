@@ -79,9 +79,9 @@ class NrSupportedBandsParser implements DataParser
 
     protected function parseSupportedNrBand(int $band): SupportedNrBand
     {
-        $nrBand = Arr::first($this->nrBands, fn ($b) => $b['band'] === $band);
-        $nrNsaBandEutra = Arr::first($this->nrNsaBandsEutra, fn ($b) => $b['band'] === $band);
-        $nrSaBandEutra = Arr::first($this->nrSaBandsEutra, fn ($b) => $b['band'] === $band);
+        $nrBand = Arr::first($this->nrBands ?: [], fn ($b) => $b['band'] === $band);
+        $nrNsaBandEutra = Arr::first($this->nrNsaBandsEutra ?: [], fn ($b) => $b['band'] === $band);
+        $nrSaBandEutra = Arr::first($this->nrSaBandsEutra ?: [], fn ($b) => $b['band'] === $band);
 
         $eutraDataAvailable = $nrNsaBandEutra !== null || $nrSaBandEutra !== null;
 
