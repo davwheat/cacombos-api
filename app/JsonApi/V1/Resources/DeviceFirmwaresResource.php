@@ -45,7 +45,7 @@ class DeviceFirmwaresResource extends EloquentResource implements Creatable
     {
         return [
             Field\Str::make('uuid'),
-            Field\Str::make('name')->required(),
+            Field\Str::make('name')->required()->writable(),
             Field\DateTime::make('createdAt'),
             Field\DateTime::make('updatedAt'),
 

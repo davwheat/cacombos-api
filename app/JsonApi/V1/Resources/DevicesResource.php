@@ -47,10 +47,10 @@ class DevicesResource extends EloquentResource
     {
         return [
             Field\Str::make('uuid'),
-            Field\Str::make('deviceName')->required(),
-            Field\Str::make('modelName')->required(),
-            Field\Str::make('manufacturer')->required(),
-            Field\Date::make('releaseDate')->required(),
+            Field\Str::make('deviceName')->required()->writable(),
+            Field\Str::make('modelName')->required()->writable(),
+            Field\Str::make('manufacturer')->required()->writable(),
+            Field\Date::make('releaseDate')->required()->writable(),
             Field\DateTime::make('createdAt'),
             Field\DateTime::make('updatedAt'),
 

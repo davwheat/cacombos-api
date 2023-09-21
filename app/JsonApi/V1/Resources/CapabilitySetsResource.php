@@ -47,8 +47,8 @@ class CapabilitySetsResource extends EloquentResource implements Creatable
     {
         return [
             Field\Str::make('uuid'),
-            Field\Str::make('description')->required(),
-            Field\Str::make('plmn')->validate(rules(['nullable', 'regex:/^[0-9]{3}-[0-9]{2,3}$/'])),
+            Field\Str::make('description')->required()->writable(),
+            Field\Str::make('plmn')->validate(rules(['nullable', 'regex:/^[0-9]{3}-[0-9]{2,3}$/']))->writable(),
             Field\Integer::make('lteCategoryDl')->nullable(),
             Field\Integer::make('lteCategoryUl')->nullable(),
             Field\Attribute::make('parserMetadata')->nullable(),
