@@ -74,6 +74,7 @@ services:
 
 volumes:
   db_data:
+  redis:
 
 networks:
   app:
