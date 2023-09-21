@@ -40,7 +40,7 @@ services:
     networks:
       - app
     healthcheck:
-      test: "mysql -h localhost -P 3306 -u$$MYSQL_USER -p$$MYSQL_PASSWORD"
+      test: mysql -h 127.0.0.1 -P 3306 -u"$$MYSQL_USER" -p"$$MYSQL_PASSWORD"
       interval: 5s
       timeout: 20s
       retries: 30
