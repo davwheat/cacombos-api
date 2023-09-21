@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int                          $id
@@ -20,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon   $created_at
  * @property \Illuminate\Support\Carbon   $updated_at
  */
-class CapabilitySet extends Model
+class CapabilitySet extends BaseModel
 {
     use Traits\HasSecondaryUuid;
 

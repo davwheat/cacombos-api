@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection<Mimo>       $dlMimos
  * @property Collection<Mimo>       $ulMimos
  */
-class SupportedNrBand extends Model
+class SupportedNrBand extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

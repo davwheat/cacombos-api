@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int  $mimo
  * @property bool $is_ul
  */
-class Mimo extends Model
+class Mimo extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

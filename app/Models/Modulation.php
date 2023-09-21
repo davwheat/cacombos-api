@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $modulation
  * @property bool   $is_ul
  */
-class Modulation extends Model
+class Modulation extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
-class DeviceFirmware extends Model
+class DeviceFirmware extends BaseModel
 {
     use Traits\HasSecondaryUuid;
 

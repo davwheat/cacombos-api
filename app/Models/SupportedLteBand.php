@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection<Mimo>       $dlMimos
  * @property Collection<Mimo>       $ulMimos
  */
-class SupportedLteBand extends Model
+class SupportedLteBand extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

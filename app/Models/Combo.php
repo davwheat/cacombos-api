@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
-class Combo extends Model
+class Combo extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

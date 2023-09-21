@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?int    $subcarrier_spacing
  * @property int     $component_index
  */
-class NrComponent extends Model
+class NrComponent extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;

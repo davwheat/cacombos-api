@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?string $ul_class
  * @property int     $component_index
  */
-class LteComponent extends Model
+class LteComponent extends BaseModel
 {
     // Disable timestamps
     public $timestamps = false;
