@@ -3,8 +3,8 @@
 export interface Capabilities {
   lteca?: ComboLte[];
   lteBands?: BandLteDetails[];
-  nrNsaBandsEutra?: BandNrDetails[];
-  nrSaBandsEutra?: BandNrDetails[];
+  nrNsaBandsEutra?: BandBoxed[];
+  nrSaBandsEutra?: BandBoxed[];
   nrBands?: BandNrDetails[];
   lteCategoryDl?: number;
   lteCategoryUl?: number;
@@ -12,9 +12,11 @@ export interface Capabilities {
   nrca?: ComboNr[];
   nrdc?: ComboNrDc[];
   logType: string;
+  ueCapFilters?: IUeCapabilityFilter[];
   parserVersion: string;
   timestamp: number;
   metadata: { [key: string]: string };
+  id?: string;
 }
 
 export interface ComboLte {
@@ -29,6 +31,10 @@ export interface BandLteDetails {
   modulationDl?: Modulation;
   modulationUl?: Modulation;
   powerClass?: PowerClass;
+}
+
+export interface BandBoxed {
+  band: number;
 }
 
 export interface BandNrDetails {
@@ -60,6 +66,45 @@ export interface ComboNrDc {
   componentsFr1: ComponentNr[];
   componentsFr2: ComponentNr[];
   bcs?: BCS;
+}
+
+export type IUeCapabilityFilter =
+  | IUeCapabilityFilter.UeCapabilityFilterLte
+  | IUeCapabilityFilter.UeCapabilityFilterNr;
+
+export namespace IUeCapabilityFilter {
+  export enum Type {
+    UeCapabilityFilterLte = "UeCapabilityFilterLte",
+    UeCapabilityFilterNr = "UeCapabilityFilterNr",
+  }
+  
+  export interface UeCapabilityFilterLte {
+    type: IUeCapabilityFilter.Type.UeCapabilityFilterLte;
+    rat: Rat;
+    lteBands?: BandBoxed[];
+    reducedFormat?: boolean;
+    reducedIntNonContComb?: boolean;
+    skipFallbackCombRequested?: boolean;
+    diffFallbackCombList?: ComboLte[];
+    maxCCsDl?: number;
+    maxCCsUl?: number;
+    includeNrDc?: boolean;
+    includeNeDc?: boolean;
+    omitEnDc?: boolean;
+    uplinkTxSwitchRequest?: boolean;
+  }
+  
+  export interface UeCapabilityFilterNr {
+    type: IUeCapabilityFilter.Type.UeCapabilityFilterNr;
+    rat: Rat;
+    lteBands?: BandFilterLte[];
+    nrBands?: BandFilterNr[];
+    eutraNrOnly?: boolean;
+    includeNrDc?: boolean;
+    includeNeDc?: boolean;
+    omitEnDc?: boolean;
+    uplinkTxSwitchRequest?: boolean;
+  }
 }
 
 export type BCS =
@@ -161,6 +206,17 @@ export enum PowerClass {
   pc7 = "pc7",
 }
 
+export enum Rat {
+  EUTRA = "EUTRA",
+  UTRA = "UTRA",
+  GERAN_CS = "GERAN_CS",
+  GERAN_PS = "GERAN_PS",
+  CDMA2000_1XRTT = "CDMA2000_1XRTT",
+  NR = "NR",
+  EUTRA_NR = "EUTRA_NR",
+  SPARE1 = "SPARE1",
+}
+
 export interface ComponentLte {
   band: number;
   bwClassDl?: BwClass;
@@ -173,7 +229,6 @@ export interface ComponentLte {
 
 export enum ModulationOrder {
   none = "none",
-  qpsk = "qpsk",
   qam16 = "qam16",
   qam64 = "qam64",
   qam256 = "qam256",
@@ -194,9 +249,52 @@ export interface ComponentNr {
   mimoUl?: Mimo;
   modulationDl?: Modulation;
   modulationUl?: Modulation;
-  maxBw?: number;
   bw90mhzSupported?: boolean;
   maxScs?: number;
+  maxBwDl?: Bandwidth;
+  maxBwUl?: Bandwidth;
+  maxBw?: number;
+}
+
+export interface BandFilterLte {
+  band: number;
+  bwClassDl?: BwClass;
+  bwClassUl?: BwClass;
+}
+
+export interface BandFilterNr {
+  band: number;
+  maxBwDl?: number;
+  maxBwUl?: number;
+  maxCCsDl?: number;
+  maxCCsUl?: number;
 }
 
 export type BwClass = string;
+
+export type Bandwidth =
+  | Bandwidth.empty
+  | Bandwidth.mixed
+  | Bandwidth.single;
+
+export namespace Bandwidth {
+  export enum Type {
+    empty = "empty",
+    mixed = "mixed",
+    single = "single",
+  }
+  
+  export interface empty {
+    type: Bandwidth.Type.empty;
+  }
+  
+  export interface mixed {
+    type: Bandwidth.Type.mixed;
+    value: number[];
+  }
+  
+  export interface single {
+    type: Bandwidth.Type.single;
+    value: number;
+  }
+}
