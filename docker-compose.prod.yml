@@ -14,10 +14,13 @@ services:
       - .:/var/www
     ports:
       - 9000
-    depends_on:
-      - db
     networks:
       - app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   db:
     image: mysql:8
@@ -33,9 +36,14 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     ports:
-      - 3306:3306
+      - 3306
     networks:
       - app
+    healthcheck:
+      test: "mysql -h localhost -P 3306 -u$$MYSQL_USER -p$$MYSQL_PASSWORD"
+      interval: 5s
+      timeout: 20s
+      retries: 30
 
   web:
     image: nginx:1-alpine
@@ -50,6 +58,19 @@ services:
       - laravel
     networks:
       - app
+
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - 6379
+    volumes:
+      - "redis:/data"
+    networks:
+      - app
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      retries: 3
+      timeout: 5s
 
 volumes:
   db_data:
