@@ -12,13 +12,13 @@ class Auth
     {
         $ra = new RequiresAuthentication(resolve(TokensRepository::class));
 
-        return $ra($context->getRequest(), 'uploader');
+        return $ra($context->request, 'uploader');
     }
 
     public static function adminOrAbove(Context $context): bool
     {
         $ra = new RequiresAuthentication(resolve(TokensRepository::class));
 
-        return $ra($context->getRequest(), 'admin');
+        return $ra($context->request, 'admin');
     }
 }
