@@ -43,22 +43,22 @@ class NrComponent extends Model
         return $this->belongsToMany(Mimo::class, 'components_mimos');
     }
 
-    public function dlMimos()
+    public function dl_mimos()
     {
         return $this->mimos()->where('is_ul', false);
     }
 
-    public function ulMimos()
+    public function ul_mimos()
     {
         return $this->mimos()->where('is_ul', true);
     }
 
-    public function dlModulations()
+    public function dl_modulations()
     {
         return $this->modulations()->where('is_ul', false);
     }
 
-    public function ulModulations()
+    public function ul_modulations()
     {
         return $this->modulations()->where('is_ul', true);
     }

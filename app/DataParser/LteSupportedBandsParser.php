@@ -34,7 +34,7 @@ class LteSupportedBandsParser implements DataParser
             $collection->push($this->parseSupportedLteBand($band));
         }
 
-        $this->capabilitySet->supportedLteBands()->saveMany($collection);
+        $this->capabilitySet->supported_lte_bands()->saveMany($collection);
     }
 
     protected function parseSupportedLteBand(array $band): SupportedLteBand

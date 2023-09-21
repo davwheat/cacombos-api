@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?array                     $bandwidth_combination_set_eutra
  * @property ?array                     $bandwidth_combination_set_nr
  * @property ?array                     $bandwidth_combination_set_intra_endc
- * @property CapabilitySet              $capabilitySet
- * @property Collection<LteComponent>   $lteComponents
- * @property Collection<NrComponent>    $nrComponents
+ * @property CapabilitySet              $capability_set
+ * @property Collection<LteComponent>   $lte_components
+ * @property Collection<NrComponent>    $nr_coponents
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
@@ -42,18 +42,18 @@ class Combo extends Model
         'bandwidth_combination_set_intra_endc' => 'array',
     ];
 
-    public function capabilitySet()
+    public function capability_set()
     {
         return $this->belongsTo(CapabilitySet::class);
     }
 
-    public function lteComponents()
+    public function lte_components()
     {
         return $this
             ->belongsToMany(LteComponent::class, 'combo_components', 'combo_id', 'lte_component_id');
     }
 
-    public function nrComponents()
+    public function nr_components()
     {
         return $this
             ->belongsToMany(NrComponent::class, 'combo_components', 'combo_id', 'nr_component_id');

@@ -51,7 +51,7 @@ class SupportedNrBand extends Model
         return FrequencyRange::FR1;
     }
 
-    public function capabilitySet()
+    public function capability_set()
     {
         return $this->belongsTo(CapabilitySet::class);
     }
@@ -66,22 +66,22 @@ class SupportedNrBand extends Model
         return $this->belongsToMany(Mimo::class, 'supported_nr_bands_mimos');
     }
 
-    public function dlMimos()
+    public function dl_mimos()
     {
         return $this->mimos()->where('is_ul', false);
     }
 
-    public function ulMimos()
+    public function ul_mimos()
     {
         return $this->mimos()->where('is_ul', true);
     }
 
-    public function dlModulations()
+    public function dl_modulations()
     {
         return $this->modulations()->where('is_ul', false);
     }
 
-    public function ulModulations()
+    public function ul_modulations()
     {
         return $this->modulations()->where('is_ul', true);
     }

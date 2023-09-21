@@ -59,8 +59,8 @@ class EndcParser implements DataParser
         // Insert
         Combo::insert($modelAttributes);
         $comboIds = Combo::where('capability_set_id', $this->capabilitySet->id)
-            ->whereDoesntHave('nrComponents')
-            ->whereDoesntHave('lteComponents')
+            ->whereDoesntHave('nr_components')
+            ->whereDoesntHave('lte_components')
             ->pluck('id')
             ->toArray();
 

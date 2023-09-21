@@ -26,7 +26,7 @@ class DeviceFirmware extends Model
         return $this->belongsTo(Device::class);
     }
 
-    public function capabilitySets()
+    public function capability_sets()
     {
         return $this->hasMany(CapabilitySet::class);
     }

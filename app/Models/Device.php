@@ -26,12 +26,12 @@ class Device extends Model
         'release_date' => 'datetime',
     ];
 
-    public function deviceFirmwares()
+    public function device_firmwares()
     {
         return $this->hasMany(DeviceFirmware::class);
     }
 
-    public function capabilitySets()
+    public function capability_sets()
     {
         return $this->hasManyThrough(CapabilitySet::class, DeviceFirmware::class);
     }

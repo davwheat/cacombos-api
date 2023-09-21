@@ -39,25 +39,25 @@ class ComboStringGenerator
 
             if (isset($component->dl_class)) {
                 $str .= $component->dl_class;
-            } elseif ($component->dlMimos()->exists()) {
+            } elseif ($component->dl_mimos()->exists()) {
                 $str .= 'X';
             }
 
-            if ($component->dlMimos()->count() > 0) {
-                $str .= $component->dlMimos()->max('mimo');
+            if ($component->dl_mimos()->count() > 0) {
+                $str .= $component->dl_mimos()->max('mimo');
             }
 
             if (isset($component->ul_class)) {
                 $str .= $component->ul_class;
-            } elseif ($component->ulMimos()->exists()) {
+            } elseif ($component->ul_mimos()->exists()) {
                 $str .= 'X';
             }
 
-            if ($component->ulMimos()->count() > 0) {
-                $maxMimo = $component->ulMimos()->max('mimo');
+            if ($component->ul_mimos()->count() > 0) {
+                $maxMimo = $component->ul_mimos()->max('mimo');
 
                 if ($maxMimo > 1) {
-                    $str .= $component->ulMimos()->max('mimo');
+                    $str .= $component->ul_mimos()->max('mimo');
                 }
             }
 

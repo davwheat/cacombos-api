@@ -63,7 +63,7 @@ class NrSupportedBandsParser implements DataParser
             $collection->push($this->parseSupportedNrBand($band));
         }
 
-        $this->capabilitySet->supportedNrBands()->saveMany($collection);
+        $this->capabilitySet->supported_nr_bands()->saveMany($collection);
     }
 
     protected function getValueFromArraysInOrder(string $key, ?array ...$arrays): mixed

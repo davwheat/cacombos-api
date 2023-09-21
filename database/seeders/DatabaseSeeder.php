@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         $p7pro_a13_ee = new CapabilitySet();
         $p7pro_a13_ee->description = 'EE';
         $p7pro_a13_ee->plmn = '234-30';
-        $p7pro_a13_ee->deviceFirmware()->associate($p7pro_a13);
+        $p7pro_a13_ee->device_firmware()->associate($p7pro_a13);
         $p7pro_a13_ee->save();
     }
 }

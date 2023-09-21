@@ -77,9 +77,9 @@ class ImportParsedJsonController extends JsonController
         $device = Device::findOrFail($deviceId);
 
         $capabilitySetId = Arr::get($body, 'capabilitySetId');
-        $this->capabilitySet = CapabilitySet::with('deviceFirmware')->findOrFail($capabilitySetId);
+        $this->capabilitySet = CapabilitySet::with('device_firmware')->findOrFail($capabilitySetId);
 
-        if ($this->capabilitySet->deviceFirmware->device_id !== $device->id) {
+        if ($this->capabilitySet->device_firmware->device_id !== $device->id) {
             $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
             return [
