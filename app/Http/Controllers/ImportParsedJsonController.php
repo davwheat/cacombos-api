@@ -51,6 +51,7 @@ class ImportParsedJsonController extends JsonController
             'jsonData'        => ['required', new FileOrString()],
             'deviceId'        => 'required|exists:devices,id',
             'capabilitySetId' => 'required|exists:capability_sets,id',
+            'multipleInputs'  => 'nullable|boolean'
         ]);
 
         if ($validator->fails()) {
@@ -72,6 +73,7 @@ class ImportParsedJsonController extends JsonController
         // Parse JSON data to associative array
         /** @var array */
         $jsonData = json_decode($jsonData, true);
+        $multipleInputs = Arr::get($body, 'multipleInputs', false) === true;
 
         $deviceId = Arr::get($body, 'deviceId');
         $device = Device::findOrFail($deviceId);
@@ -93,16 +95,29 @@ class ImportParsedJsonController extends JsonController
 
         $this->propogateCombosToDelete();
 
-        DB::transaction(function () use ($jsonData) {
+        DB::transaction(function () use ($jsonData, $multipleInputs) {
             Schema::disableForeignKeyConstraints();
 
             // Delete unneeded combos
             Combo::whereIn('id', $this->combosToDelete->pluck('id'))->delete();
             $this->combosToDelete = $this->combosToDelete->empty();
 
-            $this->parseJsonToModels($jsonData);
+            if (!$multipleInputs) {
+                $jsonData = [$jsonData];
+            }
 
-            $this->capabilitySet->parser_metadata = Arr::only($jsonData, ['metadata', 'parserVersion', 'timestamp']);
+            foreach ($jsonData as $json) {
+                $this->parseJsonToModels($json);
+            }
+
+            // Merge metadata from all outputs
+            $metadata = array_reduce($jsonData, function ($carry, $item) {
+                $carry[] = Arr::only($item, ['metadata', 'parserVersion', 'timestamp']);
+
+                return $carry;
+            }, []);
+
+            $this->capabilitySet->parser_metadata = $metadata;
             $this->capabilitySet->save();
 
             Schema::enableForeignKeyConstraints();

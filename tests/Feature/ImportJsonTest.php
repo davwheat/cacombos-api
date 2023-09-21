@@ -1377,6 +1377,6 @@ class ImportJsonTest extends TestCase
 
         $testingCapabilitySet->refresh();
 
-        $this->assertSame(['metadata' => $meta, 'timestamp' => 0], $testingCapabilitySet->parser_metadata);
+        $this->assertSame([['metadata' => $meta, 'timestamp' => 0]], $testingCapabilitySet->parser_metadata);
     }
 }
