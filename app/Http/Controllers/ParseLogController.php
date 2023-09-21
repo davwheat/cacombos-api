@@ -78,7 +78,7 @@ class ParseLogController extends JsonController
         // If an error occurred in any of the parser calls, return the error.
         if (count(array_filter($output, fn ($out) => $out['code'] !== 0)) > 0) {
             $debug = App::hasDebugModeEnabled();
-            $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->response = $this->response->withStatus(Response::HTTP_INTERNAL_SERVER_ERROR)->withHeader('Access-Control-Allow-Origin', '*');
 
             return [
                 'errors' => [
@@ -95,7 +95,7 @@ class ParseLogController extends JsonController
 
             // Error if one or more parser call outputs have no capability data
             if (count($outputLines) === 0) {
-                $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+                $this->response = $this->response->withStatus(Response::HTTP_UNPROCESSABLE_ENTITY)->withHeader('Access-Control-Allow-Origin', '*');
 
                 return [
                     'errors' => [
@@ -139,6 +139,7 @@ class ParseLogController extends JsonController
         try {
             $options = [];
 
+            $options[] = ["cli", ""];
             $options[] = ['--json', '-'];
 
             $logPassed = false;
