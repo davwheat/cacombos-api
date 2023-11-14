@@ -43,7 +43,7 @@ class ComboStringGenerator
                 $str .= 'X';
             }
 
-            if ($component->dl_mimos()->count() > 0) {
+            if ($component->dl_mimos()->exists()) {
                 $str .= $component->dl_mimos()->max('mimo');
             }
 
@@ -53,11 +53,11 @@ class ComboStringGenerator
                 $str .= 'X';
             }
 
-            if ($component->ul_mimos()->count() > 0) {
+            if ($component->ul_mimos()->exists()) {
                 $maxMimo = $component->ul_mimos()->max('mimo');
 
                 if ($maxMimo > 1) {
-                    $str .= $component->ul_mimos()->max('mimo');
+                    $str .= $maxMimo;
                 }
             }
 
