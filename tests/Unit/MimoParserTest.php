@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\DataParser;
+namespace Tests\Unit;
 
 use App\DataParser\ElementParser\MimoParser;
 use App\Models\Mimo;
