@@ -35,9 +35,9 @@ class ComboStringGeneratorTest extends TestCase
 
         // 1C4A
         $c1 = new LteComponent([
-            'band' => 1,
-            'dl_class' => 'C',
-            'ul_class' => 'A',
+            'band'            => 1,
+            'dl_class'        => 'C',
+            'ul_class'        => 'A',
             'component_index' => 1,
         ]);
         $c1->save();
@@ -48,8 +48,8 @@ class ComboStringGeneratorTest extends TestCase
 
         // 3A4
         $c2 = new LteComponent([
-            'band' => 3,
-            'dl_class' => 'A',
+            'band'            => 3,
+            'dl_class'        => 'A',
             'component_index' => 2,
         ]);
         $c2->save();
@@ -82,9 +82,9 @@ class ComboStringGeneratorTest extends TestCase
 
         // 1C4A
         $c1 = new NrComponent([
-            'band' => 1,
-            'dl_class' => 'C',
-            'ul_class' => 'A',
+            'band'            => 1,
+            'dl_class'        => 'C',
+            'ul_class'        => 'A',
             'component_index' => 1,
         ]);
         $c1->save();
@@ -96,8 +96,8 @@ class ComboStringGeneratorTest extends TestCase
 
         // 3A4
         $c2 = new NrComponent([
-            'band' => 3,
-            'dl_class' => 'A',
+            'band'            => 3,
+            'dl_class'        => 'A',
             'component_index' => 2,
         ]);
         $c2->save();
@@ -134,9 +134,9 @@ class ComboStringGeneratorTest extends TestCase
 
         // 28A4A
         $c1 = new LteComponent([
-            'band' => 28,
-            'dl_class' => 'A',
-            'ul_class' => 'A',
+            'band'            => 28,
+            'dl_class'        => 'A',
+            'ul_class'        => 'A',
             'component_index' => 1,
         ]);
         $c1->save();
@@ -147,8 +147,8 @@ class ComboStringGeneratorTest extends TestCase
 
         // 7C
         $c2 = new LteComponent([
-            'band' => 7,
-            'dl_class' => 'C',
+            'band'            => 7,
+            'dl_class'        => 'C',
             'component_index' => 2,
         ]);
         $c2->save();
@@ -159,9 +159,9 @@ class ComboStringGeneratorTest extends TestCase
 
         // n1C4A2
         $c3 = new NrComponent([
-            'band' => 1,
-            'dl_class' => 'C',
-            'ul_class' => 'A',
+            'band'            => 1,
+            'dl_class'        => 'C',
+            'ul_class'        => 'A',
             'component_index' => 3,
         ]);
         $c3->save();
@@ -173,8 +173,8 @@ class ComboStringGeneratorTest extends TestCase
 
         // n3A4
         $c4 = new NrComponent([
-            'band' => 3,
-            'dl_class' => 'A',
+            'band'            => 3,
+            'dl_class'        => 'A',
             'component_index' => 4,
         ]);
         $c4->save();
@@ -187,7 +187,7 @@ class ComboStringGeneratorTest extends TestCase
             $c1,
             $c2,
             $c3,
-            $c4
+            $c4,
         ];
 
         $comboString = $g->getComboStringFromComponents($components);

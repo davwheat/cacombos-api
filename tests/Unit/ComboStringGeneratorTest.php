@@ -18,16 +18,16 @@ class ComboStringGeneratorTest extends UnitTestCase
 
         $components = [
             new LteComponent([
-                'band' => 1,
+                'band'     => 1,
                 'dl_class' => 'C',
                 'ul_class' => 'A',
             ]),
             new LteComponent([
-                'band' => 2,
+                'band'     => 2,
                 'dl_class' => 'C',
             ]),
             new LteComponent([
-                'band' => 3,
+                'band'     => 3,
                 'dl_class' => 'A',
             ]),
         ];
@@ -46,16 +46,16 @@ class ComboStringGeneratorTest extends UnitTestCase
 
         $components = [
             new NrComponent([
-                'band' => 1,
+                'band'     => 1,
                 'dl_class' => 'C',
                 'ul_class' => 'A',
             ]),
             new NrComponent([
-                'band' => 2,
+                'band'     => 2,
                 'dl_class' => 'C',
             ]),
             new NrComponent([
-                'band' => 3,
+                'band'     => 3,
                 'dl_class' => 'A',
             ]),
         ];
@@ -74,25 +74,25 @@ class ComboStringGeneratorTest extends UnitTestCase
 
         $components = [
             new NrComponent([
-                'band' => 1,
+                'band'     => 1,
                 'dl_class' => 'C',
                 'ul_class' => 'A',
             ]),
             new NrComponent([
-                'band' => 2,
+                'band'     => 2,
                 'dl_class' => 'C',
             ]),
             new LteComponent([
-                'band' => 7,
+                'band'     => 7,
                 'dl_class' => 'A',
                 'ul_class' => 'A',
             ]),
             new NrComponent([
-                'band' => 3,
+                'band'     => 3,
                 'dl_class' => 'A',
             ]),
             new LteComponent([
-                'band' => 28,
+                'band'     => 28,
                 'dl_class' => 'A',
                 'ul_class' => 'A',
             ]),
