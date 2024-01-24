@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1;
 
+use App\JsonApi\V1\Extensions\SearchByComponents\SearchByComponentsExtension;
 use Illuminate\Support\Facades\Config;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobyz\JsonApiServer\ErrorProviderInterface;
@@ -28,6 +29,7 @@ class JsonApiServer
             $this->addResources();
 
             $this->server->extension(new Atomic());
+            $this->server->extension(new SearchByComponentsExtension());
         }
 
         if (!$request->hasHeader('Accept')) {
